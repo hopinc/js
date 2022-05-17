@@ -1,5 +1,10 @@
 export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
+/**
+ * Hop's API uses ISO 8601 date strings
+ */
+export type Timestamp = string;
+
 export const ID_PREFIXES = [
 	{
 		prefix: 'user',
@@ -72,7 +77,7 @@ export namespace API {
 			/**
 			 * The unix timestamp of when this room was created
 			 */
-			created_at: number;
+			created_at: Timestamp;
 		}
 
 		export interface GET_ROOMS {
@@ -122,12 +127,80 @@ export namespace API {
 	}
 
 	export namespace Ignite {
+		/**
+		 * Container types are used to describe the type of container that is being deployed.
+		 */
+		export enum ContainerType {
+			/**
+			 * Ephemeral containers are a "fire and forget" container. They dont restart if they exit.
+			 */
+			EPHEMERAL = 0,
+
+			/**
+			 * Persistent containers will restart if they exit. They can also be started and stopped programmatically.
+			 */
+			PERSISTENT = 1,
+		}
+
+		/**
+		 * Container state is relatively self-explanatory. It describes what the container is currently doing.
+		 */
+		export enum ContainerState {
+			/**
+			 * The container is pending creation
+			 */
+			PENDING = 0,
+
+			/**
+			 * The container is running
+			 */
+			RUNNING = 1,
+
+			/**
+			 * The container is stopped
+			 */
+			STOPPED = 2,
+
+			/**
+			 * The container's entrypoint failed (e.g. exited with a non-zero exit code)
+			 */
+			FAILED = 3,
+
+			/**
+			 * The container is being deleted
+			 */
+			TERMINATING = 4,
+
+			/**
+			 * The container exited (e.g. with a zero exit code)
+			 */
+			EXITED = 5,
+		}
+
 		export interface Container {
+			/**
+			 * The ID of the container
+			 */
 			id: Id<'container'>;
-			created_at: string;
-			type: number;
-			deployment_id: string;
-			state: number;
+			/**
+			 * The time this container was created
+			 */
+			created_at: Timestamp;
+
+			/**
+			 * The type of this container
+			 */
+			type: ContainerType;
+
+			/**
+			 * The ID of the deployment this container is associated with
+			 */
+			deployment_id: Id<'deployment'>;
+
+			/**
+			 * The state this container is in
+			 */
+			state: ContainerState;
 		}
 
 		export interface GET_DEPLOYMENT_CONTAINERS {
