@@ -7,6 +7,9 @@
 	"author": "Alistair Smith <hi@alistair.sh>",
 	"license": "MIT",
 	"packageManager": "yarn@3.2.1",
+	"scripts": {
+		"build": "tsup"
+	},
 	"devDependencies": {
 		"prettier": "^2.6.2",
 		"tsup": "^5.12.8",
