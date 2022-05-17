@@ -12,12 +12,14 @@
 	},
 	"devDependencies": {
 		"@types/common-tags": "^1",
+		"@types/node-fetch": "^2.6.1",
 		"common-tags": "^1.8.2",
 		"prettier": "^2.6.2",
 		"tsup": "^5.12.8",
 		"typescript": "^4.6.4"
 	},
 	"dependencies": {
+		"node-fetch": "cjs",
 		"urlcat": "^2.0.4"
 	}
 }
