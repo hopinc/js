@@ -104,7 +104,13 @@ export type Endpoints =
 				container_id: Id<'container'>;
 			}
 	  >
-	| Endpoint<'POST', '/v1/ignite/deployments', API.Ignite.CREATE_DEPLOYMENT>;
+	| Endpoint<
+			'POST',
+			'/v1/ignite/deployments',
+			API.Ignite.CREATE_DEPLOYMENT,
+			API.Ignite.DeploymentConfig
+	  >
+	| Endpoint<'GET', '/v1/registry/teams/@this/images', API.Registry.GET_IMAGES>;
 
 export type EndpointMap = {
 	[Path in Endpoints['path']]: Extract<Endpoints, {path: Path}>;

@@ -357,10 +357,22 @@ export namespace API {
 			 * Amount of vCPU to allocate
 			 */
 			cpu: number;
-			ram: number;
+
+			/**
+			 * Amount of memory to allocate in a readible format
+			 * You can use the `parseSize` function to convert this to bytes.
+			 */
+			ram: string;
+
+			/**
+			 * vGPUs to allocate
+			 */
 			vgpu: Vgpu[];
 		}
 
+		/**
+		 * Virtual GPU config
+		 */
 		export interface Vgpu {
 			type: string;
 			count: number;
@@ -385,5 +397,9 @@ export namespace API {
 		export interface CREATE_DEPLOYMENT {
 			deployment: Deployment;
 		}
+	}
+
+	export namespace Registry {
+		export interface GET_IMAGES {}
 	}
 }
