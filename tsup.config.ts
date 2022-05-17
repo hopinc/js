@@ -1,3 +1,4 @@
+import {stripIndent} from 'common-tags';
 import {defineConfig} from 'tsup';
 
 export default defineConfig({
@@ -8,4 +9,12 @@ export default defineConfig({
 	minifyWhitespace: true,
 	sourcemap: true,
 	dts: true,
+	banner: {
+		js: stripIndent`
+
+			/*
+			 * Copyright ${new Date().getFullYear()} Hop, Inc
+			 */
+		`,
+	},
 });

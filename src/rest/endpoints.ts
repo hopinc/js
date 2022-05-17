@@ -1,8 +1,12 @@
-import {Method, API} from './types';
+import {Method, API, Id} from './types';
 
-export type SuccessfulAPIResposne<T> = {
+export type SuccessfulAPIResponse<T> = {
 	success: true;
 	data: T;
+};
+
+export type EmptySuccessfulAPIResponse = {
+	success: true;
 };
 
 export type ErroredAPIResponse = {
@@ -13,7 +17,11 @@ export type ErroredAPIResponse = {
 	};
 };
 
-export type APIResponse<T> = SuccessfulAPIResposne<T> | ErroredAPIResponse;
+export type APIResponse<T> =
+	| ([T] extends [never]
+			? EmptySuccessfulAPIResponse
+			: SuccessfulAPIResponse<T>)
+	| ErroredAPIResponse;
 
 export type Endpoint<
 	M extends Method,
@@ -62,12 +70,41 @@ export type Endpoints =
 				metadata: API.Pipe.RoomMetadata;
 			}
 	  >
-	| Endpoint<'GET', '/v1/teams/:team_id/members/@me', API.Teams.Member>
+	| Endpoint<'GET', '/v1/teams/:team_id/members/@me', API.Teams.GET_MEMBERS_ME>
+	| Endpoint<'GET', '/v1/ignite/deployments', API.Ignite.GET_DEPLOYMENTS>
 	| Endpoint<
 			'GET',
 			'/v1/ignite/deployments/:deployment_id/containers',
-			API.Ignite.Container
-	  >;
+			API.Ignite.GET_CONTAINERS
+	  >
+	| Endpoint<
+			'POST',
+			'/v1/ignite/deployments/:deployment_id/containers',
+			API.Ignite.CREATE_CONTAINER,
+			{
+				/**
+				 * The ID of the deployment
+				 */
+				deployment_id: Id<'deployment'>;
+			}
+	  >
+	| Endpoint<
+			'POST',
+			'/v1/ignite/deployments/:deployment_id/containers/:container_id',
+			never,
+			{
+				/**
+				 * The ID of the deployment
+				 */
+				deployment_id: Id<'deployment'>;
+
+				/**
+				 * The ID of the container
+				 */
+				container_id: Id<'container'>;
+			}
+	  >
+	| Endpoint<'POST', '/v1/ignite/deployments', API.Ignite.CREATE_DEPLOYMENT>;
 
 export type EndpointMap = {
 	[Path in Endpoints['path']]: Extract<Endpoints, {path: Path}>;
