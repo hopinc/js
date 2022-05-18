@@ -1,0 +1,5 @@
+{
+	"yaml.schemas": {
+		"https://json.schemastore.org/github-action.json": "file:///Users/ali/code/hop-js/.github/workflows/build.yml"
+	}
+}
