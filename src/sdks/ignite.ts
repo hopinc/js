@@ -96,11 +96,11 @@ export class Ignite {
 
 		// Hop's runtime requires a minimum of 6mb of memory per container
 		// It's useful to validate this at the SDK level as well as API level.
-		if (parseSize(config.resources.ram) <= SIX_MB_IN_BYTES) {
-			throw new Error(
-				'Allocated memory must be greater than 6MB when creating a deployment.',
-			);
-		}
+		// if (parseSize(config.resources.ram) <= SIX_MB_IN_BYTES) {
+		// 	throw new Error(
+		// 		'Allocated memory must be greater than 6MB when creating a deployment.',
+		// 	);
+		// }
 
 		const {deployment} = await this.client.post(
 			'/v1/ignite/deployments',
@@ -109,5 +109,17 @@ export class Ignite {
 		);
 
 		return deployment;
+	}
+
+	async deleteDeployment(deployment: Id<'deployment'>) {
+		await this.client.delete(
+			'/v1/ignite/deployments/:deployment_id',
+			undefined,
+			{deployment_id: deployment},
+		);
+	}
+
+	async createContainer(deployment: Id<'deployment'>) {
+		//
 	}
 }

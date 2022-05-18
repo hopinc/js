@@ -64,6 +64,7 @@ __metadata:
   resolution: "@onehop/js@workspace:."
   dependencies:
     "@types/common-tags": ^1
+    colorette: ^2.0.16
     common-tags: ^1.8.2
     cross-fetch: ^3.1.5
     prettier: ^2.6.2
@@ -297,6 +298,13 @@ __metadata:
   bin:
     color-support: bin.js
   checksum: 9b7356817670b9a13a26ca5af1c21615463b500783b739b7634a0c2047c16cef4b2865d7576875c31c3cddf9dd621fa19285e628f20198b233a5cfdda6d0793b
+  languageName: node
+  linkType: hard
+
+"colorette@npm:^2.0.16":
+  version: 2.0.16
+  resolution: "colorette@npm:2.0.16"
+  checksum: cd55596a3a2d1071c1a28eee7fd8a5387593ff1bd10a3e8d0a6221499311fe34a9f2b9272d77c391e0e003dcdc8934fb2f8d106e7ef1f7516f8060c901d41a27
   languageName: node
   linkType: hard
 

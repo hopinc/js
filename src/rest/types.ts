@@ -100,7 +100,11 @@ export function getIdPrefix<T extends IdPrefixes>(id: string, expect?: T) {
 	const [prefix] = id.split('_');
 
 	if (!prefix || !validateIdPrefix(prefix, expect)) {
-		throw new Error(`Expected ${id} to be an id of type ${expect}`);
+		const message = expect
+			? `Expected ${id} to be a valid id of type ${expect}`
+			: `Expected ${id} to be a valid id. Found prefix \`${prefix}\`.`;
+
+		throw new Error(message);
 	}
 
 	return prefix;
@@ -143,6 +147,8 @@ export function assertId<T extends IdPrefixes = IdPrefixes>(
  * All type information for the entire API
  */
 export namespace API {
+	export type Empty = void;
+
 	/**
 	 * @see https://docs.hop.io/pipe
 	 */
@@ -329,6 +335,11 @@ export namespace API {
 		// when future versions of deployment configs come out
 		export type DeploymentConfig = {
 			/**
+			 * The name of the deployment
+			 */
+			name: string;
+
+			/**
 			 * The type of this deployment
 			 */
 			type: RuntimeType;
@@ -426,6 +437,8 @@ export namespace API {
 		export interface CREATE_DEPLOYMENT {
 			deployment: Deployment;
 		}
+
+		export type DELETE_DEPLOYMENT = Empty;
 	}
 
 	export namespace Registry {

@@ -1,6 +1,7 @@
 import fetch from 'cross-fetch';
 import urlcat from 'urlcat';
 import {ExtractRouteParams} from '../util';
+import {debug} from '../util/debug';
 import {APIResponse, Endpoints} from './endpoints';
 import {Id} from './types';
 
@@ -23,16 +24,20 @@ export class APIClient {
 		query: Record<string, string> = {},
 		init: RequestInit = {},
 	): Promise<T> {
-		const url = urlcat(this.options.baseUrl, path);
+		const url = urlcat(this.options.baseUrl, path, query);
+
+		const headers = {
+			...(init?.headers ?? {}),
+			'Authorization': this.options.authorization,
+			'Content-Type': 'application/json',
+		};
+
+		debug(headers);
 
 		const response = await fetch(url, {
 			method,
 			body: body ? JSON.stringify(body) : undefined,
-			headers: {
-				...(init?.headers ?? {}),
-				'Authorization': this.options.authorization,
-				'Content-Type': 'application/json',
-			},
+			headers,
 			...init,
 		});
 
@@ -50,10 +55,13 @@ export class APIClient {
 		query?: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
 	) {
-		type E = Extract<Endpoints, {path: Path; method: 'GET'}>;
-
-		const url = urlcat(this.options.baseUrl, path, query ?? {});
-		return this.request<E['res']>('get', url, undefined, query, init);
+		return this.request<Extract<Endpoints, {path: Path; method: 'GET'}>['res']>(
+			'get',
+			path,
+			undefined,
+			query,
+			init,
+		);
 	}
 
 	post<Path extends Extract<Endpoints, {method: 'POST'}>['path']>(
@@ -62,10 +70,9 @@ export class APIClient {
 		query?: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
 	) {
-		type E = Extract<Endpoints, {path: Path; method: 'POST'}>;
-
-		const url = urlcat(this.options.baseUrl, path);
-		return this.request<E['res']>('post', url, body, query, init);
+		return this.request<
+			Extract<Endpoints, {path: Path; method: 'POST'}>['res']
+		>('post', path, body, query, init);
 	}
 
 	put<Path extends Extract<Endpoints, {method: 'PUT'}>['path']>(
@@ -74,10 +81,13 @@ export class APIClient {
 		query?: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
 	) {
-		type E = Extract<Endpoints, {path: Path; method: 'PUT'}>;
-
-		const url = urlcat(this.options.baseUrl, path);
-		return this.request<E['res']>('put', url, body, query, init);
+		return this.request<Extract<Endpoints, {path: Path; method: 'PUT'}>['res']>(
+			'put',
+			path,
+			body,
+			query,
+			init,
+		);
 	}
 
 	patch<Path extends Extract<Endpoints, {method: 'PATCH'}>['path']>(
@@ -86,10 +96,9 @@ export class APIClient {
 		query?: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
 	) {
-		type E = Extract<Endpoints, {path: Path; method: 'PATCH'}>;
-
-		const url = urlcat(this.options.baseUrl, path);
-		return this.request<E['res']>('patch', url, body, query, init);
+		return this.request<
+			Extract<Endpoints, {path: Path; method: 'PATCH'}>['res']
+		>('patch', path, body, query, init);
 	}
 
 	delete<Path extends Extract<Endpoints, {method: 'DELETE'}>['path']>(
@@ -98,9 +107,8 @@ export class APIClient {
 		query?: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
 	) {
-		type E = Extract<Endpoints, {path: Path; method: 'DELETE'}>;
-
-		const url = urlcat(this.options.baseUrl, path, query ?? {});
-		return this.request<E['res']>('delete', url, body, query, init);
+		return this.request<
+			Extract<Endpoints, {path: Path; method: 'DELETE'}>['res']
+		>('delete', path, body, query, init);
 	}
 }
