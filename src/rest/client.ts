@@ -1,4 +1,4 @@
-import fetch, {RequestInit} from 'node-fetch';
+import fetch from 'cross-fetch';
 import urlcat from 'urlcat';
 import {ExtractRouteParams} from '../util';
 import {APIResponse, Endpoints} from './endpoints';

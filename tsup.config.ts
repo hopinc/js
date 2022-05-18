@@ -9,6 +9,7 @@ export default defineConfig({
 	minifyWhitespace: true,
 	sourcemap: true,
 	dts: true,
+	format: ['cjs', 'esm'],
 	banner: {
 		js: stripIndent`
 
