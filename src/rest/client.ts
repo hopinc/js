@@ -3,7 +3,7 @@ import urlcat from 'urlcat';
 import {ExtractRouteParams} from '../util';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints';
 
-export type APIAuthorization = {type: 'console' | 'sk'; token: string};
+export type APIAuthorization = {type: 'bearer' | 'secret'; token: string};
 
 export interface APIClientOptions {
 	baseUrl: string;
@@ -28,7 +28,7 @@ export class APIClient {
 			headers: {
 				...(init?.headers ?? {}),
 				'Authorization':
-					this.options.authorization.type === 'console'
+					this.options.authorization.type === 'bearer'
 						? `Bearer ${this.options.authorization.token}`
 						: `Secret ${this.options.authorization.token}`,
 				'Content-Type': 'application/json',
@@ -39,11 +39,10 @@ export class APIClient {
 		const result = (await response.json()) as APIResponse<T>;
 
 		if (!result.success) {
-			const {error} = body as ErroredAPIResponse;
-			throw new Error(error.message);
+			throw new Error(result.error.message);
 		}
 
-		return result.data as T;
+		return result.data;
 	}
 
 	async get<Path extends Extract<Endpoints, {method: 'GET'}>['path']>(

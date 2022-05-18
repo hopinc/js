@@ -20,12 +20,12 @@ export class Ignite {
 	 * @returns A list of deployments for the given team.
 	 */
 	async getDeployments(teamId?: Id<'team'>) {
-		if (this.authorization.type === 'console' && !teamId) {
+		if (this.authorization.type === 'bearer' && !teamId) {
 			throw new Error('Team ID is required for console authorization');
 		}
 
-		if (teamId && this.authorization.type === 'sk') {
-			throw new Error('Team ID is not required for sk authorization');
+		if (teamId && this.authorization.type === 'secret') {
+			throw new Error('Team ID is not required for secret authorization');
 		}
 
 		const query = teamId ? {team: teamId} : undefined;
@@ -66,7 +66,7 @@ export class Ignite {
 		let team: Id<'team'> | null = null;
 
 		if (typeof configOrTeam === 'object') {
-			if (this.authorization.type === 'sk') {
+			if (this.authorization.type === 'secret') {
 				config = configOrTeam;
 			} else {
 				throw new Error(
@@ -80,12 +80,12 @@ export class Ignite {
 				);
 			}
 
-			if (this.authorization.type === 'console') {
+			if (this.authorization.type === 'bearer') {
 				team = configOrTeam;
 				config = consoleConfig;
 			} else {
 				throw new Error(
-					'Only argument must be the config when using sk authorization to create deployments.',
+					'Only argument must be the config when using secret authorization to create deployments.',
 				);
 			}
 		}

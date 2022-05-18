@@ -35,7 +35,7 @@ export const ID_PREFIXES = [
 		description: 'Team Invite',
 	},
 	{
-		prefix: 'sk',
+		prefix: 'secret',
 		description: 'Secret Key',
 	},
 	{

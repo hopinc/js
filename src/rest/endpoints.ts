@@ -5,11 +5,6 @@ export type SuccessfulAPIResponse<T> = {
 	data: T;
 };
 
-export type EmptySuccessfulAPIResponse = {
-	success: true;
-	data?: undefined;
-};
-
 export type ErroredAPIResponse = {
 	success: false;
 	error: {
@@ -18,11 +13,7 @@ export type ErroredAPIResponse = {
 	};
 };
 
-export type APIResponse<T> =
-	| ([T] extends [never]
-			? EmptySuccessfulAPIResponse
-			: SuccessfulAPIResponse<T>)
-	| ErroredAPIResponse;
+export type APIResponse<T> = SuccessfulAPIResponse<T> | ErroredAPIResponse;
 
 export type Endpoint<
 	M extends Method,
