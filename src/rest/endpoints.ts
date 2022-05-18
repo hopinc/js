@@ -7,6 +7,7 @@ export type SuccessfulAPIResponse<T> = {
 
 export type EmptySuccessfulAPIResponse = {
 	success: true;
+	data?: undefined;
 };
 
 export type ErroredAPIResponse = {
@@ -31,7 +32,7 @@ export type Endpoint<
 > = {
 	method: M;
 	path: Path;
-	res: APIResponse<Res>;
+	res: Res;
 	body: Body;
 };
 

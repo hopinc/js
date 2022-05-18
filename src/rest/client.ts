@@ -1,42 +1,7 @@
 import fetch, {RequestInit} from 'node-fetch';
 import urlcat from 'urlcat';
-import {APIResponse, ErroredAPIResponse} from './endpoints';
-
-export interface Methods {
-	get<T>(
-		path: string,
-		query?: Record<string, string>,
-		init?: RequestInit,
-	): Promise<T>;
-
-	post<T>(
-		path: string,
-		body?: unknown,
-		query?: Record<string, string>,
-		init?: RequestInit,
-	): Promise<T>;
-
-	put<T>(
-		path: string,
-		body?: unknown,
-		query?: Record<string, string>,
-		init?: RequestInit,
-	): Promise<T>;
-
-	patch<T>(
-		path: string,
-		body?: unknown,
-		query?: Record<string, string>,
-		init?: RequestInit,
-	): Promise<T>;
-
-	delete<T>(
-		path: string,
-		body?: unknown,
-		query?: Record<string, string>,
-		init?: RequestInit,
-	): Promise<T>;
-}
+import {ExtractRouteParams} from '../util';
+import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints';
 
 export type APIAuthorization = {type: 'console' | 'sk'; token: string};
 
@@ -45,7 +10,7 @@ export interface APIClientOptions {
 	authorization: APIAuthorization;
 }
 
-export class APIClient implements Methods {
+export class APIClient {
 	constructor(private readonly options: APIClientOptions) {}
 
 	private async request<T>(
@@ -78,60 +43,65 @@ export class APIClient implements Methods {
 			throw new Error(error.message);
 		}
 
-		if ('data' in result) {
-			return result.data;
-		}
-
-		// Return nothing but cast to never
-		return undefined as never;
+		return result.data as T;
 	}
 
-	async get<T>(
-		path: string,
-		query?: Record<string, string>,
+	async get<Path extends Extract<Endpoints, {method: 'GET'}>['path']>(
+		path: Path,
+		query?: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
-	): Promise<T> {
+	) {
+		type E = Extract<Endpoints, {path: Path; method: 'GET'}>;
+
 		const url = urlcat(this.options.baseUrl, path, query ?? {});
-		return this.request<T>('get', url, undefined, query, init);
+		return this.request<E['res']>('get', url, undefined, query, init);
 	}
 
-	post<T>(
-		path: string,
-		body?: unknown,
-		query?: Record<string, string>,
+	post<Path extends Extract<Endpoints, {method: 'POST'}>['path']>(
+		path: Path,
+		body?: Extract<Endpoints, {path: Path; method: 'POST'}>['body'],
+		query?: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
-	): Promise<T> {
+	) {
+		type E = Extract<Endpoints, {path: Path; method: 'POST'}>;
+
 		const url = urlcat(this.options.baseUrl, path);
-		return this.request<T>('post', url, body, query, init);
+		return this.request<E['res']>('post', url, body, query, init);
 	}
 
-	put<T>(
-		path: string,
-		body?: unknown,
-		query?: Record<string, string>,
+	put<Path extends Extract<Endpoints, {method: 'PUT'}>['path']>(
+		path: Path,
+		body?: Extract<Endpoints, {path: Path; method: 'PUT'}>['body'],
+		query?: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
-	): Promise<T> {
+	) {
+		type E = Extract<Endpoints, {path: Path; method: 'PUT'}>;
+
 		const url = urlcat(this.options.baseUrl, path);
-		return this.request<T>('put', url, body, query, init);
+		return this.request<E['res']>('put', url, body, query, init);
 	}
 
-	patch<T>(
-		path: string,
-		body?: unknown,
-		query?: Record<string, string>,
+	patch<Path extends Extract<Endpoints, {method: 'PATCH'}>['path']>(
+		path: Path,
+		body?: Extract<Endpoints, {path: Path; method: 'PATCH'}>['body'],
+		query?: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
-	): Promise<T> {
+	) {
+		type E = Extract<Endpoints, {path: Path; method: 'PATCH'}>;
+
 		const url = urlcat(this.options.baseUrl, path);
-		return this.request<T>('patch', url, body, query, init);
+		return this.request<E['res']>('patch', url, body, query, init);
 	}
 
-	delete<T>(
-		path: string,
-		body?: unknown,
-		query?: Record<string, string>,
+	delete<Path extends Extract<Endpoints, {method: 'DELETE'}>['path']>(
+		path: Path,
+		body?: Extract<Endpoints, {path: Path; method: 'DELETE'}>['body'],
+		query?: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
-	): Promise<T> {
-		const url = urlcat(this.options.baseUrl, path);
-		return this.request<T>('delete', url, body, query, init);
+	) {
+		type E = Extract<Endpoints, {path: Path; method: 'DELETE'}>;
+
+		const url = urlcat(this.options.baseUrl, path, query ?? {});
+		return this.request<E['res']>('delete', url, body, query, init);
 	}
 }
