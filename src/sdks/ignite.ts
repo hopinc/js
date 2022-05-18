@@ -14,6 +14,11 @@ export class Ignite {
 		this.client = new APIClient({baseUrl, authorization});
 	}
 
+	/**
+	 * Gets all deployments for a team
+	 * @param teamId The team ID to list deployments for. You only need to provide this if you are using console authorization.
+	 * @returns A list of deployments for the given team.
+	 */
 	async getDeployments(teamId?: Id<'team'>) {
 		if (this.authorization.type === 'console' && !teamId) {
 			throw new Error('Team ID is required for console authorization');
@@ -32,6 +37,26 @@ export class Ignite {
 
 		return deployments;
 	}
+
+	/**
+	 * Creates a new deployment.
+	 * You should use this overload if you are authorizing with a console token.
+	 * @param configOrTeam The team ID to create the deployment in.
+	 * @param consoleConfig The deployment config to create.
+	 */
+	async createDeployment(
+		configOrTeam: Id<'team'>,
+		consoleConfig: API.Ignite.DeploymentConfig,
+	): Promise<API.Ignite.Deployment>;
+
+	/**
+	 * Create a new deployment. You should use this overload if you are authorizing with a secret key and
+	 * not with a console token.
+	 * @param configOrTeam The config for this deployment.
+	 */
+	async createDeployment(
+		configOrTeam: API.Ignite.DeploymentConfig,
+	): Promise<API.Ignite.Deployment>;
 
 	async createDeployment(
 		configOrTeam: Id<'team'> | API.Ignite.DeploymentConfig,
