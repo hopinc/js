@@ -35,7 +35,7 @@ export const ID_PREFIXES = [
 		description: 'Team Invite',
 	},
 	{
-		prefix: 'secret',
+		prefix: 'sk',
 		description: 'Secret Key',
 	},
 	{
@@ -54,11 +54,26 @@ export const ID_PREFIXES = [
 		prefix: 'deployment',
 		description: 'Ignite deployment',
 	},
+	{
+		prefix: 'bearer',
+		description: 'Users bearer token',
+	},
 ] as const;
 
 export type IdPrefixes = typeof ID_PREFIXES[number]['prefix'];
 export type Id<T extends IdPrefixes> = `${T}_${string}`;
 export type AnyId = Id<IdPrefixes>;
+
+export function validateIdPrefix<T extends IdPrefixes = IdPrefixes>(
+	prefix: string,
+	expect?: T,
+): prefix is T {
+	if (expect) {
+		return prefix === expect;
+	}
+
+	return ID_PREFIXES.some(({prefix: p}) => p === prefix);
+}
 
 /**
  * Validates that a string is a valid ID
@@ -75,6 +90,20 @@ export function validateId<T extends IdPrefixes = IdPrefixes>(
 	}
 
 	return maybeId.startsWith(prefix);
+}
+
+export function getIdPrefix<T extends IdPrefixes>(id: string, expect?: T) {
+	if (expect && !validateId(id, expect)) {
+		throw new Error(`Expected ${id} to be an id of type ${expect}`);
+	}
+
+	const [prefix] = id.split('_');
+
+	if (!prefix || !validateIdPrefix(prefix, expect)) {
+		throw new Error(`Expected ${id} to be an id of type ${expect}`);
+	}
+
+	return prefix;
 }
 
 /**

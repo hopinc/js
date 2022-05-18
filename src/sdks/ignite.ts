@@ -1,30 +1,34 @@
-import {API, Endpoints, Id} from '../rest';
-import {APIAuthorization, APIClient} from '../rest/client';
+import {API, getIdPrefix, Id, validateId} from '../rest';
+import {
+	APIAuthorization,
+	APIAuthorizationType,
+	APIClient,
+} from '../rest/client';
 import {parseSize} from '../util';
 import {DEFAULT_BASE_URL} from '../util/constants';
 
 const SIX_MB_IN_BYTES = 6 * 1024 * 1024;
 
 export class Ignite {
-	private readonly authorization: APIAuthorization;
 	private readonly client: APIClient;
+	private readonly authType: APIAuthorizationType;
 
 	constructor(authorization: APIAuthorization, baseUrl = DEFAULT_BASE_URL) {
-		this.authorization = authorization;
+		this.authType = getIdPrefix(authorization);
 		this.client = new APIClient({baseUrl, authorization});
 	}
 
 	/**
 	 * Gets all deployments for a team
-	 * @param teamId The team ID to list deployments for. You only need to provide this if you are using console authorization.
+	 * @param teamId The team ID to list deployments for. You only need to provide this if you are using bearer or PAT authorization.
 	 * @returns A list of deployments for the given team.
 	 */
 	async getDeployments(teamId?: Id<'team'>) {
-		if (this.authorization.type === 'bearer' && !teamId) {
-			throw new Error('Team ID is required for console authorization');
+		if (this.authType === 'bearer' && !teamId) {
+			throw new Error('Team ID is required for Bearer or PAT authorization');
 		}
 
-		if (teamId && this.authorization.type === 'secret') {
+		if (teamId && this.authType === 'sk') {
 			throw new Error('Team ID is not required for secret authorization');
 		}
 
@@ -40,18 +44,18 @@ export class Ignite {
 
 	/**
 	 * Creates a new deployment.
-	 * You should use this overload if you are authorizing with a console token.
+	 * You should use this overload if you are authorizing with a bearer or pat.
 	 * @param configOrTeam The team ID to create the deployment in.
-	 * @param consoleConfig The deployment config to create.
+	 * @param bearerOrPatConfig The deployment config to create.
 	 */
 	async createDeployment(
 		configOrTeam: Id<'team'>,
-		consoleConfig: API.Ignite.DeploymentConfig,
+		bearerOrPatConfig: API.Ignite.DeploymentConfig,
 	): Promise<API.Ignite.Deployment>;
 
 	/**
 	 * Create a new deployment. You should use this overload if you are authorizing with a secret key and
-	 * not with a console token.
+	 * not with a bearer or pat.
 	 * @param configOrTeam The config for this deployment.
 	 */
 	async createDeployment(
@@ -60,29 +64,29 @@ export class Ignite {
 
 	async createDeployment(
 		configOrTeam: Id<'team'> | API.Ignite.DeploymentConfig,
-		consoleConfig?: API.Ignite.DeploymentConfig,
+		bearerOrPatConfig?: API.Ignite.DeploymentConfig,
 	) {
 		let config: API.Ignite.DeploymentConfig;
 		let team: Id<'team'> | null = null;
 
 		if (typeof configOrTeam === 'object') {
-			if (this.authorization.type === 'secret') {
+			if (this.authType === 'sk') {
 				config = configOrTeam;
 			} else {
 				throw new Error(
-					'First argument must be the team ID when using console authorization to create deployments.',
+					'First argument must be the team ID when using bearer authorization to create deployments.',
 				);
 			}
 		} else {
-			if (!consoleConfig) {
+			if (!bearerOrPatConfig) {
 				throw new Error(
-					'Second argument must be the deployment config when using console authorization to create deployments.',
+					'Second argument must be the deployment config when using bearer authorization to create deployments.',
 				);
 			}
 
-			if (this.authorization.type === 'bearer') {
+			if (this.authType === 'bearer' || this.authType === 'pat') {
 				team = configOrTeam;
-				config = consoleConfig;
+				config = bearerOrPatConfig;
 			} else {
 				throw new Error(
 					'Only argument must be the config when using secret authorization to create deployments.',

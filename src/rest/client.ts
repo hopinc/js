@@ -1,9 +1,12 @@
 import fetch, {RequestInit} from 'node-fetch';
 import urlcat from 'urlcat';
 import {ExtractRouteParams} from '../util';
-import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints';
+import {APIResponse, Endpoints} from './endpoints';
+import {Id} from './types';
 
-export type APIAuthorization = {type: 'bearer' | 'secret'; token: string};
+export type APIAuthorization = Id<'sk'> | Id<'bearer'> | Id<'pat'>;
+export type APIAuthorizationType =
+	APIAuthorization extends `${infer T}_${string}` ? T : never;
 
 export interface APIClientOptions {
 	baseUrl: string;
@@ -27,10 +30,7 @@ export class APIClient {
 			body: body ? JSON.stringify(body) : undefined,
 			headers: {
 				...(init?.headers ?? {}),
-				'Authorization':
-					this.options.authorization.type === 'bearer'
-						? `Bearer ${this.options.authorization.token}`
-						: `Secret ${this.options.authorization.token}`,
+				'Authorization': this.options.authorization,
 				'Content-Type': 'application/json',
 			},
 			...init,

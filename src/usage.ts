@@ -1,6 +1,3 @@
 import {Ignite} from './sdks';
 
-const api = new Ignite({
-	token: 'dsadfjsdfjds',
-	type: 'bearer',
-});
+const api = new Ignite('bearer_dsajfsfsdfdsfsdfjisdj');
