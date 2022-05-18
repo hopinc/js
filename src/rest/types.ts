@@ -418,6 +418,21 @@ export namespace API {
 			count: number;
 		}
 
+		/**
+		 * Logs from a container
+		 */
+		export interface ContainerLog {
+			/**
+			 * The timestamp of the log
+			 */
+			timestampe: Timestamp;
+
+			/**
+			 * The log message
+			 */
+			message: string;
+		}
+
 		export interface GET_DEPLOYMENT_CONTAINERS {
 			containers: Container[];
 		}
@@ -439,6 +454,10 @@ export namespace API {
 		}
 
 		export type DELETE_DEPLOYMENT = Empty;
+
+		export interface GET_LOGS {
+			logs: ContainerLog[];
+		}
 	}
 
 	export namespace Registry {

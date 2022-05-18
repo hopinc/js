@@ -1,9 +1,10 @@
-import fetch from 'cross-fetch';
+import {blueBright, bold} from 'colorette';
+import fetch, {Headers} from 'cross-fetch';
 import urlcat from 'urlcat';
 import {ExtractRouteParams} from '../util';
 import {debug} from '../util/debug';
 import {APIResponse, Endpoints} from './endpoints';
-import {Id} from './types';
+import {getIdPrefix, Id, Method} from './types';
 
 export type APIAuthorization = Id<'sk'> | Id<'bearer'> | Id<'pat'>;
 export type APIAuthorizationType =
@@ -14,11 +15,30 @@ export interface APIClientOptions {
 	authorization: APIAuthorization;
 }
 
+export class HopAPIError extends Error {
+	constructor(public readonly status: number, message: string) {
+		super(message);
+	}
+}
+
 export class APIClient {
-	constructor(private readonly options: APIClientOptions) {}
+	private readonly options: APIClientOptions;
+	public readonly authType: APIAuthorizationType;
+
+	constructor(options: APIClientOptions) {
+		this.options = options;
+		this.authType = getIdPrefix(options.authorization);
+
+		debug(
+			'Creating new',
+			this.authType,
+			'API client with',
+			options.authorization,
+		);
+	}
 
 	private async request<T>(
-		method: 'get' | 'post' | 'put' | 'patch' | 'delete',
+		method: Method,
 		path: string,
 		body?: unknown,
 		query: Record<string, string> = {},
@@ -26,13 +46,22 @@ export class APIClient {
 	): Promise<T> {
 		const url = urlcat(this.options.baseUrl, path, query);
 
-		const headers = {
+		const headers = new Headers({
 			...(init?.headers ?? {}),
-			'Authorization': this.options.authorization,
-			'Content-Type': 'application/json',
-		};
+			Authorization: this.options.authorization,
+		});
 
-		debug(headers);
+		if (body) {
+			headers.set('Content-Type', 'application/json');
+		}
+
+		debug(() => [
+			method,
+			'to',
+			bold(blueBright(path)),
+			'with',
+			{url, query, headers: Object.fromEntries(headers.entries())},
+		]);
 
 		const response = await fetch(url, {
 			method,
@@ -44,7 +73,9 @@ export class APIClient {
 		const result = (await response.json()) as APIResponse<T>;
 
 		if (!result.success) {
-			throw new Error(result.error.message);
+			debug(result);
+
+			throw new HopAPIError(response.status, result.error.message);
 		}
 
 		return result.data;
@@ -56,7 +87,7 @@ export class APIClient {
 		init?: RequestInit,
 	) {
 		return this.request<Extract<Endpoints, {path: Path; method: 'GET'}>['res']>(
-			'get',
+			'GET',
 			path,
 			undefined,
 			query,
@@ -72,7 +103,7 @@ export class APIClient {
 	) {
 		return this.request<
 			Extract<Endpoints, {path: Path; method: 'POST'}>['res']
-		>('post', path, body, query, init);
+		>('POST', path, body, query, init);
 	}
 
 	put<Path extends Extract<Endpoints, {method: 'PUT'}>['path']>(
@@ -82,7 +113,7 @@ export class APIClient {
 		init?: RequestInit,
 	) {
 		return this.request<Extract<Endpoints, {path: Path; method: 'PUT'}>['res']>(
-			'put',
+			'PUT',
 			path,
 			body,
 			query,
@@ -98,7 +129,7 @@ export class APIClient {
 	) {
 		return this.request<
 			Extract<Endpoints, {path: Path; method: 'PATCH'}>['res']
-		>('patch', path, body, query, init);
+		>('PATCH', path, body, query, init);
 	}
 
 	delete<Path extends Extract<Endpoints, {method: 'DELETE'}>['path']>(
@@ -109,6 +140,6 @@ export class APIClient {
 	) {
 		return this.request<
 			Extract<Endpoints, {path: Path; method: 'DELETE'}>['res']
-		>('delete', path, body, query, init);
+		>('DELETE', path, body, query, init);
 	}
 }

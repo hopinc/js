@@ -102,12 +102,17 @@ export type Endpoints =
 			API.Ignite.CREATE_DEPLOYMENT,
 			API.Ignite.DeploymentConfig
 	  >
-	| Endpoint<'GET', '/v1/registry/teams/@this/images', API.Registry.GET_IMAGES>
 	| Endpoint<
 			'DELETE',
 			'/v1/ignite/deployments/:deployment_id',
 			API.Ignite.DELETE_DEPLOYMENT
-	  >;
+	  >
+	| Endpoint<
+			'GET',
+			'/v1/ignite/deployments/:deployment_id/containers/:container_id/logs',
+			API.Ignite.GET_LOGS
+	  >
+	| Endpoint<'GET', '/v1/registry/teams/@this/images', API.Registry.GET_IMAGES>;
 
 export type EndpointMap = {
 	[Path in Endpoints['path']]: Extract<Endpoints, {path: Path}>;

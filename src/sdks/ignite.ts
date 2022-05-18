@@ -1,4 +1,4 @@
-import {API, getIdPrefix, Id, validateId} from '../rest';
+import {API, Id} from '../rest';
 import {
 	APIAuthorization,
 	APIAuthorizationType,
@@ -11,10 +11,8 @@ const SIX_MB_IN_BYTES = 6 * 1024 * 1024;
 
 export class Ignite {
 	private readonly client: APIClient;
-	private readonly authType: APIAuthorizationType;
 
 	constructor(authorization: APIAuthorization, baseUrl = DEFAULT_BASE_URL) {
-		this.authType = getIdPrefix(authorization);
 		this.client = new APIClient({baseUrl, authorization});
 	}
 
@@ -24,11 +22,11 @@ export class Ignite {
 	 * @returns A list of deployments for the given team.
 	 */
 	async getDeployments(teamId?: Id<'team'>) {
-		if (this.authType === 'bearer' && !teamId) {
+		if (this.client.authType === 'bearer' && !teamId) {
 			throw new Error('Team ID is required for Bearer or PAT authorization');
 		}
 
-		if (teamId && this.authType === 'sk') {
+		if (teamId && this.client.authType === 'sk') {
 			throw new Error('Team ID is not required for secret authorization');
 		}
 
@@ -70,7 +68,7 @@ export class Ignite {
 		let team: Id<'team'> | null = null;
 
 		if (typeof configOrTeam === 'object') {
-			if (this.authType === 'sk') {
+			if (this.client.authType === 'sk') {
 				config = configOrTeam;
 			} else {
 				throw new Error(
@@ -84,7 +82,7 @@ export class Ignite {
 				);
 			}
 
-			if (this.authType === 'bearer' || this.authType === 'pat') {
+			if (this.client.authType === 'bearer' || this.client.authType === 'pat') {
 				team = configOrTeam;
 				config = bearerOrPatConfig;
 			} else {
@@ -111,6 +109,10 @@ export class Ignite {
 		return deployment;
 	}
 
+	/**
+	 * Deletes a deployment
+	 * @param deployment The ID of the deployment
+	 */
 	async deleteDeployment(deployment: Id<'deployment'>) {
 		await this.client.delete(
 			'/v1/ignite/deployments/:deployment_id',
@@ -120,6 +122,27 @@ export class Ignite {
 	}
 
 	async createContainer(deployment: Id<'deployment'>) {
-		//
+		const {container} = await this.client.post(
+			'/v1/ignite/deployments/:deployment_id/containers',
+			undefined,
+			{deployment_id: deployment},
+		);
+
+		return container;
+	}
+
+	/**
+	 * Get the logs for a container
+	 * @param container The ID of the container
+	 * @param deployment The ID of the deployment
+	 * @returns
+	 */
+	async getLogs(container: Id<'container'>, deployment: Id<'deployment'>) {
+		const {logs} = await this.client.get(
+			'/v1/ignite/deployments/:deployment_id/containers/:container_id/logs',
+			{container_id: container, deployment_id: deployment},
+		);
+
+		return logs;
 	}
 }
