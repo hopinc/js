@@ -427,12 +427,17 @@ export namespace API {
 			/**
 			 * The timestamp of the log
 			 */
-			timestampe: Timestamp;
+			timestamp: Timestamp;
 
 			/**
 			 * The log message
 			 */
 			message: string;
+
+			/**
+			 * The level of the log. stderr becomes `error` and stdout becomes `info`
+			 */
+			level: 'info' | 'error';
 		}
 
 		export interface GET_DEPLOYMENT_CONTAINERS {
