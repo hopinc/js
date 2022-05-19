@@ -1,17 +1,21 @@
 import {APIAuthorization} from './rest/client';
 import {Ignite} from './sdks';
+import {User} from './sdks/user';
+import {DEFAULT_BASE_URL} from './util/constants';
 
 export class Hop {
-	public readonly ignite;
-
 	private readonly sdks;
+
+	public readonly ignite;
+	public readonly users;
 
 	constructor(
 		private readonly authorzation: APIAuthorization,
-		private readonly baseUrl?: string,
+		private readonly baseUrl = DEFAULT_BASE_URL,
 	) {
 		this.sdks = {
 			ignite: new Ignite(authorzation, baseUrl),
+			user: new User(authorzation, baseUrl),
 		};
 
 		this.ignite = {
@@ -27,6 +31,12 @@ export class Hop {
 				create: this.sdks.ignite.createContainer.bind(this.sdks.ignite),
 				delete: this.sdks.ignite.deleteContainer.bind(this.sdks.ignite),
 				getLogs: this.sdks.ignite.getLogs.bind(this.sdks.ignite),
+			},
+		};
+
+		this.users = {
+			me: {
+				get: this.sdks.user.getMe.bind(this.sdks.user),
 			},
 		};
 	}

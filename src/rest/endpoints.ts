@@ -127,7 +127,8 @@ export type Endpoints =
 			'/v1/ignite/deployments/:deployment_id',
 			API.Ignite.GET_DEPLOYMENT
 	  >
-	| Endpoint<'GET', '/v1/registry/teams/@this/images', API.Registry.GET_IMAGES>;
+	| Endpoint<'GET', '/v1/registry/teams/@this/images', API.Registry.GET_IMAGES>
+	| Endpoint<'GET', '/v1/users/@me', API.Users.GET_ME>;
 
 export type EndpointMap = {
 	[Path in Endpoints['path']]: Extract<Endpoints, {path: Path}>;
