@@ -4,6 +4,9 @@ import {BaseSDK} from './BaseSDK';
 
 const SIX_MB_IN_BYTES = 6 * 1024 * 1024;
 
+/**
+ * Ignite class for interacting with Hop's Ignite product
+ */
 export class Ignite extends BaseSDK {
 	/**
 	 * Gets all deployments for a team
