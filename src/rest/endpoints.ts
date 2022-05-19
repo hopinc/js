@@ -109,12 +109,12 @@ export type Endpoints =
 	  >
 	| Endpoint<
 			'DELETE',
-			'/v1/ignite/deployments/:deployment_id/containers/:container_id',
+			'/v1/ignite/containers/:container_id',
 			API.Ignite.DELETE_CONTAINER
 	  >
 	| Endpoint<
 			'GET',
-			'/v1/ignite/deployments/:deployment_id/containers/:container_id/logs',
+			'/v1/ignite/containers/:container_id/logs',
 			API.Ignite.GET_LOGS
 	  >
 	| Endpoint<
