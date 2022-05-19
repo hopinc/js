@@ -148,6 +148,8 @@ export function assertId<T extends IdPrefixes = IdPrefixes>(
  */
 export namespace API {
 	export type Empty = void;
+	export type SupportedByteUnits = 'b' | 'kb' | 'mb' | 'gb';
+	export type BytesString = `${number}${SupportedByteUnits}`;
 
 	/**
 	 * @see https://docs.hop.io/pipe
@@ -402,7 +404,7 @@ export namespace API {
 			 * Amount of memory to allocate in a readible format
 			 * You can use the `parseSize` function to convert this to bytes.
 			 */
-			ram: string;
+			ram: BytesString;
 
 			/**
 			 * vGPUs to allocate

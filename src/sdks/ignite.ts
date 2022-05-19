@@ -30,11 +30,9 @@ export class Ignite {
 			throw new Error('Team ID is not required for secret authorization');
 		}
 
-		const query = teamId ? {team: teamId} : undefined;
-
 		const {deployments} = await this.client.get(
 			'/v1/ignite/deployments',
-			query,
+			teamId ? {team: teamId} : {},
 		);
 
 		return deployments;
@@ -94,16 +92,16 @@ export class Ignite {
 
 		// Hop's runtime requires a minimum of 6mb of memory per container
 		// It's useful to validate this at the SDK level as well as API level.
-		// if (parseSize(config.resources.ram) <= SIX_MB_IN_BYTES) {
-		// 	throw new Error(
-		// 		'Allocated memory must be greater than 6MB when creating a deployment.',
-		// 	);
-		// }
+		if (parseSize(config.resources.ram) <= SIX_MB_IN_BYTES) {
+			throw new Error(
+				'Allocated memory must be greater than 6MB when creating a deployment.',
+			);
+		}
 
 		const {deployment} = await this.client.post(
 			'/v1/ignite/deployments',
 			config,
-			team ? {team} : undefined,
+			team ? {team} : {},
 		);
 
 		return deployment;
@@ -121,6 +119,11 @@ export class Ignite {
 		);
 	}
 
+	/**
+	 * Creates a container in a deployment
+	 * @param deployment The ID of a deployment to create a container in.
+	 * @returns The newly created container.
+	 */
 	async createContainer(deployment: Id<'deployment'>) {
 		const {container} = await this.client.post(
 			'/v1/ignite/deployments/:deployment_id/containers',

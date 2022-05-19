@@ -19,7 +19,7 @@ export type Endpoint<
 	M extends Method,
 	Path extends string,
 	Res,
-	Body = never,
+	Body = undefined,
 > = {
 	method: M;
 	path: Path;
@@ -72,13 +72,7 @@ export type Endpoints =
 	| Endpoint<
 			'POST',
 			'/v1/ignite/deployments/:deployment_id/containers',
-			API.Ignite.CREATE_CONTAINER,
-			{
-				/**
-				 * The ID of the deployment
-				 */
-				deployment_id: Id<'deployment'>;
-			}
+			API.Ignite.CREATE_CONTAINER
 	  >
 	| Endpoint<
 			'POST',

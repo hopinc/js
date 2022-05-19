@@ -40,7 +40,7 @@ export class APIClient {
 	private async request<T>(
 		method: Method,
 		path: string,
-		body?: unknown,
+		body: unknown,
 		query: Record<string, string> = {},
 		init: RequestInit = {},
 	): Promise<T> {
@@ -83,7 +83,7 @@ export class APIClient {
 
 	async get<Path extends Extract<Endpoints, {method: 'GET'}>['path']>(
 		path: Path,
-		query?: ExtractRouteParams<Path> & Record<string, string>,
+		query: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
 	) {
 		return this.request<Extract<Endpoints, {path: Path; method: 'GET'}>['res']>(
@@ -97,8 +97,8 @@ export class APIClient {
 
 	post<Path extends Extract<Endpoints, {method: 'POST'}>['path']>(
 		path: Path,
-		body?: Extract<Endpoints, {path: Path; method: 'POST'}>['body'],
-		query?: ExtractRouteParams<Path> & Record<string, string>,
+		body: Extract<Endpoints, {path: Path; method: 'POST'}>['body'],
+		query: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
 	) {
 		return this.request<
@@ -108,8 +108,8 @@ export class APIClient {
 
 	put<Path extends Extract<Endpoints, {method: 'PUT'}>['path']>(
 		path: Path,
-		body?: Extract<Endpoints, {path: Path; method: 'PUT'}>['body'],
-		query?: ExtractRouteParams<Path> & Record<string, string>,
+		body: Extract<Endpoints, {path: Path; method: 'PUT'}>['body'],
+		query: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
 	) {
 		return this.request<Extract<Endpoints, {path: Path; method: 'PUT'}>['res']>(
@@ -123,8 +123,8 @@ export class APIClient {
 
 	patch<Path extends Extract<Endpoints, {method: 'PATCH'}>['path']>(
 		path: Path,
-		body?: Extract<Endpoints, {path: Path; method: 'PATCH'}>['body'],
-		query?: ExtractRouteParams<Path> & Record<string, string>,
+		body: Extract<Endpoints, {path: Path; method: 'PATCH'}>['body'],
+		query: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
 	) {
 		return this.request<
@@ -134,8 +134,8 @@ export class APIClient {
 
 	delete<Path extends Extract<Endpoints, {method: 'DELETE'}>['path']>(
 		path: Path,
-		body?: Extract<Endpoints, {path: Path; method: 'DELETE'}>['body'],
-		query?: ExtractRouteParams<Path> & Record<string, string>,
+		body: Extract<Endpoints, {path: Path; method: 'DELETE'}>['body'],
+		query: ExtractRouteParams<Path> & Record<string, string>,
 		init?: RequestInit,
 	) {
 		return this.request<
