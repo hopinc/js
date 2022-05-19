@@ -96,11 +96,36 @@ export class Ignite extends BaseSDK {
 		return deployment;
 	}
 
+	/**
+	 * Get all containers for a deployment
+	 * @param deployment The ID of the deployment to get
+	 * @returns A list of all containers for that team
+	 */
+	async getContainers(deployment: Id<'deployment'>) {
+		const {containers} = await this.client.get(
+			'/v1/ignite/deployments/:deployment_id/containers',
+			{deployment_id: deployment},
+		);
+
+		return containers;
+	}
+
+	/**
+	 * Gets a deployment by name or id
+	 * @param teamId The team ID to list containers for. You only need to provide this if you are using bearer or PAT authorization.
+	 * @param nameOrId The deployment name or ID to list containers for.
+	 */
 	async getDeployment(
 		teamId: Id<'team'>,
 		nameOrId: string,
 	): Promise<API.Ignite.Deployment>;
+
+	/**
+	 * Gets a deployment by name or id
+	 * @param nameOrId The deployment name or ID to list containers for.
+	 */
 	async getDeployment(nameOrId: string): Promise<API.Ignite.Deployment>;
+
 	async getDeployment(teamOrNameOrId: string, nameOrId?: string) {
 		let team: Id<'team'> | undefined;
 		let realNameOrId: string;
@@ -156,7 +181,7 @@ export class Ignite extends BaseSDK {
 	}
 
 	/**
-	 * Creates a container in a deployment
+	 * Creates a container
 	 * @param deployment The ID of a deployment to create a container in.
 	 * @returns The newly created container.
 	 */
@@ -170,6 +195,10 @@ export class Ignite extends BaseSDK {
 		return container;
 	}
 
+	/**
+	 * Deletes a container
+	 * @param container The ID of the container to delete.
+	 */
 	async deleteContainer(container: Id<'container'>) {
 		await this.client.delete('/v1/ignite/containers/:container_id', undefined, {
 			container_id: container,

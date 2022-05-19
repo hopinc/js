@@ -8,6 +8,9 @@
 	"author": "Alistair Smith <hi@alistair.sh>",
 	"license": "MIT",
 	"packageManager": "yarn@3.2.1",
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
 		"build": "tsup",
 		"bench": "HOP_DEBUG=true ts-node _workbench.ts",
