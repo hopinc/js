@@ -1,4 +1,4 @@
-import {blueBright, bold} from 'colorette';
+import {blueBright, bold, redBright} from 'colorette';
 import fetch, {Headers} from 'cross-fetch';
 import urlcat from 'urlcat';
 import {ExtractRouteParams} from '../util';
@@ -76,7 +76,7 @@ export class APIClient {
 		const result = (await response.json()) as APIResponse<T>;
 
 		if (('success' in result && !result.success) || 'statusCode' in result) {
-			debug(result);
+			debug(redBright('An error occurred'), result);
 
 			throw new HopAPIError(
 				response.status,

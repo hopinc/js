@@ -285,6 +285,13 @@ export namespace API {
 			EXITED = 5,
 		}
 
+		/**
+		 * Types for supported GPU
+		 */
+		export enum VgpuType {
+			A400 = 'a400',
+		}
+
 		export interface Container {
 			/**
 			 * The ID of the container
@@ -416,7 +423,14 @@ export namespace API {
 		 * Virtual GPU config
 		 */
 		export interface Vgpu {
-			type: string;
+			/**
+			 * The type of vGPU to allocate
+			 */
+			type: VgpuType;
+
+			/**
+			 * The amount of vGPUs to allocate
+			 */
 			count: number;
 		}
 
