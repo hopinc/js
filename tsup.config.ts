@@ -7,7 +7,7 @@ export default defineConfig({
 	clean: true,
 	minifySyntax: true,
 	minifyWhitespace: true,
-	sourcemap: true,
+	sourcemap: 'inline',
 	dts: true,
 	format: ['cjs', 'esm'],
 	target: 'node14',
