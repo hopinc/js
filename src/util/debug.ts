@@ -1,14 +1,15 @@
 import {blueBright} from 'colorette';
 
 declare const process: {env: Record<string, string>} | undefined;
-
-const USE_DEBUG =
-	typeof process !== 'undefined' && process?.env?.HOP_DEBUG === 'true';
+declare const TSUP_DEBUG: boolean | undefined;
 
 type DebugArgs = [() => unknown[]] | unknown[];
 
 export function debug(...messages: DebugArgs) {
-	if (!USE_DEBUG) {
+	if (
+		typeof TSUP_DEBUG !== 'undefined' ||
+		(typeof process !== 'undefined' && process?.env?.HOP_DEBUG === 'true')
+	) {
 		return;
 	}
 

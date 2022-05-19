@@ -11,6 +11,9 @@ export default defineConfig({
 	dts: true,
 	format: ['cjs', 'esm'],
 	target: 'node14',
+	define: {
+		TSUP_DEBUG: 'false',
+	},
 	banner: {
 		js: stripIndent`
 
