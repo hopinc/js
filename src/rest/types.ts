@@ -460,6 +460,7 @@ export namespace API {
 		}
 
 		export type DELETE_DEPLOYMENT = Empty;
+		export type DELETE_CONTAINER = Empty;
 
 		export interface GET_LOGS {
 			logs: ContainerLog[];
