@@ -75,10 +75,13 @@ export class APIClient {
 
 		const result = (await response.json()) as APIResponse<T>;
 
-		if (!result.success) {
+		if (('success' in result && !result.success) || 'statusCode' in result) {
 			debug(result);
 
-			throw new HopAPIError(response.status, result.error.message);
+			throw new HopAPIError(
+				response.status,
+				'message' in result ? result.message : result.error.message,
+			);
 		}
 
 		return result.data;

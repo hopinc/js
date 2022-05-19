@@ -5,13 +5,19 @@ export type SuccessfulAPIResponse<T> = {
 	data: T;
 };
 
-export type ErroredAPIResponse = {
-	success: false;
-	error: {
-		code: string;
-		message: string;
-	};
-};
+export type ErroredAPIResponse =
+	| {
+			success: false;
+			error: {
+				code: string;
+				message: string;
+			};
+	  }
+	| {
+			statusCode: number;
+			error: string;
+			message: string;
+	  };
 
 export type APIResponse<T> = SuccessfulAPIResponse<T> | ErroredAPIResponse;
 

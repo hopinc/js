@@ -126,14 +126,16 @@ export class Ignite extends BaseSDK {
 		if (validateId(realNameOrId, 'deployment')) {
 			const {deployment} = await this.client.get(
 				'/v1/ignite/deployments/:deployment_id',
-				{deployment_id: realNameOrId},
+				team
+					? {team, deployment_id: realNameOrId}
+					: {deployment_id: realNameOrId},
 			);
 
 			return deployment;
 		} else {
 			const {deployment} = await this.client.get(
 				'/v1/ignite/deployments/search',
-				{name: nameOrId},
+				{name: realNameOrId},
 			);
 
 			return deployment;
