@@ -1,4 +1,4 @@
-import {Method, API, Id} from './types';
+import {API, Id, Method} from './types';
 
 export type SuccessfulAPIResponse<T> = {
 	success: true;
