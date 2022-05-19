@@ -10,7 +10,7 @@ export class Ignite extends BaseSDK {
 	 * @param teamId The team ID to list deployments for. You only need to provide this if you are using bearer or PAT authorization.
 	 * @returns A list of deployments for the given team.
 	 */
-	async getDeployments(teamId?: Id<'team'>) {
+	async getAllDeployments(teamId?: Id<'team'>) {
 		if (this.client.authType === 'bearer' && !teamId) {
 			throw new Error('Team ID is required for Bearer or PAT authorization');
 		}
@@ -25,20 +25,6 @@ export class Ignite extends BaseSDK {
 		);
 
 		return deployments;
-	}
-
-	async getByName(name: string): Promise<API.Ignite.Deployment>;
-	async getByName(
-		team: Id<'team'>,
-		name: string,
-	): Promise<API.Ignite.Deployment>;
-	async getByName(teamOrName: Id<'team'> | string, name?: string) {
-		const {deployment} = await this.client.get(
-			'/v1/ignite/deployments/search',
-			teamOrName && name ? {team: teamOrName, name} : {name},
-		);
-
-		return deployment;
 	}
 
 	/**
@@ -117,7 +103,7 @@ export class Ignite extends BaseSDK {
 	async getDeployment(nameOrId: string): Promise<API.Ignite.Deployment>;
 	async getDeployment(teamOrNameOrId: string, nameOrId?: string) {
 		let team: Id<'team'> | undefined;
-		let realNameOrId: string | undefined;
+		let realNameOrId: string;
 
 		if (teamOrNameOrId && nameOrId) {
 			if (this.client.authType === 'sk') {
@@ -133,9 +119,25 @@ export class Ignite extends BaseSDK {
 			}
 
 			realNameOrId = teamOrNameOrId;
+		} else {
+			throw new Error('Team ID is required for bearer or PAT authorization');
 		}
 
-		return 0 as any;
+		if (validateId(realNameOrId, 'deployment')) {
+			const {deployment} = await this.client.get(
+				'/v1/ignite/deployments/:deployment_id',
+				{deployment_id: realNameOrId},
+			);
+
+			return deployment;
+		} else {
+			const {deployment} = await this.client.get(
+				'/v1/ignite/deployments/search',
+				{name: nameOrId},
+			);
+
+			return deployment;
+		}
 	}
 
 	/**

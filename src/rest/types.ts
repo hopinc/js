@@ -447,6 +447,10 @@ export namespace API {
 			deployments: Deployment[];
 		}
 
+		export interface GET_DEPLOYMENT {
+			deployment: Deployment;
+		}
+
 		export interface GET_CONTAINERS {
 			containers: Container[];
 		}

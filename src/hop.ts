@@ -18,8 +18,8 @@ export class Hop {
 			deployments: {
 				create: this.sdks.ignite.createDeployment.bind(this.sdks.ignite),
 				delete: this.sdks.ignite.deleteDeployment.bind(this.sdks.ignite),
-				getAll: this.sdks.ignite.getDeployments.bind(this.sdks.ignite),
-				getByName: this.sdks.ignite.getByName.bind(this.sdks.ignite),
+				getAll: this.sdks.ignite.getAllDeployments.bind(this.sdks.ignite),
+				get: this.sdks.ignite.get.bind(this.sdks.ignite),
 			},
 
 			containers: {
