@@ -170,13 +170,24 @@ export class Ignite extends BaseSDK {
 		return container;
 	}
 
+	async deleteContainer(
+		deployment: Id<'deployment'>,
+		container: Id<'container'>,
+	) {
+		await this.client.delete(
+			'/v1/ignite/deployments/:deployment_id/containers/:container_id',
+			undefined,
+			{container_id: container, deployment_id: deployment},
+		);
+	}
+
 	/**
 	 * Get the logs for a container
-	 * @param container The ID of the container
 	 * @param deployment The ID of the deployment
+	 * @param container The ID of the container
 	 * @returns
 	 */
-	async getLogs(container: Id<'container'>, deployment: Id<'deployment'>) {
+	async getLogs(deployment: Id<'deployment'>, container: Id<'container'>) {
 		const {logs} = await this.client.get(
 			'/v1/ignite/deployments/:deployment_id/containers/:container_id/logs',
 			{container_id: container, deployment_id: deployment},

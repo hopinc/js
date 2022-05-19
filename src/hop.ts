@@ -24,6 +24,7 @@ export class Hop {
 
 			containers: {
 				create: this.sdks.ignite.createContainer.bind(this.sdks.ignite),
+				delete: this.sdks.ignite.deleteContainer.bind(this.sdks.ignite),
 				getLogs: this.sdks.ignite.getLogs.bind(this.sdks.ignite),
 			},
 		};
