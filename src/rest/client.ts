@@ -21,6 +21,9 @@ export class HopAPIError extends Error {
 	}
 }
 
+export type Query<Path extends string> = ExtractRouteParams<Path> &
+	Record<string, string | undefined>;
+
 export class APIClient {
 	private readonly options: APIClientOptions;
 	public readonly authType: APIAuthorizationType;
@@ -83,7 +86,7 @@ export class APIClient {
 
 	async get<Path extends Extract<Endpoints, {method: 'GET'}>['path']>(
 		path: Path,
-		query: ExtractRouteParams<Path> & Record<string, string>,
+		query: Query<Path>,
 		init?: RequestInit,
 	) {
 		return this.request<Extract<Endpoints, {path: Path; method: 'GET'}>['res']>(
@@ -98,7 +101,7 @@ export class APIClient {
 	post<Path extends Extract<Endpoints, {method: 'POST'}>['path']>(
 		path: Path,
 		body: Extract<Endpoints, {path: Path; method: 'POST'}>['body'],
-		query: ExtractRouteParams<Path> & Record<string, string>,
+		query: Query<Path>,
 		init?: RequestInit,
 	) {
 		return this.request<
@@ -109,7 +112,7 @@ export class APIClient {
 	put<Path extends Extract<Endpoints, {method: 'PUT'}>['path']>(
 		path: Path,
 		body: Extract<Endpoints, {path: Path; method: 'PUT'}>['body'],
-		query: ExtractRouteParams<Path> & Record<string, string>,
+		query: Query<Path>,
 		init?: RequestInit,
 	) {
 		return this.request<Extract<Endpoints, {path: Path; method: 'PUT'}>['res']>(
@@ -124,7 +127,7 @@ export class APIClient {
 	patch<Path extends Extract<Endpoints, {method: 'PATCH'}>['path']>(
 		path: Path,
 		body: Extract<Endpoints, {path: Path; method: 'PATCH'}>['body'],
-		query: ExtractRouteParams<Path> & Record<string, string>,
+		query: Query<Path>,
 		init?: RequestInit,
 	) {
 		return this.request<
@@ -135,7 +138,7 @@ export class APIClient {
 	delete<Path extends Extract<Endpoints, {method: 'DELETE'}>['path']>(
 		path: Path,
 		body: Extract<Endpoints, {path: Path; method: 'DELETE'}>['body'],
-		query: ExtractRouteParams<Path> & Record<string, string>,
+		query: Query<Path>,
 		init?: RequestInit,
 	) {
 		return this.request<

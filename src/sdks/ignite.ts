@@ -1,21 +1,10 @@
-import {API, Id} from '../rest';
-import {
-	APIAuthorization,
-	APIAuthorizationType,
-	APIClient,
-} from '../rest/client';
+import {API, assertId, Id, validateId} from '../rest';
 import {parseSize} from '../util';
-import {DEFAULT_BASE_URL} from '../util/constants';
+import {BaseSDK} from './BaseSDK';
 
 const SIX_MB_IN_BYTES = 6 * 1024 * 1024;
 
-export class Ignite {
-	private readonly client: APIClient;
-
-	constructor(authorization: APIAuthorization, baseUrl = DEFAULT_BASE_URL) {
-		this.client = new APIClient({baseUrl, authorization});
-	}
-
+export class Ignite extends BaseSDK {
 	/**
 	 * Gets all deployments for a team
 	 * @param teamId The team ID to list deployments for. You only need to provide this if you are using bearer or PAT authorization.
@@ -36,6 +25,20 @@ export class Ignite {
 		);
 
 		return deployments;
+	}
+
+	async getByName(name: string): Promise<API.Ignite.Deployment>;
+	async getByName(
+		team: Id<'team'>,
+		name: string,
+	): Promise<API.Ignite.Deployment>;
+	async getByName(teamOrName: Id<'team'> | string, name?: string) {
+		const {deployment} = await this.client.get(
+			'/v1/ignite/deployments/search',
+			teamOrName && name ? {team: teamOrName, name} : {name},
+		);
+
+		return deployment;
 	}
 
 	/**
@@ -105,6 +108,34 @@ export class Ignite {
 		);
 
 		return deployment;
+	}
+
+	async getDeployment(
+		teamId: Id<'team'>,
+		nameOrId: string,
+	): Promise<API.Ignite.Deployment>;
+	async getDeployment(nameOrId: string): Promise<API.Ignite.Deployment>;
+	async getDeployment(teamOrNameOrId: string, nameOrId?: string) {
+		let team: Id<'team'> | undefined;
+		let realNameOrId: string | undefined;
+
+		if (teamOrNameOrId && nameOrId) {
+			if (this.client.authType === 'sk') {
+				throw new Error('Team ID is not required for secret authorization');
+			}
+
+			assertId(teamOrNameOrId, 'team');
+			team = teamOrNameOrId;
+			realNameOrId = nameOrId;
+		} else if (teamOrNameOrId && !nameOrId) {
+			if (this.client.authType !== 'sk') {
+				throw new Error('Team ID is required for bearer or PAT authorization');
+			}
+
+			realNameOrId = teamOrNameOrId;
+		}
+
+		return 0 as any;
 	}
 
 	/**

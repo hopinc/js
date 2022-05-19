@@ -460,6 +460,10 @@ export namespace API {
 		export interface GET_LOGS {
 			logs: ContainerLog[];
 		}
+
+		export interface SEARCH_DEPLOYMENTS {
+			deployment: Deployment;
+		}
 	}
 
 	export namespace Registry {

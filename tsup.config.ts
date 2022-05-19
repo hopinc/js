@@ -10,6 +10,7 @@ export default defineConfig({
 	sourcemap: true,
 	dts: true,
 	format: ['cjs', 'esm'],
+	target: 'node14',
 	banner: {
 		js: stripIndent`
 

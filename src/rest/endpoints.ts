@@ -106,6 +106,11 @@ export type Endpoints =
 			'/v1/ignite/deployments/:deployment_id/containers/:container_id/logs',
 			API.Ignite.GET_LOGS
 	  >
+	| Endpoint<
+			'GET',
+			'/v1/ignite/deployments/search',
+			API.Ignite.SEARCH_DEPLOYMENTS
+	  >
 	| Endpoint<'GET', '/v1/registry/teams/@this/images', API.Registry.GET_IMAGES>;
 
 export type EndpointMap = {
