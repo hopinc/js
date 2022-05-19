@@ -111,6 +111,7 @@ export class Ignite extends BaseSDK {
 			}
 
 			assertId(teamOrNameOrId, 'team');
+
 			team = teamOrNameOrId;
 			realNameOrId = nameOrId;
 		} else if (teamOrNameOrId && !nameOrId) {
@@ -132,14 +133,14 @@ export class Ignite extends BaseSDK {
 			);
 
 			return deployment;
-		} else {
-			const {deployment} = await this.client.get(
-				'/v1/ignite/deployments/search',
-				{name: realNameOrId},
-			);
-
-			return deployment;
 		}
+
+		const {deployment} = await this.client.get(
+			'/v1/ignite/deployments/search',
+			{name: realNameOrId},
+		);
+
+		return deployment;
 	}
 
 	/**

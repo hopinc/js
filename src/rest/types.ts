@@ -135,11 +135,11 @@ export function asId<T extends IdPrefixes>(id: string, prefix: T) {
 export const id = asId;
 
 export function assertId<T extends IdPrefixes = IdPrefixes>(
-	id: string,
+	maybeId: string,
 	prefix?: T,
-): asserts id is Id<T> {
-	if (!validateId(id, prefix)) {
-		throw new Error(`Invalid id: ${id}. Expected ${prefix}_{string}`);
+): asserts maybeId is Id<T> {
+	if (!validateId(maybeId, prefix)) {
+		throw new Error(`Invalid id: ${maybeId}. Expected ${prefix}_{string}`);
 	}
 }
 
