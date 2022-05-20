@@ -51,7 +51,8 @@ export class APIClient {
 
 		const headers = new Headers({
 			...(init?.headers ?? {}),
-			Authorization: this.options.authorization,
+			'User-Agent': 'Hop-API-Client',
+			'Authorization': this.options.authorization,
 		});
 
 		if (body) {
