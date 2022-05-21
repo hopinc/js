@@ -1,5 +1,5 @@
 import fetch, {Headers} from 'cross-fetch';
-import urlcat from 'urlcat';
+import urlcat from '../urlcat';
 import {ExtractRouteParams} from '../util';
 import {debug} from '../util/debug';
 import {APIResponse, Endpoints} from './endpoints';

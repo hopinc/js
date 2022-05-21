@@ -1,5 +1,5 @@
 import {APIAuthorization} from './rest/client';
-import {Ignite} from './sdks';
+import {Ignite, Pipe} from './sdks';
 import {User} from './sdks/user';
 import {DEFAULT_BASE_URL} from './util/constants';
 
@@ -16,6 +16,7 @@ export class Hop {
 		this.sdks = {
 			ignite: new Ignite(authorzation, baseUrl),
 			user: new User(authorzation, baseUrl),
+			pipe: new Pipe(authorzation, baseUrl),
 		};
 
 		this.ignite = {
