@@ -1,5 +1,3 @@
-import {blueBright} from 'colorette';
-
 declare const process: {env: Record<string, string>} | undefined;
 declare const TSUP_DEBUG: boolean | undefined;
 
@@ -15,5 +13,5 @@ export function debug(...messages: DebugArgs) {
 
 	const args = typeof messages[0] === 'function' ? messages[0]() : messages;
 
-	console.debug(blueBright('[HOP_DEBUG]'), ...args);
+	console.debug('[HOP_DEBUG]', ...args);
 }
