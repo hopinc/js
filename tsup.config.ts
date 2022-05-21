@@ -16,7 +16,6 @@ export default defineConfig({
 	},
 	banner: {
 		js: stripIndent`
-
 			/*
 			 * Copyright ${new Date().getFullYear()} Hop, Inc
 			 */
