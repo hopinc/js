@@ -58,6 +58,10 @@ export const ID_PREFIXES = [
 		prefix: 'bearer',
 		description: 'Users bearer token',
 	},
+	{
+		prefix: 'skid',
+		description: 'Secret key ID',
+	},
 ] as const;
 
 export type IdPrefixes = typeof ID_PREFIXES[number]['prefix'];

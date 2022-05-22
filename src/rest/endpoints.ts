@@ -130,7 +130,7 @@ export type Endpoints =
 	| Endpoint<'GET', '/v1/users/@me', API.Users.GET_ME>
 	| Endpoint<
 			'DELETE',
-			'/v1/teams/:team_id/secret-keys/:secret_key',
+			'/v1/teams/secret-keys/:secret_key',
 			API.Teams.DELETE_SECRET_KEY
 	  >
 	| Endpoint<'GET', '/v1/teams/:team_id/members/@me', API.Teams.GET_MEMBERS_ME>;
