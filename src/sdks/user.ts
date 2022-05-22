@@ -6,13 +6,15 @@ export class User extends BaseSDK {
 	 *
 	 * @returns The current user authorized by the SDK.
 	 */
-	getMe() {
+	async getMe() {
 		if (this.client.authType === 'sk') {
 			throw new Error(
 				'You cannot resolve a user from a secret key! You must use a bearer or pat token.',
 			);
 		}
 
-		return this.client.get('/v1/users/@me', {});
+		const {user} = await this.client.get('/v1/users/@me', {});
+
+		return user;
 	}
 }
