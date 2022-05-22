@@ -1,6 +1,7 @@
 import fetch, {Headers, Request} from 'cross-fetch';
 import urlcat from '../urlcat';
 import {ExtractRouteParams} from '../util';
+import {IS_BROWSER} from '../util/constants';
 import {debug} from '../util/debug';
 import {APIResponse, Endpoints} from './endpoints';
 import {getIdPrefix, Id, Method} from './types';
@@ -72,9 +73,12 @@ export class APIClient {
 
 		const headers = new Headers({
 			...(init?.headers ?? {}),
-			'User-Agent': 'Hop-API-Client',
-			'Authorization': this.options.authorization,
+			Authorization: this.options.authorization,
 		});
+
+		if (!IS_BROWSER) {
+			headers.set('User-Agent', 'Hop-API-Client');
+		}
 
 		if (body) {
 			headers.set('Content-Type', 'application/json');
