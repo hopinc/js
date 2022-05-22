@@ -283,6 +283,8 @@ export namespace API {
 		export interface GET_MEMBERS_ME {
 			team_member: Member;
 		}
+
+		export type DELETE_SECRET_KEY = Empty;
 	}
 
 	/**

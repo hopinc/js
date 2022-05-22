@@ -68,7 +68,6 @@ export type Endpoints =
 				metadata: API.Pipe.RoomMetadata;
 			}
 	  >
-	| Endpoint<'GET', '/v1/teams/:team_id/members/@me', API.Teams.GET_MEMBERS_ME>
 	| Endpoint<'GET', '/v1/ignite/deployments', API.Ignite.GET_DEPLOYMENTS>
 	| Endpoint<
 			'GET',
@@ -128,8 +127,10 @@ export type Endpoints =
 			API.Ignite.GET_DEPLOYMENT
 	  >
 	| Endpoint<'GET', '/v1/registry/teams/@this/images', API.Registry.GET_IMAGES>
-	| Endpoint<'GET', '/v1/users/@me', API.Users.GET_ME>;
-
-export type EndpointMap = {
-	[Path in Endpoints['path']]: Extract<Endpoints, {path: Path}>;
-};
+	| Endpoint<'GET', '/v1/users/@me', API.Users.GET_ME>
+	| Endpoint<
+			'DELETE',
+			'/v1/teams/:team_id/secret-keys/:secret_key',
+			API.Teams.DELETE_SECRET_KEY
+	  >
+	| Endpoint<'GET', '/v1/teams/:team_id/members/@me', API.Teams.GET_MEMBERS_ME>;

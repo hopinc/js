@@ -1,4 +1,4 @@
-import {BaseSDK} from './BaseSDK';
+import {BaseSDK} from './base-sdk';
 
 export class User extends BaseSDK {
 	/**

@@ -1,6 +1,6 @@
 import {API, assertId, Id, validateId} from '../rest';
 import {parseSize} from '../util';
-import {BaseSDK} from './BaseSDK';
+import {BaseSDK} from './base-sdk';
 
 const SIX_MB_IN_BYTES = 6 * 1024 * 1024;
 

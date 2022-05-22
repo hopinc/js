@@ -1,5 +1,5 @@
 import {APIAuthorization} from './rest/client';
-import {Ignite, Pipe} from './sdks';
+import {Ignite, Pipe, Teams} from './sdks';
 import {User} from './sdks/user';
 import {DEFAULT_BASE_URL} from './util/constants';
 
@@ -8,6 +8,7 @@ export class Hop {
 
 	public readonly ignite;
 	public readonly users;
+	public readonly teams;
 
 	constructor(
 		private readonly authorzation: APIAuthorization,
@@ -17,6 +18,7 @@ export class Hop {
 			ignite: new Ignite(authorzation, baseUrl),
 			user: new User(authorzation, baseUrl),
 			pipe: new Pipe(authorzation, baseUrl),
+			teams: new Teams(authorzation, baseUrl),
 		};
 
 		this.ignite = {
@@ -39,6 +41,14 @@ export class Hop {
 			me: {
 				get: this.sdks.user.getMe.bind(this.sdks.user),
 			},
+		};
+
+		this.teams = {
+			secretKeys: {
+				delete: this.sdks.teams.deleteSecretKey.bind(this.sdks.teams),
+			},
+
+			getCurrentMember: this.sdks.teams.getCurrentMember.bind(this.sdks.teams),
 		};
 	}
 }
