@@ -5,19 +5,23 @@ export type SuccessfulAPIResponse<T> = {
 	data: T;
 };
 
+export type HopAPIErroredAPIResponse = {
+	success: false;
+	error: {
+		code: string;
+		message: string;
+	};
+};
+
+export type HopAPIDefaultServerAPIErroredResponse = {
+	statusCode: number;
+	error: string;
+	message: string;
+};
+
 export type ErroredAPIResponse =
-	| {
-			success: false;
-			error: {
-				code: string;
-				message: string;
-			};
-	  }
-	| {
-			statusCode: number;
-			error: string;
-			message: string;
-	  };
+	| HopAPIErroredAPIResponse
+	| HopAPIDefaultServerAPIErroredResponse;
 
 export type APIResponse<T> = SuccessfulAPIResponse<T> | ErroredAPIResponse;
 
@@ -133,4 +137,6 @@ export type Endpoints =
 			'/v1/teams/secret-keys/:secret_key',
 			API.Teams.DELETE_SECRET_KEY
 	  >
-	| Endpoint<'GET', '/v1/teams/:team_id/members/@me', API.Teams.GET_MEMBERS_ME>;
+	| Endpoint<'GET', '/v1/teams/:team_id/members/@me', API.Teams.GET_MEMBERS_ME>
+	| Endpoint<'GET', '/v1/teams/:team_id/secret-keys', API.Teams.GET_SECRET_KEYS>
+	| Endpoint<'GET', '/v1/teams/@this/secret-keys', API.Teams.GET_SECRET_KEYS>;

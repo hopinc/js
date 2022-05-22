@@ -284,8 +284,32 @@ export namespace API {
 			flag: number;
 		}
 
+		/**
+		 * A secret key for a team
+		 */
+		export interface SecretKey {
+			/**
+			 * The Id of the secret key
+			 */
+			id: Id<'skid'>;
+
+			/**
+			 * The key value. This will likely have half of the key obfuscated
+			 */
+			key: Id<'sk'>;
+
+			/**
+			 * The time this secret key was created
+			 */
+			created_at: Timestamp;
+		}
+
 		export interface GET_MEMBERS_ME {
 			team_member: Member;
+		}
+
+		export interface GET_SECRET_KEYS {
+			secret_keys: SecretKey[];
 		}
 
 		export type DELETE_SECRET_KEY = Empty;

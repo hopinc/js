@@ -3,14 +3,36 @@ import {BaseSDK} from './base-sdk';
 
 export class Teams extends BaseSDK {
 	/**
-	 * Deletes a secret key from a team. You use the Secret Key ID to delete by
+	 * Deletes a secret key by its ID
 	 *
-	 * @param secretKeyId The secret key ID to delete
+	 * @param secretKeyId The ID of the secret key to delete
 	 */
 	async deleteSecretKey(secretKeyId: Id<'skid'>) {
 		await this.client.delete('/v1/teams/secret-keys/:secret_key', undefined, {
 			secret_key: secretKeyId,
 		});
+	}
+
+	async getSecrets(teamId?: Id<'team'>) {
+		if (this.client.authType !== 'sk' && !teamId) {
+			throw new Error('Team ID is required for bearer or PAT authorization');
+		}
+
+		if (!teamId) {
+			const {secret_keys: keys} = await this.client.get(
+				'/v1/teams/@this/secret-keys',
+				{},
+			);
+
+			return keys;
+		}
+
+		const {secret_keys: keys} = await this.client.get(
+			'/v1/teams/:team_id/secret-keys',
+			{team_id: teamId},
+		);
+
+		return keys;
 	}
 
 	/**

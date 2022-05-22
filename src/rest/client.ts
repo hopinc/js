@@ -1,4 +1,4 @@
-import fetch, {Headers} from 'cross-fetch';
+import fetch, {Headers, Request} from 'cross-fetch';
 import urlcat from '../urlcat';
 import {ExtractRouteParams} from '../util';
 import {debug} from '../util/debug';
@@ -21,7 +21,13 @@ export interface APIClientOptions {
 }
 
 export class HopAPIError extends Error {
-	constructor(public readonly status: number, message: string) {
+	constructor(
+		public readonly status: number,
+		public readonly request: Request,
+		public readonly response: Response,
+		public readonly data: unknown,
+		message: string,
+	) {
 		super(message);
 	}
 }
@@ -82,12 +88,14 @@ export class APIClient {
 			{url, query, headers: Object.fromEntries(headers.entries())},
 		]);
 
-		const response = await fetch(url, {
+		const request = new Request(url, {
 			method,
 			body: body ? JSON.stringify(body) : undefined,
 			headers,
 			...init,
 		});
+
+		const response = await fetch(request);
 
 		const result = (await response.json()) as APIResponse<T>;
 
@@ -96,6 +104,9 @@ export class APIClient {
 
 			throw new HopAPIError(
 				response.status,
+				request,
+				response,
+				result,
 				'message' in result ? result.message : result.error.message,
 			);
 		}
