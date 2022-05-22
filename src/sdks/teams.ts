@@ -13,6 +13,12 @@ export class Teams extends BaseSDK {
 		});
 	}
 
+	/**
+	 * Get all secret keys for a team
+	 *
+	 * @param teamId The team to fetch secrets for
+	 * @returns An array of all secrets for the team
+	 */
 	async getSecrets(teamId?: Id<'team'>) {
 		if (this.client.authType !== 'sk' && !teamId) {
 			throw new Error('Team ID is required for bearer or PAT authorization');
@@ -36,7 +42,8 @@ export class Teams extends BaseSDK {
 	}
 
 	/**
-	 * Fetch the currently authorized member from a team
+	 * Fetch the currently authorized member from a team.
+	 * You cannot use this route if you are authorizing with a secret key as there is no user attached to it.
 	 *
 	 * @param teamId The team ID to fetch a member from
 	 * @returns The member authorized by the SDK

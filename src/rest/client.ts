@@ -20,12 +20,12 @@ export interface APIClientOptions {
 	authorization: APIAuthorization;
 }
 
-export class HopAPIError extends Error {
+export class HopAPIError<T> extends Error {
 	constructor(
 		public readonly status: number,
 		public readonly request: Request,
 		public readonly response: Response,
-		public readonly data: unknown,
+		public readonly data: APIResponse<T>,
 		message: string,
 	) {
 		super(message);
@@ -102,7 +102,7 @@ export class APIClient {
 		if (('success' in result && !result.success) || 'statusCode' in result) {
 			debug('An error occurred', result);
 
-			throw new HopAPIError(
+			throw new HopAPIError<T>(
 				response.status,
 				request,
 				response,

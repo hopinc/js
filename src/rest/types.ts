@@ -81,6 +81,7 @@ export function validateIdPrefix<T extends IdPrefixes = IdPrefixes>(
 
 /**
  * Validates that a string is a valid ID
+ *
  * @param maybeId A string that might be an id
  * @param prefix Optionally an id prefix to check against
  * @returns true if the string is an id
