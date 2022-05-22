@@ -1,4 +1,4 @@
-import {APIAuthorization} from './rest/client';
+import {APIAuthorization, APIClient} from './rest/client';
 import {Ignite, Pipe, Teams} from './sdks';
 import {User} from './sdks/user';
 import {DEFAULT_BASE_URL} from './util/constants';
@@ -9,11 +9,14 @@ export class Hop {
 	public readonly ignite;
 	public readonly users;
 	public readonly teams;
+	public readonly authType;
 
 	constructor(
 		private readonly authorzation: APIAuthorization,
 		private readonly baseUrl = DEFAULT_BASE_URL,
 	) {
+		this.authType = APIClient.getAuthType(authorzation);
+
 		this.sdks = {
 			ignite: new Ignite(authorzation, baseUrl),
 			user: new User(authorzation, baseUrl),

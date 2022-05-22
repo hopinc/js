@@ -9,6 +9,12 @@ export type APIAuthorization = Id<'sk'> | Id<'bearer'> | Id<'pat'>;
 export type APIAuthorizationType =
 	APIAuthorization extends `${infer T}_${string}` ? T : never;
 
+export function validateAPIAuthorization(
+	auth: string,
+): auth is APIAuthorizationType {
+	return auth === 'bearer' || auth === 'pat' || auth === 'sk';
+}
+
 export interface APIClientOptions {
 	baseUrl: string;
 	authorization: APIAuthorization;
@@ -24,12 +30,22 @@ export type Query<Path extends string> = ExtractRouteParams<Path> &
 	Record<string, string | undefined>;
 
 export class APIClient {
+	public static getAuthType(auth: APIAuthorization) {
+		const prefix = getIdPrefix(auth);
+
+		if (!validateAPIAuthorization(prefix)) {
+			throw new Error(`Invalid authorization type: ${prefix}`);
+		}
+
+		return prefix;
+	}
+
 	private readonly options: APIClientOptions;
 	public readonly authType: APIAuthorizationType;
 
 	constructor(options: APIClientOptions) {
 		this.options = options;
-		this.authType = getIdPrefix(options.authorization);
+		this.authType = APIClient.getAuthType(options.authorization);
 
 		debug(
 			'Creating new',
