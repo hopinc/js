@@ -10,6 +10,7 @@ const SIX_MB_IN_BYTES = 6 * 1024 * 1024;
 export class Ignite extends BaseSDK {
 	/**
 	 * Gets all deployments for a team
+	 *
 	 * @param teamId The team ID to list deployments for. You only need to provide this if you are using bearer or PAT authorization.
 	 * @returns A list of deployments for the given team.
 	 */
@@ -33,6 +34,7 @@ export class Ignite extends BaseSDK {
 	/**
 	 * Creates a new deployment.
 	 * You should use this overload if you are authorizing with a bearer or pat.
+	 *
 	 * @param configOrTeam The team ID to create the deployment in.
 	 * @param bearerOrPatConfig The deployment config to create.
 	 */
@@ -44,6 +46,7 @@ export class Ignite extends BaseSDK {
 	/**
 	 * Create a new deployment. You should use this overload if you are authorizing with a secret key and
 	 * not with a bearer or pat.
+	 *
 	 * @param configOrTeam The config for this deployment.
 	 */
 	async createDeployment(
@@ -101,6 +104,7 @@ export class Ignite extends BaseSDK {
 
 	/**
 	 * Get all containers for a deployment
+	 *
 	 * @param deployment The ID of the deployment to get
 	 * @returns A list of all containers for that team
 	 */
@@ -115,6 +119,7 @@ export class Ignite extends BaseSDK {
 
 	/**
 	 * Gets a deployment by name or id
+	 *
 	 * @param teamId The team ID to list containers for. You only need to provide this if you are using bearer or PAT authorization.
 	 * @param nameOrId The deployment name or ID to list containers for.
 	 */
@@ -125,6 +130,7 @@ export class Ignite extends BaseSDK {
 
 	/**
 	 * Gets a deployment by name or id
+	 *
 	 * @param nameOrId The deployment name or ID to list containers for.
 	 */
 	async getDeployment(nameOrId: string): Promise<API.Ignite.Deployment>;
@@ -173,6 +179,7 @@ export class Ignite extends BaseSDK {
 
 	/**
 	 * Deletes a deployment
+	 *
 	 * @param deployment The ID of the deployment
 	 */
 	async deleteDeployment(deployment: Id<'deployment'>) {
@@ -185,6 +192,7 @@ export class Ignite extends BaseSDK {
 
 	/**
 	 * Creates a container
+	 *
 	 * @param deployment The ID of a deployment to create a container in.
 	 * @returns The newly created container.
 	 */
@@ -200,6 +208,7 @@ export class Ignite extends BaseSDK {
 
 	/**
 	 * Deletes a container
+	 *
 	 * @param container The ID of the container to delete.
 	 */
 	async deleteContainer(container: Id<'container'>) {
@@ -210,6 +219,7 @@ export class Ignite extends BaseSDK {
 
 	/**
 	 * Get the logs for a container
+	 *
 	 * @param container The ID of the container
 	 * @returns
 	 */
