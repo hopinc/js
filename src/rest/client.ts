@@ -80,7 +80,8 @@ export class APIClient {
 			headers.set('User-Agent', 'Hop-API-Client');
 		}
 
-		if (body) {
+		// Treat null, false and empty strings as valid body
+		if (body !== undefined) {
 			headers.set('Content-Type', 'application/json');
 		}
 
