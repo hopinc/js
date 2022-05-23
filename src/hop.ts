@@ -3,6 +3,16 @@ import {Ignite, Pipe, Teams} from './sdks';
 import {User} from './sdks/user';
 import {DEFAULT_BASE_URL} from './util/constants';
 
+/**
+ * Constructs a new instance of Hop and all of its SDKs.
+ *
+ * If you would like to use only a subclass, you can do so by importing and instantiating that class directly.
+ * For example
+ * ```ts
+ * import {Ignite} from '@onehop/js';
+ * const ignite = new Ignite(bearerTokenOrPATOrSecretKey);
+ * ```
+ */
 export class Hop {
 	private readonly sdks;
 
@@ -11,10 +21,7 @@ export class Hop {
 	public readonly teams;
 	public readonly authType;
 
-	constructor(
-		private readonly authorzation: APIAuthorization,
-		private readonly baseUrl = DEFAULT_BASE_URL,
-	) {
+	constructor(authorzation: APIAuthorization, baseUrl = DEFAULT_BASE_URL) {
 		this.authType = APIClient.getAuthType(authorzation);
 
 		this.sdks = {

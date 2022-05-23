@@ -15,11 +15,11 @@ export class Ignite extends BaseSDK {
 	 * @returns A list of deployments for the given team.
 	 */
 	async getAllDeployments(teamId?: Id<'team'>) {
-		if (this.client.authType === 'bearer' && !teamId) {
+		if (this.client.authType !== 'sk' && !teamId) {
 			throw new Error('Team ID is required for Bearer or PAT authorization');
 		}
 
-		if (teamId && this.client.authType === 'sk') {
+		if (this.client.authType === 'sk' && teamId) {
 			throw new Error('Team ID is not required for secret authorization');
 		}
 
