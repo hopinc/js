@@ -1,4 +1,16 @@
-const units = ['gb', 'mb', 'kb', 'b'];
+export const units = ['gb', 'mb', 'kb', 'b'] as const;
+
+export type ByteString = `${number}${typeof units[number]}`;
+
+export function isValidByteString(value: string): value is ByteString {
+	return units.some(unit => {
+		if (!value.endsWith(unit)) {
+			return false;
+		}
+
+		return !isNaN(parseFloat(value.slice(0, -unit.length)));
+	});
+}
 
 /**
  * Parses a byte size string into bytes

@@ -5,3 +5,5 @@ export type ExtractRouteParams<T extends string> = string extends T
 	: T extends `${string}:${infer Param}`
 	? {[k in Param]: string}
 	: {};
+
+export type Values<T> = T[keyof T];

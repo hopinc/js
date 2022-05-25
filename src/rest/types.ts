@@ -1,3 +1,5 @@
+import {ByteString} from '../util';
+
 export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export type Tag<T, Name extends string> = T & {
@@ -153,8 +155,6 @@ export function assertId<T extends IdPrefixes = IdPrefixes>(
  */
 export namespace API {
 	export type Empty = void;
-	export type SupportedByteUnits = 'b' | 'kb' | 'mb' | 'gb';
-	export type BytesString = `${number}${SupportedByteUnits}`;
 
 	export namespace Users {
 		export interface PartialUserTeam {
@@ -496,7 +496,7 @@ export namespace API {
 			 * Amount of memory to allocate in a readible format
 			 * You can use the `parseSize` function to convert this to bytes.
 			 */
-			ram: BytesString;
+			ram: ByteString;
 
 			/**
 			 * vGPUs to allocate
