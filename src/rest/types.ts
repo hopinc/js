@@ -214,11 +214,11 @@ export namespace API {
 	 * @see https://docs.hop.io/pipe
 	 */
 	export namespace Pipe {
-		export type RoomMetadata = unknown;
+		export type StreamMetadata = unknown;
 
-		export interface Room {
+		export interface Stream {
 			/**
-			 * The ID of this room
+			 * The ID of this stream
 			 */
 			id: Id<'room'>;
 
@@ -233,12 +233,12 @@ export namespace API {
 			created_at: Timestamp;
 		}
 
-		export interface GET_ROOMS {
-			rooms: Room[];
+		export interface GET_STREAMS {
+			streams: Stream[];
 		}
 
-		export interface CREATE_ROOM {
-			room: Room;
+		export interface CREATE_STREAM {
+			room: Stream;
 		}
 
 		export interface CREATE_JOIN_TOKEN {
