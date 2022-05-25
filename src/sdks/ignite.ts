@@ -39,7 +39,7 @@ export class Ignite extends BaseSDK {
 	) {
 		await this.client.patch(
 			'/v1/ignite/containers/:container_id/state',
-			{state},
+			{preferred_state: state},
 			{container_id: container},
 		);
 	}

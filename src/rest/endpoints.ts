@@ -115,7 +115,7 @@ export type Endpoints =
 				 * The state to update the container to
 				
 				 */
-				state:
+				preferred_state:
 					| API.Ignite.ContainerState.STOPPED
 					| API.Ignite.ContainerState.PENDING;
 			}
