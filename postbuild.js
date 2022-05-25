@@ -9,6 +9,10 @@ const pkg = JSON.stringify(
 	4,
 );
 
+fs.copyFileSync('./package.json', './dist/package.json');
+fs.copyFileSync('./README.md', './dist/README.md');
+fs.copyFileSync('./LICENSE', './dist/LICENSE');
+
 for (const util of utils) {
 	fs.writeFileSync(
 		`./dist/utils/${util.split('/').pop()}/package.json`,

@@ -1,9 +1,9 @@
 {
 	"name": "@onehop/js",
-	"version": "0.0.18",
-	"main": "dist/index.js",
-	"module": "dist/index.mjs",
-	"types": "dist/index.d.ts",
+	"version": "0.0.19",
+	"main": "./index.js",
+	"module": "./index.mjs",
+	"types": "./index.d.ts",
 	"repository": "https://github.com/hopinc/hop-js.git",
 	"author": "Alistair Smith <hi@alistair.sh>",
 	"license": "MIT",
@@ -14,13 +14,8 @@
 	"scripts": {
 		"build": "tsup",
 		"bench": "HOP_DEBUG=true ts-node _workbench.ts",
-		"release": "yarn build && yarn npm publish --tag beta"
+		"release": "yarn build && cd dist && yarn npm publish --tag beta && rm -rf dist"
 	},
-	"files": [
-		"dist",
-		"LICENSE",
-		"package.json"
-	],
 	"devDependencies": {
 		"@types/common-tags": "^1",
 		"@types/glob": "^7.2.0",
