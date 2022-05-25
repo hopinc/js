@@ -1,3 +1,4 @@
+import {API, Id} from './rest';
 import {APIAuthorization, APIClient} from './rest/client';
 import {Ignite, Pipe, Teams} from './sdks';
 import {User} from './sdks/user';
@@ -44,6 +45,20 @@ export class Hop {
 				create: this.sdks.ignite.createContainer.bind(this.sdks.ignite),
 				delete: this.sdks.ignite.deleteContainer.bind(this.sdks.ignite),
 				getLogs: this.sdks.ignite.getLogs.bind(this.sdks.ignite),
+
+				stop: async (container: Id<'container'>) => {
+					await this.sdks.ignite.updateContainerState(
+						container,
+						API.Ignite.ContainerState.STOPPED,
+					);
+				},
+
+				start: async (container: Id<'container'>) => {
+					await this.sdks.ignite.updateContainerState(
+						container,
+						API.Ignite.ContainerState.PENDING,
+					);
+				},
 			},
 		};
 

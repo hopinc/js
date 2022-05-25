@@ -31,6 +31,19 @@ export class Ignite extends BaseSDK {
 		return deployments;
 	}
 
+	async updateContainerState(
+		container: Id<'container'>,
+		state:
+			| API.Ignite.ContainerState.PENDING
+			| API.Ignite.ContainerState.STOPPED,
+	) {
+		await this.client.patch(
+			'/v1/ignite/containers/:container_id/state',
+			{state},
+			{container_id: container},
+		);
+	}
+
 	/**
 	 * Creates a new deployment.
 	 * You should use this overload if you are authorizing with a bearer or pat.

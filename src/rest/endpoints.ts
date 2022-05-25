@@ -139,4 +139,17 @@ export type Endpoints =
 	  >
 	| Endpoint<'GET', '/v1/teams/:team_id/members/@me', API.Teams.GET_MEMBERS_ME>
 	| Endpoint<'GET', '/v1/teams/:team_id/secret-keys', API.Teams.GET_SECRET_KEYS>
-	| Endpoint<'GET', '/v1/teams/@this/secret-keys', API.Teams.GET_SECRET_KEYS>;
+	| Endpoint<'GET', '/v1/teams/@this/secret-keys', API.Teams.GET_SECRET_KEYS>
+	| Endpoint<
+			'PATCH',
+			'/v1/ignite/containers/:container_id/state',
+			API.Ignite.UPDATE_CONTAINER_STATE,
+			{
+				/**
+				 * The state to update the container to
+				 */
+				state:
+					| API.Ignite.ContainerState.STOPPED
+					| API.Ignite.ContainerState.PENDING;
+			}
+	  >;
