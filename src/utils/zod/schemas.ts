@@ -10,12 +10,7 @@ export const schemas = {
 			version: z.literal('2022-05-17'),
 			image: z.object({
 				name: z.string().min(1),
-				auth: z
-					.object({
-						username: z.string(),
-						password: z.string(),
-					})
-					.optional(),
+				auth: z.object({username: z.string(), password: z.string()}).optional(),
 			}),
 			env: z.record(z.string()),
 			resources: z.object({
