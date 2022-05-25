@@ -2,7 +2,7 @@ import {stripIndent} from 'common-tags';
 import {defineConfig} from 'tsup';
 
 export default defineConfig({
-	entry: ['src/index.ts'],
+	entry: ['src/index.ts', 'src/utils/*/index.ts'],
 	splitting: true,
 	clean: true,
 	minifySyntax: true,
@@ -14,6 +14,7 @@ export default defineConfig({
 	define: {
 		TSUP_DEBUG: 'false',
 	},
+	onSuccess: 'node postbuild.js',
 	banner: {
 		js: stripIndent`
 			/*
