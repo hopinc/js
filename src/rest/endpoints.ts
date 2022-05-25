@@ -38,40 +38,6 @@ export type Endpoint<
 };
 
 export type Endpoints =
-	| Endpoint<'GET', '/v1/pipe/rooms', API.Pipe.GET_ROOMS>
-	| Endpoint<
-			'POST',
-			'/v1/pipe/rooms',
-			API.Pipe.CREATE_ROOM,
-			{
-				/**
-				 * The name of the room
-				 */
-				name: string;
-
-				/**
-				 * Any information attatched to the room
-				 */
-				metadata: API.Pipe.RoomMetadata;
-			}
-	  >
-	| Endpoint<
-			'POST',
-			'/v1/pipe/rooms/:room_id/join-token',
-			API.Pipe.CREATE_JOIN_TOKEN,
-			{
-				/**
-				 * The user id of the user to join into this room
-				 * This should be the user id on YOUR systems
-				 */
-				user_id: string | number;
-
-				/**
-				 * Any information attatched to the room
-				 */
-				metadata: API.Pipe.RoomMetadata;
-			}
-	  >
 	| Endpoint<'GET', '/v1/ignite/deployments', API.Ignite.GET_DEPLOYMENTS>
 	| Endpoint<
 			'GET',
@@ -147,9 +113,44 @@ export type Endpoints =
 			{
 				/**
 				 * The state to update the container to
+				
 				 */
 				state:
 					| API.Ignite.ContainerState.STOPPED
 					| API.Ignite.ContainerState.PENDING;
+			}
+	  >
+	| Endpoint<'GET', '/v1/pipe/streams', API.Pipe.GET_STREAMS>
+	| Endpoint<
+			'POST',
+			'/v1/pipe/rooms',
+			API.Pipe.CREATE_STREAM,
+			{
+				/**
+				 * The name of the stream
+				 */
+				name: string;
+
+				/**
+				 * Any information attatched to the stream
+				 */
+				metadata: API.Pipe.StreamMetadata;
+			}
+	  >
+	| Endpoint<
+			'POST',
+			'/v1/pipe/rooms/:room_id/join-token',
+			API.Pipe.CREATE_JOIN_TOKEN,
+			{
+				/**
+				 * The user id of the user to join into this strema
+				 * This should be the user id on YOUR systems
+				 */
+				user_id: string | number;
+
+				/**
+				 * Any information attatched to the strema
+				 */
+				metadata: API.Pipe.StreamMetadata;
 			}
 	  >;

@@ -27,6 +27,8 @@ export class Hop {
 	public readonly ignite;
 	public readonly users;
 	public readonly teams;
+	public readonly pipe;
+
 	public readonly authType;
 
 	constructor(authorzation: APIAuthorization, baseUrl = DEFAULT_BASE_URL) {
@@ -81,6 +83,12 @@ export class Hop {
 			},
 
 			getCurrentMember: this.sdks.teams.getCurrentMember.bind(this.sdks.teams),
+		};
+
+		this.pipe = {
+			streams: {
+				getAll: this.sdks.pipe.getStreams.bind(this.sdks.pipe),
+			},
 		};
 	}
 }
