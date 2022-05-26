@@ -1,9 +1,9 @@
 {
 	"name": "@onehop/js",
-	"version": "0.0.20",
-	"main": "./index.js",
-	"module": "./index.mjs",
-	"types": "./index.d.ts",
+	"version": "0.0.21",
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
 	"repository": "https://github.com/hopinc/hop-js.git",
 	"author": "Alistair Smith <hi@alistair.sh>",
 	"license": "MIT",
