@@ -1,4 +1,3 @@
-import {stripIndent} from 'common-tags';
 import {defineConfig} from 'tsup';
 
 export default defineConfig({
@@ -16,10 +15,6 @@ export default defineConfig({
 	},
 	onSuccess: 'node postbuild.js',
 	banner: {
-		js: stripIndent`
-			/*
-			 * Copyright ${new Date().getFullYear()} Hop, Inc
-			 */
-		`,
+		js: '/* Copyright ${new Date().getFullYear()} Hop, Inc */',
 	},
 });

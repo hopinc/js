@@ -3,20 +3,34 @@ const fs = require('fs');
 
 const utils = glob.sync('./src/utils/*');
 
-const pkg = JSON.stringify(
-	{main: './index.js', module: './index.mjs', types: './index.d.ts'},
-	null,
-	4,
-);
+/**
+ * Generate a package.json file for a util
+ * @param {string} utilName The name of the util to be exported
+ * @returns A package.json config
+ */
+const pkg = utilName =>
+	JSON.stringify(
+		{
+			main: `../../dist/utils/${utilName}/index.js`,
+			module: `../../dist/utils/${utilName}/index.mjs`,
+			types: `../../dist/utils/${utilName}/index.d.ts`,
+		},
+		null,
+		4,
+	);
 
-fs.copyFileSync('./package.json', './dist/package.json');
-fs.copyFileSync('./README.md', './dist/README.md');
-fs.copyFileSync('./LICENSE', './dist/LICENSE');
+if (!fs.existsSync('./utils')) {
+	fs.mkdirSync('./utils');
+}
 
 for (const util of utils) {
-	fs.writeFileSync(
-		`./dist/utils/${util.split('/').pop()}/package.json`,
-		pkg,
-		'utf-8',
-	);
+	const utilName = util.split('/').pop();
+
+	const directory = `./utils/${utilName}`;
+
+	if (!fs.existsSync(directory)) {
+		fs.mkdirSync(directory);
+	}
+
+	fs.writeFileSync(`${directory}/package.json`, pkg(utilName), 'utf-8');
 }
