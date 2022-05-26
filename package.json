@@ -11,10 +11,17 @@
 	"publishConfig": {
 		"access": "public"
 	},
+	"files": [
+		"dist",
+		"LICENSE",
+		"README.md",
+		"package.json",
+		"utils"
+	],
 	"scripts": {
 		"build": "tsup",
 		"bench": "HOP_DEBUG=true ts-node _workbench.ts",
-		"release": "yarn build && cd dist && yarn npm publish --tag beta && rm -rf dist utils"
+		"release": "yarn build && cd dist && yarn npm publish --tag beta && rm -rf dist && rm -rf utils"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.2.0",
