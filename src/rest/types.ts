@@ -330,12 +330,12 @@ export namespace API {
 			/**
 			 * Ephemeral deployments/containers are sort of fire and forget. Containers won't restart if they exit but they can still be terminated programatically.
 			 */
-			EPHEMERAL = 0,
+			EPHEMERAL = 'ephemeral',
 
 			/**
 			 * Persistent deployments/containers will restart if they exit. They can also be started and stopped programmatically.
 			 */
-			PERSISTENT = 1,
+			PERSISTENT = 'persistent',
 		}
 
 		/**
@@ -345,32 +345,32 @@ export namespace API {
 			/**
 			 * The container is pending creation
 			 */
-			PENDING = 0,
+			PENDING = 'pending',
 
 			/**
 			 * The container is running
 			 */
-			RUNNING = 1,
+			RUNNING = 'running',
 
 			/**
 			 * The container is stopped
 			 */
-			STOPPED = 2,
+			STOPPED = 'stopped',
 
 			/**
 			 * The container's entrypoint failed (e.g. exited with a non-zero exit code)
 			 */
-			FAILED = 3,
+			FAILED = 'failed',
 
 			/**
 			 * The container is being deleted
 			 */
-			TERMINATING = 4,
+			TERMINATING = 'terminating',
 
 			/**
 			 * The container exited (e.g. with a zero exit code)
 			 */
-			EXITED = 5,
+			EXITED = 'exited',
 		}
 
 		/**
