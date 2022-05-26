@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/utils/zod/index.js",
+    "module": "../../dist/utils/zod/index.mjs",
+    "types": "../../dist/utils/zod/index.d.ts"
+}
