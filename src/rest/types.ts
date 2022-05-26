@@ -144,9 +144,12 @@ export const id = asId;
 export function assertId<T extends IdPrefixes = IdPrefixes>(
 	maybeId: string,
 	prefix?: T,
+	message?: string,
 ): asserts maybeId is Id<T> {
 	if (!validateId(maybeId, prefix)) {
-		throw new Error(`Invalid id: ${maybeId}. Expected ${prefix}_{string}`);
+		throw new Error(
+			message ?? `Invalid id: ${maybeId}. Expected ${prefix}_{string}`,
+		);
 	}
 }
 

@@ -131,60 +131,51 @@ export class Ignite extends BaseSDK {
 	}
 
 	/**
-	 * Gets a deployment by name or id
+	 * Gets a deployment by name
 	 *
-	 * @param teamId The team ID to list containers for. You only need to provide this if you are using bearer or PAT authorization.
-	 * @param nameOrId The deployment name or ID to list containers for.
+	 * @param teamId The team ID. You only need to provide this if you are getting by name.
+	 * @param name The deployment name to get
 	 */
 	async getDeployment(
 		teamId: Id<'team'>,
-		nameOrId: string,
+		name: string,
 	): Promise<API.Ignite.Deployment>;
 
 	/**
-	 * Gets a deployment by name or id
+	 * Gets a deployment by id
 	 *
-	 * @param nameOrId The deployment name or ID to list containers for.
+	 * @param id The deployment ID
 	 */
-	async getDeployment(nameOrId: string): Promise<API.Ignite.Deployment>;
+	async getDeployment(id: Id<'deployment'>): Promise<API.Ignite.Deployment>;
 
-	async getDeployment(teamOrNameOrId: string, nameOrId?: string) {
-		let team: Id<'team'> | undefined;
-		let realNameOrId: string;
+	async getDeployment(
+		teamIdOrId: Id<'team'> | Id<'deployment'>,
+		name?: string,
+	) {
+		if (name) {
+			assertId(
+				teamIdOrId,
+				'team',
+				'You must provide a team ID to get a deployment by name',
+			);
 
-		if (teamOrNameOrId && nameOrId) {
-			if (this.client.authType === 'sk') {
-				throw new Error('Team ID is not required for secret authorization');
-			}
-
-			assertId(teamOrNameOrId, 'team');
-
-			team = teamOrNameOrId;
-			realNameOrId = nameOrId;
-		} else if (teamOrNameOrId && !nameOrId) {
-			if (this.client.authType !== 'sk') {
-				throw new Error('Team ID is required for bearer or PAT authorization');
-			}
-
-			realNameOrId = teamOrNameOrId;
-		} else {
-			throw new Error('Team ID is required for bearer or PAT authorization');
-		}
-
-		if (validateId(realNameOrId, 'deployment')) {
 			const {deployment} = await this.client.get(
-				'/v1/ignite/deployments/:deployment_id',
-				team
-					? {team, deployment_id: realNameOrId}
-					: {deployment_id: realNameOrId},
+				'/v1/ignite/deployments/search',
+				{name, team: teamIdOrId},
 			);
 
 			return deployment;
 		}
 
+		assertId(
+			teamIdOrId,
+			'deployment',
+			'You must provide a valid deployment ID.',
+		);
+
 		const {deployment} = await this.client.get(
-			'/v1/ignite/deployments/search',
-			{name: realNameOrId},
+			'/v1/ignite/deployments/:deployment_id',
+			{deployment_id: teamIdOrId},
 		);
 
 		return deployment;
