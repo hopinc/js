@@ -34,7 +34,7 @@ export class Ignite extends BaseSDK {
 	async updateContainerState(
 		container: Id<'container'>,
 		state:
-			| API.Ignite.ContainerState.PENDING
+			| API.Ignite.ContainerState.RUNNING
 			| API.Ignite.ContainerState.STOPPED,
 	) {
 		await this.client.patch(

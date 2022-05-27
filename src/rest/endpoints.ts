@@ -117,7 +117,7 @@ export type Endpoints =
 				 */
 				preferred_state:
 					| API.Ignite.ContainerState.STOPPED
-					| API.Ignite.ContainerState.PENDING;
+					| API.Ignite.ContainerState.RUNNING;
 			}
 	  >
 	| Endpoint<'GET', '/v1/pipe/streams', API.Pipe.GET_STREAMS>
