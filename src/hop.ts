@@ -65,7 +65,7 @@ export class Hop {
 				start: async (container: Id<'container'>) => {
 					await this.sdks.ignite.updateContainerState(
 						container,
-						API.Ignite.ContainerState.PENDING,
+						API.Ignite.ContainerState.RUNNING,
 					);
 				},
 			},
