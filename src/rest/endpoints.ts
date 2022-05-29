@@ -123,7 +123,7 @@ export type Endpoints =
 	| Endpoint<'GET', '/v1/pipe/streams', API.Pipe.GET_STREAMS>
 	| Endpoint<
 			'POST',
-			'/v1/pipe/rooms',
+			'/v1/pipe/streams',
 			API.Pipe.CREATE_STREAM,
 			{
 				/**
@@ -139,7 +139,7 @@ export type Endpoints =
 	  >
 	| Endpoint<
 			'POST',
-			'/v1/pipe/rooms/:room_id/join-token',
+			'/v1/pipe/streams/:stream_id/join-token',
 			API.Pipe.CREATE_JOIN_TOKEN,
 			{
 				/**

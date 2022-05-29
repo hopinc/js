@@ -49,8 +49,8 @@ export const ID_PREFIXES = [
 		description: 'Ignite container',
 	},
 	{
-		prefix: 'room',
-		description: 'Pipe room',
+		prefix: 'stream',
+		description: 'Pipe stream',
 	},
 	{
 		prefix: 'deployment',
@@ -223,7 +223,7 @@ export namespace API {
 			/**
 			 * The ID of this stream
 			 */
-			id: Id<'room'>;
+			id: Id<'stream'>;
 
 			/**
 			 * The name of this room

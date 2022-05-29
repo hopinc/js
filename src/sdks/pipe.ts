@@ -9,10 +9,23 @@ export class Pipe extends BaseSDK {
 			);
 		}
 
-		const {streams} = await this.client.get('/v1/pipe/streams', {
-			team,
-		});
+		const {streams} = await this.client.get('/v1/pipe/streams', {team});
 
 		return streams;
+	}
+
+	async createJoinToken(
+		stream: Id<'stream'>,
+		userId: string | number,
+		metadata: unknown,
+		team?: Id<'team'>,
+	) {
+		const {join_token: token} = await this.client.post(
+			'/v1/pipe/streams/:stream_id/join-token',
+			{metadata, user_id: userId},
+			{team, stream_id: stream},
+		);
+
+		return token;
 	}
 }
