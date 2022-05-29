@@ -1,8 +1,10 @@
 import {Method} from './types';
+
 import {IgniteEndpoints} from './types/ignite';
 import {PipeEndpoints} from './types/pipe';
 import {RegistryEndpoints} from './types/registry';
 import {TeamsEndpoints} from './types/teams';
+import {UserEndpoints} from './types/users';
 
 export type SuccessfulAPIResponse<T> = {
 	success: true;
@@ -44,5 +46,6 @@ export type Endpoint<
 export type Endpoints =
 	| IgniteEndpoints
 	| RegistryEndpoints
+	| UserEndpoints
 	| TeamsEndpoints
 	| PipeEndpoints;
