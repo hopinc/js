@@ -38,9 +38,14 @@ export interface User {
 	id: Id<'user'>;
 
 	/**
-	 * The name of the user
+	 * The name of the user. Think of this as a display name
 	 */
 	name: string;
+
+	/**
+	 * A unqiue username for the user
+	 */
+	username: string;
 
 	/**
 	 * The email of the user
