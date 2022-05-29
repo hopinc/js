@@ -1,3 +1,4 @@
+import {Endpoint} from '../endpoints';
 import {Id, Timestamp} from './types';
 
 export type StreamMetadata = unknown;
@@ -14,19 +15,43 @@ export interface Stream {
 	name: string;
 
 	/**
-	 * The unix timestamp of when this room was created
+	 * The unix timestamp of when this stream was created
 	 */
 	created_at: Timestamp;
 }
 
-export interface GET_STREAMS {
-	streams: Stream[];
-}
+export type PipeEndpoints =
+	| Endpoint<'GET', '/v1/pipe/streams', {streams: Stream[]}>
+	| Endpoint<
+			'POST',
+			'/v1/pipe/streams',
+			{room: Stream},
+			{
+				/**
+				 * The name of the stream
+				 */
+				name: string;
 
-export interface CREATE_STREAM {
-	room: Stream;
-}
+				/**
+				 * Any information attatched to the stream
+				 */
+				metadata: StreamMetadata;
+			}
+	  >
+	| Endpoint<
+			'POST',
+			'/v1/pipe/streams/:stream_id/join-token',
+			{join_token: string},
+			{
+				/**
+				 * The user id of the user to join into this strema
+				 * This should be the user id on YOUR systems
+				 */
+				user_id: string | number;
 
-export interface CREATE_JOIN_TOKEN {
-	join_token: string;
-}
+				/**
+				 * Any information attatched to the strema
+				 */
+				metadata: StreamMetadata;
+			}
+	  >;

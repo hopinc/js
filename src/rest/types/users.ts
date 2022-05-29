@@ -1,3 +1,4 @@
+import {Endpoint} from '../endpoints';
 import {Id, Timestamp} from './types';
 
 export interface PartialUserTeam {
@@ -47,7 +48,8 @@ export interface User {
 	email: string;
 }
 
-export interface GET_ME {
-	teams: PartialUserTeam[];
-	user: User;
-}
+export type UserEndpoints = Endpoint<
+	'GET',
+	'/v1/users/@me',
+	{teams: PartialUserTeam[]; user: User}
+>;

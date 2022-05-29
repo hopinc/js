@@ -1,6 +1,6 @@
-import {ByteString} from '../../util';
-
 export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
+export type Empty = void;
 
 export type Tag<T, Name extends string> = T & {
 	/**
