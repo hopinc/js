@@ -70,9 +70,14 @@ export interface Container {
 	created_at: Timestamp;
 
 	/**
-	 * The duration this container has been alive for
+	 * Information about uptime/downtime for this container
 	 */
-	uptime: number;
+	uptime: {
+		/**
+		 * The last time this container was started at
+		 */
+		last_start: Timestamp;
+	};
 
 	/**
 	 * The type of this container
