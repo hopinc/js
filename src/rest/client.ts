@@ -105,7 +105,7 @@ export class APIClient {
 
 		if (('success' in result && !result.success) || 'statusCode' in result) {
 			debug('An error occurred', result);
-			throw new HopAPIError<T>(response.status, request, response, result);
+			throw new HopAPIError(response.status, request, response, result);
 		}
 
 		return result.data;
