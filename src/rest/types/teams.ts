@@ -1,23 +1,23 @@
 import {Endpoint} from '../endpoints';
 import {Empty, Id, Timestamp} from './types';
+import {User} from './users';
 
-export interface Member {
+export type Member = Omit<User, 'email' | 'id'> & {
 	/**
-	 * The ID of the user
+	 * The ID of the team member
 	 */
 	id: Id<'tm'>;
 
 	/**
-	 * The personal access token of this user.
-	 * Most characters will be hidden if this is NOT the first time you have seen this token.
-	 */
-	pat: string;
-
-	/**
-	 * The role of this user in the team
+	 * The role that this member has in a team
 	 */
 	role: MemberRole;
-}
+
+	/**
+	 * The date that this member joined the team
+	 */
+	joined_at: Timestamp;
+};
 
 export interface MemberRole {
 	/**
@@ -69,4 +69,6 @@ export type TeamsEndpoints =
 			'/v1/teams/:team_id/secret-keys',
 			{secret_keys: SecretKey[]}
 	  >
-	| Endpoint<'GET', '/v1/teams/@this/secret-keys', {secret_keys: SecretKey[]}>;
+	| Endpoint<'GET', '/v1/teams/@this/secret-keys', {secret_keys: SecretKey[]}>
+	| Endpoint<'GET', '/v1/teams/:team_id/members', {members: Member[]}>
+	| Endpoint<'GET', '/v1/teams/@this/members', {members: Member[]}>;

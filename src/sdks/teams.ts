@@ -62,4 +62,24 @@ export class Teams extends BaseSDK {
 
 		return member;
 	}
+
+	async getAllMembers(teamId?: Id<'team'>) {
+		if (this.client.authType === 'sk' && !teamId) {
+			throw new Error(
+				'Team ID is required for bearer or PAT authorization to fetch all team members',
+			);
+		}
+
+		if (teamId) {
+			const {members} = await this.client.get('/v1/teams/:team_id/members', {
+				team_id: teamId,
+			});
+
+			return members;
+		}
+
+		const {members} = await this.client.get('/v1/teams/@this/members', {});
+
+		return members;
+	}
 }
