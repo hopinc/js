@@ -37,3 +37,17 @@ export enum BROAD_TEAM_PERMISSIONS {
 		TEAM_PERMISSIONS.UPDATE_CONTAINER_CONFIG |
 		TEAM_PERMISSIONS.READ_CONTAINER_LOGS,
 }
+
+export const permissions = {
+	add(value: number, flag: TEAM_PERMISSIONS | BROAD_TEAM_PERMISSIONS) {
+		return value | flag;
+	},
+
+	test(value: number, flag: TEAM_PERMISSIONS | BROAD_TEAM_PERMISSIONS) {
+		return (value & flag) === flag;
+	},
+
+	subtract(value: number, flag: TEAM_PERMISSIONS | BROAD_TEAM_PERMISSIONS) {
+		return value & ~flag;
+	},
+};
