@@ -64,7 +64,7 @@ export class Teams extends BaseSDK {
 	}
 
 	async getAllMembers(teamId?: Id<'team'>) {
-		if (this.client.authType === 'sk' && !teamId) {
+		if (this.client.authType !== 'sk' && !teamId) {
 			throw new Error(
 				'Team ID is required for bearer or PAT authorization to fetch all team members',
 			);

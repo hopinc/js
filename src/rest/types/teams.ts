@@ -33,7 +33,7 @@ export interface MemberRole {
 	/**
 	 * The flags for this role
 	 */
-	flag: number;
+	flags: number;
 }
 
 /**

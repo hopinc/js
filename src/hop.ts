@@ -83,6 +83,7 @@ export class Hop {
 				get: this.sdks.teams.getSecretKeys.bind(this.sdks.teams),
 			},
 
+			getAllMembers: this.sdks.teams.getAllMembers.bind(this.sdks.teams),
 			getCurrentMember: this.sdks.teams.getCurrentMember.bind(this.sdks.teams),
 		};
 
