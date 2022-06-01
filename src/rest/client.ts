@@ -33,7 +33,7 @@ export class HopAPIError extends Error {
 }
 
 export type Query<Path extends string> = ExtractRouteParams<Path> &
-	Record<string, string | undefined>;
+	Record<string, string | number | undefined>;
 
 export class APIClient {
 	public static getAuthType(auth: APIAuthorization) {

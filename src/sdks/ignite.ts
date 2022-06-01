@@ -227,10 +227,18 @@ export class Ignite extends BaseSDK {
 	 * @param container The ID of the container
 	 * @returns
 	 */
-	async getLogs(container: Id<'container'>) {
+	async getLogs(
+		container: Id<'container'>,
+		options: Partial<{
+			sortBy: string;
+			orderedBy: 'desc' | 'asc';
+			limit: number;
+			offset: number;
+		}> = {},
+	) {
 		const {logs} = await this.client.get(
 			'/v1/ignite/containers/:container_id/logs',
-			{container_id: container},
+			{container_id: container, ...options},
 		);
 
 		return logs;
