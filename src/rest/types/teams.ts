@@ -54,6 +54,11 @@ export interface SecretKey {
 	 * The time this secret key was created
 	 */
 	created_at: Timestamp;
+
+	/**
+	 * Permissions and flags that this secret key can perform
+	 */
+	flags: number;
 }
 
 export type TeamsEndpoints =
