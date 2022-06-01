@@ -70,6 +70,11 @@ export interface Container {
 	created_at: Timestamp;
 
 	/**
+	 * The duration this container has been alive for
+	 */
+	uptime: number;
+
+	/**
 	 * The type of this container
 	 */
 	type: RuntimeType;

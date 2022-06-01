@@ -19,7 +19,7 @@ export class Teams extends BaseSDK {
 	 * @param teamId The team to fetch secrets for
 	 * @returns An array of all secrets for the team
 	 */
-	async getSecrets(teamId?: Id<'team'>) {
+	async getSecretKeys(teamId?: Id<'team'>) {
 		if (this.client.authType !== 'sk' && !teamId) {
 			throw new Error('Team ID is required for bearer or PAT authorization');
 		}

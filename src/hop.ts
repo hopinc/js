@@ -80,6 +80,7 @@ export class Hop {
 		this.teams = {
 			secretKeys: {
 				delete: this.sdks.teams.deleteSecretKey.bind(this.sdks.teams),
+				get: this.sdks.teams.getSecretKeys.bind(this.sdks.teams),
 			},
 
 			getCurrentMember: this.sdks.teams.getCurrentMember.bind(this.sdks.teams),
