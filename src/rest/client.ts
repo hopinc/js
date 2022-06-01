@@ -21,7 +21,7 @@ export interface APIClientOptions {
 	authorization: APIAuthorization;
 }
 
-export class HopAPIError<T> extends Error {
+export class HopAPIError extends Error {
 	constructor(
 		public readonly status: number,
 		public readonly request: Request,
