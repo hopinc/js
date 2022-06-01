@@ -3,7 +3,7 @@ import urlcat from '../urlcat';
 import {ExtractRouteParams} from '../util';
 import {IS_BROWSER} from '../util/constants';
 import {debug} from '../util/debug';
-import {APIResponse, Endpoints} from './endpoints';
+import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints';
 import {getIdPrefix, Id, Method} from './types';
 
 export type APIAuthorization = Id<'sk'> | Id<'bearer'> | Id<'pat'>;
@@ -26,10 +26,9 @@ export class HopAPIError<T> extends Error {
 		public readonly status: number,
 		public readonly request: Request,
 		public readonly response: Response,
-		public readonly data: APIResponse<T>,
-		message: string,
+		public readonly data: ErroredAPIResponse,
 	) {
-		super(message);
+		super(data.error.message);
 	}
 }
 
@@ -106,14 +105,7 @@ export class APIClient {
 
 		if (('success' in result && !result.success) || 'statusCode' in result) {
 			debug('An error occurred', result);
-
-			throw new HopAPIError<T>(
-				response.status,
-				request,
-				response,
-				result,
-				'message' in result ? result.message : result.error.message,
-			);
+			throw new HopAPIError<T>(response.status, request, response, result);
 		}
 
 		return result.data;
