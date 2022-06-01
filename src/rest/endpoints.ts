@@ -11,23 +11,13 @@ export type SuccessfulAPIResponse<T> = {
 	data: T;
 };
 
-export type HopAPIErroredAPIResponse = {
+export type ErroredAPIResponse = {
 	success: false;
 	error: {
 		code: string;
 		message: string;
 	};
 };
-
-export type HopAPIDefaultServerAPIErroredResponse = {
-	statusCode: number;
-	error: string;
-	message: string;
-};
-
-export type ErroredAPIResponse =
-	| HopAPIErroredAPIResponse
-	| HopAPIDefaultServerAPIErroredResponse;
 
 export type APIResponse<T> = SuccessfulAPIResponse<T> | ErroredAPIResponse;
 
