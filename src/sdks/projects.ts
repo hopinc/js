@@ -16,6 +16,23 @@ export class Projects extends BaseSDK {
 	}
 
 	/**
+	 * Creates a new secret key
+	 *
+	 * @param projectId The project to create a key for
+	 * @param flags Permissions for this flag
+	 * @returns A newly created secret key
+	 */
+	async createSecretKey(projectId: Id<'project'>, flags: number) {
+		const {secret_key: key} = await this.client.post(
+			'/v1/projects/:project_id/secret-keys',
+			{flags},
+			{project_id: projectId},
+		);
+
+		return key;
+	}
+
+	/**
 	 * Get all secret keys for a project
 	 *
 	 * @param projectId The project to fetch secrets for

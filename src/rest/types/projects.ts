@@ -61,6 +61,53 @@ export interface SecretKey {
 	flags: number;
 }
 
+/**
+ * Type of a project
+ */
+export enum ProjectType {
+	/**
+	 * A regular project is
+	 */
+	REGULAR,
+
+	/**
+	 * A personal project are created when you register an account
+	 */
+	PERSONAL,
+}
+
+export interface Project {
+	/**
+	 * The ID of the project
+	 */
+	id: Id<'project'>;
+
+	/**
+	 * The name of the project
+	 */
+	name: string;
+
+	/**
+	 * The time this project was created at
+	 */
+	created_at: Timestamp;
+
+	/**
+	 * An icon for this project
+	 */
+	icon: string | null;
+
+	/**
+	 * The registry namespace for this project
+	 */
+	namespace: string;
+
+	/**
+	 * The type of this project. Either regular or personal
+	 */
+	type: ProjectType;
+}
+
 export type ProjectsEndpoints =
 	| Endpoint<'DELETE', '/v1/projects/secret-keys/:secret_key', Empty>
 	| Endpoint<
@@ -79,4 +126,18 @@ export type ProjectsEndpoints =
 			{secret_keys: SecretKey[]}
 	  >
 	| Endpoint<'GET', '/v1/projects/:project_id/members', {members: Member[]}>
-	| Endpoint<'GET', '/v1/projects/@this/members', {members: Member[]}>;
+	| Endpoint<'GET', '/v1/projects/@this/members', {members: Member[]}>
+	| Endpoint<
+			'POST',
+			'/v1/projects/:project_id/secret-keys',
+			{
+				secret_key: {
+					id: Id<'skid'>;
+					key: Id<'sk'>;
+					project: Project;
+					created_at: Timestamp;
+					flags: number;
+				};
+			},
+			{flags: number}
+	  >;

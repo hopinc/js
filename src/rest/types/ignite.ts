@@ -226,6 +226,12 @@ export interface ContainerLog {
 	message: string;
 
 	/**
+	 * The ID of the document in elasticsearch. You probably won't have to use this, but
+	 * it might be useful for example React keys as they are unique.
+	 */
+	nonce: string;
+
+	/**
 	 * The level of the log. stderr becomes `error` and stdout becomes `info`
 	 */
 	level: 'info' | 'error';

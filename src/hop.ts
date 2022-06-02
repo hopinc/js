@@ -81,6 +81,7 @@ export class Hop {
 			secretKeys: {
 				delete: this.sdks.projects.deleteSecretKey.bind(this.sdks.projects),
 				get: this.sdks.projects.getSecretKeys.bind(this.sdks.projects),
+				create: this.sdks.projects.createSecretKey.bind(this.sdks.projects),
 			},
 
 			getAllMembers: this.sdks.projects.getAllMembers.bind(this.sdks.projects),
