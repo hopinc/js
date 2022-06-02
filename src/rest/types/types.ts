@@ -21,20 +21,20 @@ export const ID_PREFIXES = [
 		description: 'Users',
 	},
 	{
-		prefix: 'team',
-		description: 'Teams',
+		prefix: 'project',
+		description: 'Project',
 	},
 	{
-		prefix: 'tm',
-		description: 'Team Members',
+		prefix: 'pm',
+		description: 'Project Members',
 	},
 	{
 		prefix: 'role',
 		description: 'Roles',
 	},
 	{
-		prefix: 'ti',
-		description: 'Team Invite',
+		prefix: 'pi',
+		description: 'Project Invite',
 	},
 	{
 		prefix: 'sk',
@@ -42,7 +42,7 @@ export const ID_PREFIXES = [
 	},
 	{
 		prefix: 'pat',
-		description: 'Team members personal access token',
+		description: 'User personal access token',
 	},
 	{
 		prefix: 'container',

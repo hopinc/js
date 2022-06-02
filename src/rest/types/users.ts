@@ -1,29 +1,30 @@
 import {Endpoint} from '../endpoints';
+import {MemberRole} from './projects';
 import {Id, Timestamp} from './types';
 
-export interface PartialUserTeam {
+export interface PartialUserProject {
 	/**
-	 * The ID of the team
+	 * The ID of the project
 	 */
-	id: Id<'team'>;
+	id: Id<'project'>;
 
 	/**
-	 * The name of the team
+	 * The name of the project
 	 */
 	name: string;
 
 	/**
-	 * The time this team was created at
+	 * The time this project was created at
 	 */
 	created_at: Timestamp;
 
 	/**
-	 * An icon for this team
+	 * An icon for this project
 	 */
 	icon: string | null;
 
 	/**
-	 * The registry namespace for this team
+	 * The registry namespace for this project
 	 */
 	namespace: string;
 }
@@ -56,5 +57,9 @@ export interface User {
 export type UserEndpoints = Endpoint<
 	'GET',
 	'/v1/users/@me',
-	{teams: PartialUserTeam[]; user: User}
+	{
+		projects: PartialUserProject[];
+		user: User;
+		project_member_role_map: Record<Id<'project'>, MemberRole>;
+	}
 >;

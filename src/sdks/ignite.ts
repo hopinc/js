@@ -9,23 +9,23 @@ const SIX_MB_IN_BYTES = 6 * 1024 * 1024;
  */
 export class Ignite extends BaseSDK {
 	/**
-	 * Gets all deployments for a team
+	 * Gets all deployments for a project
 	 *
-	 * @param teamId The team ID to list deployments for. You only need to provide this if you are using bearer or PAT authorization.
-	 * @returns A list of deployments for the given team.
+	 * @param projectId The project ID to list deployments for. You only need to provide this if you are using bearer or PAT authorization.
+	 * @returns A list of deployments for the given project.
 	 */
-	async getAllDeployments(teamId?: Id<'team'>) {
-		if (this.client.authType !== 'sk' && !teamId) {
-			throw new Error('Team ID is required for Bearer or PAT authorization');
+	async getAllDeployments(projectId?: Id<'project'>) {
+		if (this.client.authType !== 'sk' && !projectId) {
+			throw new Error('Project ID is required for Bearer or PAT authorization');
 		}
 
-		if (this.client.authType === 'sk' && teamId) {
-			throw new Error('Team ID is not required for secret authorization');
+		if (this.client.authType === 'sk' && projectId) {
+			throw new Error('Project ID is not required for secret authorization');
 		}
 
 		const {deployments} = await this.client.get(
 			'/v1/ignite/deployments',
-			teamId ? {team: teamId} : {},
+			projectId ? {project: projectId} : {},
 		);
 
 		return deployments;
@@ -48,11 +48,11 @@ export class Ignite extends BaseSDK {
 	 * Creates a new deployment.
 	 * You should use this overload if you are authorizing with a bearer or pat.
 	 *
-	 * @param configOrTeam The team ID to create the deployment in.
+	 * @param configOrProject The project ID to create the deployment in.
 	 * @param bearerOrPatConfig The deployment config to create.
 	 */
 	async createDeployment(
-		configOrTeam: Id<'team'>,
+		configOrProject: Id<'project'>,
 		bearerOrPatConfig: API.Ignite.DeploymentConfig,
 	): Promise<API.Ignite.Deployment>;
 
@@ -60,25 +60,25 @@ export class Ignite extends BaseSDK {
 	 * Create a new deployment. You should use this overload if you are authorizing with a secret key and
 	 * not with a bearer or pat.
 	 *
-	 * @param configOrTeam The config for this deployment.
+	 * @param configOrProject The config for this deployment.
 	 */
 	async createDeployment(
-		configOrTeam: API.Ignite.DeploymentConfig,
+		configOrProject: API.Ignite.DeploymentConfig,
 	): Promise<API.Ignite.Deployment>;
 
 	async createDeployment(
-		configOrTeam: Id<'team'> | API.Ignite.DeploymentConfig,
+		configOrProject: Id<'project'> | API.Ignite.DeploymentConfig,
 		bearerOrPatConfig?: API.Ignite.DeploymentConfig,
 	) {
 		let config: API.Ignite.DeploymentConfig;
-		let team: Id<'team'> | null = null;
+		let project: Id<'project'> | null = null;
 
-		if (typeof configOrTeam === 'object') {
+		if (typeof configOrProject === 'object') {
 			if (this.client.authType === 'sk') {
-				config = configOrTeam;
+				config = configOrProject;
 			} else {
 				throw new Error(
-					'First argument must be the team ID when using bearer authorization to create deployments.',
+					'First argument must be the project ID when using bearer authorization to create deployments.',
 				);
 			}
 		} else {
@@ -89,7 +89,7 @@ export class Ignite extends BaseSDK {
 			}
 
 			if (this.client.authType === 'bearer' || this.client.authType === 'pat') {
-				team = configOrTeam;
+				project = configOrProject;
 				config = bearerOrPatConfig;
 			} else {
 				throw new Error(
@@ -109,7 +109,7 @@ export class Ignite extends BaseSDK {
 		const {deployment} = await this.client.post(
 			'/v1/ignite/deployments',
 			config,
-			team ? {team} : {},
+			project ? {project} : {},
 		);
 
 		return deployment;
@@ -119,7 +119,7 @@ export class Ignite extends BaseSDK {
 	 * Get all containers for a deployment
 	 *
 	 * @param deployment The ID of the deployment to get
-	 * @returns A list of all containers for that team
+	 * @returns A list of all containers for that project
 	 */
 	async getContainers(deployment: Id<'deployment'>) {
 		const {containers} = await this.client.get(
@@ -133,11 +133,11 @@ export class Ignite extends BaseSDK {
 	/**
 	 * Gets a deployment by name
 	 *
-	 * @param teamId The team ID. You only need to provide this if you are getting by name.
+	 * @param projectId The project ID. You only need to provide this if you are getting by name.
 	 * @param name The deployment name to get
 	 */
 	async getDeployment(
-		teamId: Id<'team'>,
+		projectId: Id<'project'>,
 		name: string,
 	): Promise<API.Ignite.Deployment>;
 
@@ -149,33 +149,33 @@ export class Ignite extends BaseSDK {
 	async getDeployment(id: Id<'deployment'>): Promise<API.Ignite.Deployment>;
 
 	async getDeployment(
-		teamIdOrId: Id<'team'> | Id<'deployment'>,
+		projectIdOrId: Id<'project'> | Id<'deployment'>,
 		name?: string,
 	) {
 		if (name) {
 			assertId(
-				teamIdOrId,
-				'team',
-				'You must provide a team ID to get a deployment by name',
+				projectIdOrId,
+				'project',
+				'You must provide a project ID to get a deployment by name',
 			);
 
 			const {deployment} = await this.client.get(
 				'/v1/ignite/deployments/search',
-				{name, team: teamIdOrId},
+				{name, project: projectIdOrId},
 			);
 
 			return deployment;
 		}
 
 		assertId(
-			teamIdOrId,
+			projectIdOrId,
 			'deployment',
 			'You must provide a valid deployment ID.',
 		);
 
 		const {deployment} = await this.client.get(
 			'/v1/ignite/deployments/:deployment_id',
-			{deployment_id: teamIdOrId},
+			{deployment_id: projectIdOrId},
 		);
 
 		return deployment;

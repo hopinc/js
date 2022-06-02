@@ -1,6 +1,6 @@
 import {API, Id} from './rest';
 import {APIAuthorization, APIClient} from './rest/client';
-import {Ignite, Pipe, Teams} from './sdks';
+import {Ignite, Pipe, Projects} from './sdks';
 import {User} from './sdks/user';
 import {DEFAULT_BASE_URL} from './util/constants';
 
@@ -26,7 +26,7 @@ export class Hop {
 
 	public readonly ignite;
 	public readonly users;
-	public readonly teams;
+	public readonly projects;
 	public readonly pipe;
 
 	public readonly authType;
@@ -38,7 +38,7 @@ export class Hop {
 			ignite: new Ignite(authorzation, baseUrl),
 			user: new User(authorzation, baseUrl),
 			pipe: new Pipe(authorzation, baseUrl),
-			teams: new Teams(authorzation, baseUrl),
+			projects: new Projects(authorzation, baseUrl),
 		};
 
 		this.ignite = {
@@ -77,14 +77,16 @@ export class Hop {
 			},
 		};
 
-		this.teams = {
+		this.projects = {
 			secretKeys: {
-				delete: this.sdks.teams.deleteSecretKey.bind(this.sdks.teams),
-				get: this.sdks.teams.getSecretKeys.bind(this.sdks.teams),
+				delete: this.sdks.projects.deleteSecretKey.bind(this.sdks.projects),
+				get: this.sdks.projects.getSecretKeys.bind(this.sdks.projects),
 			},
 
-			getAllMembers: this.sdks.teams.getAllMembers.bind(this.sdks.teams),
-			getCurrentMember: this.sdks.teams.getCurrentMember.bind(this.sdks.teams),
+			getAllMembers: this.sdks.projects.getAllMembers.bind(this.sdks.projects),
+			getCurrentMember: this.sdks.projects.getCurrentMember.bind(
+				this.sdks.projects,
+			),
 		};
 
 		this.pipe = {

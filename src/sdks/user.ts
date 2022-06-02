@@ -13,8 +13,8 @@ export class User extends BaseSDK {
 			);
 		}
 
-		const {user, teams} = await this.client.get('/v1/users/@me', {});
+		const {user, projects} = await this.client.get('/v1/users/@me', {});
 
-		return {user, teams};
+		return {user, projects};
 	}
 }

@@ -4,17 +4,17 @@ import {User} from './users';
 
 export type Member = Omit<User, 'email' | 'id'> & {
 	/**
-	 * The ID of the team member
+	 * The ID of the project member
 	 */
 	id: Id<'tm'>;
 
 	/**
-	 * The role that this member has in a team
+	 * The role that this member has in a project
 	 */
 	role: MemberRole;
 
 	/**
-	 * The date that this member joined the team
+	 * The date that this member joined the project
 	 */
 	joined_at: Timestamp;
 };
@@ -37,7 +37,7 @@ export interface MemberRole {
 }
 
 /**
- * A secret key for a team
+ * A secret key for a project
  */
 export interface SecretKey {
 	/**
@@ -61,14 +61,22 @@ export interface SecretKey {
 	flags: number;
 }
 
-export type TeamsEndpoints =
-	| Endpoint<'DELETE', '/v1/teams/secret-keys/:secret_key', Empty>
-	| Endpoint<'GET', '/v1/teams/:team_id/members/@me', {team_member: Member}>
+export type ProjectsEndpoints =
+	| Endpoint<'DELETE', '/v1/projects/secret-keys/:secret_key', Empty>
 	| Endpoint<
 			'GET',
-			'/v1/teams/:team_id/secret-keys',
+			'/v1/projects/:project_id/members/@me',
+			{project_member: Member}
+	  >
+	| Endpoint<
+			'GET',
+			'/v1/projects/:project_id/secret-keys',
 			{secret_keys: SecretKey[]}
 	  >
-	| Endpoint<'GET', '/v1/teams/@this/secret-keys', {secret_keys: SecretKey[]}>
-	| Endpoint<'GET', '/v1/teams/:team_id/members', {members: Member[]}>
-	| Endpoint<'GET', '/v1/teams/@this/members', {members: Member[]}>;
+	| Endpoint<
+			'GET',
+			'/v1/projects/@this/secret-keys',
+			{secret_keys: SecretKey[]}
+	  >
+	| Endpoint<'GET', '/v1/projects/:project_id/members', {members: Member[]}>
+	| Endpoint<'GET', '/v1/projects/@this/members', {members: Member[]}>;

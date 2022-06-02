@@ -1,4 +1,4 @@
 export {Ignite} from './ignite';
 export {Pipe} from './pipe';
-export {Teams} from './teams';
+export {Projects} from './projects';
 export {User} from './user';
