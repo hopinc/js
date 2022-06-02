@@ -1,4 +1,4 @@
-import {API, assertId, Id, validateId} from '../rest';
+import {API, assertId, Id} from '../rest';
 import {parseSize} from '../util';
 import {BaseSDK} from './base-sdk';
 

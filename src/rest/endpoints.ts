@@ -1,9 +1,8 @@
 import {Method} from './types';
-
 import {IgniteEndpoints} from './types/ignite';
 import {PipeEndpoints} from './types/pipe';
-import {RegistryEndpoints} from './types/registry';
 import {ProjectsEndpoints} from './types/projects';
+import {RegistryEndpoints} from './types/registry';
 import {UserEndpoints} from './types/users';
 
 export type SuccessfulAPIResponse<T> = {

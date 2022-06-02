@@ -1,6 +1,6 @@
 import {Endpoint} from '../endpoints';
 import {MemberRole, Project} from './projects';
-import {Id, Timestamp} from './types';
+import {Id} from './types';
 
 /**
  * A user objct
