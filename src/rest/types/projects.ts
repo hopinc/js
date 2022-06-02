@@ -6,7 +6,7 @@ export type Member = Omit<User, 'email' | 'id'> & {
 	/**
 	 * The ID of the project member
 	 */
-	id: Id<'tm'>;
+	id: Id<'pm'>;
 
 	/**
 	 * The role that this member has in a project
