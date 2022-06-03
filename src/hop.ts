@@ -1,6 +1,7 @@
 import {API, Id} from './rest';
 import {APIAuthorization, APIClient} from './rest/client';
 import {Ignite, Pipe, Projects} from './sdks';
+import {Registry} from './sdks/registry';
 import {User} from './sdks/user';
 import {DEFAULT_BASE_URL} from './util/constants';
 
@@ -28,6 +29,7 @@ export class Hop {
 	public readonly users;
 	public readonly projects;
 	public readonly pipe;
+	public readonly registry;
 
 	public readonly authType;
 
@@ -39,6 +41,7 @@ export class Hop {
 			user: new User(authorzation, baseUrl),
 			pipe: new Pipe(authorzation, baseUrl),
 			projects: new Projects(authorzation, baseUrl),
+			registry: new Registry(authorzation, baseUrl),
 		};
 
 		this.ignite = {
@@ -93,6 +96,12 @@ export class Hop {
 		this.pipe = {
 			streams: {
 				getAll: this.sdks.pipe.getStreams.bind(this.sdks.pipe),
+			},
+		};
+
+		this.registry = {
+			images: {
+				getAll: this.sdks.registry.getImages.bind(this.sdks.registry),
 			},
 		};
 	}

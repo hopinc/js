@@ -126,6 +126,15 @@ export type DeploymentConfig = {
 	name: string;
 
 	/**
+	 * The strategy for scaling multiple containers.
+	 *
+	 * Manual = add containers yourself
+	 *
+	 * @warning This property is not yet fully complete
+	 */
+	container_strategy: 'manual';
+
+	/**
 	 * The type of this deployment
 	 */
 	type: RuntimeType;
