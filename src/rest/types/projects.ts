@@ -109,8 +109,12 @@ export interface Project {
 }
 
 export type ProjectsEndpoints =
-	| Endpoint<'DELETE', '/v1/projects/:project_id/secrets/:secret_key_id', Empty>
-	| Endpoint<'DELETE', '/v1/projects/@this/secrets/:secret_key_id', Empty>
+	| Endpoint<
+			'DELETE',
+			'/v1/projects/:project_id/secret-keys/:secret_key_id',
+			Empty
+	  >
+	| Endpoint<'DELETE', '/v1/projects/@this/secret-keys/:secret_key_id', Empty>
 	| Endpoint<
 			'GET',
 			'/v1/projects/:project_id/members/@me',
@@ -118,15 +122,19 @@ export type ProjectsEndpoints =
 	  >
 	| Endpoint<
 			'GET',
-			'/v1/projects/:project_id/secrets',
+			'/v1/projects/:project_id/secret-keys',
 			{secret_keys: SecretKey[]}
 	  >
-	| Endpoint<'GET', '/v1/projects/@this/secrets', {secret_keys: SecretKey[]}>
+	| Endpoint<
+			'GET',
+			'/v1/projects/@this/secret-keys',
+			{secret_keys: SecretKey[]}
+	  >
 	| Endpoint<'GET', '/v1/projects/:project_id/members', {members: Member[]}>
 	| Endpoint<'GET', '/v1/projects/@this/members', {members: Member[]}>
 	| Endpoint<
 			'POST',
-			'/v1/projects/:project_id/secrets',
+			'/v1/projects/:project_id/secret-keys',
 			{
 				secret_key: {
 					id: Id<'skid'>;

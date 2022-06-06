@@ -16,8 +16,8 @@ export class Projects extends BaseSDK {
 
 		await this.client.delete(
 			project
-				? '/v1/projects/:project_id/secrets/:secret_key_id'
-				: '/v1/projects/@this/secrets/:secret_key_id',
+				? '/v1/projects/:project_id/secret-keys/:secret_key_id'
+				: '/v1/projects/@this/secret-keys/:secret_key_id',
 			undefined,
 			project
 				? {
@@ -39,7 +39,7 @@ export class Projects extends BaseSDK {
 	 */
 	async createSecretKey(projectId: Id<'project'>, flags: number) {
 		const {secret_key: key} = await this.client.post(
-			'/v1/projects/:project_id/secrets',
+			'/v1/projects/:project_id/secret-keys',
 			{flags},
 			{project_id: projectId},
 		);
@@ -60,7 +60,7 @@ export class Projects extends BaseSDK {
 
 		if (!projectId) {
 			const {secret_keys: keys} = await this.client.get(
-				'/v1/projects/@this/secrets',
+				'/v1/projects/@this/secret-keys',
 				{},
 			);
 
@@ -68,7 +68,7 @@ export class Projects extends BaseSDK {
 		}
 
 		const {secret_keys: keys} = await this.client.get(
-			'/v1/projects/:project_id/secrets',
+			'/v1/projects/:project_id/secret-keys',
 			{project_id: projectId},
 		);
 
