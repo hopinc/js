@@ -37,8 +37,8 @@ export const ID_PREFIXES = [
 		description: 'Project Invite',
 	},
 	{
-		prefix: 'sk',
-		description: 'Secret Key',
+		prefix: 'ptk',
+		description: 'Project token',
 	},
 	{
 		prefix: 'pat',
@@ -61,8 +61,8 @@ export const ID_PREFIXES = [
 		description: 'Users bearer token',
 	},
 	{
-		prefix: 'skid',
-		description: 'Secret key ID',
+		prefix: 'ptkid',
+		description: 'Project token ID',
 	},
 ] as const;
 

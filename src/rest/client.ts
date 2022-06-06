@@ -6,14 +6,14 @@ import {debug} from '../util/debug';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints';
 import {getIdPrefix, Id, Method} from './types';
 
-export type APIAuthorization = Id<'sk'> | Id<'bearer'> | Id<'pat'>;
+export type APIAuthorization = Id<'ptk'> | Id<'bearer'> | Id<'pat'>;
 export type APIAuthorizationType =
 	APIAuthorization extends `${infer T}_${string}` ? T : never;
 
 export function validateAPIAuthorization(
 	auth: string,
 ): auth is APIAuthorizationType {
-	return auth === 'bearer' || auth === 'pat' || auth === 'sk';
+	return auth === 'bearer' || auth === 'pat' || auth === 'ptk';
 }
 
 export interface APIClientOptions {

@@ -7,9 +7,9 @@ export class User extends BaseSDK {
 	 * @returns The current user authorized by the SDK.
 	 */
 	async getMe() {
-		if (this.client.authType === 'sk') {
+		if (this.client.authType === 'ptk') {
 			throw new Error(
-				'You cannot resolve a user from a secret key! You must use a bearer or pat token.',
+				'You cannot resolve a user from a project token! You must use a bearer or pat token.',
 			);
 		}
 

@@ -3,7 +3,7 @@ import {BaseSDK} from './base-sdk';
 
 export class Registry extends BaseSDK {
 	async getImages(projectId?: Id<'project'>) {
-		if (!projectId && this.client.authType !== 'sk') {
+		if (!projectId && this.client.authType !== 'ptk') {
 			throw new Error('projectId is required when using a PAT or bearer');
 		}
 

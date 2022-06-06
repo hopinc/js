@@ -37,26 +37,26 @@ export interface MemberRole {
 }
 
 /**
- * A secret key for a project
+ * A project token for a project
  */
-export interface SecretKey {
+export interface ProjectToken {
 	/**
-	 * The Id of the secret key
+	 * The Id of the project token
 	 */
-	id: Id<'skid'>;
+	id: Id<'ptkid'>;
 
 	/**
 	 * The key value. This will likely have half of the key obfuscated
 	 */
-	key: Id<'sk'>;
+	key: Id<'ptk'>;
 
 	/**
-	 * The time this secret key was created
+	 * The time this project token was created
 	 */
 	created_at: Timestamp;
 
 	/**
-	 * Permissions and flags that this secret key can perform
+	 * Permissions and flags that this project token can perform
 	 */
 	flags: number;
 }
@@ -111,10 +111,10 @@ export interface Project {
 export type ProjectsEndpoints =
 	| Endpoint<
 			'DELETE',
-			'/v1/projects/:project_id/secret-keys/:secret_key_id',
+			'/v1/projects/:project_id/tokens/:project_token_id',
 			Empty
 	  >
-	| Endpoint<'DELETE', '/v1/projects/@this/secret-keys/:secret_key_id', Empty>
+	| Endpoint<'DELETE', '/v1/projects/@this/tokens/:project_token_id', Empty>
 	| Endpoint<
 			'GET',
 			'/v1/projects/:project_id/members/@me',
@@ -122,23 +122,23 @@ export type ProjectsEndpoints =
 	  >
 	| Endpoint<
 			'GET',
-			'/v1/projects/:project_id/secret-keys',
-			{secret_keys: SecretKey[]}
+			'/v1/projects/:project_id/tokens',
+			{project_tokens: ProjectToken[]}
 	  >
 	| Endpoint<
 			'GET',
-			'/v1/projects/@this/secret-keys',
-			{secret_keys: SecretKey[]}
+			'/v1/projects/@this/tokens',
+			{project_tokens: ProjectToken[]}
 	  >
 	| Endpoint<'GET', '/v1/projects/:project_id/members', {members: Member[]}>
 	| Endpoint<'GET', '/v1/projects/@this/members', {members: Member[]}>
 	| Endpoint<
 			'POST',
-			'/v1/projects/:project_id/secret-keys',
+			'/v1/projects/:project_id/tokens',
 			{
-				secret_key: {
-					id: Id<'skid'>;
-					key: Id<'sk'>;
+				project_token: {
+					id: Id<'ptkid'>;
+					key: Id<'ptk'>;
 					project: Project;
 					created_at: Timestamp;
 					flags: number;

@@ -15,11 +15,11 @@ export class Ignite extends BaseSDK {
 	 * @returns A list of deployments for the given project.
 	 */
 	async getAllDeployments(projectId?: Id<'project'>) {
-		if (this.client.authType !== 'sk' && !projectId) {
+		if (this.client.authType !== 'ptk' && !projectId) {
 			throw new Error('Project ID is required for Bearer or PAT authorization');
 		}
 
-		if (this.client.authType === 'sk' && projectId) {
+		if (this.client.authType === 'ptk' && projectId) {
 			throw new Error('Project ID is not required for secret authorization');
 		}
 
@@ -57,7 +57,7 @@ export class Ignite extends BaseSDK {
 	): Promise<API.Ignite.Deployment>;
 
 	/**
-	 * Create a new deployment. You should use this overload if you are authorizing with a secret key and
+	 * Create a new deployment. You should use this overload if you are authorizing with a project token and
 	 * not with a bearer or pat.
 	 *
 	 * @param configOrProject The config for this deployment.
@@ -74,7 +74,7 @@ export class Ignite extends BaseSDK {
 		let project: Id<'project'> | null = null;
 
 		if (typeof configOrProject === 'object') {
-			if (this.client.authType === 'sk') {
+			if (this.client.authType === 'ptk') {
 				config = configOrProject;
 			} else {
 				throw new Error(

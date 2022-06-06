@@ -3,7 +3,7 @@ import {BaseSDK} from './base-sdk';
 
 export class Pipe extends BaseSDK {
 	async getStreams(project?: Id<'project'>) {
-		if (!project && this.client.authType !== 'sk') {
+		if (!project && this.client.authType !== 'ptk') {
 			throw new Error(
 				'You must provide ID project id when using a bearer or pat token.',
 			);

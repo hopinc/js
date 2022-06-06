@@ -10,7 +10,7 @@ import {DEFAULT_BASE_URL} from './util/constants';
  *
  * @example
  * ```ts
- * const hop = new Hop(bearerTokenOrPATOrSecretKey);
+ * const hop = new Hop(bearerTokenOrPATOrProjectToken);
  * await hop.ignite.containers.create(deploymentId);
  * ```
  *
@@ -19,7 +19,7 @@ import {DEFAULT_BASE_URL} from './util/constants';
  * For example
  * ```ts
  * import {Ignite} from '@onehop/js';
- * const ignite = new Ignite(bearerTokenOrPATOrSecretKey);
+ * const ignite = new Ignite(bearerTokenOrPATOrProjectToken);
  * ```
  */
 export class Hop {
@@ -81,10 +81,10 @@ export class Hop {
 		};
 
 		this.projects = {
-			secretKeys: {
-				delete: this.sdks.projects.deleteSecretKey.bind(this.sdks.projects),
-				get: this.sdks.projects.getSecretKeys.bind(this.sdks.projects),
-				create: this.sdks.projects.createSecretKey.bind(this.sdks.projects),
+			projectTokens: {
+				delete: this.sdks.projects.deleteProjectToken.bind(this.sdks.projects),
+				get: this.sdks.projects.getProjectTokens.bind(this.sdks.projects),
+				create: this.sdks.projects.createProjectToken.bind(this.sdks.projects),
 			},
 
 			getAllMembers: this.sdks.projects.getAllMembers.bind(this.sdks.projects),
