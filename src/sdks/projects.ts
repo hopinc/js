@@ -8,11 +8,9 @@ export class Projects extends BaseSDK {
 	 * @param secretKeyId The ID of the secret key to delete
 	 */
 	async deleteSecretKey(secretKeyId: Id<'skid'>) {
-		await this.client.delete(
-			'/v1/projects/secret-keys/:secret_key',
-			undefined,
-			{secret_key: secretKeyId},
-		);
+		await this.client.delete('/v1/projects/secrets/:secret_key_id', undefined, {
+			secret_key_id: secretKeyId,
+		});
 	}
 
 	/**
@@ -24,7 +22,7 @@ export class Projects extends BaseSDK {
 	 */
 	async createSecretKey(projectId: Id<'project'>, flags: number) {
 		const {secret_key: key} = await this.client.post(
-			'/v1/projects/:project_id/secret-keys',
+			'/v1/projects/:project_id/secrets',
 			{flags},
 			{project_id: projectId},
 		);
@@ -45,7 +43,7 @@ export class Projects extends BaseSDK {
 
 		if (!projectId) {
 			const {secret_keys: keys} = await this.client.get(
-				'/v1/projects/@this/secret-keys',
+				'/v1/projects/@this/secrets',
 				{},
 			);
 
@@ -53,7 +51,7 @@ export class Projects extends BaseSDK {
 		}
 
 		const {secret_keys: keys} = await this.client.get(
-			'/v1/projects/:project_id/secret-keys',
+			'/v1/projects/:project_id/secrets',
 			{project_id: projectId},
 		);
 
