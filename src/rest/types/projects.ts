@@ -48,7 +48,7 @@ export interface ProjectToken {
 	/**
 	 * The key value. This will likely have half of the key obfuscated
 	 */
-	key: Id<'ptk'>;
+	token: Id<'ptk'>;
 
 	/**
 	 * The time this project token was created
@@ -135,14 +135,6 @@ export type ProjectsEndpoints =
 	| Endpoint<
 			'POST',
 			'/v1/projects/:project_id/tokens',
-			{
-				project_token: {
-					id: Id<'ptkid'>;
-					key: Id<'ptk'>;
-					project: Project;
-					created_at: Timestamp;
-					flags: number;
-				};
-			},
+			{project_token: ProjectToken & {project: Project}},
 			{flags: number}
 	  >;

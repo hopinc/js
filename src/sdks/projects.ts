@@ -24,8 +24,8 @@ export class Projects extends BaseSDK {
 			undefined,
 			project
 				? {
-						project_token_id: projectTokenId,
 						project_id: project,
+						project_token_id: projectTokenId,
 				  }
 				: {
 						project_token_id: projectTokenId,
@@ -41,13 +41,13 @@ export class Projects extends BaseSDK {
 	 * @returns A newly created project token
 	 */
 	async createProjectToken(projectId: Id<'project'>, flags: number) {
-		const {project_token: key} = await this.client.post(
+		const {project_token: token} = await this.client.post(
 			'/v1/projects/:project_id/tokens',
 			{flags},
 			{project_id: projectId},
 		);
 
-		return key;
+		return token;
 	}
 
 	/**
