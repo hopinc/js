@@ -7,10 +7,27 @@ export class Projects extends BaseSDK {
 	 *
 	 * @param secretKeyId The ID of the secret key to delete
 	 */
-	async deleteSecretKey(secretKeyId: Id<'skid'>) {
-		await this.client.delete('/v1/projects/secrets/:secret_key_id', undefined, {
-			secret_key_id: secretKeyId,
-		});
+	async deleteSecretKey(secretKeyId: Id<'skid'>, project?: Id<'project'>) {
+		if (this.client.authType !== 'sk' && !project) {
+			throw new Error(
+				'Project ID is required for bearer or PAT authorization to delete a secret key',
+			);
+		}
+
+		await this.client.delete(
+			project
+				? '/v1/projects/:project_id/secrets/:secret_key_id'
+				: '/v1/projects/@this/secrets/:secret_key_id',
+			undefined,
+			project
+				? {
+						secret_key_id: secretKeyId,
+						project_id: project,
+				  }
+				: {
+						secret_key_id: secretKeyId,
+				  },
+		);
 	}
 
 	/**
@@ -90,9 +107,7 @@ export class Projects extends BaseSDK {
 		if (projectId) {
 			const {members} = await this.client.get(
 				'/v1/projects/:project_id/members',
-				{
-					project_id: projectId,
-				},
+				{project_id: projectId},
 			);
 
 			return members;

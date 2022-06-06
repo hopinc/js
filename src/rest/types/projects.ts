@@ -109,7 +109,8 @@ export interface Project {
 }
 
 export type ProjectsEndpoints =
-	| Endpoint<'DELETE', '/v1/projects/secrets/:secret_key_id', Empty>
+	| Endpoint<'DELETE', '/v1/projects/:project_id/secrets/:secret_key_id', Empty>
+	| Endpoint<'DELETE', '/v1/projects/@this/secrets/:secret_key_id', Empty>
 	| Endpoint<
 			'GET',
 			'/v1/projects/:project_id/members/@me',
