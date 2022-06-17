@@ -30,6 +30,7 @@ export class Hop {
 	public readonly projects;
 	public readonly pipe;
 	public readonly registry;
+	public readonly channels;
 
 	public readonly authType;
 
@@ -42,6 +43,7 @@ export class Hop {
 			pipe: new Pipe(authorzation, baseUrl),
 			projects: new Projects(authorzation, baseUrl),
 			registry: new Registry(authorzation, baseUrl),
+			channels: new Channels(authorzation, baseUrl),
 		};
 
 		this.ignite = {
@@ -103,6 +105,10 @@ export class Hop {
 			images: {
 				getAll: this.sdks.registry.getImages.bind(this.sdks.registry),
 			},
+		};
+
+		this.channels = {
+			create: this.sdks.channels.createChannel.bind(this.sdks.ignite),
 		};
 	}
 }

@@ -64,6 +64,10 @@ export const ID_PREFIXES = [
 		prefix: 'ptkid',
 		description: 'Project token ID',
 	},
+	{
+		prefix: 'channel',
+		description: 'Channel',
+	},
 ] as const;
 
 export type IdPrefixes = typeof ID_PREFIXES[number]['prefix'];

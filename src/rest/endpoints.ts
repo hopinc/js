@@ -1,4 +1,5 @@
 import {Method} from './types';
+import {ChannelEndpoints} from './types/channels';
 import {IgniteEndpoints} from './types/ignite';
 import {PipeEndpoints} from './types/pipe';
 import {ProjectsEndpoints} from './types/projects';
@@ -37,4 +38,5 @@ export type Endpoints =
 	| RegistryEndpoints
 	| UserEndpoints
 	| ProjectsEndpoints
-	| PipeEndpoints;
+	| PipeEndpoints
+	| ChannelEndpoints;
