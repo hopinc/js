@@ -1,6 +1,7 @@
 import {API, Id} from './rest';
 import {APIAuthorization, APIClient} from './rest/client';
 import {Ignite, Pipe, Projects} from './sdks';
+import {Channels} from './sdks/channels';
 import {Registry} from './sdks/registry';
 import {User} from './sdks/user';
 import {DEFAULT_BASE_URL} from './util/constants';
@@ -108,7 +109,7 @@ export class Hop {
 		};
 
 		this.channels = {
-			create: this.sdks.channels.createChannel.bind(this.sdks.ignite),
+			create: this.sdks.channels.create.bind(this.sdks.ignite),
 		};
 	}
 }
