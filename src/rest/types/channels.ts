@@ -27,6 +27,11 @@ export interface Channel {
 	state: State;
 
 	/**
+	 * Capabilities of the channel
+	 */
+	capabilities: number;
+
+	/**
 	 * When this channel was created
 	 */
 	created_at: Timestamp;
