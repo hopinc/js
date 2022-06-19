@@ -190,4 +190,36 @@ export class Projects extends BaseSDK {
 
 		return secrets;
 	}
+
+	/**
+	 * Deletes a secret from a project
+	 *
+	 * @param id The secret ID to delete
+	 * @param projectId The project to delete the secret from
+	 */
+	async deleteSecret(id: Id<'secret'>, projectId?: Id<'project'>) {
+		if (this.client.authType !== 'ptk' && !projectId) {
+			throw new Error(
+				'Project ID is required for bearer or PAT authorization to delete a secret',
+			);
+		}
+
+		if (!projectId) {
+			await this.client.delete(
+				'/v1/projects/@this/secrets/:secret_id',
+				undefined,
+				{secret_id: id},
+			);
+
+			return;
+		}
+
+		await this.client.delete(
+			'/v1/projects/:project_id/secrets/:secret_id',
+			undefined,
+			{secret_id: id, project_id: projectId},
+		);
+
+		return;
+	}
 }

@@ -93,6 +93,7 @@ export class Hop {
 			secrets: {
 				create: this.sdks.projects.createSecret.bind(this.sdks.projects),
 				getAll: this.sdks.projects.getSecrets.bind(this.sdks.projects),
+				delete: this.sdks.projects.deleteSecret.bind(this.sdks.projects),
 			},
 
 			getAllMembers: this.sdks.projects.getAllMembers.bind(this.sdks.projects),
