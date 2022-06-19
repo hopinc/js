@@ -23,13 +23,8 @@ export class Projects extends BaseSDK {
 				: '/v1/projects/@this/tokens/:project_token_id',
 			undefined,
 			project
-				? {
-						project_id: project,
-						project_token_id: projectTokenId,
-				  }
-				: {
-						project_token_id: projectTokenId,
-				  },
+				? {project_id: project, project_token_id: projectTokenId}
+				: {project_token_id: projectTokenId},
 		);
 	}
 
@@ -135,5 +130,64 @@ export class Projects extends BaseSDK {
 		const {members} = await this.client.get('/v1/projects/@this/members', {});
 
 		return members;
+	}
+
+	/**
+	 * Creates a new project secret
+	 *
+	 * @param name The name of the secret
+	 * @param value The value of the secret
+	 * @param projectId The project to create the secret in
+	 */
+	async createSecret(name: string, value: string, projectId?: Id<'project'>) {
+		if (this.client.authType !== 'ptk' && !projectId) {
+			throw new Error(
+				'Project ID is required for bearer or PAT authorization to create a secret',
+			);
+		}
+
+		if (!projectId) {
+			const {secret} = await this.client.post(
+				'/v1/projects/@this/secrets',
+				{name, value},
+				{},
+			);
+
+			return secret;
+		}
+
+		const {secret} = await this.client.post(
+			'/v1/projects/:project_id/secrets',
+			{name, value},
+			{project_id: projectId},
+		);
+
+		return secret;
+	}
+
+	/**
+	 * Gets all secrets in a project
+	 *
+	 * @param projectId The project to fetch secrets for
+	 */
+	async getSecrets(projectId?: Id<'project'>) {
+		if (this.client.authType !== 'ptk' && !projectId) {
+			throw new Error(
+				'Project ID is required for bearer or PAT authorization to fetch all secrets',
+			);
+		}
+
+		if (!projectId) {
+			const {secrets} = await this.client.get('/v1/projects/@this/secrets', {});
+
+			return secrets;
+		}
+
+		const {secrets} = await this.client.get(
+			'/v1/projects/:project_id/secrets',
+			{project_id: projectId},
+		);
+
+		return secrets;
 	}
 }

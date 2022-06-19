@@ -172,4 +172,11 @@ export type ProjectsEndpoints =
 			{secret: Secret},
 			{name: string; value: string}
 	  >
-	| Endpoint<'GET', '/v1/projects/:project_id/secrets', {secrets: Secret[]}>;
+	| Endpoint<
+			'POST',
+			'/v1/projects/@this/secrets',
+			{secret: Secret},
+			{name: string; value: string}
+	  >
+	| Endpoint<'GET', '/v1/projects/:project_id/secrets', {secrets: Secret[]}>
+	| Endpoint<'GET', '/v1/projects/@this/secrets', {secrets: Secret[]}>;
