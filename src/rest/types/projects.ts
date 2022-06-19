@@ -179,4 +179,6 @@ export type ProjectsEndpoints =
 			{name: string; value: string}
 	  >
 	| Endpoint<'GET', '/v1/projects/:project_id/secrets', {secrets: Secret[]}>
-	| Endpoint<'GET', '/v1/projects/@this/secrets', {secrets: Secret[]}>;
+	| Endpoint<'GET', '/v1/projects/@this/secrets', {secrets: Secret[]}>
+	| Endpoint<'DELETE', '/v1/projects/:project_id/secrets/:secret_id', Empty>
+	| Endpoint<'DELETE', '/v1/projects/@this/secrets/:secret_id', Empty>;
