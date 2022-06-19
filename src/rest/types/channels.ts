@@ -3,7 +3,7 @@ import {Project} from './projects';
 import {Id, Timestamp} from './types';
 
 export enum ChannelType {
-	PRIVATE = 0,
+	PRIVATE,
 	PUBLIC,
 	UNPROTECTED,
 }

@@ -11,6 +11,7 @@ export class Channels extends BaseSDK {
 		}
 
 		const {channel} = await this.client.post('/v1/channels', {type}, {project});
+
 		return channel;
 	}
 }
