@@ -40,7 +40,23 @@ export class Projects extends BaseSDK {
 	 * @param flags Permissions for this flag
 	 * @returns A newly created project token
 	 */
-	async createProjectToken(projectId: Id<'project'>, flags: number) {
+	async createProjectToken(flags: number, projectId?: Id<'project'>) {
+		if (!projectId && this.client.authType !== 'ptk') {
+			throw new Error(
+				'Project ID is required for bearer or PAT authorization to create a project token',
+			);
+		}
+
+		if (!projectId) {
+			const {project_token: token} = await this.client.post(
+				'/v1/projects/@this/tokens',
+				{flags},
+				{},
+			);
+
+			return token;
+		}
+
 		const {project_token: token} = await this.client.post(
 			'/v1/projects/:project_id/tokens',
 			{flags},

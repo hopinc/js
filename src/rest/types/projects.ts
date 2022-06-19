@@ -108,6 +108,28 @@ export interface Project {
 	type: ProjectType;
 }
 
+export interface Secret {
+	/**
+	 * The ID of the secret
+	 */
+	id: Id<'secret'>;
+
+	/**
+	 * The name of the secret
+	 */
+	name: string;
+
+	/**
+	 * A digest hash of the secret
+	 */
+	digest: string;
+
+	/**
+	 * The time this secret was created at
+	 */
+	created_at: Timestamp;
+}
+
 export type ProjectsEndpoints =
 	| Endpoint<
 			'DELETE',
@@ -137,4 +159,17 @@ export type ProjectsEndpoints =
 			'/v1/projects/:project_id/tokens',
 			{project_token: ProjectToken & {project: Project}},
 			{flags: number}
-	  >;
+	  >
+	| Endpoint<
+			'POST',
+			'/v1/projects/@this/tokens',
+			{project_token: ProjectToken & {project: Project}},
+			{flags: number}
+	  >
+	| Endpoint<
+			'POST',
+			'/v1/projects/:project_id/secrets',
+			{secret: Secret},
+			{name: string; value: string}
+	  >
+	| Endpoint<'GET', '/v1/projects/:project_id/secrets', {secrets: Secret[]}>;
