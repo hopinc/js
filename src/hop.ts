@@ -82,6 +82,8 @@ export class Hop {
 				get: this.sdks.user.getMe.bind(this.sdks.user),
 				pats: {
 					create: this.sdks.user.createPAT.bind(this.sdks.user),
+					delete: this.sdks.user.deletePAT.bind(this.sdks.user),
+					getAll: this.sdks.user.getAllPATs.bind(this.sdks.user),
 				},
 			},
 		};

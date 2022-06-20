@@ -1,6 +1,6 @@
 import {Endpoint} from '../endpoints';
 import {MemberRole, Project} from './projects';
-import {Id, Timestamp} from './types';
+import {Empty, Id, Timestamp} from './types';
 
 /**
  * A user objct
@@ -56,4 +56,6 @@ export type UserEndpoints =
 				project_member_role_map: Record<Id<'project'>, MemberRole>;
 			}
 	  >
-	| Endpoint<'POST', '/v1/users/@me/pats', {pat: PAT}>;
+	| Endpoint<'POST', '/v1/users/@me/pats', {pat: PAT}>
+	| Endpoint<'GET', '/v1/users/@me/pats', {pats: PAT[]}>
+	| Endpoint<'DELETE', '/v1/users/@me/pats/:pat_id', Empty>;
