@@ -37,7 +37,7 @@ export class Ignite extends BaseSDK {
 			| API.Ignite.ContainerState.RUNNING
 			| API.Ignite.ContainerState.STOPPED,
 	) {
-		await this.client.patch(
+		await this.client.put(
 			'/v1/ignite/containers/:container_id/state',
 			{preferred_state: state},
 			{container_id: container},

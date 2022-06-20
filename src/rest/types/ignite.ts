@@ -294,7 +294,7 @@ export type IgniteEndpoints =
 			{deployment: Deployment}
 	  >
 	| Endpoint<
-			'PATCH',
+			'PUT',
 			'/v1/ignite/containers/:container_id/state',
 			Empty,
 			{
