@@ -80,6 +80,9 @@ export class Hop {
 		this.users = {
 			me: {
 				get: this.sdks.user.getMe.bind(this.sdks.user),
+				pats: {
+					create: this.sdks.user.createPAT.bind(this.sdks.user),
+				},
 			},
 		};
 

@@ -9,7 +9,7 @@ export class User extends BaseSDK {
 	async getMe() {
 		if (this.client.authType === 'ptk') {
 			throw new Error(
-				'You cannot resolve a user from a project token! You must use a bearer or pat token.',
+				'You cannot resolve a user from a project token! You must use a Bearer or PAT.',
 			);
 		}
 
@@ -22,5 +22,22 @@ export class User extends BaseSDK {
 			...rest,
 			projectMemberRoleMap: project_member_role_map,
 		};
+	}
+
+	/**
+	 * Creates a PAT for the current user
+	 *
+	 * @returns The created PAT
+	 */
+	async createPAT() {
+		if (this.client.authType === 'ptk') {
+			throw new Error(
+				'You cannot create a PAT from a project token! You must use a Bearer or PAT.',
+			);
+		}
+
+		const {pat} = await this.client.post('/v1/users/@me/pats', undefined, {});
+
+		return pat;
 	}
 }
