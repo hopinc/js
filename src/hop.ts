@@ -121,6 +121,9 @@ export class Hop {
 
 		this.channels = {
 			create: this.sdks.channels.create.bind(this.sdks.ignite),
+			tokens: {
+				create: this.sdks.channels.createToken.bind(this.sdks.channels),
+			},
 		};
 	}
 }

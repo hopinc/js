@@ -42,9 +42,29 @@ export interface Channel {
 	type: ChannelType;
 }
 
-export type ChannelEndpoints = Endpoint<
-	'POST',
-	'/v1/channels',
-	{channel: Channel},
-	{type: ChannelType}
->;
+export interface ChannelToken {
+	/**
+	 * The ID for the token
+	 */
+	// @ts-expect-error — pending prefix
+	id: Id<'ch'>;
+
+	/**
+	 * State for this token
+	 */
+	state: State;
+
+	/**
+	 * The project this channel token is associated with
+	 */
+	project_id: Id<'project'>;
+}
+
+export type ChannelEndpoints =
+	| Endpoint<'POST', '/v1/channels', {channel: Channel}, {type: ChannelType}>
+	| Endpoint<
+			'POST',
+			'/v1/channels/tokens',
+			{token: ChannelToken},
+			{state: State}
+	  >;
