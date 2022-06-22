@@ -72,6 +72,14 @@ export const ID_PREFIXES = [
 		prefix: 'secret',
 		description: 'Project secret ID',
 	},
+	{
+		prefix: 'gateway',
+		description: 'Gateway',
+	},
+	{
+		prefix: 'domain',
+		description: 'Domain for a gateway',
+	},
 ] as const;
 
 export type IdPrefixes = typeof ID_PREFIXES[number]['prefix'];

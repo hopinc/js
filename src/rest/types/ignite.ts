@@ -246,6 +246,85 @@ export interface ContainerLog {
 	level: 'info' | 'error';
 }
 
+/**
+ * Types of gateways supported by Hop
+ */
+export enum GatewayType {
+	/**
+	 * The gateway can only be accessed inside of a project's network
+	 */
+	INTERNAL = 'internal',
+
+	/**
+	 * The gateway can be accessed from the internet
+	 */
+	EXTERNAL = 'external',
+}
+
+/**
+ * Gateways are used to connect services to the internet or a private network
+ */
+export interface Gateway {
+	/**
+	 * The ID of the gateway
+	 */
+	id: Id<'gateway'>;
+
+	/**
+	 * The type of the gateway
+	 */
+	type: GatewayType;
+
+	/**
+	 * The protocol for this gateway
+	 *
+	 * @warning Currently, hop only supports HTTP. This will eventually change to an enum
+	 */
+	protocol: 'http';
+
+	/**
+	 * The deployment this gateway is associated with
+	 */
+	deployment_id: Id<'deployment'>;
+
+	/**
+	 * The date this gateway was created
+	 */
+	created_at: Timestamp;
+
+	/**
+	 * Domains associated with this gateway
+	 */
+	domains: Domain[];
+}
+
+export interface Domain {
+	/**
+	 * The ID of the domain
+	 */
+	id: Id<'domain'>;
+
+	/**
+	 * The domain name
+	 */
+	domain: string;
+
+	/**
+	 * If this domain has a valid CNAME record pointing to Hop
+	 */
+	valid_cname: boolean;
+
+	/**
+	 * If this domain will be using certificates issued by Hop & therefore encryption terminates at the gateway.
+	 */
+	ssl_termination: boolean;
+
+	/**
+	 * The date this domain was created
+	 */
+	created_at: Timestamp;
+}
+
 export type IgniteEndpoints =
 	| Endpoint<'GET', '/v1/ignite/deployments', {deployments: Deployment[]}>
 	| Endpoint<
@@ -303,4 +382,5 @@ export type IgniteEndpoints =
 				 */
 				preferred_state: ContainerState.STOPPED | ContainerState.RUNNING;
 			}
-	  >;
+	  >
+	| Endpoint<'GET', '/v1/ignite/gateways/:gateway_id', {}>;
