@@ -26,6 +26,8 @@ import {DEFAULT_BASE_URL} from './util/constants';
 export class Hop {
 	private readonly sdks;
 
+	public readonly client: APIClient;
+
 	public readonly ignite;
 	public readonly users;
 	public readonly projects;
@@ -33,18 +35,19 @@ export class Hop {
 	public readonly registry;
 	public readonly channels;
 
-	public readonly authType;
-
-	constructor(authorzation: APIAuthorization, baseUrl = DEFAULT_BASE_URL) {
-		this.authType = APIClient.getAuthType(authorzation);
+	constructor(authorization: APIAuthorization, baseUrl = DEFAULT_BASE_URL) {
+		this.client = new APIClient({
+			authorization,
+			baseUrl,
+		});
 
 		this.sdks = {
-			ignite: new Ignite(authorzation, baseUrl),
-			user: new User(authorzation, baseUrl),
-			pipe: new Pipe(authorzation, baseUrl),
-			projects: new Projects(authorzation, baseUrl),
-			registry: new Registry(authorzation, baseUrl),
-			channels: new Channels(authorzation, baseUrl),
+			ignite: new Ignite(this.client),
+			user: new User(this.client),
+			pipe: new Pipe(this.client),
+			projects: new Projects(this.client),
+			registry: new Registry(this.client),
+			channels: new Channels(this.client),
 		};
 
 		this.ignite = {
@@ -65,7 +68,7 @@ export class Hop {
 			},
 
 			gateways: {
-				get: this.sdks.ignite.getGateway.bind(this.ignite),
+				get: this.sdks.ignite.getGateway.bind(this.sdks.ignite),
 				addDomain: this.sdks.ignite.addDomainToGateway.bind(this.sdks.ignite),
 			},
 

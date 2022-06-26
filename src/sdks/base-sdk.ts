@@ -1,16 +1,9 @@
-import {APIAuthorization, APIClient} from '../rest/client';
-import {DEFAULT_BASE_URL} from '../util/constants';
+import {APIClient} from '../rest/client';
 
 export abstract class BaseSDK {
 	protected readonly client: APIClient;
 
-	public constructor(
-		authorization: APIAuthorization,
-		baseUrl = DEFAULT_BASE_URL,
-	) {
-		this.client = new APIClient({
-			authorization,
-			baseUrl,
-		});
+	public constructor(client: APIClient) {
+		this.client = client;
 	}
 }
