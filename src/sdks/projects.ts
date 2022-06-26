@@ -13,7 +13,7 @@ export class Projects extends BaseSDK {
 	) {
 		if (this.client.authType !== 'ptk' && !project) {
 			throw new Error(
-				'Project ID is required for bearer or PAT authorization to delete a project token',
+				'Project ID is required for bearer or PAT authentication to delete a project token',
 			);
 		}
 
@@ -38,7 +38,7 @@ export class Projects extends BaseSDK {
 	async createProjectToken(flags: number, projectId?: Id<'project'>) {
 		if (!projectId && this.client.authType !== 'ptk') {
 			throw new Error(
-				'Project ID is required for bearer or PAT authorization to create a project token',
+				'Project ID is required for bearer or PAT authentication to create a project token',
 			);
 		}
 
@@ -69,7 +69,9 @@ export class Projects extends BaseSDK {
 	 */
 	async getProjectTokens(projectId?: Id<'project'>) {
 		if (this.client.authType !== 'ptk' && !projectId) {
-			throw new Error('Project ID is required for bearer or PAT authorization');
+			throw new Error(
+				'Project ID is required for bearer or PAT authentication',
+			);
 		}
 
 		if (!projectId) {
@@ -114,7 +116,7 @@ export class Projects extends BaseSDK {
 	async getAllMembers(projectId?: Id<'project'>) {
 		if (this.client.authType !== 'ptk' && !projectId) {
 			throw new Error(
-				'Project ID is required for bearer or PAT authorization to fetch all project members',
+				'Project ID is required for bearer or PAT authentication to fetch all project members',
 			);
 		}
 
@@ -142,7 +144,7 @@ export class Projects extends BaseSDK {
 	async createSecret(name: string, value: string, projectId?: Id<'project'>) {
 		if (this.client.authType !== 'ptk' && !projectId) {
 			throw new Error(
-				'Project ID is required for bearer or PAT authorization to create a secret',
+				'Project ID is required for bearer or PAT authentication to create a secret',
 			);
 		}
 
@@ -173,7 +175,7 @@ export class Projects extends BaseSDK {
 	async getSecrets(projectId?: Id<'project'>) {
 		if (this.client.authType !== 'ptk' && !projectId) {
 			throw new Error(
-				'Project ID is required for bearer or PAT authorization to fetch all secrets',
+				'Project ID is required for bearer or PAT authentication to fetch all secrets',
 			);
 		}
 
@@ -200,7 +202,7 @@ export class Projects extends BaseSDK {
 	async deleteSecret(id: Id<'secret'>, projectId?: Id<'project'>) {
 		if (this.client.authType !== 'ptk' && !projectId) {
 			throw new Error(
-				'Project ID is required for bearer or PAT authorization to delete a secret',
+				'Project ID is required for bearer or PAT authentication to delete a secret',
 			);
 		}
 

@@ -1,5 +1,5 @@
 import {API, Id} from './rest';
-import {APIAuthorization, APIClient} from './rest/client';
+import {APIAuthentication, APIClient} from './rest/client';
 import {Ignite, Pipe, Projects} from './sdks';
 import {Channels} from './sdks/channels';
 import {Registry} from './sdks/registry';
@@ -35,9 +35,9 @@ export class Hop {
 	public readonly registry;
 	public readonly channels;
 
-	constructor(authorization: APIAuthorization, baseUrl = DEFAULT_BASE_URL) {
+	constructor(authentication: APIAuthentication, baseUrl = DEFAULT_BASE_URL) {
 		this.client = new APIClient({
-			authorization,
+			authentication: authentication,
 			baseUrl,
 		});
 
@@ -118,6 +118,7 @@ export class Hop {
 			},
 
 			getAllMembers: this.sdks.projects.getAllMembers.bind(this.sdks.projects),
+
 			getCurrentMember: this.sdks.projects.getCurrentMember.bind(
 				this.sdks.projects,
 			),

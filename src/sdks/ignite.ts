@@ -12,16 +12,18 @@ export class Ignite extends BaseSDK {
 	/**
 	 * Gets all deployments for a project
 	 *
-	 * @param projectId The project ID to list deployments for. You only need to provide this if you are using bearer or PAT authorization.
+	 * @param projectId The project ID to list deployments for. You only need to provide this if you are using bearer or PAT authentication.
 	 * @returns A list of deployments for the given project.
 	 */
 	async getAllDeployments(projectId?: Id<'project'>) {
 		if (this.client.authType !== 'ptk' && !projectId) {
-			throw new Error('Project ID is required for Bearer or PAT authorization');
+			throw new Error(
+				'Project ID is required for Bearer or PAT authentication',
+			);
 		}
 
 		if (this.client.authType === 'ptk' && projectId) {
-			throw new Error('Project ID is not required for secret authorization');
+			throw new Error('Project ID is not required for secret authentication');
 		}
 
 		const {deployments} = await this.client.get(
@@ -79,13 +81,13 @@ export class Ignite extends BaseSDK {
 				config = configOrProject;
 			} else {
 				throw new Error(
-					'First argument must be the project ID when using bearer authorization to create deployments.',
+					'First argument must be the project ID when using bearer authentication to create deployments.',
 				);
 			}
 		} else {
 			if (!bearerOrPatConfig) {
 				throw new Error(
-					'Second argument must be the deployment config when using bearer authorization to create deployments.',
+					'Second argument must be the deployment config when using bearer authentication to create deployments.',
 				);
 			}
 
@@ -94,7 +96,7 @@ export class Ignite extends BaseSDK {
 				config = bearerOrPatConfig;
 			} else {
 				throw new Error(
-					'Only argument must be the config when using secret authorization to create deployments.',
+					'Only argument must be the config when using secret authentication to create deployments.',
 				);
 			}
 		}

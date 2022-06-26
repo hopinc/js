@@ -6,19 +6,19 @@ import {debug} from '../util/debug';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints';
 import {getIdPrefix, Id, Method} from './types';
 
-export type APIAuthorization = Id<'ptk'> | Id<'bearer'> | Id<'pat'>;
-export type APIAuthorizationType =
-	APIAuthorization extends `${infer T}_${string}` ? T : never;
+export type APIAuthentication = Id<'ptk'> | Id<'bearer'> | Id<'pat'>;
+export type APIAuthenticationType =
+	APIAuthentication extends `${infer T}_${string}` ? T : never;
 
-export function validateAPIAuthorization(
+export function validateAPIAuthentication(
 	auth: string,
-): auth is APIAuthorizationType {
+): auth is APIAuthenticationType {
 	return auth === 'bearer' || auth === 'pat' || auth === 'ptk';
 }
 
 export interface APIClientOptions {
 	baseUrl: string;
-	authorization: APIAuthorization;
+	authentication: APIAuthentication;
 }
 
 export class HopAPIError extends Error {
@@ -36,28 +36,28 @@ export type Query<Path extends string> = ExtractRouteParams<Path> &
 	Record<string, string | number | undefined>;
 
 export class APIClient {
-	public static getAuthType(auth: APIAuthorization) {
+	public static getAuthType(auth: APIAuthentication) {
 		const prefix = getIdPrefix(auth);
 
-		if (!validateAPIAuthorization(prefix)) {
-			throw new Error(`Invalid authorization type: ${prefix}`);
+		if (!validateAPIAuthentication(prefix)) {
+			throw new Error(`Invalid authentication type: ${prefix}`);
 		}
 
 		return prefix;
 	}
 
 	private readonly options: APIClientOptions;
-	public readonly authType: APIAuthorizationType;
+	public readonly authType: APIAuthenticationType;
 
 	constructor(options: APIClientOptions) {
 		this.options = options;
-		this.authType = APIClient.getAuthType(options.authorization);
+		this.authType = APIClient.getAuthType(options.authentication);
 
 		debug(
 			'Creating new',
 			this.authType,
 			'API client with',
-			options.authorization,
+			options.authentication,
 		);
 	}
 
@@ -72,7 +72,7 @@ export class APIClient {
 
 		const headers = new Headers({
 			...(init?.headers ?? {}),
-			Authorization: this.options.authorization,
+			Authorization: this.options.authentication,
 		});
 
 		if (!IS_BROWSER) {
