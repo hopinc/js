@@ -124,7 +124,7 @@ export function getIdPrefix<T extends IdPrefixes>(id: string, expect?: T) {
 
 	if (!prefix || !validateIdPrefix(prefix, expect)) {
 		const message = expect
-			? `Expected ${id} to be a valid id of type ${expect}`
+			? `Expected ${id} to be a valid id with a prefix \`${expect}\`.`
 			: `Expected ${id} to be a valid id. Found prefix \`${prefix}\`.`;
 
 		throw new Error(message);
@@ -134,7 +134,8 @@ export function getIdPrefix<T extends IdPrefixes>(id: string, expect?: T) {
 }
 
 /**
- * Casts a variable into a string for TypeScript
+ * Casts a variable into an ID for TypeScript
+ *
  * @param id The variable to cast into an id
  * @param prefix The type of id to cast to
  * @returns A valid id string
@@ -155,6 +156,9 @@ export function asId<T extends IdPrefixes>(id: string, prefix: T) {
 	return id as Id<T>;
 }
 
+/**
+ * Alias for {@link asId}
+ */
 export const id = asId;
 
 export function assertId<T extends IdPrefixes = IdPrefixes>(

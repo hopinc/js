@@ -54,6 +54,19 @@ export class Hop {
 				getAll: this.sdks.ignite.getAllDeployments.bind(this.sdks.ignite),
 				get: this.sdks.ignite.getDeployment.bind(this.sdks.ignite),
 				getContainers: this.sdks.ignite.getContainers.bind(this.sdks.ignite),
+
+				gateways: {
+					getAll: this.sdks.ignite.getGatewaysForDeployment.bind(
+						this.sdks.ignite,
+					),
+
+					create: this.sdks.ignite.createGateway.bind(this.sdks.ignite),
+				},
+			},
+
+			gateways: {
+				get: this.sdks.ignite.getGateway.bind(this.ignite),
+				addDomain: this.sdks.ignite.addDomainToGateway.bind(this.sdks.ignite),
 			},
 
 			containers: {

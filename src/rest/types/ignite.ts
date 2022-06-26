@@ -383,4 +383,21 @@ export type IgniteEndpoints =
 				preferred_state: ContainerState.STOPPED | ContainerState.RUNNING;
 			}
 	  >
-	| Endpoint<'GET', '/v1/ignite/gateways/:gateway_id', {}>;
+	| Endpoint<
+			'POST',
+			'/v1/ignite/gateways/:gateway_id/domains',
+			Empty,
+			{domain: string}
+	  >
+	| Endpoint<'GET', '/v1/ignite/gateways/:gateway_id', {gateway: Gateway}>
+	| Endpoint<
+			'GET',
+			'/v1/ignite/deployments/:deployment_id/gateways',
+			{gateways: Gateway[]}
+	  >
+	| Endpoint<
+			'POST',
+			'/v1/ignite/deployments/:deployment_id/gateways',
+			{gateway: Gateway},
+			{type: GatewayType; listening_port: number; protocol: Gateway['protocol']}
+	  >;

@@ -1,4 +1,5 @@
 import {API, assertId, Id} from '../rest';
+import {Deployment, Gateway, GatewayType} from '../rest/types/ignite';
 import {parseSize} from '../util';
 import {BaseSDK} from './base-sdk';
 
@@ -242,5 +243,72 @@ export class Ignite extends BaseSDK {
 		);
 
 		return logs;
+	}
+
+	/**
+	 * Adds a domain to a gateway
+	 *
+	 * @param gatewayId The ID of the gateway
+	 * @param domain The full name of the domain
+	 */
+	async addDomainToGateway(gatewayId: Id<'gateway'>, domain: string) {
+		await this.client.post(
+			'/v1/ignite/gateways/:gateway_id/domains',
+			{domain},
+			{gateway_id: gatewayId},
+		);
+	}
+
+	/**
+	 * Fetches a gateway by ID
+	 *
+	 * @param gatewayId The ID of the gateway to retrieve
+	 */
+	async getGateway(gatewayId: Id<'gateway'>) {
+		const {gateway} = await this.client.get('/v1/ignite/gateways/:gateway_id', {
+			gateway_id: gatewayId,
+		});
+
+		return gateway;
+	}
+
+	/**
+	 * Fecthes all gateways attached to a deployment
+	 *
+	 * @param deploymentId The ID of the deployment to fetch gateways for
+	 */
+	async getGatewaysForDeployment(deploymentId: Id<'deployment'>) {
+		const {gateways} = await this.client.get(
+			'/v1/ignite/deployments/:deployment_id/gateways',
+			{deployment_id: deploymentId},
+		);
+
+		return gateways;
+	}
+
+	/**
+	 * Creates and attaches a gateway to a deployment
+	 *
+	 * @param deployment The deployment to create a gateway on
+	 * @param type The type of the gatway to create, either internal or external
+	 * @param protocol The protocol that the gateway will listen for
+	 * @param listeningPort The port to listen on
+	 */
+	async createGateway(
+		deployment: Deployment | Deployment['id'],
+		type: GatewayType,
+		protocol: Gateway['protocol'],
+		listeningPort: number,
+	) {
+		const deploymentId =
+			typeof deployment === 'object' ? deployment.id : deployment;
+
+		const {gateway} = await this.client.post(
+			'/v1/ignite/deployments/:deployment_id/gateways',
+			{type, protocol, listening_port: listeningPort},
+			{deployment_id: deploymentId},
+		);
+
+		return gateway;
 	}
 }
