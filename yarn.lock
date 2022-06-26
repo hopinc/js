@@ -98,15 +98,15 @@ __metadata:
   dependencies:
     "@onehop/leap-edge-js": ^0.0.1
     "@types/glob": ^7.2.0
-    "@types/node": ^17.0.40
+    "@types/node": ^18.0.0
     "@types/qs": ^6.9.7
     cross-fetch: ^3.1.5
     glob: ^8.0.3
-    prettier: ^2.6.2
-    qs: ^6.10.3
+    prettier: ^2.7.1
+    qs: ^6.10.5
     ts-node: ^10.8.1
-    tsup: ^6.1.0
-    typescript: ^4.7.3
+    tsup: ^6.1.2
+    typescript: ^4.7.4
     zod: ^3.17.3
   languageName: unknown
   linkType: soft
@@ -179,10 +179,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^17.0.40":
-  version: 17.0.40
-  resolution: "@types/node@npm:17.0.40"
-  checksum: e3b2fe876672fbe4be84ce17773944eb2f5eaba50e2c6c0536bdf6d4972ed6488581580581f154183fdc8f2d56fa42a42e3d6e83b9b71ee25adea16a84765e92
+"@types/node@npm:^18.0.0":
+  version: 18.0.0
+  resolution: "@types/node@npm:18.0.0"
+  checksum: aab2b325727a2599f6d25ebe0dedf58c40fb66a51ce4ca9c0226ceb70fcda2d3afccdca29db5942eb48b158ee8585a274a1e3750c718bbd5399d7f41d62dfdcc
   languageName: node
   linkType: hard
 
@@ -1562,12 +1562,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.6.2":
-  version: 2.6.2
-  resolution: "prettier@npm:2.6.2"
+"prettier@npm:^2.7.1":
+  version: 2.7.1
+  resolution: "prettier@npm:2.7.1"
   bin:
     prettier: bin-prettier.js
-  checksum: 48d08dde8e9fb1f5bccdd205baa7f192e9fc8bc98f86e1b97d919de804e28c806b0e6cc685e4a88211aa7987fa9668f30baae19580d87ced3ed0f2ec6572106f
+  checksum: 55a4409182260866ab31284d929b3cb961e5fdb91fe0d2e099dac92eaecec890f36e524b4c19e6ceae839c99c6d7195817579cdffc8e2c80da0cb794463a748b
   languageName: node
   linkType: hard
 
@@ -1595,12 +1595,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:^6.10.3":
-  version: 6.10.3
-  resolution: "qs@npm:6.10.3"
+"qs@npm:^6.10.5":
+  version: 6.10.5
+  resolution: "qs@npm:6.10.5"
   dependencies:
     side-channel: ^1.0.4
-  checksum: 0fac5e6c7191d0295a96d0e83c851aeb015df7e990e4d3b093897d3ac6c94e555dbd0a599739c84d7fa46d7fee282d94ba76943983935cf33bba6769539b8019
+  checksum: b3873189a11bcf48445864b3ba66f7a76db0d9d874955d197779f561addfa604884f7b107971526ce1eca02c99bf7d1e47f28a3e7e6e29204d798fb279164226
   languageName: node
   linkType: hard
 
@@ -1969,9 +1969,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsup@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "tsup@npm:6.1.0"
+"tsup@npm:^6.1.2":
+  version: 6.1.2
+  resolution: "tsup@npm:6.1.2"
   dependencies:
     bundle-require: ^3.0.2
     cac: ^6.7.12
@@ -2001,27 +2001,27 @@ __metadata:
   bin:
     tsup: dist/cli-default.js
     tsup-node: dist/cli-node.js
-  checksum: 25a22724f1b8aa1d02e6c83fe6382285804938a804701d4b37a54573706c448daa68945f4ff7850885b4b6cd99096c42d0148e98e4ec564ee2f3c08504970abc
+  checksum: 258cd2d25ce52b8eb1cabfc2355867e1978e419b19bcd16366b70fe717b12e7fb2d78a9101788aca365e3a33f1d9cfbf766afd6c58aa355bb3fae5b641f5d87b
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.7.3":
-  version: 4.7.3
-  resolution: "typescript@npm:4.7.3"
+"typescript@npm:^4.7.4":
+  version: 4.7.4
+  resolution: "typescript@npm:4.7.4"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: fd13a1ce53790a36bb8350e1f5e5e384b5f6cb9b0635114a6d01d49cb99916abdcfbc13c7521cdae2f2d3f6d8bc4a8ae7625edf645a04ee940588cd5e7597b2f
+  checksum: 5750181b1cd7e6482c4195825547e70f944114fb47e58e4aa7553e62f11b3f3173766aef9c281783edfd881f7b8299cf35e3ca8caebe73d8464528c907a164df
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.7.3#~builtin<compat/typescript>":
-  version: 4.7.3
-  resolution: "typescript@patch:typescript@npm%3A4.7.3#~builtin<compat/typescript>::version=4.7.3&hash=7ad353"
+"typescript@patch:typescript@^4.7.4#~builtin<compat/typescript>":
+  version: 4.7.4
+  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 137d18a77f52254a284960b16ab53d0619f57b69b5d585804b8413f798a1175ce3e774fb95e6a101868577aafe357d8fcfc9171f0dc9fc0c210e9ae59d107cc0
+  checksum: 9096d8f6c16cb80ef3bf96fcbbd055bf1c4a43bd14f3b7be45a9fbe7ada46ec977f604d5feed3263b4f2aa7d4c7477ce5f9cd87de0d6feedec69a983f3a4f93e
   languageName: node
   linkType: hard
 
