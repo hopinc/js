@@ -6,7 +6,7 @@ export default defineConfig({
 	clean: true,
 	minifySyntax: true,
 	minifyWhitespace: true,
-	sourcemap: 'inline',
+	sourcemap: true,
 	dts: true,
 	format: ['cjs', 'esm'],
 	target: 'node14',
@@ -15,6 +15,6 @@ export default defineConfig({
 	},
 	onSuccess: 'node postbuild.js',
 	banner: {
-		js: '/* Copyright ${new Date().getFullYear()} Hop, Inc */',
+		js: `/* Copyright ${new Date().getFullYear()} Hop, Inc */`,
 	},
 });

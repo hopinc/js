@@ -221,7 +221,5 @@ export class Projects extends BaseSDK {
 			undefined,
 			{secret_id: id, project_id: projectId},
 		);
-
-		return;
 	}
 }

@@ -7,8 +7,10 @@ import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints';
 import {getIdPrefix, Id, Method} from './types';
 
 export type APIAuthentication = Id<'ptk'> | Id<'bearer'> | Id<'pat'>;
-export type APIAuthenticationType =
-	APIAuthentication extends `${infer T}_${string}` ? T : never;
+
+export type APIAuthenticationType = APIAuthentication extends Id<infer T>
+	? T
+	: never;
 
 export function validateAPIAuthentication(
 	auth: string,
@@ -22,13 +24,16 @@ export interface APIClientOptions {
 }
 
 export class HopAPIError extends Error {
+	public readonly status: number;
+
 	constructor(
-		public readonly status: number,
 		public readonly request: Request,
 		public readonly response: Response,
 		public readonly data: ErroredAPIResponse,
 	) {
 		super(data.error.message);
+
+		this.status = response.status;
 	}
 }
 
@@ -79,8 +84,13 @@ export class APIClient {
 			headers.set('User-Agent', 'Hop-API-Client');
 		}
 
-		// Treat null, false and empty strings as valid body
+		// Treat falsy values as valid body
+		// only undefined is not
 		if (body !== undefined) {
+			if (method === 'GET') {
+				throw new Error('Cannot send a GET request with a body');
+			}
+
 			headers.set('Content-Type', 'application/json');
 		}
 
@@ -103,9 +113,9 @@ export class APIClient {
 
 		const result = (await response.json()) as APIResponse<T>;
 
-		if (('success' in result && !result.success) || 'statusCode' in result) {
+		if ('success' in result && !result.success) {
 			debug('An error occurred', result);
-			throw new HopAPIError(response.status, request, response, result);
+			throw new HopAPIError(request, response, result);
 		}
 
 		return result.data;
