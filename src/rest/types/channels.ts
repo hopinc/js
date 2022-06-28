@@ -1,6 +1,6 @@
 import {Endpoint} from '../endpoints';
 import {Project} from './projects';
-import {Id, Timestamp} from './types';
+import {Empty, Id, Timestamp} from './types';
 
 export enum ChannelType {
 	PRIVATE,
@@ -46,8 +46,7 @@ export interface ChannelToken {
 	/**
 	 * The ID for the token
 	 */
-	// @ts-expect-error — pending prefix
-	id: Id<'ch'>;
+	id: Id<'leap_token'>;
 
 	/**
 	 * State for this token
@@ -63,8 +62,20 @@ export interface ChannelToken {
 export type ChannelEndpoints =
 	| Endpoint<'POST', '/v1/channels', {channel: Channel}, {type: ChannelType}>
 	| Endpoint<
+			'PUT',
+			'/v1/channels/:channel_id',
+			{channel: Channel},
+			{type: ChannelType}
+	  >
+	| Endpoint<
 			'POST',
 			'/v1/channels/tokens',
 			{token: ChannelToken},
 			{state: State}
-	  >;
+	  >
+	| Endpoint<'DELETE', '/v1/channels/:channel_id', Empty>
+	| Endpoint<'GET', '/v1/channels/:channel_id', {channel: Channel}>
+	| Endpoint<'GET', '/v1/channels/:channel_id/tokens', {tokens: ChannelToken[]}>
+	| Endpoint<'PUT', '/v1/channels/:channel_id/subscribers/:token', Empty>
+	| Endpoint<'PATCH', '/v1/channels/:channel_id/state', Empty, State>
+	| Endpoint<'PUT', '/v1/channels/:channel_id/state', Empty, State>;

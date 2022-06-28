@@ -80,6 +80,10 @@ export const ID_PREFIXES = [
 		prefix: 'domain',
 		description: 'Domain for a gateway',
 	},
+	{
+		prefix: 'leap_token',
+		description: 'Token for connecting to leap as a client',
+	},
 ] as const;
 
 export type IdPrefixes = typeof ID_PREFIXES[number]['prefix'];
