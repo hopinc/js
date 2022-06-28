@@ -46,21 +46,33 @@ export class LeapChannel {
 		return tokens;
 	}
 
-	async updateState(state: State) {
-		await this.client.patch('/v1/channels/:channel_id/state', state, {
+	async setState(state: State) {
+		await this.client.put('/v1/channels/:channel_id/state', state, {
 			channel_id: this.channel.id,
 		});
 
 		this.channel.state = state;
 	}
 
-	async patchState(newState: Partial<State> | ((old: State) => State)) {
-		const state =
-			typeof newState === 'function'
-				? newState(this.channel.state)
-				: {...this.channel.state, newState};
+	async patchState(newState: State | ((old: State) => State | Promise<State>)) {
+		let state: State;
 
-		return this.updateState(state);
+		if (typeof newState === 'function') {
+			const {state: oldState} = await this.client.get(
+				'/v1/channels/:channel_id/state',
+				{channel_id: this.channel.id},
+			);
+
+			state = await newState(oldState);
+		} else {
+			state = newState;
+		}
+
+		await this.client.put('/v1/channels/:channel_id/state', state, {
+			channel_id: this.channel.id,
+		});
+
+		this.channel.state = state;
 	}
 
 	async publishMessage(name: string, data: unknown) {
