@@ -9,7 +9,7 @@ export class LeapChannel {
 	private readonly channel: Channel;
 	private readonly client: APIClient;
 
-	private constructor(client: APIClient, channel: Channel) {
+	constructor(client: APIClient, channel: Channel) {
 		this.client = client;
 		this.channel = channel;
 	}
@@ -50,5 +50,24 @@ export class LeapChannel {
 		await this.client.patch('/v1/channels/:channel_id/state', state, {
 			channel_id: this.channel.id,
 		});
+
+		this.channel.state = state;
+	}
+
+	async patchState(newState: Partial<State> | ((old: State) => State)) {
+		const state =
+			typeof newState === 'function'
+				? newState(this.channel.state)
+				: {...this.channel.state, newState};
+
+		return this.updateState(state);
+	}
+
+	async publishMessage(name: string, data: unknown) {
+		await this.client.post(
+			'/v1/channels/:channel_id/messages',
+			{e: name, d: data},
+			{channel_id: this.channel.id},
+		);
 	}
 }

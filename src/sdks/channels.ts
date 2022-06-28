@@ -53,4 +53,14 @@ export class Channels extends BaseSDK {
 
 		return token;
 	}
+
+	/**
+	 * Get all channels for a project
+	 *
+	 * @param project An optional project ID if authenticating with a PAT or Bearer
+	 */
+	async getAll(project?: Id<'project'>) {
+		const {channels} = await this.client.get('/v1/channels', {project});
+		return channels;
+	}
 }
