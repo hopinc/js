@@ -64,6 +64,7 @@ export interface Container {
 	 * The ID of the container
 	 */
 	id: Id<'container'>;
+
 	/**
 	 * The time this container was created
 	 */
@@ -83,6 +84,11 @@ export interface Container {
 	 * The type of this container
 	 */
 	type: RuntimeType;
+
+	/**
+	 * The internal IP of the container
+	 */
+	internal_ip: string;
 
 	/**
 	 * The ID of the deployment this container is associated with
@@ -236,7 +242,7 @@ export interface ContainerLog {
 
 	/**
 	 * The ID of the document in elasticsearch. You probably won't have to use this, but
-	 * it might be useful for example React keys as they are unique.
+	 * it might be useful for React keys, for example, as they are unique.
 	 */
 	nonce: string;
 
