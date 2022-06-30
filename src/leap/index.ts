@@ -3,6 +3,8 @@ import {Channel, State} from '../rest/types/channels';
 
 type Token = Id<'leap_token'>;
 
+type SetStateAction = State | ((oldState: State) => State | Promise<State>);
+
 export class LeapChannel {
 	private readonly subscriptionCache = new Set<Token>();
 
@@ -46,15 +48,7 @@ export class LeapChannel {
 		return tokens;
 	}
 
-	async setState(state: State) {
-		await this.client.put('/v1/channels/:channel_id/state', state, {
-			channel_id: this.channel.id,
-		});
-
-		this.channel.state = state;
-	}
-
-	async patchState(newState: State | ((old: State) => State | Promise<State>)) {
+	private async updateState(newState: SetStateAction, mode: 'patch' | 'set') {
 		let state: State;
 
 		if (typeof newState === 'function') {
@@ -63,16 +57,32 @@ export class LeapChannel {
 				{channel_id: this.channel.id},
 			);
 
+			this.channel.state = oldState;
+
 			state = await newState(oldState);
 		} else {
 			state = newState;
 		}
 
-		await this.client.put('/v1/channels/:channel_id/state', state, {
-			channel_id: this.channel.id,
-		});
+		if (mode === 'patch') {
+			await this.client.patch('/v1/channels/:channel_id/state', state, {
+				channel_id: this.channel.id,
+			});
+		} else {
+			await this.client.put('/v1/channels/:channel_id/state', state, {
+				channel_id: this.channel.id,
+			});
+		}
 
 		this.channel.state = state;
+	}
+
+	async setState(state: SetStateAction) {
+		return this.updateState(state, 'set');
+	}
+
+	async patchState(state: SetStateAction) {
+		return this.updateState(state, 'patch');
 	}
 
 	async publishMessage(name: string, data: unknown) {

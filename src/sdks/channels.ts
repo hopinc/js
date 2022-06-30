@@ -10,11 +10,7 @@ export class Channels extends BaseSDK {
 	 * @param id An ID to assign to the channel (optional, set this to `undefined` or `null` if you do not want to specify an ID)
 	 * @param project A project ID (if necessary) to assign this to
 	 */
-	async create(
-		type: ChannelType,
-		id?: Id<'channel'> | null,
-		project?: Id<'project'>,
-	) {
+	async create(type: ChannelType, id?: string | null, project?: Id<'project'>) {
 		if (!project && this.client.authType !== 'ptk') {
 			throw new Error(
 				'Project must be provided when creating a channel with bearer or PAT auth',

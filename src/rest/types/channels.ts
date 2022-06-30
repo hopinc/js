@@ -3,9 +3,9 @@ import {Project} from './projects';
 import {Empty, Id, Timestamp} from './types';
 
 export enum ChannelType {
-	PRIVATE,
-	PUBLIC,
-	UNPROTECTED,
+	PRIVATE = 'private',
+	PUBLIC = 'public',
+	UNPROTECTED = 'unprotected',
 }
 
 export type State = Record<string, unknown>;
@@ -14,7 +14,7 @@ export interface Channel {
 	/**
 	 * The ID of the channel
 	 */
-	id: Id<'channel'>;
+	id: string;
 
 	/**
 	 * The project it is associated with

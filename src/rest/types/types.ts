@@ -64,10 +64,13 @@ export const ID_PREFIXES = [
 		prefix: 'ptkid',
 		description: 'Project token ID',
 	},
-	{
-		prefix: 'channel',
-		description: 'Channel',
-	},
+	// Technically, yes, it should be here, but channel IDs can also
+	// be any random string if a developer decides to set it
+	// themselves. So I'll leave it commented for now..
+	// {
+	// 	prefix: 'channel',
+	// 	description: 'Channel',
+	// },
 	{
 		prefix: 'secret',
 		description: 'Project secret ID',
