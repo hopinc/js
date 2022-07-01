@@ -30,14 +30,14 @@ export class User extends BaseSDK {
 	 *
 	 * @returns The created PAT
 	 */
-	async createPAT() {
+	async createPAT(name: string) {
 		if (this.client.authType === 'ptk') {
 			throw new Error(
 				'You cannot create a PAT from a project token! You must use a Bearer or PAT.',
 			);
 		}
 
-		const {pat} = await this.client.post('/v1/users/@me/pats', undefined, {});
+		const {pat} = await this.client.post('/v1/users/@me/pats', {name}, {});
 
 		return pat;
 	}

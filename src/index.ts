@@ -3,7 +3,6 @@ import {APIAuthentication} from './rest';
 import {ContainerState, RuntimeType} from './rest/types/ignite';
 
 export * from './hop';
-export * from './leap';
 export * from './permissions';
 export * from './rest';
 export * from './sdks';

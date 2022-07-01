@@ -34,6 +34,11 @@ export interface PAT {
 	id: Id<'pat'>;
 
 	/**
+	 * The name of the pat
+	 */
+	name: string | null;
+
+	/**
 	 * The pat token
 	 *
 	 * @warning This value will be partially censored if it
@@ -56,6 +61,6 @@ export type UserEndpoints =
 				project_member_role_map: Record<Id<'project'>, MemberRole>;
 			}
 	  >
-	| Endpoint<'POST', '/v1/users/@me/pats', {pat: PAT}>
+	| Endpoint<'POST', '/v1/users/@me/pats', {pat: PAT}, {name: string}>
 	| Endpoint<'GET', '/v1/users/@me/pats', {pats: PAT[]}>
 	| Endpoint<'DELETE', '/v1/users/@me/pats/:pat_id', Empty>;
