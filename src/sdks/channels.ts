@@ -1,6 +1,9 @@
 import {Id} from '../rest';
-import {ChannelType, State} from '../rest/types/channels';
+import {ChannelType, State, Channel} from '../rest/types/channels';
 import {BaseSDK} from './base-sdk';
+
+type Token = Id<'leap_token'>;
+type SetStateAction = State | ((oldState: State) => State | Promise<State>);
 
 export class Channels extends BaseSDK {
 	/**
@@ -58,5 +61,91 @@ export class Channels extends BaseSDK {
 	async getAll(project?: Id<'project'>) {
 		const {channels} = await this.client.get('/v1/channels', {project});
 		return channels;
+	}
+
+	async subscribeToken(channel: Channel | Channel['id'], token: Token) {
+		const id = typeof channel === 'object' ? channel.id : channel;
+
+		await this.client.put(
+			'/v1/channels/:channel_id/subscribers/:token',
+			undefined,
+			{channel_id: id, token},
+		);
+	}
+
+	async subscribeTokens(
+		channel: Channel | Channel['id'],
+		tokens: Token[] | Set<Token>,
+	) {
+		const promises: Array<Promise<void>> = [];
+
+		for (const subscription of tokens) {
+			promises.push(this.subscribeToken(channel, subscription));
+		}
+
+		await Promise.allSettled(promises);
+	}
+
+	async getAllTokens(channel: Channel['id'] | Channel) {
+		const id = typeof channel === 'object' ? channel.id : channel;
+
+		const {tokens} = await this.client.get('/v1/channels/:channel_id/tokens', {
+			channel_id: id,
+		});
+
+		return tokens;
+	}
+
+	private async updateState(
+		channelId: Channel['id'],
+		newState: SetStateAction,
+		mode: 'patch' | 'set',
+	) {
+		let state: State;
+
+		if (typeof newState === 'function') {
+			const {state: oldState} = await this.client.get(
+				'/v1/channels/:channel_id/state',
+				{channel_id: channelId},
+			);
+
+			state = await newState(oldState);
+		} else {
+			state = newState;
+		}
+
+		if (mode === 'patch') {
+			await this.client.patch('/v1/channels/:channel_id/state', state, {
+				channel_id: channelId,
+			});
+		} else {
+			await this.client.put('/v1/channels/:channel_id/state', state, {
+				channel_id: channelId,
+			});
+		}
+	}
+
+	async setState(channel: Channel | Channel['id'], state: SetStateAction) {
+		const id = typeof channel === 'object' ? channel.id : channel;
+		return this.updateState(id, state, 'set');
+	}
+
+	async patchState(channel: Channel | Channel['id'], state: SetStateAction) {
+		const id = typeof channel === 'object' ? channel.id : channel;
+		return this.updateState(id, state, 'patch');
+	}
+
+	async publishMessage(
+		channel: Channel | Channel['id'],
+		name: string,
+		data: unknown,
+	) {
+		const id = typeof channel === 'object' ? channel.id : channel;
+
+		await this.client.post(
+			'/v1/channels/:channel_id/messages',
+			{e: name, d: data},
+			{channel_id: id},
+		);
 	}
 }

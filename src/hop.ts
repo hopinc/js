@@ -140,6 +140,23 @@ export class Hop {
 			create: this.sdks.channels.create.bind(this.sdks.channels),
 			getAll: this.sdks.channels.getAll.bind(this.sdks.channels),
 
+			subscribeToken: this.sdks.channels.subscribeToken.bind(
+				this.sdks.channels,
+			),
+
+			subscribeTokens: this.sdks.channels.subscribeTokens.bind(
+				this.sdks.channels,
+			),
+
+			getAllTokens: this.sdks.channels.getAllTokens.bind(this.sdks.channels),
+
+			setState: this.sdks.channels.setState.bind(this.sdks.channels),
+			patchState: this.sdks.channels.patchState.bind(this.sdks.channels),
+
+			publishMessage: this.sdks.channels.publishMessage.bind(
+				this.sdks.channels,
+			),
+
 			tokens: {
 				create: this.sdks.channels.createToken.bind(this.sdks.channels),
 			},
