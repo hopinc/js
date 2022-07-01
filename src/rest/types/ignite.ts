@@ -118,6 +118,11 @@ export interface Deployment {
 	container_count: number;
 
 	/**
+	 * The time this deployment was created at
+	 */
+	created_at: Timestamp;
+
+	/**
 	 * The config for this deployment
 	 */
 	config: DeploymentConfig;
