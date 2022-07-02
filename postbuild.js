@@ -5,6 +5,7 @@ const utils = glob.sync('./src/utils/*');
 
 /**
  * Generate a package.json file for a util
+ *
  * @param {string} utilName The name of the util to be exported
  * @returns A package.json config
  */

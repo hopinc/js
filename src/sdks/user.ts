@@ -5,7 +5,7 @@ export class User extends BaseSDK {
 	/**
 	 * Gets the current user
 	 *
-	 * @returns The current user authorized by the SDK.
+	 * @returns The current user authorized by the SDK
 	 */
 	async getMe() {
 		if (this.client.authType === 'ptk') {
