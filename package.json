@@ -1,6 +1,6 @@
 {
 	"name": "@onehop/js",
-	"version": "0.0.66",
+	"version": "1.0.0",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
@@ -21,7 +21,7 @@
 	"scripts": {
 		"build": "tsup",
 		"bench": "HOP_DEBUG=true ts-node _workbench.ts",
-		"release": "yarn build && cd dist && yarn npm publish --tag beta && rm -rf dist"
+		"release": "yarn build && cd dist && yarn npm publish && rm -rf dist"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.2.0",
@@ -34,7 +34,6 @@
 		"typescript": "^4.7.4"
 	},
 	"dependencies": {
-		"@onehop/leap-edge-js": "^0.0.1",
 		"cross-fetch": "^3.1.5",
 		"qs": "^6.11.0",
 		"zod": "^3.17.3"

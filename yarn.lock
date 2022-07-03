@@ -96,7 +96,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@onehop/js@workspace:."
   dependencies:
-    "@onehop/leap-edge-js": ^0.0.1
     "@types/glob": ^7.2.0
     "@types/node": ^18.0.0
     "@types/qs": ^6.9.7
@@ -110,15 +109,6 @@ __metadata:
     zod: ^3.17.3
   languageName: unknown
   linkType: soft
-
-"@onehop/leap-edge-js@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@onehop/leap-edge-js@npm:0.0.1"
-  dependencies:
-    ws: ^8.8.0
-  checksum: 79f2dadbc48efdaba6d4439d6a22bb013cf9b02ffb533b8a60274c99f95025c5aa11507c16ad390cc6bd1466da283f4c43a91e3f3982ea627556f2ae17cb21d5
-  languageName: node
-  linkType: hard
 
 "@tootallnate/once@npm:2":
   version: 2.0.0
@@ -2116,21 +2106,6 @@ __metadata:
   version: 1.0.2
   resolution: "wrappy@npm:1.0.2"
   checksum: 159da4805f7e84a3d003d8841557196034155008f817172d4e986bd591f74aa82aa7db55929a54222309e01079a65a92a9e6414da5a6aa4b01ee44a511ac3ee5
-  languageName: node
-  linkType: hard
-
-"ws@npm:^8.8.0":
-  version: 8.8.0
-  resolution: "ws@npm:8.8.0"
-  peerDependencies:
-    bufferutil: ^4.0.1
-    utf-8-validate: ^5.0.2
-  peerDependenciesMeta:
-    bufferutil:
-      optional: true
-    utf-8-validate:
-      optional: true
-  checksum: 6ceed1ca1cb800ef60c7fc8346c7d5d73d73be754228eb958765abf5d714519338efa20ffe674167039486eb3a813aae5a497f8d319e16b4d96216a31df5bd95
   languageName: node
   linkType: hard
 
