@@ -94,13 +94,12 @@ export class Hop {
 		};
 
 		this.users = {
-			me: {
-				get: this.sdks.user.getMe.bind(this.sdks.user),
-				pats: {
-					create: this.sdks.user.createPAT.bind(this.sdks.user),
-					delete: this.sdks.user.deletePAT.bind(this.sdks.user),
-					getAll: this.sdks.user.getAllPATs.bind(this.sdks.user),
-				},
+			get: this.sdks.user.getMe.bind(this.sdks.user),
+
+			pats: {
+				create: this.sdks.user.createPAT.bind(this.sdks.user),
+				delete: this.sdks.user.deletePAT.bind(this.sdks.user),
+				getAll: this.sdks.user.getAllPATs.bind(this.sdks.user),
 			},
 		};
 
@@ -112,8 +111,8 @@ export class Hop {
 			},
 
 			secrets: {
-				create: this.sdks.projects.createSecret.bind(this.sdks.projects),
 				getAll: this.sdks.projects.getSecrets.bind(this.sdks.projects),
+				create: this.sdks.projects.createSecret.bind(this.sdks.projects),
 				delete: this.sdks.projects.deleteSecret.bind(this.sdks.projects),
 			},
 

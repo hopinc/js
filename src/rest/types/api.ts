@@ -1,5 +1,5 @@
 import * as Channels from './channels';
-import * as Registry from './channels';
+import * as Registry from './registry';
 import * as Ignite from './ignite';
 import * as Pipe from './pipe';
 import * as Projects from './projects';

@@ -3,7 +3,9 @@ import {ChannelType, State, Channel} from '../rest/types/channels';
 import {BaseSDK} from './base-sdk';
 
 type Token = Id<'leap_token'>;
-type SetStateAction = State | ((oldState: State) => State | Promise<State>);
+export type SetStateAction =
+	| State
+	| ((oldState: State) => State | Promise<State>);
 
 export class Channels extends BaseSDK {
 	/**
