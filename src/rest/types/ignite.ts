@@ -2,6 +2,10 @@ import {ByteString} from '../../util';
 import {Endpoint} from '../endpoints';
 import {Empty, Id, Timestamp} from './types';
 
+export enum Regions {
+	US_EAST_1 = 'us-east-1',
+}
+
 /**
  * Runtime types are used to describe the type of a deployment or container
  */
@@ -69,6 +73,11 @@ export interface Container {
 	 * The time this container was created
 	 */
 	created_at: Timestamp;
+
+	/**
+	 * The region this container runs in
+	 */
+	region: Regions;
 
 	/**
 	 * Information about uptime/downtime for this container
