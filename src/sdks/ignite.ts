@@ -233,7 +233,7 @@ export class Ignite extends BaseSDK {
 	async getLogs(
 		container: Id<'container'>,
 		options: Partial<{
-			sortBy: string;
+			sortBy: 'timestamp';
 			orderBy: 'desc' | 'asc';
 			limit: number;
 			offset: number;
