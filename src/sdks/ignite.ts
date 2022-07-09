@@ -234,7 +234,7 @@ export class Ignite extends BaseSDK {
 		container: Id<'container'>,
 		options: Partial<{
 			sortBy: string;
-			orderedBy: 'desc' | 'asc';
+			orderBy: 'desc' | 'asc';
 			limit: number;
 			offset: number;
 		}> = {},
