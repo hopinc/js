@@ -112,7 +112,7 @@ export class APIClient {
 		const response = await fetch(request);
 
 		if (
-			response.status === 204 &&
+			response.status === 204 ||
 			response.headers.get('Content-Type') !== 'application/json'
 		) {
 			// Probably a DELETE request with no body returned, so return undefined here
