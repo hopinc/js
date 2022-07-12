@@ -4,7 +4,7 @@ import {ExtractRouteParams} from '../util';
 import {IS_BROWSER} from '../util/constants';
 import {debug} from '../util/debug';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints';
-import {getIdPrefix, Id, Method} from './types';
+import {Empty, getIdPrefix, Id, Method} from './types';
 
 export type APIAuthentication = Id<'ptk'> | Id<'bearer'> | Id<'pat'>;
 
@@ -111,9 +111,31 @@ export class APIClient {
 
 		const response = await fetch(request);
 
-		const result = (await response.json()) as APIResponse<T>;
+		if (
+			response.status === 204 &&
+			response.headers.get('Content-Type') !== 'application/json'
+		) {
+			// Probably a DELETE request with no body returned, so return undefined here
+			// This cast is (prolly) safe because endpoints that return nothing
+			// are typed as `Empty`
+			return undefined as unknown as T;
+		}
 
-		if ('success' in result && !result.success) {
+		const result = await (response.json() as Promise<APIResponse<T>>).catch(
+			(error: Error): ErroredAPIResponse => {
+				debug('Could not parse JSON', error, request, response);
+
+				return {
+					success: false,
+					error: {
+						code: 'local_client_error',
+						message: error.message,
+					},
+				};
+			},
+		);
+
+		if (!result.success) {
 			debug('An error occurred', result);
 			throw new HopAPIError(request, response, result);
 		}

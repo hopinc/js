@@ -261,9 +261,9 @@ export interface ContainerLog {
 	nonce: string;
 
 	/**
-	 * The level of the log. stderr becomes `error` and stdout becomes `info`
+	 * The level of the log. stdout becomes `info`
 	 */
-	level: 'info' | 'error';
+	level: 'info' | 'stderr';
 }
 
 /**
@@ -323,6 +323,11 @@ export interface Domain {
 	 * The ID of the domain
 	 */
 	id: Id<'domain'>;
+
+	/**
+	 * The port this
+	 */
+	target_port: number;
 
 	/**
 	 * The domain name
