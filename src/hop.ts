@@ -125,7 +125,7 @@ export class Hop {
 
 		this.pipe = {
 			streams: {
-				getAll: this.sdks.pipe.getStreams.bind(this.sdks.pipe),
+				getAll: this.sdks.pipe.getRooms.bind(this.sdks.pipe),
 			},
 		};
 

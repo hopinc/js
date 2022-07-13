@@ -1,13 +1,13 @@
 import {Endpoint} from '../endpoints';
 import {Id, Timestamp} from './types';
 
-export type StreamMetadata = unknown;
+export type RoomMetadata = unknown;
 
-export interface Stream {
+export interface Room {
 	/**
 	 * The ID of this stream
 	 */
-	id: Id<'stream'>;
+	id: Id<'room'>;
 
 	/**
 	 * The name of this room
@@ -21,11 +21,11 @@ export interface Stream {
 }
 
 export type PipeEndpoints =
-	| Endpoint<'GET', '/v1/pipe/streams', {streams: Stream[]}>
+	| Endpoint<'GET', '/v1/pipe/rooms', {rooms: Room[]}>
 	| Endpoint<
 			'POST',
-			'/v1/pipe/streams',
-			{room: Stream},
+			'/v1/pipe/rooms',
+			{room: Room},
 			{
 				/**
 				 * The name of the stream
@@ -35,12 +35,12 @@ export type PipeEndpoints =
 				/**
 				 * Any information attatched to the stream
 				 */
-				metadata: StreamMetadata;
+				metadata: RoomMetadata;
 			}
 	  >
 	| Endpoint<
 			'POST',
-			'/v1/pipe/streams/:stream_id/join-token',
+			'/v1/pipe/rooms/:room_id/join-token',
 			{join_token: string},
 			{
 				/**
@@ -52,6 +52,6 @@ export type PipeEndpoints =
 				/**
 				 * Any information attatched to the strema
 				 */
-				metadata: StreamMetadata;
+				metadata: RoomMetadata;
 			}
 	  >;
