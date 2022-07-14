@@ -1,7 +1,8 @@
 import {Endpoint} from '../endpoints';
+import {Regions} from './ignite';
 import {Id, Timestamp} from './types';
 
-export type RoomMetadata = unknown;
+export type DeliveryProtocol = 'webrtc' | 'hls';
 
 export interface Room {
 	/**
@@ -18,6 +19,36 @@ export interface Room {
 	 * The unix timestamp of when this stream was created
 	 */
 	created_at: Timestamp;
+
+	/**
+	 * Protocol you can stream with
+	 */
+	ingest_protocol: 'rtmp';
+
+	/**
+	 * Protocols that are supported by this room to the client
+	 */
+	delivery_protocols: DeliveryProtocol[];
+
+	/**
+	 * A join token to subscribe into this room
+	 */
+	join_token: string;
+
+	/**
+	 * The region that the stream url is located in
+	 */
+	ingest_region: Regions;
+
+	/**
+	 * The URL that you can stream to
+	 */
+	ingest_endpoint: string;
+
+	/**
+	 * The state of the stream currently
+	 */
+	state: 'live' | 'offline';
 }
 
 export type PipeEndpoints =
@@ -32,26 +63,16 @@ export type PipeEndpoints =
 				 */
 				name: string;
 
-				/**
-				 * Any information attatched to the stream
-				 */
-				metadata: RoomMetadata;
-			}
-	  >
-	| Endpoint<
-			'POST',
-			'/v1/pipe/rooms/:room_id/join-token',
-			{join_token: string},
-			{
-				/**
-				 * The user id of the user to join into this strema
-				 * This should be the user id on YOUR systems
-				 */
-				user_id: string | number;
+				ingest_protocol: 'rtmp';
 
-				/**
-				 * Any information attatched to the strema
-				 */
-				metadata: RoomMetadata;
+				delivery_protocols: DeliveryProtocol[];
+
+				region: Regions;
+
+				llhls_config: {
+					wcl_delay: number;
+					artificial_delay: number;
+					max_playout_bitrate_preset: string;
+				};
 			}
 	  >;
