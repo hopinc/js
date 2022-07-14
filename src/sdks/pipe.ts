@@ -1,4 +1,6 @@
 import {Id} from '../rest';
+import {Regions} from '../rest/types/ignite';
+import {DeliveryProtocol} from '../rest/types/pipe';
 import {BaseSDK} from './base-sdk';
 
 export class Pipe extends BaseSDK {
@@ -14,18 +16,34 @@ export class Pipe extends BaseSDK {
 		return rooms;
 	}
 
-	async createJoinToken(
-		room: Id<'room'>,
-		userId: string | number,
-		metadata: unknown,
-		project?: Id<'project'>,
+	async createRoom(
+		name: string,
+		options: {
+			deliveryProtocols: DeliveryProtocol[];
+			hlsConfig: {
+				wcl_delay: number;
+				artificial_delay: number;
+				max_playout_bitrate_preset: string;
+			};
+		},
 	) {
-		const {join_token: token} = await this.client.post(
-			'/v1/pipe/rooms/:room_id/join-token',
-			{metadata, user_id: userId},
-			{project, room_id: room},
+		const {room} = await this.client.post(
+			'/v1/pipe/rooms',
+			{
+				name,
+
+				// These values are constant for now
+				// so we can just include them here
+				ingest_protocol: 'rtmp',
+				region: Regions.US_EAST_1,
+
+				delivery_protocols: options.deliveryProtocols,
+
+				llhls_config: options.hlsConfig,
+			},
+			{},
 		);
 
-		return token;
+		return room;
 	}
 }
