@@ -20,7 +20,8 @@ export class Pipe extends BaseSDK {
 		name: string,
 		options: {
 			deliveryProtocols: DeliveryProtocol[];
-			hlsConfig: {
+			ephemeral?: boolean;
+			hlsConfig?: {
 				wcl_delay: number;
 				artificial_delay: number;
 				max_playout_bitrate_preset: string;
@@ -37,8 +38,9 @@ export class Pipe extends BaseSDK {
 				ingest_protocol: 'rtmp',
 				region: Regions.US_EAST_1,
 
-				delivery_protocols: options.deliveryProtocols,
+				ephemeral: options.ephemeral ?? false,
 
+				delivery_protocols: options.deliveryProtocols,
 				llhls_config: options.hlsConfig,
 			},
 			{},

@@ -124,8 +124,9 @@ export class Hop {
 		};
 
 		this.pipe = {
-			streams: {
+			rooms: {
 				getAll: this.sdks.pipe.getRooms.bind(this.sdks.pipe),
+				create: this.sdks.pipe.createRoom.bind(this.sdks.pipe),
 			},
 		};
 

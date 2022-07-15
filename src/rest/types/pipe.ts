@@ -69,7 +69,9 @@ export type PipeEndpoints =
 
 				region: Regions;
 
-				llhls_config: {
+				ephemeral: boolean;
+
+				llhls_config?: {
 					wcl_delay: number;
 					artificial_delay: number;
 					max_playout_bitrate_preset: string;
