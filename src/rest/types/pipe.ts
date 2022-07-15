@@ -8,7 +8,7 @@ export interface Room {
 	/**
 	 * The ID of this stream
 	 */
-	id: Id<'room'>;
+	id: Id<'pipe_room'>;
 
 	/**
 	 * The name of this room
