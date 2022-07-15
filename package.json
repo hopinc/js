@@ -1,6 +1,6 @@
 {
 	"name": "@onehop/js",
-	"version": "1.0.9",
+	"version": "1.0.8",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
@@ -10,7 +10,7 @@
 	"packageManager": "yarn@3.2.1",
 	"publishConfig": {
 		"access": "public"
-	},ge
+	},
 	"files": [
 		"dist",
 		"LICENSE",
