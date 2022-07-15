@@ -21,6 +21,7 @@ export class Pipe extends BaseSDK {
 		options: {
 			deliveryProtocols: DeliveryProtocol[];
 			ephemeral?: boolean;
+			ingestProtocol: 'rtmp' | 'rtp';
 			hlsConfig?: {
 				wcl_delay: number;
 				artificial_delay: number;
@@ -33,9 +34,7 @@ export class Pipe extends BaseSDK {
 			{
 				name,
 
-				// These values are constant for now
-				// so we can just include them here
-				ingest_protocol: 'rtmp',
+				ingest_protocol: options.ingestProtocol,
 				region: Regions.US_EAST_1,
 
 				ephemeral: options.ephemeral ?? false,

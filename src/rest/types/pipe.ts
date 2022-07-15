@@ -63,7 +63,7 @@ export type PipeEndpoints =
 				 */
 				name: string;
 
-				ingest_protocol: 'rtmp';
+				ingest_protocol: 'rtmp' | 'rtp';
 
 				delivery_protocols: DeliveryProtocol[];
 
