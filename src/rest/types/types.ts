@@ -49,8 +49,8 @@ export const ID_PREFIXES = [
 		description: 'Ignite container',
 	},
 	{
-		prefix: 'room',
-		description: 'Pipe room stream',
+		prefix: 'pipe_room',
+		description: 'Pipe room',
 	},
 	{
 		prefix: 'deployment',
