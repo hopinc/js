@@ -5,7 +5,7 @@
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
 	"repository": "https://github.com/hopinc/hop-js.git",
-	"author": "Alistair Smith <hi@alistair.sh>",
+	"author": "Hop <developers@hop.io>",
 	"license": "MIT",
 	"packageManager": "yarn@3.2.1",
 	"publishConfig": {

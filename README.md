@@ -2,8 +2,19 @@
 
 Hop's JavaScript library. Requires Node.js 12+
 
-```ts
-import {APIAuthentication} from '@onehop/js';
+## Usage
 
-const authentication = process.env.HOP_API_TOKEN as APIAuthentication;
+Create a [project token](https://docs.hop.io/docs/reference/project_tokens) or personal access token.
+
+```ts
+import {Hop} from '@onehop/js';
+
+const myToken = 'ptk_xxx';
+const hop = new Hop(myToken);
+
+// Example: Creating a project secret
+hop.projects.secrets.create(
+	'RANDOM_NUMBER',
+	Math.floor(Math.random() * 100).toString(),
+);
 ```
