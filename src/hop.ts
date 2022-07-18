@@ -127,6 +127,7 @@ export class Hop {
 			rooms: {
 				getAll: this.sdks.pipe.getRooms.bind(this.sdks.pipe),
 				create: this.sdks.pipe.createRoom.bind(this.sdks.pipe),
+				delete: this.sdks.pipe.deleteRoom.bind(this.sdks.pipe),
 			},
 		};
 

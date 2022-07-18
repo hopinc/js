@@ -47,4 +47,15 @@ export class Pipe extends BaseSDK {
 
 		return room;
 	}
+
+		/**
+	 * Deletes a Pipe room
+	 *
+	 * @param room The ID of the Pipe room to delete.
+	 */
+		 async deleteRoom(room: Id<'pipe_room'>) {
+			await this.client.delete('/v1/pipe/rooms/:room_id', undefined, {
+				room_id: room,
+			});
+		}
 }
