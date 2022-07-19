@@ -113,7 +113,7 @@ export class APIClient {
 
 		if (
 			response.status === 204 ||
-			response.headers.get('Content-Type') !== 'application/json'
+			!response.headers.get('Content-Type')?.includes('application/json')
 		) {
 			// Probably a DELETE request with no body returned, so return undefined here
 			// This cast is (prolly) safe because endpoints that return nothing

@@ -149,19 +149,20 @@ export class Projects extends BaseSDK {
 		}
 
 		if (!projectId) {
-			const {secret} = await this.client.post(
-				'/v1/projects/@this/secrets',
-				{name, value},
-				{},
+			const s = await this.client.put(
+				'/v1/projects/@this/secrets/:name',
+				value,
+				{name},
 			);
 
-			return secret;
+			console.log(s);
+			return s;
 		}
 
-		const {secret} = await this.client.post(
-			'/v1/projects/:project_id/secrets',
-			{name, value},
-			{project_id: projectId},
+		const {secret} = await this.client.put(
+			'/v1/projects/:project_id/secrets/:name',
+			value,
+			{project_id: projectId, name},
 		);
 
 		return secret;
