@@ -4,7 +4,7 @@ import {ExtractRouteParams} from '../util';
 import {IS_BROWSER} from '../util/constants';
 import {debug} from '../util/debug';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints';
-import {Empty, getIdPrefix, Id, Method} from './types';
+import {getIdPrefix, Id, Method} from './types';
 
 export type APIAuthentication = Id<'ptk'> | Id<'bearer'> | Id<'pat'>;
 
