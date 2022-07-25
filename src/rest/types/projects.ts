@@ -68,12 +68,12 @@ export enum ProjectType {
 	/**
 	 * A regular project is
 	 */
-	REGULAR,
+	REGULAR = 'regular',
 
 	/**
 	 * A personal project are created when you register an account
 	 */
-	PERSONAL,
+	PERSONAL = 'personal',
 }
 
 export interface Project {
