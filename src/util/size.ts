@@ -37,7 +37,6 @@ export function parseSize(size: string) {
 		case 'kb':
 			return num * 1024;
 		case 'b':
-			return num;
 		default:
 			return num;
 	}
