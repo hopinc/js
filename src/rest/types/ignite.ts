@@ -211,7 +211,7 @@ export interface Resources {
 	/**
 	 * Amount of vCPU to allocate
 	 */
-	cpu: number;
+	vcpu: number;
 
 	/**
 	 * Amount of memory to allocate in a readible format
