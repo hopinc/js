@@ -19,8 +19,8 @@ export function validateAPIAuthentication(
 }
 
 export interface APIClientOptions {
-	baseUrl: string;
-	authentication: APIAuthentication;
+	readonly baseUrl: string;
+	readonly authentication: APIAuthentication;
 }
 
 export class HopAPIError extends Error {

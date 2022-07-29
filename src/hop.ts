@@ -134,6 +134,14 @@ export class Hop {
 		this.registry = {
 			images: {
 				getAll: this.sdks.registry.getImages.bind(this.sdks.registry),
+
+				getManifest: this.sdks.registry.getImageManifest.bind(
+					this.sdks.registry,
+				),
+
+				delete: this.sdks.registry.deleteImage.bind(
+					this.sdks.registry.deleteImage,
+				),
 			},
 		};
 

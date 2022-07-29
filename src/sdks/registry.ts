@@ -17,6 +17,20 @@ export class Registry extends BaseSDK {
 		}
 
 		const {images} = await this.client.get('/v1/registry/@this/images', {});
+
 		return {images};
+	}
+
+	async getImageManifest(image: string) {
+		const {manifests} = await this.client.get(
+			'/v1/registry/images/:image/manifests',
+			{image},
+		);
+
+		return manifests;
+	}
+
+	async deleteImage(image: string) {
+		await this.client.delete('/v1/registry/images/:image', undefined, {image});
 	}
 }
