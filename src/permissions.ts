@@ -29,7 +29,7 @@ export enum PROJECT_PERMISSION {
 	ADD_DOMAIN = 'add_domain',
 	DELETE_CHANNELS = 'delete_channels',
 	UPDATE_CHANNEL_STATE = 'update_channel_state',
-	PUBLISH_CHANNEL_EVENTS = 'publish_channel_events',
+	PUBLISH_CHANNEL_MESSAGES = 'publish_channel_messages',
 	READ_CHANNELS = 'read_channels',
 	READ_LEAP_TOKENS = 'read_leap_tokens',
 	MANAGE_CHANNEL_SUBSCRIBERS = 'manage_channel_subscribers',
@@ -72,7 +72,7 @@ export const permissionsMap = {
 	[PROJECT_PERMISSION.DELETE_CHANNELS]: 1n << 27n,
 	[PROJECT_PERMISSION.UPDATE_CHANNEL_STATE]: 1n << 28n,
 	[PROJECT_PERMISSION.READ_CHANNELS]: 1n << 29n,
-	[PROJECT_PERMISSION.PUBLISH_CHANNEL_EVENTS]: 1n << 30n,
+	[PROJECT_PERMISSION.PUBLISH_CHANNEL_MESSAGES]: 1n << 30n,
 	[PROJECT_PERMISSION.MANAGE_CHANNEL_SUBSCRIBERS]: 1n << 31n,
 	[PROJECT_PERMISSION.DELETE_DOMAIN]: 1n << 32n,
 	[PROJECT_PERMISSION.DELETE_GATEWAY]: 1n << 33n,
@@ -127,7 +127,7 @@ export const BROAD_PERMISSIONS_MAP = {
 		permissionsMap.delete_channels |
 		permissionsMap.update_channel_state |
 		permissionsMap.read_channels |
-		permissionsMap.publish_channel_events |
+		permissionsMap.publish_channel_messages |
 		permissionsMap.manage_channel_subscribers |
 		permissionsMap.message_token,
 	MANAGE_REGISTRY: permissionsMap.get_registry_images,
