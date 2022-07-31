@@ -41,6 +41,7 @@ export enum PROJECT_PERMISSION {
 	ROLLOUT = 'rollout',
 	REQUEST_QUOTA_INCREASE = 'request_quota_increase',
 	READ_BILLING = 'read_billing',
+	READ_GATEWAYS = 'read_gateways',
 }
 
 export const permissionsMap = {
@@ -86,6 +87,7 @@ export const permissionsMap = {
 	[PROJECT_PERMISSION.ROLLOUT]: 1n << 40n,
 	[PROJECT_PERMISSION.REQUEST_QUOTA_INCREASE]: 1n << 41n,
 	[PROJECT_PERMISSION.READ_BILLING]: 1n << 42n,
+	[PROJECT_PERMISSION.READ_GATEWAYS]: 1n << 43n,
 };
 
 export const BROAD_PERMISSIONS_MAP = {
@@ -141,7 +143,8 @@ export const BROAD_PERMISSIONS_MAP = {
 		permissionsMap.read_project_tokens |
 		permissionsMap.read_project_secrets |
 		permissionsMap.read_leap_tokens |
-		permissionsMap.get_project_members,
+		permissionsMap.get_project_members |
+		permissionsMap.read_gateways,
 	MANAGE_QUOTAS: permissionsMap.request_quota_increase,
 	MANAGE_ROLLOUTS: permissionsMap.rollout,
 	MANAGE_BILLING: permissionsMap.read_billing,
