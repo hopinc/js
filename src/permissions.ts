@@ -29,7 +29,7 @@ export enum PROJECT_PERMISSION {
 	ADD_DOMAIN = 'add_domain',
 	DELETE_CHANNELS = 'delete_channels',
 	UPDATE_CHANNEL_STATE = 'update_channel_state',
-	PUBLISH_CHANNEL_EVENTS = 'publish_channel_events',
+	PUBLISH_CHANNEL_MESSAGES = 'publish_channel_messages',
 	READ_CHANNELS = 'read_channels',
 	READ_LEAP_TOKENS = 'read_leap_tokens',
 	MANAGE_CHANNEL_SUBSCRIBERS = 'manage_channel_subscribers',
@@ -40,6 +40,7 @@ export enum PROJECT_PERMISSION {
 	MESSAGE_TOKEN = 'message_token',
 	ROLLOUT = 'rollout',
 	REQUEST_QUOTA_INCREASE = 'request_quota_increase',
+	READ_BILLING = 'read_billing',
 }
 
 export const permissionsMap = {
@@ -72,7 +73,7 @@ export const permissionsMap = {
 	[PROJECT_PERMISSION.DELETE_CHANNELS]: 1n << 27n,
 	[PROJECT_PERMISSION.UPDATE_CHANNEL_STATE]: 1n << 28n,
 	[PROJECT_PERMISSION.READ_CHANNELS]: 1n << 29n,
-	[PROJECT_PERMISSION.PUBLISH_CHANNEL_EVENTS]: 1n << 30n,
+	[PROJECT_PERMISSION.PUBLISH_CHANNEL_MESSAGES]: 1n << 30n,
 	[PROJECT_PERMISSION.MANAGE_CHANNEL_SUBSCRIBERS]: 1n << 31n,
 	[PROJECT_PERMISSION.DELETE_DOMAIN]: 1n << 32n,
 	[PROJECT_PERMISSION.DELETE_GATEWAY]: 1n << 33n,
@@ -84,6 +85,7 @@ export const permissionsMap = {
 	[PROJECT_PERMISSION.CREATE_CHANNEL]: 1n << 39n,
 	[PROJECT_PERMISSION.ROLLOUT]: 1n << 40n,
 	[PROJECT_PERMISSION.REQUEST_QUOTA_INCREASE]: 1n << 41n,
+	[PROJECT_PERMISSION.READ_BILLING]: 1n << 42n,
 };
 
 export const BROAD_PERMISSIONS_MAP = {
@@ -127,7 +129,7 @@ export const BROAD_PERMISSIONS_MAP = {
 		permissionsMap.delete_channels |
 		permissionsMap.update_channel_state |
 		permissionsMap.read_channels |
-		permissionsMap.publish_channel_events |
+		permissionsMap.publish_channel_messages |
 		permissionsMap.manage_channel_subscribers |
 		permissionsMap.message_token,
 	MANAGE_REGISTRY: permissionsMap.get_registry_images,
@@ -137,8 +139,12 @@ export const BROAD_PERMISSIONS_MAP = {
 		permissionsMap.read_room |
 		permissionsMap.read_channels |
 		permissionsMap.read_project_tokens |
-		permissionsMap.read_project_secrets,
+		permissionsMap.read_project_secrets |
+		permissionsMap.read_leap_tokens |
+		permissionsMap.get_project_members,
 	MANAGE_QUOTAS: permissionsMap.request_quota_increase,
+	MANAGE_ROLLOUTS: permissionsMap.rollout,
+	MANAGE_BILLING: permissionsMap.read_billing,
 };
 
 export const roles = {
@@ -148,7 +154,8 @@ export const roles = {
 		BROAD_PERMISSIONS_MAP.MANAGE_DEPLOYMENTS |
 		BROAD_PERMISSIONS_MAP.MANAGE_PIPE |
 		BROAD_PERMISSIONS_MAP.MANAGE_SECRETS |
-		BROAD_PERMISSIONS_MAP.MANAGE_REGISTRY,
+		BROAD_PERMISSIONS_MAP.MANAGE_REGISTRY |
+		BROAD_PERMISSIONS_MAP.READ_ONLY,
 	admin:
 		BROAD_PERMISSIONS_MAP.MANAGE_CHANNELS |
 		BROAD_PERMISSIONS_MAP.MANAGE_DEPLOYMENTS |
@@ -157,7 +164,8 @@ export const roles = {
 		BROAD_PERMISSIONS_MAP.MANAGE_PROJECT_TOKENS |
 		BROAD_PERMISSIONS_MAP.MANAGE_SECRETS |
 		BROAD_PERMISSIONS_MAP.MANAGE_REGISTRY |
-		BROAD_PERMISSIONS_MAP.MANAGE_QUOTAS,
+		BROAD_PERMISSIONS_MAP.MANAGE_QUOTAS |
+		BROAD_PERMISSIONS_MAP.READ_ONLY,
 	owner:
 		BROAD_PERMISSIONS_MAP.MANAGE_CHANNELS |
 		BROAD_PERMISSIONS_MAP.MANAGE_DEPLOYMENTS |
@@ -166,7 +174,9 @@ export const roles = {
 		BROAD_PERMISSIONS_MAP.MANAGE_PROJECT_TOKENS |
 		BROAD_PERMISSIONS_MAP.MANAGE_SECRETS |
 		BROAD_PERMISSIONS_MAP.MANAGE_REGISTRY |
-		BROAD_PERMISSIONS_MAP.MANAGE_QUOTAS,
+		BROAD_PERMISSIONS_MAP.MANAGE_QUOTAS |
+		BROAD_PERMISSIONS_MAP.MANAGE_ROLLOUTS |
+		BROAD_PERMISSIONS_MAP.MANAGE_BILLING,
 };
 
 export const permissions = {
