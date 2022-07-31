@@ -76,10 +76,6 @@ export enum ProjectType {
 	PERSONAL = 'personal',
 }
 
-declare const b: Project;
-
-b.type === ProjectType.PERSONAL;
-
 export interface Project {
 	/**
 	 * The ID of the project
