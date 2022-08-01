@@ -8,17 +8,12 @@ export class Registry extends BaseSDK {
 		}
 
 		if (projectId) {
-			const {images} = await this.client.get(
-				'/v1/registry/:project_id/images',
-				{project_id: projectId},
-			);
+			const {images} = await this.client.get('/v1/registry/images', {
+				project: projectId,
+			});
 
 			return {images};
 		}
-
-		const {images} = await this.client.get('/v1/registry/@this/images', {});
-
-		return {images};
 	}
 
 	async getImageManifest(image: string) {
