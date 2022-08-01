@@ -42,6 +42,7 @@ export enum PROJECT_PERMISSION {
 	REQUEST_QUOTA_INCREASE = 'request_quota_increase',
 	READ_BILLING = 'read_billing',
 	READ_GATEWAYS = 'read_gateways',
+	DELETE_REGISTRY_IMAGES = 'delete_registry_images',
 }
 
 export const permissionsMap = {
@@ -88,6 +89,7 @@ export const permissionsMap = {
 	[PROJECT_PERMISSION.REQUEST_QUOTA_INCREASE]: 1n << 41n,
 	[PROJECT_PERMISSION.READ_BILLING]: 1n << 42n,
 	[PROJECT_PERMISSION.READ_GATEWAYS]: 1n << 43n,
+	[PROJECT_PERMISSION.DELETE_REGISTRY_IMAGES]: 1n << 44n,
 };
 
 export const BROAD_PERMISSIONS_MAP = {
@@ -134,7 +136,8 @@ export const BROAD_PERMISSIONS_MAP = {
 		permissionsMap.publish_channel_messages |
 		permissionsMap.manage_channel_subscribers |
 		permissionsMap.message_token,
-	MANAGE_REGISTRY: permissionsMap.get_registry_images,
+	MANAGE_REGISTRY:
+		permissionsMap.get_registry_images | permissionsMap.delete_registry_images,
 	READ_ONLY:
 		permissionsMap.read_deployments |
 		permissionsMap.read_container_logs |
