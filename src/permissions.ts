@@ -187,14 +187,14 @@ export const roles = {
 
 export const permissions = {
 	add(value: bigint, flag: bigint) {
-		return value | flag;
+		return BigInt(value) | flag;
 	},
 
 	test(value: bigint, flag: bigint) {
-		return (value & flag) === flag;
+		return (BigInt(value) & flag) === flag;
 	},
 
 	subtract(value: bigint, flag: bigint) {
-		return value & ~flag;
+		return BigInt(value) & ~flag;
 	},
 };
