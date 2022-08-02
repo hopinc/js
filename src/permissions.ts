@@ -191,7 +191,7 @@ export const permissions = {
 	},
 
 	test(value: bigint, flag: bigint) {
-		return (BigInt(value) & BigInt(flag)) === BigInt(flag);
+		return BigInt(value) & BigInt(flag);
 	},
 
 	subtract(value: bigint, flag: bigint) {
