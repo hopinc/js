@@ -96,6 +96,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@onehop/js@workspace:."
   dependencies:
+    "@onehop/json-methods": ^1.0.2
     "@types/glob": ^7.2.0
     "@types/node": ^18.6.2
     "@types/qs": ^6.9.7
@@ -109,6 +110,13 @@ __metadata:
     zod: ^3.17.10
   languageName: unknown
   linkType: soft
+
+"@onehop/json-methods@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@onehop/json-methods@npm:1.0.2"
+  checksum: 20a3579fd9eba92091a252b93fd21afa522a2a5d6fc9d65a9b71ec9615870c4f516c0fe527ef18760344d2287a7a0658e4c7b06ce995bcd14ae2620cd2f0b96b
+  languageName: node
+  linkType: hard
 
 "@tootallnate/once@npm:2":
   version: 2.0.0

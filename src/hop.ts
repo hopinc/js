@@ -42,9 +42,9 @@ export class Hop {
 		});
 
 		this.sdks = {
-			ignite: new Ignite(this.client),
 			user: new User(this.client),
 			pipe: new Pipe(this.client),
+			ignite: new Ignite(this.client),
 			projects: new Projects(this.client),
 			registry: new Registry(this.client),
 			channels: new Channels(this.client),
