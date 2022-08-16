@@ -1,11 +1,17 @@
-import {APIAuthentication, APIClient} from './rest/client';
-import {channels} from './sdks/channels';
-import {ignite} from './sdks/ignite';
-import {pipe} from './sdks/pipe';
-import {projects} from './sdks/projects';
-import {registry} from './sdks/registry';
-import {users} from './sdks/users';
-import {DEFAULT_BASE_URL} from './util/constants';
+import {
+	APIAuthentication,
+	APIClient,
+	APIClientOptions,
+	APITransport,
+	transports,
+} from './rest/client';
+import {channels, ignite, pipe, projects, registry, users} from './sdks';
+import {DEFAULT_BASE_URL, DEFAULT_API_OPTIONS} from './util/constants';
+
+export type PartialAPIOptions = Partial<
+	Omit<APIClientOptions, 'authentication'>
+> &
+	Pick<APIClientOptions, 'authentication'>;
 
 /**
  * Constructs a new instance of Hop and all of its SDKs.
@@ -26,17 +32,30 @@ export class Hop {
 	public readonly registry;
 	public readonly channels;
 
-	constructor(authentication: APIAuthentication, baseUrl = DEFAULT_BASE_URL) {
-		const client = (this.client = new APIClient({
-			authentication: authentication,
-			baseUrl,
-		}));
+	constructor(options: PartialAPIOptions);
 
-		this.ignite = ignite(client);
-		this.users = users(client);
-		this.projects = projects(client);
-		this.pipe = pipe(client);
-		this.registry = registry(client);
-		this.channels = channels(client);
+	constructor(
+		authentication: APIAuthentication,
+		baseurl?: string,
+		transport?: APITransport,
+	);
+
+	constructor(
+		authenticationOrOptions: APIAuthentication | PartialAPIOptions,
+		baseUrl = DEFAULT_BASE_URL,
+		transport = transports.fetch,
+	) {
+		this.client = new APIClient(
+			typeof authenticationOrOptions === 'object'
+				? {...DEFAULT_API_OPTIONS, ...authenticationOrOptions}
+				: {authentication: authenticationOrOptions, baseUrl, transport},
+		);
+
+		this.ignite = ignite(this.client);
+		this.users = users(this.client);
+		this.projects = projects(this.client);
+		this.pipe = pipe(this.client);
+		this.registry = registry(this.client);
+		this.channels = channels(this.client);
 	}
 }

@@ -2,7 +2,6 @@ import fetch, {Headers, Request} from 'cross-fetch';
 import urlcat from '../urlcat';
 import {ExtractRouteParams} from '../util';
 import {IS_BROWSER} from '../util/constants';
-import {debug} from '../util/debug';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints';
 import {getIdPrefix, Id, Method} from './types';
 
@@ -34,7 +33,7 @@ export type APITransport = <T>(
 export interface APIClientOptions {
 	readonly baseUrl: string;
 	readonly authentication: APIAuthentication;
-	readonly transport?: APITransport;
+	readonly transport: APITransport;
 }
 
 export const transports: Record<'fetch', APITransport> = {
@@ -67,14 +66,6 @@ export const transports: Record<'fetch', APITransport> = {
 			headers.set('Content-Type', 'application/json');
 		}
 
-		debug(() => [
-			method,
-			'to',
-			path,
-			'with',
-			{url, query, headers: Object.fromEntries(headers.entries())},
-		]);
-
 		const request = new Request(url, {
 			method,
 			body: body ? JSON.stringify(body) : undefined,
@@ -96,8 +87,6 @@ export const transports: Record<'fetch', APITransport> = {
 
 		const result = await (response.json() as Promise<APIResponse<T>>).catch(
 			(error: Error): ErroredAPIResponse => {
-				debug('Could not parse JSON', error, request, response);
-
 				return {
 					success: false,
 					error: {
@@ -109,7 +98,6 @@ export const transports: Record<'fetch', APITransport> = {
 		);
 
 		if (!result.success) {
-			debug('An error occurred', result);
 			throw new HopAPIError(request, response, result);
 		}
 
@@ -161,17 +149,15 @@ export class APIClient {
 			query: Record<string, string> = {},
 			init: RequestInit = {},
 		) => {
-			const transport = this.options.transport ?? transports.fetch;
-
-			return transport<T>(this.options, method, path, body, query, init);
+			return this.options.transport<T>(
+				this.options,
+				method,
+				path,
+				body,
+				query,
+				init,
+			);
 		};
-
-		debug(
-			'Creating new',
-			this.authType,
-			'API client with',
-			options.authentication,
-		);
 	}
 
 	async get<Path extends Extract<Endpoints, {method: 'GET'}>['path']>(

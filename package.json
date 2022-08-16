@@ -20,9 +20,9 @@
 		"utils"
 	],
 	"scripts": {
-		"build": "tsup",
+		"build": "rm -rf dist && tsup",
 		"bench": "HOP_DEBUG=true ts-node _workbench.ts",
-		"release": "yarn build && cd dist && yarn npm publish && rm -rf dist"
+		"release": "yarn build && yarn npm publish && rm -rf dist"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.2.0",

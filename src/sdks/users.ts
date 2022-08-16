@@ -15,15 +15,9 @@ export const users = sdk(client => ({
 				);
 			}
 
-			const {project_member_role_map, ...rest} = await client.get(
-				'/v1/users/@me',
-				{},
-			);
+			const me = await client.get('/v1/users/@me', {});
 
-			return {
-				...rest,
-				projectMemberRoleMap: project_member_role_map,
-			};
+			return me;
 		},
 
 		pats: {
