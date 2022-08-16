@@ -60,7 +60,7 @@ export const users = sdk(client => ({
 			 *
 			 * @param id The ID of the pat to delete
 			 */
-			async deletePAT(id: Id<'pat'>) {
+			async delete(id: Id<'pat'>) {
 				if (client.authType === 'ptk') {
 					throw new Error(
 						'You cannot delete a PAT from a project token! You must use a Bearer or PAT.',
