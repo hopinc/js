@@ -1,38 +1,4 @@
-// urlcat can't be imported in ESM correctly! There is an issue on their repo but for now, this is suitable.
-
-/*
- * MIT License
- *
- * Copyright (c) 2020 Botond Balázs
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
-import qs, {IStringifyOptions} from 'qs';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ParamMap = Record<string, any>;
-export type UrlCatConfiguration = Partial<
-	Pick<IStringifyOptions, 'arrayFormat'> & {
-		objectFormat: Partial<Pick<IStringifyOptions, 'format'>>;
-	}
->;
+import {Query} from './rest/client';
 
 /**
  * Builds a URL using the base template and specified parameters.
@@ -49,7 +15,10 @@ export type UrlCatConfiguration = Partial<
  * // -> 'http://api.example.com/users/42?search=foo
  * ```
  */
-export default function urlcat(baseTemplate: string, params: ParamMap): string;
+export default function urlcat<T extends string>(
+	baseTemplate: T,
+	params: Query<T>,
+): string;
 
 /**
  * Concatenates the base URL and the path specified using '/' as a separator.
@@ -87,10 +56,10 @@ export default function urlcat(baseUrl: string, path: string): string;
  * // -> 'http://api.example.com/users/42?search=foo
  * ```
  */
-export default function urlcat(
+export default function urlcat<T extends string>(
 	baseUrl: string,
-	pathTemplate: string,
-	params: ParamMap,
+	pathTemplate: T,
+	params: Query<T>,
 ): string;
 
 /**
@@ -113,54 +82,29 @@ export default function urlcat(
  * // -> 'http://api.example.com/users/42?search=foo
  * ```
  */
-export default function urlcat(
-	baseUrlOrTemplate: string,
-	pathTemplateOrParams: string | ParamMap,
-	maybeParams: ParamMap,
-	config: UrlCatConfiguration,
+export default function urlcat<T extends string>(
+	baseUrlOrTemplate: T,
+	pathTemplateOrParams: T | Query<T>,
+	maybeParams: Query<T>,
 ): string;
 
 export default function urlcat(
 	baseUrlOrTemplate: string,
-	pathTemplateOrParams: string | ParamMap,
-	maybeParams: ParamMap = {},
-	config: UrlCatConfiguration = {},
+	pathTemplateOrParams: string | Record<string, string>,
+	maybeParams: Record<string, string> = {},
 ): string {
 	if (typeof pathTemplateOrParams === 'string') {
 		const baseUrl = baseUrlOrTemplate;
 		const pathTemplate = pathTemplateOrParams;
 		const params = maybeParams;
-		return urlcatImpl(pathTemplate, params, baseUrl, config);
+
+		return urlcatImpl(pathTemplate, params, baseUrl);
 	} else {
 		const baseTemplate = baseUrlOrTemplate;
 		const params = pathTemplateOrParams;
-		return urlcatImpl(baseTemplate, params, undefined, config);
-	}
-}
 
-/**
- * Factory function providing a pre configured urlcat function
- *
- * @param {Object} config Configuration object for urlcat
- *
- * @returns {Function} urlcat decorator function
- *
- * @example
- * ```ts
- * configure({arrayFormat: 'brackets', objectFormat: {format: 'RFC1738'}})
- * ```
- */
-export function configure(rootConfig: UrlCatConfiguration) {
-	return (
-		baseUrlOrTemplate: string,
-		pathTemplateOrParams: string | ParamMap,
-		maybeParams: ParamMap = {},
-		config: UrlCatConfiguration = {},
-	): string =>
-		urlcat(baseUrlOrTemplate, pathTemplateOrParams, maybeParams, {
-			...rootConfig,
-			...config,
-		});
+		return urlcatImpl(baseTemplate, params, undefined);
+	}
 }
 
 function joinFullUrl(
@@ -177,13 +121,12 @@ function joinFullUrl(
 
 function urlcatImpl(
 	pathTemplate: string,
-	params: ParamMap,
+	params: Record<string, string>,
 	baseUrl: string | undefined,
-	config: UrlCatConfiguration,
 ) {
 	const {renderedPath, remainingParams} = path(pathTemplate, params);
 	const cleanParams = removeNullOrUndef(remainingParams);
-	const renderedQuery = query(cleanParams, config);
+	const renderedQuery = query(cleanParams);
 	const pathAndQuery = join(renderedPath, '?', renderedQuery);
 
 	return baseUrl
@@ -205,13 +148,8 @@ function urlcatImpl(
  * // -> 'id=42&search=foo'
  * ```
  */
-export function query(params: ParamMap, config?: UrlCatConfiguration): string {
-	const qsConfiguration: IStringifyOptions = {
-		format: config?.objectFormat?.format ?? 'RFC1738', // RDC1738 is urlcat's current default. Breaking change if default is changed
-		arrayFormat: config?.arrayFormat,
-	};
-
-	return qs.stringify(params, qsConfiguration);
+export function query(params: Record<string, string>): string {
+	return new URLSearchParams(params).toString();
 }
 
 /**
@@ -228,12 +166,12 @@ export function query(params: ParamMap, config?: UrlCatConfiguration): string {
  * // -> '/users/42/posts/36'
  * ```
  */
-export function subst(template: string, params: ParamMap): string {
+export function subst<T extends string>(template: T, params: Query<T>): string {
 	const {renderedPath} = path(template, params);
 	return renderedPath;
 }
 
-function path(template: string, params: ParamMap) {
+function path(template: string, params: Record<string, string>) {
 	const remainingParams = {...params};
 
 	const renderedPath = template.replace(/:[_A-Za-z][_A-Za-z0-9]*/g, p => {
@@ -246,18 +184,20 @@ function path(template: string, params: ParamMap) {
 	return {renderedPath, remainingParams};
 }
 
-function validatePathParam(params: ParamMap, key: string) {
+function validatePathParam(params: Record<string, string>, key: string) {
 	const allowedTypes = ['boolean', 'string', 'number'];
 
 	if (!Object.prototype.hasOwnProperty.call(params, key)) {
 		throw new Error(`Missing value for path parameter ${key}.`);
 	}
+
 	if (!allowedTypes.includes(typeof params[key])) {
 		throw new TypeError(
 			`Path parameter ${key} cannot be of type ${typeof params[key]}. ` +
 				`Allowed types are: ${allowedTypes.join(', ')}.`,
 		);
 	}
+
 	if (typeof params[key] === 'string' && params[key].trim() === '') {
 		throw new Error(`Path parameter ${key} cannot be an empty string.`);
 	}
@@ -290,13 +230,13 @@ export function join(part1: string, separator: string, part2: string): string {
 	return p1 === '' || p2 === '' ? p1 + p2 : p1 + separator + p2;
 }
 
-function removeNullOrUndef(params: ParamMap) {
+function removeNullOrUndef(params: Record<string, string>) {
 	return Object.keys(params)
 		.filter(k => notNullOrUndefined(params[k]))
 		.reduce((result, k) => {
 			result[k] = params[k];
 			return result;
-		}, {} as ParamMap);
+		}, {} as Record<string, string>);
 }
 
 function notNullOrUndefined(v: string) {

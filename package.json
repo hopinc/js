@@ -27,7 +27,6 @@
 	"devDependencies": {
 		"@types/glob": "^7.2.0",
 		"@types/node": "^18.7.5",
-		"@types/qs": "^6.9.7",
 		"glob": "^8.0.3",
 		"prettier": "^2.7.1",
 		"ts-node": "^10.9.1",
@@ -37,7 +36,6 @@
 	"dependencies": {
 		"@onehop/json-methods": "^1.1.0",
 		"cross-fetch": "^3.1.5",
-		"qs": "^6.11.0",
 		"zod": "^3.18.0"
 	}
 }
