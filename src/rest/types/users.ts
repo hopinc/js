@@ -59,6 +59,7 @@ export type UserEndpoints =
 				projects: Project[];
 				user: User;
 				project_member_role_map: Record<Id<'project'>, MemberRole>;
+				leap_token: string | null;
 			}
 	  >
 	| Endpoint<'POST', '/v1/users/@me/pats', {pat: PAT}, {name: string}>

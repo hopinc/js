@@ -106,6 +106,24 @@ export interface Project {
 	 * The type of this project. Either regular or personal
 	 */
 	type: ProjectType;
+
+	default_quotas: DefaultQuotas;
+
+	quota_overrides: QuotaOverrides;
+
+	quota_usage: QuotaUsage;
+}
+
+export interface DefaultQuotas {
+	vcpu: number;
+	ram: number;
+}
+
+export interface QuotaOverrides {}
+
+export interface QuotaUsage {
+	vcpu: number;
+	ram: number;
 }
 
 export interface Secret {
