@@ -1,3 +1,4 @@
+import {create, Infer} from '@onehop/json-methods';
 import {API, assertId, Id} from '../rest';
 import {Deployment, Gateway, GatewayType} from '../rest/types/ignite';
 import {parseSize} from '../util';
@@ -6,6 +7,43 @@ import {sdk} from './create';
 const SIX_MB_IN_BYTES = 6 * 1024 * 1024;
 
 export const ignite = sdk(client => {
+	const Gateways = create<API.Ignite.Gateway>().methods({
+		async addDomain(domain: string) {
+			await client.post(
+				'/v1/ignite/gateways/:gateway_id/domains',
+				{domain},
+				{gateway_id: this.id},
+			);
+		},
+	});
+
+	const Deployments = create<API.Ignite.Deployment>().methods({
+		getContainers() {
+			return igniteSDK.deployments.getContainers(this.id);
+		},
+
+		delete() {
+			return igniteSDK.deployments.delete(this.id);
+		},
+
+		createContainer() {
+			return igniteSDK.containers.create(this.id);
+		},
+
+		createGateway(
+			type: API.Ignite.GatewayType,
+			protocol: API.Ignite.Gateway['protocol'],
+			port: number,
+		) {
+			return igniteSDK.deployments.gateways.create(
+				this.id,
+				type,
+				protocol,
+				port,
+			);
+		},
+	});
+
 	/**
 	 * Creates a new deployment.
 	 * You should use this overload if you are authorizing with a bearer or pat.
@@ -16,7 +54,7 @@ export const ignite = sdk(client => {
 	async function createDeployment(
 		configOrProject: Id<'project'>,
 		bearerOrPatConfig: API.Ignite.DeploymentConfig,
-	): Promise<API.Ignite.Deployment>;
+	): Promise<Infer<typeof Deployments>>;
 
 	/**
 	 * Create a new deployment. You should use this overload if you are authorizing with a project token and
@@ -26,14 +64,14 @@ export const ignite = sdk(client => {
 	 */
 	async function createDeployment(
 		configOrProject: API.Ignite.DeploymentConfig,
-	): Promise<API.Ignite.Deployment>;
+	): Promise<Infer<typeof Deployments>>;
 
 	async function createDeployment(
 		configOrProject: Id<'project'> | API.Ignite.DeploymentConfig,
 		bearerOrPatConfig?: API.Ignite.DeploymentConfig,
-	) {
+	): Promise<Infer<typeof Deployments>> {
 		let config: API.Ignite.DeploymentConfig;
-		let project: Id<'project'> | null = null;
+		let project: Id<'project'> | undefined = undefined;
 
 		if (typeof configOrProject === 'object') {
 			if (client.authType === 'ptk') {
@@ -68,13 +106,11 @@ export const ignite = sdk(client => {
 			);
 		}
 
-		const {deployment} = await client.post(
-			'/v1/ignite/deployments',
-			config,
-			project ? {project} : {},
-		);
+		const {deployment} = await client.post('/v1/ignite/deployments', config, {
+			project,
+		});
 
-		return deployment;
+		return Deployments.from(deployment);
 	}
 
 	async function updateContainerState(
@@ -99,7 +135,7 @@ export const ignite = sdk(client => {
 	async function getDeployment(
 		projectId: Id<'project'>,
 		name: string,
-	): Promise<API.Ignite.Deployment>;
+	): Promise<Infer<typeof Deployments>>;
 
 	/**
 	 * Gets a deployment by id
@@ -108,12 +144,12 @@ export const ignite = sdk(client => {
 	 */
 	async function getDeployment(
 		id: Id<'deployment'>,
-	): Promise<API.Ignite.Deployment>;
+	): Promise<Infer<typeof Deployments>>;
 
 	async function getDeployment(
 		projectIdOrId: Id<'project'> | Id<'deployment'>,
 		name?: string,
-	) {
+	): Promise<Infer<typeof Deployments>> {
 		if (name) {
 			assertId(
 				projectIdOrId,
@@ -126,7 +162,7 @@ export const ignite = sdk(client => {
 				project: projectIdOrId,
 			});
 
-			return deployment;
+			return Deployments.from(deployment);
 		}
 
 		assertId(
@@ -140,10 +176,10 @@ export const ignite = sdk(client => {
 			{deployment_id: projectIdOrId},
 		);
 
-		return deployment;
+		return Deployments.from(deployment);
 	}
 
-	return {
+	const igniteSDK = {
 		gateways: {
 			/**
 			 * Adds a domain to a gateway
@@ -216,7 +252,7 @@ export const ignite = sdk(client => {
 					projectId ? {project: projectId} : {},
 				);
 
-				return deployments;
+				return deployments.map(Deployments.from);
 			},
 
 			/**
@@ -244,7 +280,7 @@ export const ignite = sdk(client => {
 						{deployment_id: deploymentId},
 					);
 
-					return gateways;
+					return gateways.map(Gateways.from);
 				},
 
 				/**
@@ -270,7 +306,7 @@ export const ignite = sdk(client => {
 						{deployment_id: deploymentId},
 					);
 
-					return gateway;
+					return Gateways.from(gateway);
 				},
 			},
 		},
@@ -341,4 +377,6 @@ export const ignite = sdk(client => {
 			},
 		},
 	};
+
+	return igniteSDK;
 });

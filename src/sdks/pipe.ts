@@ -1,10 +1,17 @@
-import {Id} from '../rest';
+import {create} from '@onehop/json-methods';
+import {API, Id} from '../rest';
 import {Regions} from '../rest/types/ignite';
 import {DeliveryProtocol} from '../rest/types/pipe';
 import {sdk} from './create';
 
 export const pipe = sdk(client => {
-	return {
+	const Rooms = create<API.Pipe.Room>().methods({
+		async delete() {
+			await pipeSDK.rooms.delete(this.id);
+		},
+	});
+
+	const pipeSDK = {
 		rooms: {
 			async getAll(project?: Id<'project'>) {
 				if (!project && client.authType !== 'ptk') {
@@ -15,7 +22,7 @@ export const pipe = sdk(client => {
 
 				const {rooms} = await client.get('/v1/pipe/rooms', {project});
 
-				return rooms;
+				return rooms.map(Rooms.from);
 			},
 
 			async create(
@@ -47,7 +54,7 @@ export const pipe = sdk(client => {
 					{},
 				);
 
-				return room;
+				return Rooms.from(room);
 			},
 
 			/**
@@ -62,4 +69,6 @@ export const pipe = sdk(client => {
 			},
 		},
 	};
+
+	return pipeSDK;
 });

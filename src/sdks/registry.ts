@@ -4,18 +4,16 @@ import {sdk} from './create';
 export const registry = sdk(client => {
 	return {
 		images: {
-			async getAll(projectId?: Id<'project'>) {
-				if (!projectId && client.authType !== 'ptk') {
-					throw new Error('projectId is required when using a PAT or bearer');
+			async getAll(project?: Id<'project'>) {
+				if (!project && client.authType !== 'ptk') {
+					throw new Error('Project is required when using a PAT or bearer');
 				}
 
-				if (projectId) {
-					const {images} = await client.get('/v1/registry/images', {
-						project: projectId,
-					});
+				const {images} = await client.get('/v1/registry/images', {
+					project,
+				});
 
-					return {images};
-				}
+				return images;
 			},
 
 			async getManifest(image: string) {

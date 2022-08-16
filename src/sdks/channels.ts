@@ -1,20 +1,44 @@
-import {Id} from '../rest';
-import {Channel, ChannelType, State} from '../rest/types/channels';
+import {create} from '@onehop/json-methods';
+import {API, Id} from '../rest';
 import {sdk} from './create';
 
 type Token = Id<'leap_token'>;
 
 export type SetStateAction =
-	| State
-	| ((oldState: State) => State | Promise<State>);
+	| API.Channels.State
+	| ((
+			oldState: API.Channels.State,
+	  ) => API.Channels.State | Promise<API.Channels.State>);
 
 export const channels = sdk(client => {
+	const Channels = create<API.Channels.Channel>().methods({
+		async setState(state: SetStateAction) {
+			await updateState(this.id, state, 'set');
+		},
+
+		async patchState(state: SetStateAction) {
+			await updateState(this.id, state, 'patch');
+		},
+
+		async subscribeToken(token: Token) {
+			await channelsSDK.subscribeToken(this.id, token);
+		},
+
+		async subscribeTokens(tokens: Token[] | Set<Token>) {
+			await channelsSDK.subscribeTokens(this.id, tokens);
+		},
+
+		async publishMessage(name: string, data: unknown) {
+			await channelsSDK.publishMessage(this.id, name, data);
+		},
+	});
+
 	async function updateState(
-		channelId: Channel['id'],
+		channelId: API.Channels.Channel['id'],
 		newState: SetStateAction,
 		mode: 'patch' | 'set',
 	) {
-		let state: State;
+		let state: API.Channels.State;
 
 		if (typeof newState === 'function') {
 			const {state: oldState} = await client.get(
@@ -38,7 +62,7 @@ export const channels = sdk(client => {
 		}
 	}
 
-	return {
+	const channelsSDK = {
 		/**
 		 * Creates a new channel
 		 *
@@ -47,7 +71,7 @@ export const channels = sdk(client => {
 		 * @param project A project ID (if necessary) to assign this to
 		 */
 		async create(
-			type: ChannelType,
+			type: API.Channels.ChannelType,
 			id?: string | null,
 			project?: Id<'project'>,
 		) {
@@ -65,7 +89,15 @@ export const channels = sdk(client => {
 				  )
 				: await client.post('/v1/channels', {type}, {project});
 
-			return channel;
+			return Channels.from(channel);
+		},
+
+		async get(id: API.Channels.Channel['id']) {
+			const {channel} = await client.get('/v1/channels/:channel_id', {
+				channel_id: id,
+			});
+
+			return Channels.from(channel);
 		},
 
 		/**
@@ -75,10 +107,13 @@ export const channels = sdk(client => {
 		 */
 		async getAll(project?: Id<'project'>) {
 			const {channels} = await client.get('/v1/channels', {project});
-			return channels;
+			return channels.map(Channels.from);
 		},
 
-		async subscribeToken(channel: Channel | Channel['id'], token: Token) {
+		async subscribeToken(
+			channel: API.Channels.Channel | API.Channels.Channel['id'],
+			token: Token,
+		) {
 			const id = typeof channel === 'object' ? channel.id : channel;
 
 			await client.put(
@@ -89,7 +124,7 @@ export const channels = sdk(client => {
 		},
 
 		async subscribeTokens(
-			channel: Channel | Channel['id'],
+			channel: API.Channels.Channel | API.Channels.Channel['id'],
 			tokens: Token[] | Set<Token>,
 		) {
 			const promises: Array<Promise<void>> = [];
@@ -101,7 +136,9 @@ export const channels = sdk(client => {
 			await Promise.allSettled(promises);
 		},
 
-		async getAllTokens(channel: Channel['id'] | Channel) {
+		async getAllTokens(
+			channel: API.Channels.Channel['id'] | API.Channels.Channel,
+		) {
 			const id = typeof channel === 'object' ? channel.id : channel;
 
 			const {tokens} = await client.get('/v1/channels/:channel_id/tokens', {
@@ -111,18 +148,24 @@ export const channels = sdk(client => {
 			return tokens;
 		},
 
-		async setState(channel: Channel | Channel['id'], state: SetStateAction) {
+		async setState(
+			channel: API.Channels.Channel | API.Channels.Channel['id'],
+			state: SetStateAction,
+		) {
 			const id = typeof channel === 'object' ? channel.id : channel;
 			return updateState(id, state, 'set');
 		},
 
-		async patchState(channel: Channel | Channel['id'], state: SetStateAction) {
+		async patchState(
+			channel: API.Channels.Channel | API.Channels.Channel['id'],
+			state: SetStateAction,
+		) {
 			const id = typeof channel === 'object' ? channel.id : channel;
 			return updateState(id, state, 'patch');
 		},
 
 		async publishMessage(
-			channel: Channel | Channel['id'],
+			channel: API.Channels.Channel | API.Channels.Channel['id'],
 			name: string,
 			data: unknown,
 		) {
@@ -142,7 +185,7 @@ export const channels = sdk(client => {
 			 * @param state The state to set on the token
 			 * @param project The project to attach this token to
 			 */
-			async create(state: State, project?: Id<'project'>) {
+			async create(state: API.Channels.State, project?: Id<'project'>) {
 				if (!project && client.authType !== 'ptk') {
 					throw new Error(
 						'Project must be provided when creating a channel token with bearer or PAT auth',
@@ -159,4 +202,6 @@ export const channels = sdk(client => {
 			},
 		},
 	};
+
+	return channelsSDK;
 });

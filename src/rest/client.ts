@@ -18,66 +18,39 @@ export function validateAPIAuthentication(
 	return auth === 'bearer' || auth === 'pat' || auth === 'ptk';
 }
 
+export function makeTransport(transport: APITransport) {
+	return transport;
+}
+
+export type APITransport = <T>(
+	options: APIClientOptions,
+	method: Method,
+	path: string,
+	body: unknown,
+	query: Record<string, string>,
+	init: RequestInit,
+) => Promise<T>;
+
 export interface APIClientOptions {
 	readonly baseUrl: string;
 	readonly authentication: APIAuthentication;
+	readonly transport?: APITransport;
 }
 
-export class HopAPIError extends Error {
-	public readonly status: number;
-
-	constructor(
-		public readonly request: Request,
-		public readonly response: Response,
-		public readonly data: ErroredAPIResponse,
-	) {
-		super(data.error.message);
-
-		this.status = response.status;
-	}
-}
-
-export type Query<Path extends string> = ExtractRouteParams<Path> &
-	Record<string, string | number | undefined>;
-
-export class APIClient {
-	public static getAuthType(auth: APIAuthentication) {
-		const prefix = getIdPrefix(auth);
-
-		if (!validateAPIAuthentication(prefix)) {
-			throw new Error(`Invalid authentication type: ${prefix}`);
-		}
-
-		return prefix;
-	}
-
-	private readonly options: APIClientOptions;
-	public readonly authType: APIAuthenticationType;
-
-	constructor(options: APIClientOptions) {
-		this.options = options;
-		this.authType = APIClient.getAuthType(options.authentication);
-
-		debug(
-			'Creating new',
-			this.authType,
-			'API client with',
-			options.authentication,
-		);
-	}
-
-	private async request<T>(
+export const transports: Record<'fetch', APITransport> = {
+	fetch: async <T>(
+		options: APIClientOptions,
 		method: Method,
 		path: string,
 		body: unknown,
 		query: Record<string, string> = {},
 		init: RequestInit = {},
-	): Promise<T> {
-		const url = urlcat(this.options.baseUrl, path, query);
+	) => {
+		const url = urlcat(options.baseUrl, path, query);
 
 		const headers = new Headers({
 			...(init?.headers ?? {}),
-			Authorization: this.options.authentication,
+			Authorization: options.authentication,
 		});
 
 		if (!IS_BROWSER) {
@@ -141,6 +114,64 @@ export class APIClient {
 		}
 
 		return result.data;
+	},
+};
+
+export class HopAPIError extends Error {
+	public readonly status: number;
+
+	constructor(
+		public readonly request: Request,
+		public readonly response: Response,
+		public readonly data: ErroredAPIResponse,
+	) {
+		super(data.error.message);
+
+		this.status = response.status;
+	}
+}
+
+export type Query<Path extends string> = ExtractRouteParams<Path> &
+	Record<string, string | number | undefined>;
+
+export class APIClient {
+	public static getAuthType(auth: APIAuthentication) {
+		const prefix = getIdPrefix(auth);
+
+		if (!validateAPIAuthentication(prefix)) {
+			throw new Error(`Invalid authentication type: ${prefix}`);
+		}
+
+		return prefix;
+	}
+
+	private readonly request;
+	private readonly options: APIClientOptions;
+
+	public readonly authType: APIAuthenticationType;
+
+	constructor(options: APIClientOptions) {
+		this.options = options;
+		this.authType = APIClient.getAuthType(options.authentication);
+
+		this.request = <T>(
+			method: Method,
+			path: string,
+			body: unknown,
+			query: Record<string, string> = {},
+			init: RequestInit = {},
+		) => {
+			const transport = this.options.transport ?? transports.fetch;
+
+			return transport<T>(this.options, method, path, body, query, init);
+		};
+
+		debug(
+			'Creating new',
+			this.authType,
+			'API client with',
+			options.authentication,
+		);
 	}
 
 	async get<Path extends Extract<Endpoints, {method: 'GET'}>['path']>(
