@@ -1,6 +1,6 @@
 import {ByteString} from '../../util';
 import {Endpoint} from '../endpoints';
-import {Empty, Id, Timestamp} from './types';
+import {Empty, Id, Timestamp} from '../../util/types';
 
 export enum Regions {
 	US_EAST_1 = 'us-east-1',

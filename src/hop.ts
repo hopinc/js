@@ -1,9 +1,10 @@
-import {API, Id} from './rest';
 import {APIAuthentication, APIClient} from './rest/client';
-import {Ignite, Pipe, Projects} from './sdks';
-import {Channels} from './sdks/channels';
-import {Registry} from './sdks/registry';
-import {User} from './sdks/user';
+import {channels} from './sdks/channels';
+import {ignite} from './sdks/ignite';
+import {pipe} from './sdks/pipe';
+import {projects} from './sdks/projects';
+import {registry} from './sdks/registry';
+import {users} from './sdks/users';
 import {DEFAULT_BASE_URL} from './util/constants';
 
 /**
@@ -14,18 +15,8 @@ import {DEFAULT_BASE_URL} from './util/constants';
  * const hop = new Hop(bearerTokenOrPATOrProjectToken);
  * await hop.ignite.containers.create(deploymentId);
  * ```
- *
- * If you would like to use only a subclass, you can do so by importing and instantiating that class directly.
- *
- * For example
- * ```ts
- * import {Ignite} from '@onehop/js';
- * const ignite = new Ignite(bearerTokenOrPATOrProjectToken);
- * ```
  */
 export class Hop {
-	private readonly sdks;
-
 	public readonly client: APIClient;
 
 	public readonly ignite;
@@ -36,139 +27,16 @@ export class Hop {
 	public readonly channels;
 
 	constructor(authentication: APIAuthentication, baseUrl = DEFAULT_BASE_URL) {
-		this.client = new APIClient({
+		const client = (this.client = new APIClient({
 			authentication: authentication,
 			baseUrl,
-		});
+		}));
 
-		this.sdks = {
-			user: new User(this.client),
-			pipe: new Pipe(this.client),
-			ignite: new Ignite(this.client),
-			projects: new Projects(this.client),
-			registry: new Registry(this.client),
-			channels: new Channels(this.client),
-		};
-
-		this.ignite = {
-			deployments: {
-				create: this.sdks.ignite.createDeployment.bind(this.sdks.ignite),
-				delete: this.sdks.ignite.deleteDeployment.bind(this.sdks.ignite),
-				getAll: this.sdks.ignite.getAllDeployments.bind(this.sdks.ignite),
-				get: this.sdks.ignite.getDeployment.bind(this.sdks.ignite),
-				getContainers: this.sdks.ignite.getContainers.bind(this.sdks.ignite),
-
-				gateways: {
-					getAll: this.sdks.ignite.getGatewaysForDeployment.bind(
-						this.sdks.ignite,
-					),
-
-					create: this.sdks.ignite.createGateway.bind(this.sdks.ignite),
-				},
-			},
-
-			gateways: {
-				get: this.sdks.ignite.getGateway.bind(this.sdks.ignite),
-				addDomain: this.sdks.ignite.addDomainToGateway.bind(this.sdks.ignite),
-			},
-
-			containers: {
-				create: this.sdks.ignite.createContainer.bind(this.sdks.ignite),
-				delete: this.sdks.ignite.deleteContainer.bind(this.sdks.ignite),
-				getLogs: this.sdks.ignite.getLogs.bind(this.sdks.ignite),
-
-				stop: async (container: Id<'container'>) => {
-					await this.sdks.ignite.updateContainerState(
-						container,
-						API.Ignite.ContainerState.STOPPED,
-					);
-				},
-
-				start: async (container: Id<'container'>) => {
-					await this.sdks.ignite.updateContainerState(
-						container,
-						API.Ignite.ContainerState.RUNNING,
-					);
-				},
-			},
-		};
-
-		this.users = {
-			get: this.sdks.user.getMe.bind(this.sdks.user),
-
-			pats: {
-				create: this.sdks.user.createPAT.bind(this.sdks.user),
-				delete: this.sdks.user.deletePAT.bind(this.sdks.user),
-				getAll: this.sdks.user.getAllPATs.bind(this.sdks.user),
-			},
-		};
-
-		this.projects = {
-			projectTokens: {
-				delete: this.sdks.projects.deleteProjectToken.bind(this.sdks.projects),
-				get: this.sdks.projects.getProjectTokens.bind(this.sdks.projects),
-				create: this.sdks.projects.createProjectToken.bind(this.sdks.projects),
-			},
-
-			secrets: {
-				getAll: this.sdks.projects.getSecrets.bind(this.sdks.projects),
-				create: this.sdks.projects.createSecret.bind(this.sdks.projects),
-				delete: this.sdks.projects.deleteSecret.bind(this.sdks.projects),
-			},
-
-			getAllMembers: this.sdks.projects.getAllMembers.bind(this.sdks.projects),
-
-			getCurrentMember: this.sdks.projects.getCurrentMember.bind(
-				this.sdks.projects,
-			),
-		};
-
-		this.pipe = {
-			rooms: {
-				getAll: this.sdks.pipe.getRooms.bind(this.sdks.pipe),
-				create: this.sdks.pipe.createRoom.bind(this.sdks.pipe),
-				delete: this.sdks.pipe.deleteRoom.bind(this.sdks.pipe),
-			},
-		};
-
-		this.registry = {
-			images: {
-				getAll: this.sdks.registry.getImages.bind(this.sdks.registry),
-
-				getManifest: this.sdks.registry.getImageManifest.bind(
-					this.sdks.registry,
-				),
-
-				delete: this.sdks.registry.deleteImage.bind(
-					this.sdks.registry.deleteImage,
-				),
-			},
-		};
-
-		this.channels = {
-			create: this.sdks.channels.create.bind(this.sdks.channels),
-			getAll: this.sdks.channels.getAll.bind(this.sdks.channels),
-
-			subscribeToken: this.sdks.channels.subscribeToken.bind(
-				this.sdks.channels,
-			),
-
-			subscribeTokens: this.sdks.channels.subscribeTokens.bind(
-				this.sdks.channels,
-			),
-
-			getAllTokens: this.sdks.channels.getAllTokens.bind(this.sdks.channels),
-
-			setState: this.sdks.channels.setState.bind(this.sdks.channels),
-			patchState: this.sdks.channels.patchState.bind(this.sdks.channels),
-
-			publishMessage: this.sdks.channels.publishMessage.bind(
-				this.sdks.channels,
-			),
-
-			tokens: {
-				create: this.sdks.channels.createToken.bind(this.sdks.channels),
-			},
-		};
+		this.ignite = ignite(client);
+		this.users = users(client);
+		this.projects = projects(client);
+		this.pipe = pipe(client);
+		this.registry = registry(client);
+		this.channels = channels(client);
 	}
 }

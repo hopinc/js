@@ -1,6 +1,6 @@
 import {Endpoint} from '../endpoints';
 import {Project} from './projects';
-import {Empty, Id, Timestamp} from './types';
+import {Empty, Id, Timestamp} from '../../util/types';
 
 export enum ChannelType {
 	PRIVATE = 'private',

@@ -1,5 +1,5 @@
 import {Endpoint} from '../endpoints';
-import {Empty} from './types';
+import {Empty} from '../../util/types';
 
 export type RegistryEndpoints =
 	| Endpoint<'DELETE', '/v1/registry/images/:image', Empty>

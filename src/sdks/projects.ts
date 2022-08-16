@@ -1,226 +1,231 @@
 import {Id} from '../rest';
-import {BaseSDK} from './base-sdk';
+import {sdk} from './create';
 
-export class Projects extends BaseSDK {
-	/**
-	 * Deletes a project token by its ID
-	 *
-	 * @param projectTokenId The ID of the project token to delete
-	 */
-	async deleteProjectToken(
-		projectTokenId: Id<'ptkid'>,
-		project?: Id<'project'>,
-	) {
-		if (this.client.authType !== 'ptk' && !project) {
-			throw new Error(
-				'Project ID is required for bearer or PAT authentication to delete a project token',
-			);
-		}
+export const projects = sdk(client => {
+	return {
+		async getAllMembers(projectId?: Id<'project'>) {
+			if (client.authType !== 'ptk' && !projectId) {
+				throw new Error(
+					'Project ID is required for bearer or PAT authentication to fetch all project members',
+				);
+			}
 
-		await this.client.delete(
-			project
-				? '/v1/projects/:project_id/tokens/:project_token_id'
-				: '/v1/projects/@this/tokens/:project_token_id',
-			undefined,
-			project
-				? {project_id: project, project_token_id: projectTokenId}
-				: {project_token_id: projectTokenId},
-		);
-	}
+			if (projectId) {
+				const {members} = await client.get('/v1/projects/:project_id/members', {
+					project_id: projectId,
+				});
 
-	/**
-	 * Creates a new project token
-	 *
-	 * @param projectId The project to create a key for
-	 * @param flags Permissions for this flag
-	 * @returns A newly created project token
-	 */
-	async createProjectToken(flags: number, projectId?: Id<'project'>) {
-		if (!projectId && this.client.authType !== 'ptk') {
-			throw new Error(
-				'Project ID is required for bearer or PAT authentication to create a project token',
-			);
-		}
+				return members;
+			}
 
-		if (!projectId) {
-			const {project_token: token} = await this.client.post(
-				'/v1/projects/@this/tokens',
-				{flags},
-				{},
-			);
+			const {members} = await client.get('/v1/projects/@this/members', {});
 
-			return token;
-		}
+			return members;
+		},
 
-		const {project_token: token} = await this.client.post(
-			'/v1/projects/:project_id/tokens',
-			{flags},
-			{project_id: projectId},
-		);
+		/**
+		 * Fetch the currently authorized member from a project.
+		 * You cannot use this route if you are authorizing with a project token as there is no user attached to it.
+		 *
+		 * @param projectId The project ID to fetch a member from
+		 * @returns The member authorized by the SDK
+		 */
+		async getCurrentMember(projectId: Id<'project'>) {
+			if (client.authType === 'ptk') {
+				throw new Error(
+					'You cannot resolve a member from a project token! You must use a bearer or pat token',
+				);
+			}
 
-		return token;
-	}
-
-	/**
-	 * Get all project tokens for a project
-	 *
-	 * @param projectId The project to fetch secrets for
-	 * @returns An array of all secrets for the project
-	 */
-	async getProjectTokens(projectId?: Id<'project'>) {
-		if (this.client.authType !== 'ptk' && !projectId) {
-			throw new Error(
-				'Project ID is required for bearer or PAT authentication',
-			);
-		}
-
-		if (!projectId) {
-			const {project_tokens: keys} = await this.client.get(
-				'/v1/projects/@this/tokens',
-				{},
-			);
-
-			return keys;
-		}
-
-		const {project_tokens: keys} = await this.client.get(
-			'/v1/projects/:project_id/tokens',
-			{project_id: projectId},
-		);
-
-		return keys;
-	}
-
-	/**
-	 * Fetch the currently authorized member from a project.
-	 * You cannot use this route if you are authorizing with a project token as there is no user attached to it.
-	 *
-	 * @param projectId The project ID to fetch a member from
-	 * @returns The member authorized by the SDK
-	 */
-	async getCurrentMember(projectId: Id<'project'>) {
-		if (this.client.authType === 'ptk') {
-			throw new Error(
-				'You cannot resolve a member from a project token! You must use a bearer or pat token',
-			);
-		}
-
-		const {project_member: member} = await this.client.get(
-			'/v1/projects/:project_id/members/@me',
-			{project_id: projectId},
-		);
-
-		return member;
-	}
-
-	async getAllMembers(projectId?: Id<'project'>) {
-		if (this.client.authType !== 'ptk' && !projectId) {
-			throw new Error(
-				'Project ID is required for bearer or PAT authentication to fetch all project members',
-			);
-		}
-
-		if (projectId) {
-			const {members} = await this.client.get(
-				'/v1/projects/:project_id/members',
+			const {project_member: member} = await client.get(
+				'/v1/projects/:project_id/members/@me',
 				{project_id: projectId},
 			);
 
-			return members;
-		}
+			return member;
+		},
 
-		const {members} = await this.client.get('/v1/projects/@this/members', {});
+		projectTokens: {
+			/**
+			 * Deletes a project token by its ID
+			 *
+			 * @param projectTokenId The ID of the project token to delete
+			 */
+			async delete(projectTokenId: Id<'ptkid'>, project?: Id<'project'>) {
+				if (client.authType !== 'ptk' && !project) {
+					throw new Error(
+						'Project ID is required for bearer or PAT authentication to delete a project token',
+					);
+				}
 
-		return members;
-	}
+				await client.delete(
+					project
+						? '/v1/projects/:project_id/tokens/:project_token_id'
+						: '/v1/projects/@this/tokens/:project_token_id',
+					undefined,
+					project
+						? {project_id: project, project_token_id: projectTokenId}
+						: {project_token_id: projectTokenId},
+				);
+			},
 
-	/**
-	 * Creates a new project secret
-	 *
-	 * @param name The name of the secret
-	 * @param value The value of the secret
-	 * @param projectId The project to create the secret in
-	 */
-	async createSecret(name: string, value: string, projectId?: Id<'project'>) {
-		if (this.client.authType !== 'ptk' && !projectId) {
-			throw new Error(
-				'Project ID is required for bearer or PAT authentication to create a secret',
-			);
-		}
+			/**
+			 * Get all project tokens for a project
+			 *
+			 * @param projectId The project to fetch secrets for
+			 * @returns An array of all secrets for the project
+			 */
+			async get(projectId?: Id<'project'>) {
+				if (client.authType !== 'ptk' && !projectId) {
+					throw new Error(
+						'Project ID is required for bearer or PAT authentication',
+					);
+				}
 
-		if (!projectId) {
-			const s = await this.client.put(
-				'/v1/projects/@this/secrets/:name',
-				value,
-				{name},
-			);
+				if (!projectId) {
+					const {project_tokens: keys} = await client.get(
+						'/v1/projects/@this/tokens',
+						{},
+					);
 
-			console.log(s);
-			return s;
-		}
+					return keys;
+				}
 
-		const {secret} = await this.client.put(
-			'/v1/projects/:project_id/secrets/:name',
-			value,
-			{project_id: projectId, name},
-		);
+				const {project_tokens: keys} = await client.get(
+					'/v1/projects/:project_id/tokens',
+					{project_id: projectId},
+				);
 
-		return secret;
-	}
+				return keys;
+			},
 
-	/**
-	 * Gets all secrets in a project
-	 *
-	 * @param projectId The project to fetch secrets for
-	 */
-	async getSecrets(projectId?: Id<'project'>) {
-		if (this.client.authType !== 'ptk' && !projectId) {
-			throw new Error(
-				'Project ID is required for bearer or PAT authentication to fetch all secrets',
-			);
-		}
+			/**
+			 * Creates a new project token
+			 *
+			 * @param projectId The project to create a key for
+			 * @param flags Permissions for this flag
+			 * @returns A newly created project token
+			 */
+			async create(flags: number, projectId?: Id<'project'>) {
+				if (!projectId && client.authType !== 'ptk') {
+					throw new Error(
+						'Project ID is required for bearer or PAT authentication to create a project token',
+					);
+				}
 
-		if (!projectId) {
-			const {secrets} = await this.client.get('/v1/projects/@this/secrets', {});
+				if (!projectId) {
+					const {project_token: token} = await client.post(
+						'/v1/projects/@this/tokens',
+						{flags},
+						{},
+					);
 
-			return secrets;
-		}
+					return token;
+				}
 
-		const {secrets} = await this.client.get(
-			'/v1/projects/:project_id/secrets',
-			{project_id: projectId},
-		);
+				const {project_token: token} = await client.post(
+					'/v1/projects/:project_id/tokens',
+					{flags},
+					{project_id: projectId},
+				);
 
-		return secrets;
-	}
+				return token;
+			},
+		},
 
-	/**
-	 * Deletes a secret from a project
-	 *
-	 * @param id The secret ID to delete
-	 * @param projectId The project to delete the secret from
-	 */
-	async deleteSecret(id: Id<'secret'>, projectId?: Id<'project'>) {
-		if (this.client.authType !== 'ptk' && !projectId) {
-			throw new Error(
-				'Project ID is required for bearer or PAT authentication to delete a secret',
-			);
-		}
+		secrets: {
+			/**
+			 * Gets all secrets in a project
+			 *
+			 * @param projectId The project to fetch secrets for
+			 */
+			async getAll(projectId?: Id<'project'>) {
+				if (client.authType !== 'ptk' && !projectId) {
+					throw new Error(
+						'Project ID is required for bearer or PAT authentication to fetch all secrets',
+					);
+				}
 
-		if (!projectId) {
-			await this.client.delete(
-				'/v1/projects/@this/secrets/:secret_id',
-				undefined,
-				{secret_id: id},
-			);
+				if (!projectId) {
+					const {secrets} = await client.get('/v1/projects/@this/secrets', {});
 
-			return;
-		}
+					return secrets;
+				}
 
-		await this.client.delete(
-			'/v1/projects/:project_id/secrets/:secret_id',
-			undefined,
-			{secret_id: id, project_id: projectId},
-		);
-	}
-}
+				const {secrets} = await client.get('/v1/projects/:project_id/secrets', {
+					project_id: projectId,
+				});
+
+				return secrets;
+			},
+
+			/**
+			 * Creates a new project secret
+			 *
+			 * @param name The name of the secret
+			 * @param value The value of the secret
+			 * @param projectId The project to create the secret in
+			 */
+			async create(name: string, value: string, projectId?: Id<'project'>) {
+				if (client.authType !== 'ptk' && !projectId) {
+					throw new Error(
+						'Project ID is required for bearer or PAT authentication to create a secret',
+					);
+				}
+
+				if (!projectId) {
+					const s = await client.put(
+						'/v1/projects/@this/secrets/:name',
+						value,
+						{
+							name,
+						},
+					);
+
+					console.log(s);
+					return s;
+				}
+
+				const {secret} = await client.put(
+					'/v1/projects/:project_id/secrets/:name',
+					value,
+					{project_id: projectId, name},
+				);
+
+				return secret;
+			},
+
+			/**
+			 * Deletes a secret from a project
+			 *
+			 * @param id The secret ID to delete
+			 * @param projectId The project to delete the secret from
+			 */
+			async delete(id: Id<'secret'>, projectId?: Id<'project'>) {
+				if (client.authType !== 'ptk' && !projectId) {
+					throw new Error(
+						'Project ID is required for bearer or PAT authentication to delete a secret',
+					);
+				}
+
+				if (!projectId) {
+					await client.delete(
+						'/v1/projects/@this/secrets/:secret_id',
+						undefined,
+						{
+							secret_id: id,
+						},
+					);
+
+					return;
+				}
+
+				await client.delete(
+					'/v1/projects/:project_id/secrets/:secret_id',
+					undefined,
+					{secret_id: id, project_id: projectId},
+				);
+			},
+		},
+	};
+});

@@ -1,5 +1,5 @@
 import {Endpoint} from '../endpoints';
-import {Empty, Id, Timestamp} from './types';
+import {Empty, Id, Timestamp} from '../../util/types';
 import {User} from './users';
 
 export type Member = Omit<User, 'email' | 'id'> & {
