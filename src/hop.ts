@@ -1,12 +1,6 @@
-import {
-	APIAuthentication,
-	APIClient,
-	APIClientOptions,
-	APITransport,
-	transports,
-} from './rest/client';
+import {APIAuthentication, APIClient, APIClientOptions} from './rest/client';
 import {channels, ignite, pipe, projects, registry, users} from './sdks';
-import {DEFAULT_BASE_URL, DEFAULT_API_OPTIONS} from './util/constants';
+import {DEFAULT_BASE_URL} from './util/constants';
 
 export type PartialAPIOptions = Partial<
 	Omit<APIClientOptions, 'authentication'>
@@ -34,21 +28,16 @@ export class Hop {
 
 	constructor(options: PartialAPIOptions);
 
-	constructor(
-		authentication: APIAuthentication,
-		baseurl?: string,
-		transport?: APITransport,
-	);
+	constructor(authentication: APIAuthentication, baseurl?: string);
 
 	constructor(
 		authenticationOrOptions: APIAuthentication | PartialAPIOptions,
 		baseUrl = DEFAULT_BASE_URL,
-		transport = transports.fetch,
 	) {
 		this.client = new APIClient(
 			typeof authenticationOrOptions === 'object'
-				? {...DEFAULT_API_OPTIONS, ...authenticationOrOptions}
-				: {authentication: authenticationOrOptions, baseUrl, transport},
+				? {baseUrl: DEFAULT_BASE_URL, ...authenticationOrOptions}
+				: {authentication: authenticationOrOptions, baseUrl},
 		);
 
 		this.ignite = ignite(this.client);

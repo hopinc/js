@@ -17,93 +17,10 @@ export function validateAPIAuthentication(
 	return auth === 'bearer' || auth === 'pat' || auth === 'ptk';
 }
 
-export function makeTransport(transport: APITransport) {
-	return transport;
-}
-
-export type APITransport = <T>(
-	options: APIClientOptions,
-	method: Method,
-	path: string,
-	body: unknown,
-	query: Record<string, string>,
-	init: RequestInit,
-) => Promise<T>;
-
 export interface APIClientOptions {
 	readonly baseUrl: string;
 	readonly authentication: APIAuthentication;
-	readonly transport: APITransport;
 }
-
-export const transports: Record<'fetch', APITransport> = {
-	fetch: async <T>(
-		options: APIClientOptions,
-		method: Method,
-		path: string,
-		body: unknown,
-		query: Record<string, string> = {},
-		init: RequestInit = {},
-	) => {
-		const url = urlcat(options.baseUrl, path, query);
-
-		const headers = new Headers({
-			...(init?.headers ?? {}),
-			Authorization: options.authentication,
-		});
-
-		if (!IS_BROWSER) {
-			headers.set('User-Agent', 'Hop-API-Client');
-		}
-
-		// Treat falsy values as valid body
-		// only undefined is not
-		if (body !== undefined) {
-			if (method === 'GET') {
-				throw new Error('Cannot send a GET request with a body');
-			}
-
-			headers.set('Content-Type', 'application/json');
-		}
-
-		const request = new Request(url, {
-			method,
-			body: body ? JSON.stringify(body) : undefined,
-			headers,
-			...init,
-		});
-
-		const response = await fetch(request);
-
-		if (
-			response.status === 204 ||
-			!response.headers.get('Content-Type')?.includes('application/json')
-		) {
-			// Probably a DELETE request with no body returned, so return undefined here
-			// This cast is (prolly) safe because endpoints that return nothing
-			// are typed as `Empty`
-			return undefined as unknown as T;
-		}
-
-		const result = await (response.json() as Promise<APIResponse<T>>).catch(
-			(error: Error): ErroredAPIResponse => {
-				return {
-					success: false,
-					error: {
-						code: 'local_client_error',
-						message: error.message,
-					},
-				};
-			},
-		);
-
-		if (!result.success) {
-			throw new HopAPIError(request, response, result);
-		}
-
-		return result.data;
-	},
-};
 
 export class HopAPIError extends Error {
 	public readonly status: number;
@@ -133,7 +50,6 @@ export class APIClient {
 		return prefix;
 	}
 
-	private readonly request;
 	private readonly options: APIClientOptions;
 
 	public readonly authType: APIAuthenticationType;
@@ -141,23 +57,6 @@ export class APIClient {
 	constructor(options: APIClientOptions) {
 		this.options = options;
 		this.authType = APIClient.getAuthType(options.authentication);
-
-		this.request = <T>(
-			method: Method,
-			path: string,
-			body: unknown,
-			query: Record<string, string> = {},
-			init: RequestInit = {},
-		) => {
-			return this.options.transport<T>(
-				this.options,
-				method,
-				path,
-				body,
-				query,
-				init,
-			);
-		};
 	}
 
 	async get<Path extends Extract<Endpoints, {method: 'GET'}>['path']>(
@@ -220,5 +119,71 @@ export class APIClient {
 		return this.request<
 			Extract<Endpoints, {path: Path; method: 'DELETE'}>['res']
 		>('DELETE', path, body, query, init);
+	}
+
+	private async request<T>(
+		method: Method,
+		path: string,
+		body: unknown,
+		query: Record<string, string> = {},
+		init: RequestInit = {},
+	) {
+		const url = urlcat(this.options.baseUrl, path, query);
+
+		const headers = new Headers({
+			...(init?.headers ?? {}),
+			Authorization: this.options.authentication,
+		});
+
+		if (!IS_BROWSER) {
+			headers.set('User-Agent', 'Hop-API-Client');
+		}
+
+		// Treat falsy values as valid body
+		// only undefined is not
+		if (body !== undefined) {
+			if (method === 'GET') {
+				throw new Error('Cannot send a GET request with a body');
+			}
+
+			headers.set('Content-Type', 'application/json');
+		}
+
+		const request = new Request(url, {
+			method,
+			body: body ? JSON.stringify(body) : undefined,
+			headers,
+			...init,
+		});
+
+		const response = await fetch(request);
+
+		if (
+			response.status === 204 ||
+			!response.headers.get('Content-Type')?.includes('application/json')
+		) {
+			// Probably a DELETE request with no body returned, so return undefined here
+			// This cast is (prolly) safe because endpoints that return nothing
+			// are typed as `Empty`
+			return undefined as unknown as T;
+		}
+
+		const result = await (response.json() as Promise<APIResponse<T>>).catch(
+			(error: Error): ErroredAPIResponse => {
+				return {
+					success: false,
+					error: {
+						code: 'local_client_error',
+						message: error.message,
+					},
+				};
+			},
+		);
+
+		if (!result.success) {
+			throw new HopAPIError(request, response, result);
+		}
+
+		return result.data;
 	}
 }
