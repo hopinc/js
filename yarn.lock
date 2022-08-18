@@ -103,9 +103,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@onehop/js@workspace:."
   dependencies:
-    "@onehop/json-methods": ^1.1.0
+    "@onehop/json-methods": ^1.1.1
     "@types/glob": ^7.2.0
-    "@types/node": ^18.7.5
+    "@types/node": ^18.7.6
     cross-fetch: ^3.1.5
     glob: ^8.0.3
     prettier: ^2.7.1
@@ -116,10 +116,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@onehop/json-methods@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@onehop/json-methods@npm:1.1.0"
-  checksum: 583a764631b17ea142859fc0dce278a4b48587e39e186beb62761e85335bd1e99d3fb48b81ae7f96e0c6f582cc3ceaf12b86329a2c91c83c205a39b1efbd7b91
+"@onehop/json-methods@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@onehop/json-methods@npm:1.1.1"
+  checksum: d31f813e8bff0876bab7ddd753b2d00545d8a73ae73007f79c26974b114b171e31b7a3715c7b2bf9f14ccf5a525616ada8cd3f2479ff690438342712b6d8e51f
   languageName: node
   linkType: hard
 
@@ -182,10 +182,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.7.5":
-  version: 18.7.5
-  resolution: "@types/node@npm:18.7.5"
-  checksum: f74426f2c9e81ab00e35ddca8db84efb6eb6c77e6d120bbe84d462073c371fa46e4744bd87773d9f7cf9074cf575df573bb89c3335f38f4ecbef2f03b407f35f
+"@types/node@npm:^18.7.6":
+  version: 18.7.6
+  resolution: "@types/node@npm:18.7.6"
+  checksum: 5122988c325eda8d1f5cbe4494916036aae1758f9d5bb2d8139a800b8bad1540fbb167cd3c759da9a5cb4600cd3507609ac7969747113c1549a3e4320a17b1a9
   languageName: node
   linkType: hard
 
