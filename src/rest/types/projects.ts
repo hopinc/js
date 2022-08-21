@@ -19,6 +19,11 @@ export type Member = Omit<User, 'email' | 'id'> & {
 	joined_at: Timestamp;
 };
 
+export enum ProjectTier {
+	FREE = 'free',
+	PAID = 'paid',
+}
+
 export interface MemberRole {
 	/**
 	 * The ID of the role
@@ -86,6 +91,11 @@ export interface Project {
 	 * The name of the project
 	 */
 	name: string;
+
+	/**
+	 * The tier this project is
+	 */
+	tier: ProjectTier;
 
 	/**
 	 * The time this project was created at
