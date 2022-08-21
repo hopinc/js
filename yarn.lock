@@ -105,7 +105,7 @@ __metadata:
   dependencies:
     "@onehop/json-methods": ^1.1.1
     "@types/glob": ^7.2.0
-    "@types/node": ^18.7.6
+    "@types/node": ^18.7.9
     cross-fetch: ^3.1.5
     glob: ^8.0.3
     prettier: ^2.7.1
@@ -182,10 +182,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.7.6":
-  version: 18.7.6
-  resolution: "@types/node@npm:18.7.6"
-  checksum: 5122988c325eda8d1f5cbe4494916036aae1758f9d5bb2d8139a800b8bad1540fbb167cd3c759da9a5cb4600cd3507609ac7969747113c1549a3e4320a17b1a9
+"@types/node@npm:^18.7.9":
+  version: 18.7.9
+  resolution: "@types/node@npm:18.7.9"
+  checksum: 691ea1b734c0a39c4fe03c104fed18e0148bda6f2504dd341f84be8153d28e74d8114198d2d064ab7fdd2ece3ee16c60b78eea0101fb004f6e4595a631bc3839
   languageName: node
   linkType: hard
 

@@ -1,7 +1,7 @@
 import fetch, {Headers, Request} from 'cross-fetch';
-import urlcat from '../urlcat';
 import {ExtractRouteParams} from '../util';
 import {IS_BROWSER} from '../util/constants';
+import {createURLBuilder} from '../util/urls';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints';
 import {getIdPrefix, Id, Method} from './types';
 
@@ -50,13 +50,15 @@ export class APIClient {
 		return prefix;
 	}
 
-	private readonly options: APIClientOptions;
+	private readonly options;
 
-	public readonly authType: APIAuthenticationType;
+	public readonly authType;
+	public readonly url;
 
 	constructor(options: APIClientOptions) {
 		this.options = options;
 		this.authType = APIClient.getAuthType(options.authentication);
+		this.url = createURLBuilder(options.baseUrl);
 	}
 
 	async get<Path extends Extract<Endpoints, {method: 'GET'}>['path']>(
@@ -128,7 +130,7 @@ export class APIClient {
 		query: Record<string, string> = {},
 		init: RequestInit = {},
 	) {
-		const url = urlcat(this.options.baseUrl, path, query);
+		const url = this.url(path, query);
 
 		const headers = new Headers({
 			...(init?.headers ?? {}),
