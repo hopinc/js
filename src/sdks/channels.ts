@@ -4,19 +4,17 @@ import {sdk} from './create';
 
 type Token = Id<'leap_token'>;
 
-export type SetStateAction =
-	| API.Channels.State
-	| ((
-			oldState: API.Channels.State,
-	  ) => API.Channels.State | Promise<API.Channels.State>);
+export type SetStateAction<T extends API.Channels.State> =
+	| T
+	| ((oldState: T) => T | Promise<T>);
 
 export const channels = sdk(client => {
 	const Channels = create<API.Channels.Channel>().methods({
-		async setState(state: SetStateAction) {
+		async setState(state: SetStateAction<API.Channels.State>) {
 			await updateState(this.id, state, 'set');
 		},
 
-		async patchState(state: SetStateAction) {
+		async patchState(state: SetStateAction<API.Channels.State>) {
 			await updateState(this.id, state, 'patch');
 		},
 
@@ -33,9 +31,9 @@ export const channels = sdk(client => {
 		},
 	});
 
-	async function updateState(
+	async function updateState<T extends API.Channels.State>(
 		channelId: API.Channels.Channel['id'],
-		newState: SetStateAction,
+		newState: SetStateAction<T>,
 		mode: 'patch' | 'set',
 	) {
 		let state: API.Channels.State;
@@ -46,7 +44,7 @@ export const channels = sdk(client => {
 				{channel_id: channelId},
 			);
 
-			state = await newState(oldState);
+			state = await newState(oldState as T);
 		} else {
 			state = newState;
 		}
@@ -148,17 +146,17 @@ export const channels = sdk(client => {
 			return tokens;
 		},
 
-		async setState(
+		async setState<T extends API.Channels.State = API.Channels.State>(
 			channel: API.Channels.Channel | API.Channels.Channel['id'],
-			state: SetStateAction,
+			state: SetStateAction<T>,
 		) {
 			const id = typeof channel === 'object' ? channel.id : channel;
 			return updateState(id, state, 'set');
 		},
 
-		async patchState(
+		async patchState<T extends API.Channels.State>(
 			channel: API.Channels.Channel | API.Channels.Channel['id'],
-			state: SetStateAction,
+			state: SetStateAction<T>,
 		) {
 			const id = typeof channel === 'object' ? channel.id : channel;
 			return updateState(id, state, 'patch');
