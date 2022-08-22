@@ -318,6 +318,12 @@ export interface Gateway {
 	domains: Domain[];
 }
 
+export enum DomainState {
+	PENDING = 'pending',
+	VALID_CNAME = 'valid_cname',
+	SSL_ACTIVE = 'ssl_active',
+}
+
 export interface Domain {
 	/**
 	 * The ID of the domain
@@ -325,24 +331,14 @@ export interface Domain {
 	id: Id<'domain'>;
 
 	/**
-	 * The port this
-	 */
-	target_port: number;
-
-	/**
 	 * The domain name
 	 */
 	domain: string;
 
 	/**
-	 * If this domain has a valid CNAME record pointing to Hop
+	 * The domain state
 	 */
-	valid_cname: boolean;
-
-	/**
-	 * If this domain will be using certificates issued by Hop & therefore encryption terminates at the gateway.
-	 */
-	ssl_termination: boolean;
+	state: DomainState;
 
 	/**
 	 * The date this domain was created
