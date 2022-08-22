@@ -1,6 +1,12 @@
 import {ByteString} from '../../util';
 import {Endpoint} from '../endpoints';
-import {Empty, Id, Timestamp} from '../../util/types';
+import {
+	Empty,
+	HopShDomain,
+	Id,
+	InternalHopDomain,
+	Timestamp,
+} from '../../util/types';
 
 export enum Regions {
 	US_EAST_1 = 'us-east-1',
@@ -296,11 +302,16 @@ export interface Gateway {
 	type: GatewayType;
 
 	/**
-	 * The protocol for this gateway
+	 * The name of the gateway
+	 */
+	name: string;
+
+	/**
+	 * The protocol for this gateway (Only for external)
 	 *
 	 * @warning Currently, hop only supports HTTP. This will eventually change to an enum
 	 */
-	protocol: 'http';
+	protocol: 'http' | null;
 
 	/**
 	 * The deployment this gateway is associated with
@@ -311,6 +322,21 @@ export interface Gateway {
 	 * The date this gateway was created
 	 */
 	created_at: Timestamp;
+
+	/**
+	 * Domain automatically assigned by Hop
+	 */
+	hopsh_domain: HopShDomain | null;
+
+	/**
+	 * Internal domain assigned by user upon gateway creation
+	 */
+	internal_domain: InternalHopDomain | null;
+
+	/**
+	 * Port the Gateway targets (Only for external gateways)
+	 */
+	target_port: number | null;
 
 	/**
 	 * Domains associated with this gateway

@@ -101,6 +101,8 @@ export const ID_PREFIXES = [
 
 export type IdPrefixes = typeof ID_PREFIXES[number]['prefix'];
 export type Id<T extends IdPrefixes> = `${T}_${string}`;
+export type HopShDomain = `${string}.hop.sh`;
+export type InternalHopDomain = `${string}.hop`;
 export type AnyId = Id<IdPrefixes>;
 
 export function validateIdPrefix<T extends IdPrefixes = IdPrefixes>(
