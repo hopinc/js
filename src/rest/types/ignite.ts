@@ -193,13 +193,18 @@ export interface Image {
 	/**
 	 * The name of the docker image
 	 */
-	name: string;
+	name: string | null;
 
 	/**
 	 * Authorization required for the registry to access this image
 	 * This is not required if you use Hop's own registry.
 	 */
-	auth?: Auth;
+	auth: Auth | null;
+
+	/**
+	 * GitHub repo information (if applicable)
+	 */
+	gh_repo: ImageGHRepo | null;
 }
 
 /**
@@ -208,6 +213,27 @@ export interface Image {
 export interface Auth {
 	username: string;
 	password: string;
+}
+
+/**
+ * GitHub repo type sent from API (NOT USED IN IMAGES)
+ */
+export interface GHRepo {
+	id: number;
+	full_name: string;
+	private: boolean;
+	default_branch: string;
+	account_name: string;
+}
+
+
+/**
+ * GitHub repo partial used for images
+ */
+export interface ImageGHRepo {
+	repo_id: number;
+	full_name: string;
+	branch: string;
 }
 
 /**
