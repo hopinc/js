@@ -1,8 +1,8 @@
 import {create} from '@onehop/json-methods';
-import {API, Id} from '../rest';
-import {Regions} from '../rest/types/ignite';
-import {DeliveryProtocol} from '../rest/types/pipe';
-import {sdk} from './create';
+import {API, Id} from '../rest/index.js';
+import {Regions} from '../rest/types/ignite.js';
+import {DeliveryProtocol} from '../rest/types/pipe.js';
+import {sdk} from './create.js';
 
 export const pipe = sdk(client => {
 	const Rooms = create<API.Pipe.Room>().methods({

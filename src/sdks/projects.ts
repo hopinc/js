@@ -1,5 +1,5 @@
-import {Id} from '../rest';
-import {sdk} from './create';
+import {Id} from '../rest/index.js';
+import {sdk} from './create.js';
 
 export const projects = sdk(client => {
 	return {

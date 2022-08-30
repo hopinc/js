@@ -16,11 +16,11 @@ export type Tag<T, Name extends string> = T & {
 export type Timestamp = Tag<string, 'timestamp'>;
 
 export type ExtractRouteParams<T extends string> = string extends T
-	? Record<string, string>
+	? Record<string, string | number | undefined>
 	: T extends `${string}:${infer Param}/${infer Rest}`
-	? {[k in Param | keyof ExtractRouteParams<Rest>]: string}
+	? {[k in Param | keyof ExtractRouteParams<Rest>]: string | number}
 	: T extends `${string}:${infer Param}`
-	? {[k in Param]: string}
+	? {[k in Param]: string | number}
 	: {};
 
 export type Values<T> = T[keyof T];

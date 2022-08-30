@@ -1,5 +1,5 @@
-import {Id} from '../util/types';
-import {sdk} from './create';
+import {Id} from '../util/types.js';
+import {sdk} from './create.js';
 
 export const users = sdk(client => ({
 	me: {

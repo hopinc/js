@@ -1,10 +1,10 @@
-import {Method} from './types';
-import {ChannelEndpoints} from './types/channels';
-import {IgniteEndpoints} from './types/ignite';
-import {PipeEndpoints} from './types/pipe';
-import {ProjectsEndpoints} from './types/projects';
-import {RegistryEndpoints} from './types/registry';
-import {UserEndpoints} from './types/users';
+import {Method} from './types/index.js';
+import {ChannelEndpoints} from './types/channels.js';
+import {IgniteEndpoints} from './types/ignite.js';
+import {PipeEndpoints} from './types/pipe.js';
+import {ProjectsEndpoints} from './types/projects.js';
+import {RegistryEndpoints} from './types/registry.js';
+import {UserEndpoints} from './types/users.js';
 
 export type SuccessfulAPIResponse<T> = {
 	success: true;

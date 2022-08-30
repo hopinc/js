@@ -1,6 +1,6 @@
-import {ByteString} from '../../util';
-import {Endpoint} from '../endpoints';
-import {Empty, Id, Timestamp} from '../../util/types';
+import {ByteString} from '../../util/index.js';
+import {Endpoint} from '../endpoints.js';
+import {Empty, Id, Timestamp} from '../../util/types.js';
 
 export enum Regions {
 	US_EAST_1 = 'us-east-1',

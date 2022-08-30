@@ -1,4 +1,4 @@
-import {ExtractRouteParams, Query} from '../rest';
+import {ExtractRouteParams, Query} from '../rest/index.js';
 
 export const lead = (x: string) => {
 	return x.charCodeAt(0) === 47 ? x : '/' + x;
@@ -14,6 +14,16 @@ export function isObjectEmpty(object: object) {
 
 export function join(a: string, b: string) {
 	return a + lead(b);
+}
+
+export function querystring(query: Query<string>) {
+	return Object.entries(query).reduce((acc, [key, value]) => {
+		if (value === undefined) {
+			return acc;
+		}
+
+		return acc + `${key}=${value.toString()}`;
+	}, '');
 }
 
 export function createURLBuilder(base: string) {
@@ -45,7 +55,7 @@ export function createURLBuilder(base: string) {
 
 		const urlWithSearch = isObjectEmpty(query)
 			? urlWithQuery
-			: `${urlWithQuery}?${new URLSearchParams(query).toString()}`;
+			: `${urlWithQuery}?${querystring(query as Query<string>)}`;
 
 		return join(base, urlWithSearch);
 	};

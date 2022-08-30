@@ -1,6 +1,6 @@
-import {Endpoint} from '../endpoints';
-import {Empty, Id, Timestamp} from '../../util/types';
-import {User} from './users';
+import {Endpoint} from '../endpoints.js';
+import {Empty, Id, Timestamp} from '../../util/types.js';
+import {User} from './users.js';
 
 export type Member = Omit<User, 'email' | 'id'> & {
 	/**

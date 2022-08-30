@@ -1,1 +1,1 @@
-export * from './ids';
+export * from './ids.js';

@@ -1,5 +1,5 @@
 import {z} from 'zod';
-import {Id, IdPrefixes, validateId} from '../../rest';
+import {Id, IdPrefixes, validateId} from '../../rest/index.js';
 
 /**
  * Generate a Zod schema for an ID prefix

@@ -1,9 +1,9 @@
 import fetch, {Headers, Request} from 'cross-fetch';
-import {ExtractRouteParams} from '../util';
-import {IS_BROWSER} from '../util/constants';
-import {createURLBuilder} from '../util/urls';
-import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints';
-import {getIdPrefix, Id, Method} from './types';
+import {ExtractRouteParams} from '../util/index.js';
+import {IS_BROWSER} from '../util/constants.js';
+import {createURLBuilder} from '../util/urls.js';
+import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.js';
+import {getIdPrefix, Id, Method} from './types/index.js';
 
 export type APIAuthentication = Id<'ptk'> | Id<'bearer'> | Id<'pat'>;
 
@@ -127,7 +127,7 @@ export class APIClient {
 		method: Method,
 		path: string,
 		body: unknown,
-		query: Record<string, string> = {},
+		query: Record<string, string | number | undefined> = {},
 		init: RequestInit = {},
 	) {
 		const url = this.url(path, query);

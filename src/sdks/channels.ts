@@ -1,9 +1,12 @@
 import {create} from '@onehop/json-methods';
-import {API, Id} from '../rest';
-import {sdk} from './create';
+import {API, Id} from '../rest/index.js';
+import {sdk} from './create.js';
 
 type Token = Id<'leap_token'>;
 
+/**
+ * New state to set to a channel, or a callback function that will produce the new state
+ */
 export type SetStateAction<T extends API.Channels.State> =
 	| T
 	| ((oldState: T) => T | Promise<T>);

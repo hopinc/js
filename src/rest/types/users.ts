@@ -1,6 +1,6 @@
-import {Endpoint} from '../endpoints';
-import {MemberRole, Project} from './projects';
-import {Empty, Id, Timestamp} from '../../util/types';
+import {Endpoint} from '../endpoints.js';
+import {MemberRole, Project} from './projects.js';
+import {Empty, Id, Timestamp} from '../../util/types.js';
 
 /**
  * A user objct

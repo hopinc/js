@@ -1,6 +1,13 @@
-import {APIAuthentication, APIClient, APIClientOptions} from './rest/client';
-import {channels, ignite, pipe, projects, registry, users} from './sdks';
-import {DEFAULT_BASE_URL} from './util/constants';
+import {APIAuthentication, APIClient, APIClientOptions} from './rest/client.js';
+import {
+	channels,
+	ignite,
+	pipe,
+	projects,
+	registry,
+	users,
+} from './sdks/index.js';
+import {DEFAULT_BASE_URL} from './util/constants.js';
 
 export type PartialAPIOptions = Partial<
 	Omit<APIClientOptions, 'authentication'>

@@ -1,8 +1,8 @@
-import * as Channels from './channels';
-import * as Registry from './registry';
-import * as Ignite from './ignite';
-import * as Pipe from './pipe';
-import * as Projects from './projects';
-import * as Users from './users';
+import * as Channels from './channels.js';
+import * as Registry from './registry.js';
+import * as Ignite from './ignite.js';
+import * as Pipe from './pipe.js';
+import * as Projects from './projects.js';
+import * as Users from './users.js';
 
 export {Pipe, Users, Projects, Ignite, Channels, Registry};

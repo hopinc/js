@@ -1,5 +1,6 @@
 {
 	"yaml.schemas": {
 		"https://json.schemastore.org/github-action.json": "./.github/workflows/build.yml"
-	}
+	},
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

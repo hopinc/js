@@ -1,8 +1,8 @@
 import {create, Infer} from '@onehop/json-methods';
-import {API, assertId, Id} from '../rest';
-import {Deployment, Gateway, GatewayType} from '../rest/types/ignite';
-import {parseSize} from '../util';
-import {sdk} from './create';
+import {API, assertId, Id} from '../rest/index.js';
+import {Deployment, Gateway, GatewayType} from '../rest/types/ignite.js';
+import {parseSize} from '../util/index.js';
+import {sdk} from './create.js';
 
 const SIX_MB_IN_BYTES = 6 * 1024 * 1024;
 

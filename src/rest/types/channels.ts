@@ -1,6 +1,6 @@
-import {Endpoint} from '../endpoints';
-import {Project} from './projects';
-import {Empty, Id, Timestamp} from '../../util/types';
+import {Endpoint} from '../endpoints.js';
+import {Project} from './projects.js';
+import {Empty, Id, Timestamp} from '../../util/types.js';
 
 export enum ChannelType {
 	PRIVATE = 'private',
