@@ -74,6 +74,7 @@ export const channels = sdk(client => {
 		async create(
 			type: API.Channels.ChannelType,
 			id?: string | null,
+			options?: {state?: Record<string, any>} | null,
 			project?: Id<'project'>,
 		) {
 			if (!project && client.authType !== 'ptk') {
@@ -85,10 +86,14 @@ export const channels = sdk(client => {
 			const {channel} = id
 				? await client.put(
 						'/v1/channels/:channel_id',
-						{type},
+						{type, state: options?.state ?? null},
 						{project, channel_id: id},
 				  )
-				: await client.post('/v1/channels', {type}, {project});
+				: await client.post(
+						'/v1/channels',
+						{type, state: options?.state ?? null},
+						{project},
+				  );
 
 			return Channels.from(channel);
 		},

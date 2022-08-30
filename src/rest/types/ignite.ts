@@ -1,6 +1,12 @@
 import {ByteString} from '../../util/index.js';
 import {Endpoint} from '../endpoints.js';
-import {Empty, Id, Timestamp} from '../../util/types.js';
+import {
+	Empty,
+	HopShDomain,
+	Id,
+	InternalHopDomain,
+	Timestamp,
+} from '../../util/types.js';
 
 export enum Regions {
 	US_EAST_1 = 'us-east-1',
@@ -187,13 +193,18 @@ export interface Image {
 	/**
 	 * The name of the docker image
 	 */
-	name: string;
+	name: string | null;
 
 	/**
 	 * Authorization required for the registry to access this image
 	 * This is not required if you use Hop's own registry.
 	 */
-	auth?: Auth;
+	auth: Auth | null;
+
+	/**
+	 * GitHub repo information (if applicable)
+	 */
+	gh_repo: ImageGHRepo | null;
 }
 
 /**
@@ -202,6 +213,26 @@ export interface Image {
 export interface Auth {
 	username: string;
 	password: string;
+}
+
+/**
+ * GitHub repo type sent from API (NOT USED IN IMAGES)
+ */
+export interface GHRepo {
+	id: number;
+	full_name: string;
+	private: boolean;
+	default_branch: string;
+	account_name: string;
+}
+
+/**
+ * GitHub repo partial used for images
+ */
+export interface ImageGHRepo {
+	repo_id: number;
+	full_name: string;
+	branch: string;
 }
 
 /**
@@ -296,11 +327,16 @@ export interface Gateway {
 	type: GatewayType;
 
 	/**
-	 * The protocol for this gateway
+	 * The name of the gateway
+	 */
+	name: string;
+
+	/**
+	 * The protocol for this gateway (Only for external)
 	 *
 	 * @warning Currently, hop only supports HTTP. This will eventually change to an enum
 	 */
-	protocol: 'http';
+	protocol: 'http' | null;
 
 	/**
 	 * The deployment this gateway is associated with
@@ -313,9 +349,30 @@ export interface Gateway {
 	created_at: Timestamp;
 
 	/**
+	 * Domain automatically assigned by Hop
+	 */
+	hopsh_domain: HopShDomain | null;
+
+	/**
+	 * Internal domain assigned by user upon gateway creation
+	 */
+	internal_domain: InternalHopDomain | null;
+
+	/**
+	 * Port the Gateway targets (Only for external gateways)
+	 */
+	target_port: number | null;
+
+	/**
 	 * Domains associated with this gateway
 	 */
 	domains: Domain[];
+}
+
+export enum DomainState {
+	PENDING = 'pending',
+	VALID_CNAME = 'valid_cname',
+	SSL_ACTIVE = 'ssl_active',
 }
 
 export interface Domain {
@@ -325,24 +382,14 @@ export interface Domain {
 	id: Id<'domain'>;
 
 	/**
-	 * The port this
-	 */
-	target_port: number;
-
-	/**
 	 * The domain name
 	 */
 	domain: string;
 
 	/**
-	 * If this domain has a valid CNAME record pointing to Hop
+	 * The domain state
 	 */
-	valid_cname: boolean;
-
-	/**
-	 * If this domain will be using certificates issued by Hop & therefore encryption terminates at the gateway.
-	 */
-	ssl_termination: boolean;
+	state: DomainState;
 
 	/**
 	 * The date this domain was created

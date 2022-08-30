@@ -60,12 +60,17 @@ export interface ChannelToken {
 }
 
 export type ChannelEndpoints =
-	| Endpoint<'POST', '/v1/channels', {channel: Channel}, {type: ChannelType}>
+	| Endpoint<
+			'POST',
+			'/v1/channels',
+			{channel: Channel},
+			{type: ChannelType; state: Record<string, any> | null}
+	  >
 	| Endpoint<
 			'PUT',
 			'/v1/channels/:channel_id',
 			{channel: Channel},
-			{type: ChannelType}
+			{type: ChannelType; state: Record<string, any> | null}
 	  >
 	| Endpoint<
 			'POST',
