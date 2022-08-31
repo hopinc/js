@@ -1,8 +1,8 @@
 import {ExtractRouteParams, Query} from '../rest/index.js';
 
-export const lead = (x: string) => {
+export function lead(x: string) {
 	return x.charCodeAt(0) === 47 ? x : '/' + x;
-};
+}
 
 export function isObjectEmpty(object: object) {
 	for (const _ in object) {
