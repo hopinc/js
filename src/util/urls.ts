@@ -22,7 +22,13 @@ export function querystring(query: Query<string>) {
 			return acc;
 		}
 
-		return acc + `${key}=${value.toString()}`;
+		const result = `${key}=${value.toString()}`;
+
+		if (acc === '') {
+			return result;
+		}
+
+		return acc + '&' + result;
 	}, '');
 }
 
