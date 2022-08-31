@@ -1,4 +1,4 @@
-import fetch, {Headers, Request} from 'cross-fetch';
+import fetch from 'isomorphic-fetch';
 import {ExtractRouteParams} from '../util/index.js';
 import {IS_BROWSER} from '../util/constants.js';
 import {createURLBuilder} from '../util/urls.js';
@@ -158,7 +158,7 @@ export class APIClient {
 			...init,
 		});
 
-		const response = await fetch(request);
+		const response = await fetch(url, request);
 
 		if (
 			response.status === 204 ||
