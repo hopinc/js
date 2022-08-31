@@ -13,11 +13,11 @@ export type SetStateAction<T extends API.Channels.State> =
 
 export const channels = sdk(client => {
 	const Channels = create<API.Channels.Channel>().methods({
-		async setState(state: SetStateAction<API.Channels.State>) {
+		async setState<T extends API.Channels.State>(state: SetStateAction<T>) {
 			await updateState(this.id, state, 'set');
 		},
 
-		async patchState(state: SetStateAction<API.Channels.State>) {
+		async patchState<T extends API.Channels.State>(state: SetStateAction<T>) {
 			await updateState(this.id, state, 'patch');
 		},
 

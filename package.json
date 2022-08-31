@@ -29,20 +29,22 @@
 		"build": "rm -rf dist && tsup",
 		"bench": "HOP_DEBUG=true ts-node _workbench.ts",
 		"release": "yarn build && yarn npm publish && rm -rf dist",
-		"vercel-build": "yarn typedoc src/index.ts"
+		"vercel-build": "yarn typedoc --plugin typedoc-plugin-markdown --plugin typedoc-plugin-missing-exports src/index.ts"
 	},
 	"devDependencies": {
-		"@types/glob": "^7.2.0",
-		"@types/node": "^18.7.9",
+		"@types/glob": "^8.0.0",
+		"@types/node": "^18.7.14",
 		"glob": "^8.0.3",
 		"prettier": "^2.7.1",
 		"ts-node": "^10.9.1",
-		"tsup": "^6.2.2",
-		"typedoc": "^0.23.11",
+		"tsup": "^6.2.3",
+		"typedoc": "^0.23.12",
+		"typedoc-plugin-markdown": "^3.13.5",
+		"typedoc-plugin-missing-exports": "^1.0.0",
 		"typescript": "^4.8.2"
 	},
 	"dependencies": {
-		"@onehop/json-methods": "^1.1.1",
+		"@onehop/json-methods": "^1.1.2",
 		"cross-fetch": "^3.1.5",
 		"zod": "^3.18.0"
 	}
