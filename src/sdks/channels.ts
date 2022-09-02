@@ -197,7 +197,7 @@ export const channels = sdk(client => {
 			 * @param state The state to set on the token
 			 * @param project The project to attach this token to
 			 */
-			async create(state: API.Channels.State, project?: Id<'project'>) {
+			async create(state: API.Channels.State = {}, project?: Id<'project'>) {
 				if (!project && client.authType !== 'ptk') {
 					throw new Error(
 						'Project must be provided when creating a channel token with bearer or PAT auth',
@@ -209,6 +209,14 @@ export const channels = sdk(client => {
 					{state},
 					{project},
 				);
+
+				return token;
+			},
+
+			async get(id: Id<'leap_token'>) {
+				const {token} = await client.get('/v1/channels/tokens/:token_id', {
+					token_id: id,
+				});
 
 				return token;
 			},

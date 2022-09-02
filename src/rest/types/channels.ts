@@ -97,4 +97,5 @@ export type ChannelEndpoints =
 			Empty,
 			{e: string; d: unknown}
 	  >
-	| Endpoint<'GET', '/v1/channels', {channels: Channel[]}>;
+	| Endpoint<'GET', '/v1/channels', {channels: Channel[]}>
+	| Endpoint<'GET', '/v1/channels/tokens/:token_id', {token: ChannelToken}>;
