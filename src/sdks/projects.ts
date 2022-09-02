@@ -1,4 +1,4 @@
-import {Endpoints, Id} from '../rest/index.js';
+import {API, Endpoints, Id} from '../rest/index.js';
 import {sdk} from './create.js';
 
 export const projects = sdk(client => {
@@ -202,7 +202,10 @@ export const projects = sdk(client => {
 			 * @param id The secret ID to delete
 			 * @param projectId The project to delete the secret from
 			 */
-			async delete(id: Id<'secret'>, projectId?: Id<'project'>) {
+			async delete(
+				id: Id<'secret'> | API.Projects.Secret['name'],
+				projectId?: Id<'project'>,
+			) {
 				if (client.authType !== 'ptk' && !projectId) {
 					throw new Error(
 						'Project ID is required for bearer or PAT authentication to delete a secret',

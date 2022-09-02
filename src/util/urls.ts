@@ -16,20 +16,37 @@ export function join(a: string, b: string) {
 	return a + lead(b);
 }
 
-export function querystring(query: Query<string>) {
-	return Object.entries(query).reduce((acc, [key, value]) => {
+/**
+ * Generates a querystring to append to a URL. This function will include the ? character.
+ * @param query An object of query params to be encoded
+ * @returns A string of query params
+ */
+export function querystring(query: Query<string>): string {
+	const usefulQuery = Object.entries(query).filter(entry => {
+		const [, value] = entry;
+
+		return value !== undefined;
+	});
+
+	if (usefulQuery.length === 0) {
+		return '';
+	}
+
+	const INITIAL_QUERYSTRING = '?';
+
+	return usefulQuery.reduce((acc, [key, value]) => {
 		if (value === undefined) {
 			return acc;
 		}
 
 		const result = `${key}=${value.toString()}`;
 
-		if (acc === '') {
+		if (acc === INITIAL_QUERYSTRING) {
 			return result;
 		}
 
 		return acc + '&' + result;
-	}, '');
+	}, INITIAL_QUERYSTRING);
 }
 
 export function createURLBuilder(base: string) {
@@ -61,7 +78,7 @@ export function createURLBuilder(base: string) {
 
 		const urlWithSearch = isObjectEmpty(query)
 			? urlWithQuery
-			: `${urlWithQuery}?${querystring(query as Query<string>)}`;
+			: `${urlWithQuery}${querystring(query as Query<string>)}`;
 
 		return join(base, urlWithSearch);
 	};
