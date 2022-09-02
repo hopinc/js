@@ -82,8 +82,6 @@ export function createURLBuilder(base: string) {
 			? urlWithParams
 			: `${urlWithParams}${querystring(query as Query<string>)}`;
 
-		console.log(urlWithSearch);
-
 		return join(base, urlWithSearch);
 	};
 }
