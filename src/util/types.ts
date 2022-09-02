@@ -97,10 +97,10 @@ export const ID_PREFIXES = [
 		prefix: 'leap_token',
 		description: 'Token for connecting to leap as a client',
 	},
-  {
-    prefix: "build",
-    description: "Build ID for build logs"
-  }
+	{
+		prefix: 'build',
+		description: 'Build ID for build logs',
+	},
 ] as const;
 
 export type IdPrefixes = typeof ID_PREFIXES[number]['prefix'];

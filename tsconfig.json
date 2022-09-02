@@ -15,5 +15,5 @@
 		"noFallthroughCasesInSwitch": true
 	},
 	"exclude": ["node_modules", "dist"],
-	"include": ["./**/*.ts", "./**/*.tsx"]
+	"include": ["./**/*.ts", "./**/*.tsx", "gen-docs.mts"]
 }

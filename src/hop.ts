@@ -34,13 +34,22 @@ export class Hop {
 	public readonly channels;
 
 	constructor(options: PartialAPIOptions);
-
 	constructor(authentication: APIAuthentication, baseurl?: string);
 
 	constructor(
 		authenticationOrOptions: APIAuthentication | PartialAPIOptions,
 		baseUrl = DEFAULT_BASE_URL,
 	) {
+		if (
+			!authenticationOrOptions ||
+			(typeof authenticationOrOptions === 'object' &&
+				!authenticationOrOptions.authentication)
+		) {
+			throw new Error(
+				'Missing authentication token to `new Hop()` — please provide a valid Project Token, User Bearer or Personal Access Token',
+			);
+		}
+
 		this.client = new APIClient(
 			typeof authenticationOrOptions === 'object'
 				? {baseUrl: DEFAULT_BASE_URL, ...authenticationOrOptions}
