@@ -1,4 +1,4 @@
-import {Id} from '../rest/index.js';
+import {Endpoints, Id} from '../rest/index.js';
 import {sdk} from './create.js';
 
 export const projects = sdk(client => {
@@ -173,26 +173,24 @@ export const projects = sdk(client => {
 					);
 				}
 
-				if (!projectId) {
-					const s = await client.put(
-						'/v1/projects/@this/secrets/:name',
-						value,
-						{
-							name,
-						},
-					);
+				const url = client.url('/v1/projects/@this/secrets/:name', {
+					name,
+				});
 
-					console.log(s);
-					return s;
-				}
+				const request = new Request(url, {
+					headers: {
+						'Content-Type': 'text/plain',
+					},
+					body: value,
+					method: 'PUT',
+				});
 
-				const {secret} = await client.put(
-					'/v1/projects/:project_id/secrets/:name',
-					value,
-					{project_id: projectId, name},
-				);
-
-				return secret;
+				return client.raw<
+					Extract<
+						Endpoints,
+						{method: 'PUT'; path: '/v1/projects/@this/secrets/:name'}
+					>['body']
+				>(url, request);
 			},
 
 			/**

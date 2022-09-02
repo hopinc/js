@@ -123,6 +123,51 @@ export class APIClient {
 		>('DELETE', path, body, query, init);
 	}
 
+	async raw<T>(path: string, request: Request, query: Query<string> = {}) {
+		const url = this.url(path, query);
+
+		request.headers.set('Authorization', this.options.authentication);
+
+		if (!IS_BROWSER) {
+			request.headers.set('User-Agent', 'Hop-API-Client');
+		}
+
+		return this.parseResponse<T>(request, await fetch(url, request));
+	}
+
+	private async parseResponse<T>(
+		request: Request,
+		response: Response,
+	): Promise<T> {
+		if (
+			response.status === 204 ||
+			!response.headers.get('Content-Type')?.includes('application/json')
+		) {
+			// Probably a DELETE request with no body returned, so return undefined here
+			// This cast is (prolly) safe because endpoints that return nothing
+			// are typed as `Empty`
+			return undefined as unknown as T;
+		}
+
+		const result = await (response.json() as Promise<APIResponse<T>>).catch(
+			(error: Error): ErroredAPIResponse => {
+				return {
+					success: false,
+					error: {
+						code: 'local_client_error',
+						message: error.message,
+					},
+				};
+			},
+		);
+
+		if (!result.success) {
+			throw new HopAPIError(request, response, result);
+		}
+
+		return result.data;
+	}
+
 	private async request<T>(
 		method: Method,
 		path: string,
@@ -158,34 +203,6 @@ export class APIClient {
 			...init,
 		});
 
-		const response = await fetch(url, request);
-
-		if (
-			response.status === 204 ||
-			!response.headers.get('Content-Type')?.includes('application/json')
-		) {
-			// Probably a DELETE request with no body returned, so return undefined here
-			// This cast is (prolly) safe because endpoints that return nothing
-			// are typed as `Empty`
-			return undefined as unknown as T;
-		}
-
-		const result = await (response.json() as Promise<APIResponse<T>>).catch(
-			(error: Error): ErroredAPIResponse => {
-				return {
-					success: false,
-					error: {
-						code: 'local_client_error',
-						message: error.message,
-					},
-				};
-			},
-		);
-
-		if (!result.success) {
-			throw new HopAPIError(request, response, result);
-		}
-
-		return result.data;
+		return this.parseResponse<T>(request, await fetch(url, request));
 	}
 }
