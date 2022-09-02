@@ -22,11 +22,13 @@ export function join(a: string, b: string) {
  * @returns A string of query params
  */
 export function querystring(query: Query<string>): string {
-	const usefulQuery = Object.entries(query).filter(entry => {
-		const [, value] = entry;
+	const usefulQuery = Object.entries(query).filter(
+		(entry): entry is [string, string | number] => {
+			const [, value] = entry;
 
-		return value !== undefined;
-	});
+			return value !== undefined;
+		},
+	);
 
 	if (usefulQuery.length === 0) {
 		return '';
@@ -42,7 +44,7 @@ export function querystring(query: Query<string>): string {
 		const result = `${key}=${value.toString()}`;
 
 		if (acc === INITIAL_QUERYSTRING) {
-			return result;
+			return INITIAL_QUERYSTRING + result;
 		}
 
 		return acc + '&' + result;
@@ -55,7 +57,7 @@ export function createURLBuilder(base: string) {
 	return <Path extends string>(path: Path, query: Query<Path>) => {
 		query = {...query};
 
-		const urlWithQuery = path.replace(regex, param => {
+		const urlWithParams = path.replace(regex, param => {
 			param = param.substring(1);
 
 			if (param in query) {
@@ -77,8 +79,10 @@ export function createURLBuilder(base: string) {
 		});
 
 		const urlWithSearch = isObjectEmpty(query)
-			? urlWithQuery
-			: `${urlWithQuery}${querystring(query as Query<string>)}`;
+			? urlWithParams
+			: `${urlWithParams}${querystring(query as Query<string>)}`;
+
+		console.log(urlWithSearch);
 
 		return join(base, urlWithSearch);
 	};
