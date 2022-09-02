@@ -81,6 +81,12 @@ export type ChannelEndpoints =
 	| Endpoint<'DELETE', '/v1/channels/:channel_id', Empty>
 	| Endpoint<'GET', '/v1/channels/:channel_id', {channel: Channel}>
 	| Endpoint<'GET', '/v1/channels/:channel_id/tokens', {tokens: ChannelToken[]}>
+	| Endpoint<
+			'POST',
+			'/v1/channels/tokens/:token/messages',
+			Empty,
+			{e: string; d: unknown}
+	  >
 	| Endpoint<'PUT', '/v1/channels/:channel_id/subscribers/:token', Empty>
 	| Endpoint<'PATCH', '/v1/channels/:channel_id/state', Empty, State>
 	| Endpoint<'PUT', '/v1/channels/:channel_id/state', Empty, State>

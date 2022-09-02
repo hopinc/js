@@ -170,16 +170,22 @@ export const channels = sdk(client => {
 			return updateState(id, state, 'patch');
 		},
 
-		async publishMessage(
+		/**
+		 * Publishes a new event to a channel
+		 * @param channel The channel to publish to
+		 * @param event The event name
+		 * @param data The data for this event
+		 */
+		async publishMessage<T>(
 			channel: API.Channels.Channel | API.Channels.Channel['id'],
-			name: string,
-			data: unknown,
+			event: string,
+			data: T,
 		) {
 			const id = typeof channel === 'object' ? channel.id : channel;
 
 			await client.post(
 				'/v1/channels/:channel_id/messages',
-				{e: name, d: data},
+				{e: event, d: data},
 				{channel_id: id},
 			);
 		},
@@ -205,6 +211,24 @@ export const channels = sdk(client => {
 				);
 
 				return token;
+			},
+
+			/**
+			 * Publishes a direct message to a single token
+			 * @param token The token to publish a direct message to
+			 * @param event The event name
+			 * @param data The data for this event
+			 */
+			async publishDirectMessage<T>(
+				token: Id<'leap_token'>,
+				event: string,
+				data: T,
+			) {
+				await client.post(
+					'/v1/channels/tokens/:token/messages',
+					{e: event, d: data},
+					{token},
+				);
 			},
 		},
 	};
