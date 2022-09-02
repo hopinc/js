@@ -86,12 +86,12 @@ export const channels = sdk(client => {
 			const {channel} = id
 				? await client.put(
 						'/v1/channels/:channel_id',
-						{type, state: options?.state ?? null},
+						{type, state: options?.state ?? {}},
 						{project, channel_id: id},
 				  )
 				: await client.post(
 						'/v1/channels',
-						{type, state: options?.state ?? null},
+						{type, state: options?.state ?? {}},
 						{project},
 				  );
 
