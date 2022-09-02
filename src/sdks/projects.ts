@@ -186,12 +186,14 @@ export const projects = sdk(client => {
 					method: 'PUT',
 				});
 
-				return client.raw<
+				const {secret} = await client.raw<
 					Extract<
 						Endpoints,
 						{method: 'PUT'; path: '/v1/projects/@this/secrets/:name'}
 					>['res']
 				>(url, request);
+
+				return secret;
 			},
 
 			/**

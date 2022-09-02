@@ -71,10 +71,10 @@ export const channels = sdk(client => {
 		 * @param id An ID to assign to the channel (optional, set this to `undefined` or `null` if you do not want to specify an ID)
 		 * @param project A project ID (if necessary) to assign this to
 		 */
-		async create(
+		async create<T extends API.Channels.State>(
 			type: API.Channels.ChannelType,
 			id?: string | null,
-			options?: {state?: Record<string, any>} | null,
+			options?: {state?: T} | null,
 			project?: Id<'project'>,
 		) {
 			if (!project && client.authType !== 'ptk') {

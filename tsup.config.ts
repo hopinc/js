@@ -27,7 +27,7 @@ export default defineConfig({
 	entry: ['src/index.ts', 'src/utils/*/index.ts'],
 	splitting: true,
 	clean: true,
-	minify: true,
+	minify: false,
 	sourcemap: true,
 	dts: true,
 	format: ['cjs', 'esm'],
