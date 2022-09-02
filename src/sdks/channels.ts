@@ -213,9 +213,22 @@ export const channels = sdk(client => {
 				return token;
 			},
 
+			async setState(
+				id: Id<'leap_token'>,
+				state: API.Channels.ChannelToken['state'],
+			) {
+				const {token} = await client.patch(
+					'/v1/channels/tokens/:token',
+					{state},
+					{token: id},
+				);
+
+				return token;
+			},
+
 			async get(id: Id<'leap_token'>) {
-				const {token} = await client.get('/v1/channels/tokens/:token_id', {
-					token_id: id,
+				const {token} = await client.get('/v1/channels/tokens/:token', {
+					token: id,
 				});
 
 				return token;

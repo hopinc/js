@@ -98,4 +98,10 @@ export type ChannelEndpoints =
 			{e: string; d: unknown}
 	  >
 	| Endpoint<'GET', '/v1/channels', {channels: Channel[]}>
-	| Endpoint<'GET', '/v1/channels/tokens/:token_id', {token: ChannelToken}>;
+	| Endpoint<'GET', '/v1/channels/tokens/:token', {token: ChannelToken}>
+	| Endpoint<
+			'PATCH',
+			'/v1/channels/tokens/:token',
+			{token: ChannelToken},
+			{expiresAt?: Timestamp | null; state: ChannelToken['state']}
+	  >;
