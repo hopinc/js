@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+import {fetch, Headers, Request, Response} from '../util/fetch.js';
 import {ExtractRouteParams} from '../util/index.js';
 import {IS_BROWSER} from '../util/constants.js';
 import {createURLBuilder} from '../util/urls.js';
@@ -123,14 +123,14 @@ export class APIClient {
 		>('DELETE', path, body, query, init);
 	}
 
-	async raw<T>(url: string, request: Request) {
+	async raw<T>(request: Request) {
 		request.headers.set('Authorization', this.options.authentication);
 
 		if (!IS_BROWSER) {
 			request.headers.set('User-Agent', 'Hop-API-Client');
 		}
 
-		return this.parseResponse<T>(request, await fetch(url, request));
+		return this.parseResponse<T>(request, await fetch(request));
 	}
 
 	private async parseResponse<T>(
@@ -201,6 +201,6 @@ export class APIClient {
 			...init,
 		});
 
-		return this.parseResponse<T>(request, await fetch(url, request));
+		return this.parseResponse<T>(request, await fetch(request));
 	}
 }

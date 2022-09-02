@@ -191,7 +191,7 @@ export const projects = sdk(client => {
 						Endpoints,
 						{method: 'PUT'; path: '/v1/projects/@this/secrets/:name'}
 					>['res']
-				>(url, request);
+				>(request);
 
 				return secret;
 			},
