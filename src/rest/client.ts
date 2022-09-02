@@ -123,9 +123,7 @@ export class APIClient {
 		>('DELETE', path, body, query, init);
 	}
 
-	async raw<T>(path: string, request: Request, query: Query<string> = {}) {
-		const url = this.url(path, query);
-
+	async raw<T>(url: string, request: Request) {
 		request.headers.set('Authorization', this.options.authentication);
 
 		if (!IS_BROWSER) {

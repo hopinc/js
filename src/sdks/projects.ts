@@ -175,6 +175,7 @@ export const projects = sdk(client => {
 
 				const url = client.url('/v1/projects/@this/secrets/:name', {
 					name,
+					project: projectId,
 				});
 
 				const request = new Request(url, {
@@ -189,7 +190,7 @@ export const projects = sdk(client => {
 					Extract<
 						Endpoints,
 						{method: 'PUT'; path: '/v1/projects/@this/secrets/:name'}
-					>['body']
+					>['res']
 				>(url, request);
 			},
 
