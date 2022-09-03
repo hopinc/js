@@ -197,6 +197,14 @@ export const channels = sdk(client => {
 			});
 		},
 
+		async getStats(id: API.Channels.Channel['id']) {
+			const {stats} = await client.get('/v1/channels/:channel_id/stats', {
+				channel_id: id,
+			});
+
+			return stats;
+		},
+
 		tokens: {
 			async delete(token: Id<'leap_token'>) {
 				await client.delete('/v1/channels/tokens/:token', undefined, {
