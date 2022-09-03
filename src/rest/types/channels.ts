@@ -104,4 +104,5 @@ export type ChannelEndpoints =
 			'/v1/channels/tokens/:token',
 			{token: ChannelToken},
 			{expiresAt?: Timestamp | null; state: ChannelToken['state']}
-	  >;
+	  >
+	| Endpoint<'DELETE', '/v1/channels/tokens/:token', Empty>;

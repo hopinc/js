@@ -172,6 +172,7 @@ export const channels = sdk(client => {
 
 		/**
 		 * Publishes a new event to a channel
+		 *
 		 * @param channel The channel to publish to
 		 * @param event The event name
 		 * @param data The data for this event
@@ -190,7 +191,19 @@ export const channels = sdk(client => {
 			);
 		},
 
+		async delete(id: API.Channels.Channel['id']) {
+			await client.delete('/v1/channels/:channel_id', undefined, {
+				channel_id: id,
+			});
+		},
+
 		tokens: {
+			async delete(token: Id<'leap_token'>) {
+				await client.delete('/v1/channels/tokens/:token', undefined, {
+					token,
+				});
+			},
+
 			/**
 			 * Creates a new channel token for a project
 			 *
