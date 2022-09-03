@@ -57,6 +57,11 @@ export interface ChannelToken {
 	 * The project this channel token is associated with
 	 */
 	project_id: Id<'project'>;
+
+	/**
+	 * If this token is currently online (e.g. active heartbeat and connected to leap)
+	 */
+	is_online: boolean;
 }
 
 export type ChannelEndpoints =
