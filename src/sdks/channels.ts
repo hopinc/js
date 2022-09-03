@@ -247,6 +247,18 @@ export const channels = sdk(client => {
 				return token;
 			},
 
+			async isOnline(idOrToken: Id<'leap_token'> | API.Channels.ChannelToken) {
+				if (typeof idOrToken === 'object') {
+					return idOrToken.is_online;
+				}
+
+				const {token} = await client.get('/v1/channels/tokens/:token', {
+					token: idOrToken,
+				});
+
+				return token.is_online;
+			},
+
 			/**
 			 * Publishes a direct message to a single token
 			 * @param token The token to publish a direct message to
