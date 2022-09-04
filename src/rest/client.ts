@@ -2,8 +2,11 @@ import {fetch, Headers, Request, Response} from '../util/fetch.js';
 import {ExtractRouteParams} from '../util/index.js';
 import {IS_BROWSER} from '../util/constants.js';
 import {createURLBuilder} from '../util/urls.js';
+import {isNode} from '../util/environment.js';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.js';
 import {getIdPrefix, Id, Method} from './types/index.js';
+
+const httpsAgent = isNode ? require('https').Agent({keepAlive: true}) : null;
 
 export type APIAuthentication = Id<'ptk'> | Id<'bearer'> | Id<'pat'>;
 
@@ -132,7 +135,9 @@ export class APIClient {
 
 		return this.parseResponse<T>(
 			request,
-			await fetch(request, {keepalive: true}),
+
+			// @ts-ignore
+			await fetch(request, {keepalive: true, agent: httpsAgent}),
 		);
 	}
 
@@ -206,7 +211,8 @@ export class APIClient {
 
 		return this.parseResponse<T>(
 			request,
-			await fetch(request, {keepalive: true}),
+			// @ts-ignore
+			await fetch(request, {keepalive: true, agent: httpsAgent}),
 		);
 	}
 }
