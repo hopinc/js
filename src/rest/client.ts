@@ -130,7 +130,10 @@ export class APIClient {
 			request.headers.set('User-Agent', 'Hop-API-Client');
 		}
 
-		return this.parseResponse<T>(request, await fetch(request));
+		return this.parseResponse<T>(
+			request,
+			await fetch(request, {keepalive: true}),
+		);
 	}
 
 	private async parseResponse<T>(
@@ -201,6 +204,9 @@ export class APIClient {
 			...init,
 		});
 
-		return this.parseResponse<T>(request, await fetch(request));
+		return this.parseResponse<T>(
+			request,
+			await fetch(request, {keepalive: true}),
+		);
 	}
 }
