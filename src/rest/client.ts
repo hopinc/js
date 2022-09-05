@@ -6,8 +6,6 @@ import {isNode} from '../util/environment.js';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.js';
 import {getIdPrefix, Id, Method} from './types/index.js';
 
-const httpsAgent = isNode ? require('https').Agent({keepAlive: true}) : null;
-
 export type APIAuthentication = Id<'ptk'> | Id<'bearer'> | Id<'pat'>;
 
 export type APIAuthenticationType = APIAuthentication extends Id<infer T>
@@ -54,6 +52,7 @@ export class APIClient {
 	}
 
 	private readonly options;
+	private agent: unknown;
 
 	public readonly authType;
 	public readonly url;
@@ -62,6 +61,7 @@ export class APIClient {
 		this.options = options;
 		this.authType = APIClient.getAuthType(options.authentication);
 		this.url = createURLBuilder(options.baseUrl);
+		this.agent = null;
 	}
 
 	async get<Path extends Extract<Endpoints, {method: 'GET'}>['path']>(
@@ -131,6 +131,11 @@ export class APIClient {
 
 		if (!IS_BROWSER) {
 			request.headers.set('User-Agent', 'Hop-API-Client');
+		}
+
+		if (isNode && !this.agent) {
+			const https = await import('https');
+			this.agent = new https.Agent({keepAlive: true});
 		}
 
 		return this.parseResponse<T>(
@@ -209,10 +214,15 @@ export class APIClient {
 			...init,
 		});
 
+		if (isNode && !this.agent) {
+			const https = await import('https');
+			this.agent = new https.Agent({keepAlive: true});
+		}
+
 		return this.parseResponse<T>(
 			request,
 			// @ts-ignore
-			await fetch(request, {keepalive: true, agent: httpsAgent}),
+			await fetch(request, {keepalive: true, agent: this.agent}),
 		);
 	}
 }
