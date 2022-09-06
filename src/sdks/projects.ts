@@ -3,6 +3,94 @@ import {sdk} from './create.js';
 import {Request} from '../util/fetch.js';
 
 export const projects = sdk(client => {
+	const tokens = {
+		/**
+		 * Deletes a project token by its ID
+		 *
+		 * @param projectTokenId The ID of the project token to delete
+		 */
+		async delete(projectTokenId: Id<'ptkid'>, project?: Id<'project'>) {
+			if (client.authType !== 'ptk' && !project) {
+				throw new Error(
+					'Project ID is required for bearer or PAT authentication to delete a project token',
+				);
+			}
+
+			await client.delete(
+				project
+					? '/v1/projects/:project_id/tokens/:project_token_id'
+					: '/v1/projects/@this/tokens/:project_token_id',
+				undefined,
+				project
+					? {project_id: project, project_token_id: projectTokenId}
+					: {project_token_id: projectTokenId},
+			);
+		},
+
+		/**
+		 * Get all project tokens for a project
+		 *
+		 * @param projectId The project to fetch secrets for
+		 * @returns An array of all secrets for the project
+		 */
+		async get(projectId?: Id<'project'>) {
+			if (client.authType !== 'ptk' && !projectId) {
+				throw new Error(
+					'Project ID is required for bearer or PAT authentication',
+				);
+			}
+
+			if (!projectId) {
+				const {project_tokens: keys} = await client.get(
+					'/v1/projects/@this/tokens',
+					{},
+				);
+
+				return keys;
+			}
+
+			const {project_tokens: keys} = await client.get(
+				'/v1/projects/:project_id/tokens',
+				{project_id: projectId},
+			);
+
+			return keys;
+		},
+
+		/**
+		 * Creates a new project token
+		 *
+		 * @param projectId The project to create a key for
+		 * @param flags Permissions for this flag
+		 * @returns A newly created project token
+		 */
+		async create(flags: number, projectId?: Id<'project'>) {
+			if (!projectId && client.authType !== 'ptk') {
+				throw new Error(
+					'Project ID is required for bearer or PAT authentication to create a project token',
+				);
+			}
+
+			if (!projectId) {
+				const {project_token: token} = await client.post(
+					'/v1/projects/@this/tokens',
+					{flags},
+					{},
+				);
+
+				return token;
+			}
+
+			const {project_token: token} = await client.post(
+				'/v1/projects/:project_id/tokens',
+				{flags},
+				{project_id: projectId},
+			);
+
+			return token;
+		},
+	};
+
 	return {
 		async getAllMembers(projectId?: Id<'project'>) {
 			if (client.authType !== 'ptk' && !projectId) {
@@ -46,93 +134,12 @@ export const projects = sdk(client => {
 			return member;
 		},
 
-		projectTokens: {
-			/**
-			 * Deletes a project token by its ID
-			 *
-			 * @param projectTokenId The ID of the project token to delete
-			 */
-			async delete(projectTokenId: Id<'ptkid'>, project?: Id<'project'>) {
-				if (client.authType !== 'ptk' && !project) {
-					throw new Error(
-						'Project ID is required for bearer or PAT authentication to delete a project token',
-					);
-				}
+		/**
+		 * @deprecated Use .tokens instead
+		 */
+		projectTokens: tokens,
 
-				await client.delete(
-					project
-						? '/v1/projects/:project_id/tokens/:project_token_id'
-						: '/v1/projects/@this/tokens/:project_token_id',
-					undefined,
-					project
-						? {project_id: project, project_token_id: projectTokenId}
-						: {project_token_id: projectTokenId},
-				);
-			},
-
-			/**
-			 * Get all project tokens for a project
-			 *
-			 * @param projectId The project to fetch secrets for
-			 * @returns An array of all secrets for the project
-			 */
-			async get(projectId?: Id<'project'>) {
-				if (client.authType !== 'ptk' && !projectId) {
-					throw new Error(
-						'Project ID is required for bearer or PAT authentication',
-					);
-				}
-
-				if (!projectId) {
-					const {project_tokens: keys} = await client.get(
-						'/v1/projects/@this/tokens',
-						{},
-					);
-
-					return keys;
-				}
-
-				const {project_tokens: keys} = await client.get(
-					'/v1/projects/:project_id/tokens',
-					{project_id: projectId},
-				);
-
-				return keys;
-			},
-
-			/**
-			 * Creates a new project token
-			 *
-			 * @param projectId The project to create a key for
-			 * @param flags Permissions for this flag
-			 * @returns A newly created project token
-			 */
-			async create(flags: number, projectId?: Id<'project'>) {
-				if (!projectId && client.authType !== 'ptk') {
-					throw new Error(
-						'Project ID is required for bearer or PAT authentication to create a project token',
-					);
-				}
-
-				if (!projectId) {
-					const {project_token: token} = await client.post(
-						'/v1/projects/@this/tokens',
-						{flags},
-						{},
-					);
-
-					return token;
-				}
-
-				const {project_token: token} = await client.post(
-					'/v1/projects/:project_id/tokens',
-					{flags},
-					{project_id: projectId},
-				);
-
-				return token;
-			},
-		},
+		tokens,
 
 		secrets: {
 			/**
