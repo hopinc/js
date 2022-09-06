@@ -91,7 +91,7 @@ export const projects = sdk(client => {
 		},
 	};
 
-	return {
+	const projectsSDK = {
 		async getAllMembers(projectId?: Id<'project'>) {
 			if (client.authType !== 'ptk' && !projectId) {
 				throw new Error(
@@ -240,4 +240,6 @@ export const projects = sdk(client => {
 			},
 		},
 	};
+
+	return projectsSDK;
 });

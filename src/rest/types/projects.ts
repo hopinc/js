@@ -71,7 +71,7 @@ export interface ProjectToken {
  */
 export enum ProjectType {
 	/**
-	 * A regular project is
+	 * A standard project type
 	 */
 	REGULAR = 'regular',
 
