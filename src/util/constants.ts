@@ -1,3 +1,8 @@
+// Runtime specific globals
+// only exist so we can have type safety in this file
+declare const Bun: object | undefined;
+declare const Deno: object | undefined;
+
 /**
  * The default base URL for Hop's API.
  */
@@ -14,4 +19,6 @@ export const IS_BROWSER = typeof window !== 'undefined';
 export const IS_NODE =
 	typeof process !== 'undefined' &&
 	process.versions != null &&
-	process.versions.node != null;
+	process.versions.node != null &&
+	typeof Bun === 'undefined' &&
+	typeof Deno === 'undefined';

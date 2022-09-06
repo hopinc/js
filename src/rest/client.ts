@@ -132,27 +132,22 @@ export class APIClient {
 			request.headers.set('User-Agent', 'Hop-API-Client');
 		}
 
+		return this.executeRequest<T>(request);
+	}
+
+	private async executeRequest<T>(request: Request): Promise<T> {
 		if (IS_NODE && !this.agent) {
 			const https = await import('https');
 			this.agent = new https.Agent({keepAlive: true});
 		}
 
-		return this.parseResponse<T>(
-			request,
+		const response = await fetch(request, {
+			keepalive: true,
 
-			await fetch(request, {
-				keepalive: true,
+			// @ts-expect-error 2345 Targeting multiple runtimes, this will only work in node
+			agent: this.agent,
+		});
 
-				// @ts-ignore
-				agent: httpsAgent,
-			}),
-		);
-	}
-
-	private async parseResponse<T>(
-		request: Request,
-		response: Response,
-	): Promise<T> {
 		if (
 			response.status === 204 ||
 			!response.headers.get('Content-Type')?.includes('application/json')
@@ -217,19 +212,6 @@ export class APIClient {
 			...init,
 		});
 
-		if (IS_NODE && !this.agent) {
-			const https = await import('https');
-			this.agent = new https.Agent({keepAlive: true});
-		}
-
-		return this.parseResponse<T>(
-			request,
-			await fetch(request, {
-				keepalive: true,
-
-				// @ts-ignore
-				agent: this.agent,
-			}),
-		);
+		return this.executeRequest<T>(request);
 	}
 }
