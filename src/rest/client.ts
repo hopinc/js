@@ -1,8 +1,7 @@
-import {fetch, Headers, Request, Response} from '../util/fetch.js';
+import {fetch, Headers, Request} from '../util/fetch.js';
 import {ExtractRouteParams} from '../util/index.js';
-import {IS_BROWSER} from '../util/constants.js';
+import {IS_BROWSER, IS_NODE} from '../util/constants.js';
 import {createURLBuilder} from '../util/urls.js';
-import {isNode} from '../util/environment.js';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.js';
 import {getIdPrefix, Id, Method} from './types/index.js';
 
@@ -133,7 +132,7 @@ export class APIClient {
 			request.headers.set('User-Agent', 'Hop-API-Client');
 		}
 
-		if (isNode && !this.agent) {
+		if (IS_NODE && !this.agent) {
 			const https = await import('https');
 			this.agent = new https.Agent({keepAlive: true});
 		}
@@ -141,8 +140,12 @@ export class APIClient {
 		return this.parseResponse<T>(
 			request,
 
-			// @ts-ignore
-			await fetch(request, {keepalive: true, agent: httpsAgent}),
+			await fetch(request, {
+				keepalive: true,
+
+				// @ts-ignore
+				agent: httpsAgent,
+			}),
 		);
 	}
 
@@ -214,15 +217,19 @@ export class APIClient {
 			...init,
 		});
 
-		if (isNode && !this.agent) {
+		if (IS_NODE && !this.agent) {
 			const https = await import('https');
 			this.agent = new https.Agent({keepAlive: true});
 		}
 
 		return this.parseResponse<T>(
 			request,
-			// @ts-ignore
-			await fetch(request, {keepalive: true, agent: this.agent}),
+			await fetch(request, {
+				keepalive: true,
+
+				// @ts-ignore
+				agent: this.agent,
+			}),
 		);
 	}
 }
