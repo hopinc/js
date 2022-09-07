@@ -289,20 +289,20 @@ export const ignite = sdk(client => {
 				 * @param deployment The deployment to create a gateway on
 				 * @param type The type of the gatway to create, either internal or external
 				 * @param protocol The protocol that the gateway will listen for
-				 * @param listeningPort The port to listen on
+				 * @param targetPort The port to listen on
 				 */
 				async create(
 					deployment: Deployment | Deployment['id'],
 					type: GatewayType,
 					protocol: Gateway['protocol'],
-					listeningPort: number,
+					targetPort: number,
 				) {
 					const deploymentId =
 						typeof deployment === 'object' ? deployment.id : deployment;
 
 					const {gateway} = await client.post(
 						'/v1/ignite/deployments/:deployment_id/gateways',
-						{type, protocol, target_port: listeningPort},
+						{type, protocol, target_port: targetPort},
 						{deployment_id: deploymentId},
 					);
 
