@@ -471,5 +471,5 @@ export type IgniteEndpoints =
 			'POST',
 			'/v1/ignite/deployments/:deployment_id/gateways',
 			{gateway: Gateway},
-			{type: GatewayType; listening_port: number; protocol: Gateway['protocol']}
+			{type: GatewayType; target_port: number; protocol: Gateway['protocol']}
 	  >;

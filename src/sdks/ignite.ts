@@ -302,7 +302,7 @@ export const ignite = sdk(client => {
 
 					const {gateway} = await client.post(
 						'/v1/ignite/deployments/:deployment_id/gateways',
-						{type, protocol, listening_port: listeningPort},
+						{type, protocol, target_port: listeningPort},
 						{deployment_id: deploymentId},
 					);
 
