@@ -10,6 +10,18 @@ const hop = new Hop(
 	'https://api-staging.hop.io',
 );
 
+test('It fetches the project members', async () => {
+	const members = await hop.projects.getAllMembers();
+	assert.ok(members.length > 0);
+});
+
+test('It validates an ID', () => {
+	assert.ok(validateId('ptk_1234567890'));
+	assert.ok(validateId('ptk_1234567890', 'ptk'));
+	assert.ok(validateId('leap_token_1234567890', 'leap_token'));
+	assert.ok(validateId('leap_token_1234567890', ['leap_token', 'bearer']));
+});
+
 test('It validates that the token is valid', () => {
 	assert(validateId('ptk_testing', 'ptk'), "Couldn't validate Project Token");
 });
