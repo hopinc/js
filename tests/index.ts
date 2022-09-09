@@ -15,6 +15,11 @@ test('It fetches the project members', async () => {
 	assert.ok(members.length > 0);
 });
 
+test('It gets all channels', async () => {
+	const channels = await hop.channels.getAll();
+	assert.ok(Array.isArray(channels));
+});
+
 test('It validates an ID', () => {
 	assert.ok(validateId('ptk_1234567890'));
 	assert.ok(validateId('ptk_1234567890', 'ptk'));
