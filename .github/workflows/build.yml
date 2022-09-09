@@ -19,3 +19,8 @@ jobs:
         run: yarn build
         env:
           NODE_ENV: production
+
+      - name: Test
+        run: yarn test
+        env:
+          NODE_ENV: production
