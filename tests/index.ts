@@ -10,6 +10,40 @@ const hop = new Hop(
 	'https://api-staging.hop.io',
 );
 
+test('The HTTP client correctly forms URLs', t => {
+	t.todo('Move these tests to a describe() call');
+
+	assert.equal(
+		hop.client.url('/v1/path/to/:resource', {
+			resource: 'my-resource',
+			limit: 20,
+			skip: 20,
+		}),
+		'https://api-staging.hop.io/v1/path/to/my-resource?limit=20&skip=20',
+	);
+
+	assert.equal(
+		hop.client.url('/v1/path/to/:resource', {
+			resource: 'my-resource',
+			limit: 20,
+		}),
+		'https://api-staging.hop.io/v1/path/to/my-resource?limit=20',
+	);
+
+	assert.equal(
+		hop.client.url('/v1/path/to/:resource/:param', {
+			resource: 'my-resource',
+			param: 'param2',
+			limit: 20,
+		}),
+		'https://api-staging.hop.io/v1/path/to/my-resource/param2?limit=20',
+	);
+});
+
+test('The HTTP client can make a request', async () => {
+	await assert.doesNotReject(() => hop.client.get('/v1/channels', {}));
+});
+
 test('It fetches the project members', async () => {
 	const members = await hop.projects.getAllMembers();
 	assert.ok(members.length > 0);
