@@ -5,9 +5,12 @@ import {test} from 'node:test';
 
 import {id, Hop, RuntimeType, validateId} from '../src/index.js';
 
+const BASE_URL =
+	process.env.TEST_HOP_API_BASE_URL ?? 'https://api-staging.hop.io';
+
 const hop = new Hop(
 	id(process.env.HOP_TOKEN, ['ptk', 'bearer', 'pat']),
-	'https://api-staging.hop.io',
+	BASE_URL,
 );
 
 test('The HTTP client correctly forms URLs', t => {
@@ -19,7 +22,7 @@ test('The HTTP client correctly forms URLs', t => {
 			limit: 20,
 			skip: 20,
 		}),
-		'https://api-staging.hop.io/v1/path/to/my-resource?limit=20&skip=20',
+		BASE_URL + '/v1/path/to/my-resource?limit=20&skip=20',
 	);
 
 	assert.equal(
@@ -27,7 +30,7 @@ test('The HTTP client correctly forms URLs', t => {
 			resource: 'my-resource',
 			limit: 20,
 		}),
-		'https://api-staging.hop.io/v1/path/to/my-resource?limit=20',
+		BASE_URL + '/v1/path/to/my-resource?limit=20',
 	);
 
 	assert.equal(
@@ -36,7 +39,7 @@ test('The HTTP client correctly forms URLs', t => {
 			param: 'param2',
 			limit: 20,
 		}),
-		'https://api-staging.hop.io/v1/path/to/my-resource/param2?limit=20',
+		BASE_URL + '/v1/path/to/my-resource/param2?limit=20',
 	);
 });
 
