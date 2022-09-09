@@ -7,13 +7,13 @@ import {getIdPrefix, Id, Method} from './types/index.js';
 
 export type APIAuthentication = Id<'ptk'> | Id<'bearer'> | Id<'pat'>;
 
-export type APIAuthenticationType = APIAuthentication extends Id<infer T>
+export type APIAuthenticationPrefix = APIAuthentication extends Id<infer T>
 	? T
 	: never;
 
 export function validateAPIAuthentication(
 	auth: string,
-): auth is APIAuthenticationType {
+): auth is APIAuthenticationPrefix {
 	return auth === 'bearer' || auth === 'pat' || auth === 'ptk';
 }
 

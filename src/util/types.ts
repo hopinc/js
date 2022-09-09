@@ -1,3 +1,5 @@
+import {formatList} from './lists.js';
+
 export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export type Empty = void;
@@ -129,13 +131,17 @@ export function validateIdPrefix<T extends IdPrefixes = IdPrefixes>(
  */
 export function validateId<T extends IdPrefixes = IdPrefixes>(
 	maybeId: string,
-	prefix?: T,
+	prefix?: T | T[],
 ): maybeId is Id<T> {
+	if (Array.isArray(prefix)) {
+		return prefix.some(p => validateId(maybeId, p));
+	}
+
 	if (!prefix) {
 		return ID_PREFIXES.some(({prefix}) => maybeId.startsWith(`${prefix}_`));
 	}
 
-	return maybeId.startsWith(prefix);
+	return maybeId.startsWith(`${prefix}_`);
 }
 
 export function getIdPrefix<T extends IdPrefixes>(id: string, expect?: T) {
@@ -156,42 +162,43 @@ export function getIdPrefix<T extends IdPrefixes>(id: string, expect?: T) {
 	return prefix;
 }
 
-/**
- * Casts a variable into an ID for TypeScript
- *
- * @param id The variable to cast into an id
- * @param prefix The type of id to cast to
- * @returns A valid id string
- *
- * @example
- * ```ts
- * declare function createContainer(id: Id<'container'>): void
- * declare const containerId: string;
- *
- * // Error, string cannot be assigned to Id<'container'>
- * createContainer(containerId);
- *
- * // Successfully casts and compiles
- * createContainer(asId(containerId, 'container'));
- * ```
- */
-export function asId<T extends IdPrefixes>(id: string, prefix: T) {
-	return id as Id<T>;
+export function id<T extends IdPrefixes = IdPrefixes>(
+	maybeId?: string,
+	prefix?: T | T[],
+) {
+	assertId(maybeId, prefix);
+	return maybeId;
 }
 
-/**
- * Alias for {@link asId}
- */
-export const id = asId;
-
 export function assertId<T extends IdPrefixes = IdPrefixes>(
-	maybeId: string,
-	prefix?: T,
+	maybeId?: string,
+	prefix?: T | T[],
 	message?: string,
 ): asserts maybeId is Id<T> {
-	if (!validateId(maybeId, prefix)) {
+	const expectedPrefix =
+		prefix === undefined
+			? '<prefix>'
+			: Array.isArray(prefix)
+			? formatList(prefix, 'disjunction')
+			: prefix;
+
+	if (!maybeId) {
 		throw new Error(
-			message ?? `Invalid id: ${maybeId}. Expected ${prefix}_{string}`,
+			message ??
+				`No value specified trying to assert an ID. Expected \`${expectedPrefix}\` and found ${maybeId}.`,
+		);
+	}
+
+	if (!validateId(maybeId, prefix)) {
+		const expectedPrefix =
+			prefix === undefined
+				? undefined
+				: Array.isArray(prefix)
+				? formatList(prefix, 'disjunction')
+				: prefix;
+
+		throw new Error(
+			message ?? `Invalid id: ${maybeId}. Expected \`${expectedPrefix}\`.`,
 		);
 	}
 }

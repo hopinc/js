@@ -7,3 +7,4 @@ node_modules
 dist
 _workbench.ts
 docs
+.env

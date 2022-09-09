@@ -111,6 +111,7 @@ __metadata:
     "@types/glob": ^8.0.0
     "@types/node": ^18.7.14
     cross-fetch: ^3.1.5
+    dotenv: ^16.0.2
     glob: ^8.0.3
     prettier: ^2.7.1
     tsup: ^6.2.3
@@ -461,6 +462,13 @@ __metadata:
   dependencies:
     path-type: ^4.0.0
   checksum: fa05e18324510d7283f55862f3161c6759a3f2f8dbce491a2fc14c8324c498286c54282c1f0e933cb930da8419b30679389499b919122952a4f8592362ef4615
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^16.0.2":
+  version: 16.0.2
+  resolution: "dotenv@npm:16.0.2"
+  checksum: ca8f9ca2d67929c7771069f4c31b4e46b9932621009e658e5afd655dde2d69b77642bf36dbc9e72bc170523dfd908a9ee41c26f034c1fdc605ace3b1b4b10faf
   languageName: node
   linkType: hard
 

@@ -22,3 +22,5 @@ export const IS_NODE =
 	process.versions.node != null &&
 	typeof Bun === 'undefined' &&
 	typeof Deno === 'undefined';
+
+export const SUPPORTS_INTL = typeof Intl !== 'undefined';
