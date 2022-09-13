@@ -5,8 +5,14 @@
 	"types": "./dist/index.d.ts",
 	"module": "./dist/index.js",
 	"exports": {
-		"import": "./dist/index.js",
-		"require": "./dist/index.cjs"
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./utils/zod": {
+			"import": "./dist/utils/zod/index.js",
+			"require": "./dist/utils/zod/index.cjs"
+		}
 	},
 	"type": "module",
 	"repository": "https://github.com/hopinc/hop-js.git",
