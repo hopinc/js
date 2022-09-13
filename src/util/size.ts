@@ -1,9 +1,13 @@
-export const units = ['gb', 'mb', 'kb', 'b'] as const;
+export const byteUnits = ['GB', 'MB', 'KB', 'B'] as const;
 
-export type ByteString = `${number}${typeof units[number]}`;
+export type ByteUnit =
+	| typeof byteUnits[number]
+	| Uppercase<typeof byteUnits[number]>;
+
+export type ByteString = `${number}${ByteUnit}`;
 
 export function isValidByteString(value: string): value is ByteString {
-	return units.some(unit => {
+	return byteUnits.some(unit => {
 		if (!value.endsWith(unit)) {
 			return false;
 		}
@@ -12,14 +16,21 @@ export function isValidByteString(value: string): value is ByteString {
 	});
 }
 
+const multipliers: Record<ByteUnit, number> = {
+	B: 1,
+	KB: 1024,
+	MB: 1024 * 1024,
+	GB: 1024 * 1024 * 1024,
+};
+
 /**
  * Parses a byte size string into bytes
  * @param size The size of anything in gigabytes, megabytes, kilobytes or bytes
  */
 export function parseSize(size: string) {
-	size = size.toLowerCase();
+	size = size.toUpperCase();
 
-	const unit = units.find(u => size.endsWith(u));
+	const unit = byteUnits.find(u => size.endsWith(u));
 	if (!unit) {
 		throw new Error(`Invalid size: ${size}`);
 	}
@@ -29,15 +40,10 @@ export function parseSize(size: string) {
 		throw new Error(`Invalid size: ${size}`);
 	}
 
-	switch (unit.toLowerCase()) {
-		case 'gb':
-			return num * 1024 * 1024 * 1024;
-		case 'mb':
-			return num * 1024 * 1024;
-		case 'kb':
-			return num * 1024;
-		case 'b':
-		default:
-			return num;
-	}
+	return multipliers[unit] * num;
 }
+
+/**
+ * @deprecated use `byteUnits` instead
+ */
+export const units = byteUnits;

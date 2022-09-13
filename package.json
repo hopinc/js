@@ -28,11 +28,12 @@
 	"scripts": {
 		"build": "rm -rf dist && tsup",
 		"bench": "HOP_DEBUG=true tsx _workbench.ts",
-		"release": "yarn build && yarn npm publish",
+		"release": "yarn build && yarn changeset publish",
 		"vercel-build": "yarn typedoc --plugin typedoc-plugin-missing-exports src/index.ts",
 		"test": "tsx tests/index.ts"
 	},
 	"devDependencies": {
+		"@changesets/cli": "^2.24.4",
 		"@types/glob": "^8.0.0",
 		"@types/node": "^18.7.14",
 		"dotenv": "^16.0.2",
