@@ -1,7 +1,7 @@
 import {create, Infer} from '@onehop/json-methods';
 import {API, assertId, Id} from '../rest/index.js';
 import {Deployment, Gateway, GatewayType} from '../rest/types/ignite.js';
-import {parseSize} from '../util/index.js';
+import {parseSize, validateId} from '../util/index.js';
 import {sdk} from './create.js';
 
 const SIX_MB_IN_BYTES = 6 * 1024 * 1024;
@@ -133,8 +133,8 @@ export const ignite = sdk(client => {
 	 * @param name The deployment name to get
 	 */
 	async function getDeployment(
-		projectId: Id<'project'>,
 		name: string,
+		projectId?: Id<'project'>,
 	): Promise<Infer<typeof Deployments>>;
 
 	/**
@@ -144,36 +144,30 @@ export const ignite = sdk(client => {
 	 */
 	async function getDeployment(
 		id: Id<'deployment'>,
+		projectId?: Id<'project'>,
 	): Promise<Infer<typeof Deployments>>;
 
 	async function getDeployment(
-		projectIdOrId: Id<'project'> | Id<'deployment'>,
-		name?: string,
+		idOrName: Id<'deployment'> | string,
+		projectId?: Id<'project'>,
 	): Promise<Infer<typeof Deployments>> {
-		if (name) {
-			assertId(
-				projectIdOrId,
-				'project',
-				'You must provide a project ID to get a deployment by name',
-			);
-
+		if (!validateId(idOrName, 'deployment')) {
 			const {deployment} = await client.get('/v1/ignite/deployments/search', {
-				name,
-				project: projectIdOrId,
+				name: idOrName,
+				project: projectId,
 			});
 
 			return Deployments.from(deployment);
 		}
 
-		assertId(
-			projectIdOrId,
-			'deployment',
-			'You must provide a valid deployment ID.',
-		);
+		assertId(idOrName, 'deployment', 'You must provide a valid deployment ID.');
 
 		const {deployment} = await client.get(
 			'/v1/ignite/deployments/:deployment_id',
-			{deployment_id: projectIdOrId},
+			{
+				deployment_id: idOrName,
+				project: projectId,
+			},
 		);
 
 		return Deployments.from(deployment);

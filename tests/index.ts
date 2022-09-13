@@ -82,7 +82,7 @@ test('it creates a deployment', async t => {
 		env: {},
 		resources: {
 			vcpu: 0.5,
-			ram: '128mb',
+			ram: '128MB',
 			vgpu: [],
 		},
 	});
