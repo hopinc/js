@@ -5,8 +5,14 @@
 	"types": "./dist/index.d.ts",
 	"module": "./dist/index.js",
 	"exports": {
-		"import": "./dist/index.js",
-		"require": "./dist/index.cjs"
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./utils/zod": {
+			"import": "./dist/utils/zod/index.js",
+			"require": "./dist/utils/zod/index.cjs"
+		}
 	},
 	"type": "module",
 	"repository": "https://github.com/hopinc/hop-js.git",
@@ -35,20 +41,20 @@
 	"devDependencies": {
 		"@changesets/cli": "^2.24.4",
 		"@types/glob": "^8.0.0",
-		"@types/node": "^18.7.14",
+		"@types/node": "^18.7.17",
 		"dotenv": "^16.0.2",
 		"glob": "^8.0.3",
 		"prettier": "^2.7.1",
 		"tsup": "^6.2.3",
 		"tsx": "^3.9.0",
-		"typedoc": "^0.23.12",
-		"typedoc-plugin-markdown": "^3.13.5",
+		"typedoc": "^0.23.14",
+		"typedoc-plugin-markdown": "^3.13.6",
 		"typedoc-plugin-missing-exports": "^1.0.0",
-		"typescript": "^4.8.2"
+		"typescript": "^4.8.3"
 	},
 	"dependencies": {
-		"@onehop/json-methods": "^1.1.2",
+		"@onehop/json-methods": "^1.2.0",
 		"cross-fetch": "^3.1.5",
-		"zod": "^3.18.0"
+		"zod": "^3.19.1"
 	}
 }
