@@ -405,27 +405,27 @@ __metadata:
   resolution: "@onehop/js@workspace:."
   dependencies:
     "@changesets/cli": ^2.24.4
-    "@onehop/json-methods": ^1.1.2
+    "@onehop/json-methods": ^1.2.0
     "@types/glob": ^8.0.0
-    "@types/node": ^18.7.14
+    "@types/node": ^18.7.17
     cross-fetch: ^3.1.5
     dotenv: ^16.0.2
     glob: ^8.0.3
     prettier: ^2.7.1
     tsup: ^6.2.3
     tsx: ^3.9.0
-    typedoc: ^0.23.12
-    typedoc-plugin-markdown: ^3.13.5
+    typedoc: ^0.23.14
+    typedoc-plugin-markdown: ^3.13.6
     typedoc-plugin-missing-exports: ^1.0.0
-    typescript: ^4.8.2
-    zod: ^3.18.0
+    typescript: ^4.8.3
+    zod: ^3.19.1
   languageName: unknown
   linkType: soft
 
-"@onehop/json-methods@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@onehop/json-methods@npm:1.1.2"
-  checksum: 296ffa0c5ee310cff568ddaadc08d739a483092a7866d5ce0aba7164b2fe96e533f9212eeb8d74457281291561b7553cd2794d43f64f5cfffcf09331ce88e922
+"@onehop/json-methods@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@onehop/json-methods@npm:1.2.0"
+  checksum: 010bcd12862e0862b32d246bd7314a71e77924328facd70fdd10b44aa1aaaea9fb8a591008ca04c5fe250eeb0afc99d18a692603e2c0e92810c77820fc85e0f5
   languageName: node
   linkType: hard
 
@@ -483,10 +483,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.7.14":
-  version: 18.7.14
-  resolution: "@types/node@npm:18.7.14"
-  checksum: 99cf28ff854100158de875cca23c7acc3cc01dfee526a52b90b7f36767c821bcbaf2be0a98a70f06f3b78f3c60639168ff949d725b61e2e124f9f71f1fb8043d
+"@types/node@npm:^18.7.17":
+  version: 18.7.17
+  resolution: "@types/node@npm:18.7.17"
+  checksum: bb1b832f4ad42a106d189d87e95aef117f0026a7ea291f34c5d106a25419d6d4c9d39099688ad46746cc3c2307c263be4adec1049a35dc12c9e48f19975b2dc6
   languageName: node
   linkType: hard
 
@@ -3925,14 +3925,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-plugin-markdown@npm:^3.13.5":
-  version: 3.13.5
-  resolution: "typedoc-plugin-markdown@npm:3.13.5"
+"typedoc-plugin-markdown@npm:^3.13.6":
+  version: 3.13.6
+  resolution: "typedoc-plugin-markdown@npm:3.13.6"
   dependencies:
     handlebars: ^4.7.7
   peerDependencies:
     typedoc: ">=0.23.0"
-  checksum: e062618e3bf31c9dad5a70c4a028ef4853b8cbe85128f73bbb434ddf2346773e3cc23254dc8e84d5470fd6e1ba7edbe953e173332be3332efe128a54d8721faf
+  checksum: eae59997759f485b2a6f2c306dc6de47dc0b008acc4651d66a24b8ba31fc7fd7729b69ba0b1235aaab268931701510ef5af88588f9b3ea124166a2ca7b63f954
   languageName: node
   linkType: hard
 
@@ -3945,9 +3945,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.23.12":
-  version: 0.23.12
-  resolution: "typedoc@npm:0.23.12"
+"typedoc@npm:^0.23.14":
+  version: 0.23.14
+  resolution: "typedoc@npm:0.23.14"
   dependencies:
     lunr: ^2.3.9
     marked: ^4.0.19
@@ -3957,27 +3957,27 @@ __metadata:
     typescript: 4.6.x || 4.7.x || 4.8.x
   bin:
     typedoc: bin/typedoc
-  checksum: 42a4448f7a466cb550ccb8d16982363e5209d2f3c844cd015ba7135d2046f538428a1394d9932ab1402c04ef6d7d67403deeb14442d1f06e9f03e807b51b1b38
+  checksum: 4037dc0db4aa8b205ac505bdc191de404ea2da3eb8dabbf8172851c239b85a96fbfd81503dc2d4789066d6901d76c552abc73ee04a239763b69b90587d44527b
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.8.2":
-  version: 4.8.2
-  resolution: "typescript@npm:4.8.2"
+"typescript@npm:^4.8.3":
+  version: 4.8.3
+  resolution: "typescript@npm:4.8.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 7f5b81d0d558c9067f952c7af52ab7f19c2e70a916817929e4a5b256c93990bf3178eccb1ac8a850bc75df35f6781b6f4cb3370ce20d8b1ded92ed462348f628
+  checksum: 8286a5edcaf3d68e65c451aa1e7150ad1cf53ee0813c07ec35b7abdfdb10f355ecaa13c6a226a694ae7a67785fd7eeebf89f845da0b4f7e4a35561ddc459aba0
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.8.2#~builtin<compat/typescript>":
-  version: 4.8.2
-  resolution: "typescript@patch:typescript@npm%3A4.8.2#~builtin<compat/typescript>::version=4.8.2&hash=7ad353"
+"typescript@patch:typescript@^4.8.3#~builtin<compat/typescript>":
+  version: 4.8.3
+  resolution: "typescript@patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=7ad353"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 6f49363af8af2fe480da1d5fa68712644438785208b06690a3cbe5e7365fd652c3a0f1e587bc8684d78fb69de3dde4de185c0bad7bb4f3664ddfc813ce8caad6
+  checksum: 0404a09c625df01934ef774b45ce1ca57ccae41cd625fcdbb82056715320d9329e70d9d75c2c732ec6ef947444ca978c189a332b71fa21f5c1437d5a83e24906
   languageName: node
   linkType: hard
 
@@ -4292,9 +4292,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.18.0":
-  version: 3.18.0
-  resolution: "zod@npm:3.18.0"
-  checksum: 86a9a9928f4b40a07020d4b9832842fa4a70050c2d7bd1b2866bc1acfd734aa53a40f87a99a4312a637341a608b0105770c7a1f83b56df78e97691b4f5badcd8
+"zod@npm:^3.19.1":
+  version: 3.19.1
+  resolution: "zod@npm:3.19.1"
+  checksum: 56e420ea5845912324a8fc61833714a2aec84954e418b52660d76502183c6e62fef9447cbfa64349640c5ce190cf2c24267e006bb80f066183e2f3fa9fe11864
   languageName: node
   linkType: hard
