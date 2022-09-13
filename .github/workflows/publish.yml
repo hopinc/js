@@ -29,9 +29,13 @@ jobs:
       - name: Check we have changesets since master
         run: yarn changeset status --since=master
 
+      - name: Bump version
+        run: yarn changeset version
+
       - name: Create Release Pull Request or Publish to npm
         uses: changesets/action@v1
         with:
           publish: yarn release
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
