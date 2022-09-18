@@ -63,6 +63,15 @@ export enum ContainerState {
 }
 
 /**
+ * Restart policy for deployments
+ */
+export enum RestartPolicy {
+	NEVER = 'never',
+	ALWAYS = 'always',
+	ON_FAILURE = 'on-failure',
+}
+
+/**
  * Types for supported GPU
  */
 export enum VgpuType {
@@ -184,6 +193,11 @@ export type DeploymentConfig = {
 	 * Resources allocated to this deployment
 	 */
 	resources: Resources;
+
+	/**
+	 * Restart policy for this deployment
+	 */
+	restart_policy: RestartPolicy;
 };
 
 /**
