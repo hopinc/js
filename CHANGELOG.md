@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.6.4
+
+### Patch Changes
+
+- 9fee236: Added jsdoc to container metadata
+
 ## 1.6.3
 
 ### Patch Changes
