@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.6.5
+
+### Patch Changes
+
+- 5a892c2: Rename hop-js to js (changed on GitHub)
+
 ## 1.6.4
 
 ### Patch Changes
