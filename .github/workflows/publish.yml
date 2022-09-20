@@ -46,4 +46,4 @@ jobs:
           git config --global user.name "Hop CI"
           git add .
           git commit -m "Bump version"
-          git push -u --set-upstream origin master
+          git push -u --set-upstream origin master --force
