@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.6.3
+
+### Patch Changes
+
+- 8923323: bump to 1.6.1
+
 ## 1.1.0
 
 ### Minor Changes
