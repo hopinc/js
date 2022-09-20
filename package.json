@@ -15,8 +15,8 @@
 		}
 	},
 	"type": "module",
-	"repository": "https://github.com/hopinc/hop-js.git",
-	"homepage": "https://js.hop.io",
+	"repository": "https://github.com/hopinc/js.git",
+	"homepage": "https://hop.io",
 	"author": "Hop <developers@hop.io>",
 	"license": "MIT",
 	"sideEffects": false,
