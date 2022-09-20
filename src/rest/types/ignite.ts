@@ -104,6 +104,10 @@ export interface Container {
 		last_start: Timestamp;
 	};
 
+	metadata: {
+		last_exit_code?: number;
+	};
+
 	/**
 	 * The type of this container
 	 */

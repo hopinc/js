@@ -3,7 +3,7 @@ import 'dotenv/config';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 
-import {id, Hop, RuntimeType, validateId} from '../src/index.js';
+import {id, Hop, validateId} from '../src/index.js';
 
 const BASE_URL =
 	process.env.TEST_HOP_API_BASE_URL ?? 'https://api-staging.hop.io';
