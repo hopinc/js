@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.7.0
+
+### Minor Changes
+
+- dcd458c: Make await import('https') only run on node using conditional export
+
 ## 1.6.5
 
 ### Patch Changes
