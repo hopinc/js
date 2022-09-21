@@ -4,9 +4,12 @@ export type ByteUnit =
 	| typeof byteUnits[number]
 	| Uppercase<typeof byteUnits[number]>;
 
-export type ByteString = `${number}${ByteUnit}`;
+export type ByteSizeString = `${number}${ByteUnit}`;
 
-export function isValidByteString(value: string): value is ByteString {
+/** @deprecated */
+export type ByteString = ByteSizeString;
+
+export function isValidByteString(value: string): value is ByteSizeString {
 	return byteUnits.some(unit => {
 		if (!value.endsWith(unit)) {
 			return false;
