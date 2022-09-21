@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.8.1
+
+### Patch Changes
+
+- c53642c: Added stateful RuntimeType
+
 ## 1.8.0
 
 ### Minor Changes
