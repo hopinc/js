@@ -318,7 +318,7 @@ export interface ContainerLog {
 	/**
 	 * The level of the log. stdout becomes `info`
 	 */
-	level: 'info' | 'stderr';
+	level: 'info' | 'error';
 }
 
 /**
