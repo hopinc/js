@@ -3,6 +3,9 @@ import 'dotenv/config';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 
+// @ts-expect-error This is usually injected by tsup
+globalThis.TSUP_IS_NODE = true;
+
 import {id, Hop, validateId} from '../src/index.js';
 
 const BASE_URL =
