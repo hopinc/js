@@ -13,14 +13,4 @@ export const DEFAULT_BASE_URL = 'https://api.hop.io';
  */
 export const IS_BROWSER = typeof window !== 'undefined';
 
-/**
- * If we are in Node.js.
- */
-export const IS_NODE =
-	typeof process !== 'undefined' &&
-	process.versions != null &&
-	process.versions.node != null &&
-	typeof Bun === 'undefined' &&
-	typeof Deno === 'undefined';
-
 export const SUPPORTS_INTL = typeof Intl !== 'undefined';

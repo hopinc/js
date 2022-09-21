@@ -1,6 +1,6 @@
 import {fetch, Headers, Request} from '../util/fetch.js';
 import {ExtractRouteParams} from '../util/index.js';
-import {IS_BROWSER, IS_NODE} from '../util/constants.js';
+import {IS_BROWSER} from '../util/constants.js';
 import {createURLBuilder} from '../util/urls.js';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.js';
 import {getIdPrefix, Id, Method} from './types/index.js';
@@ -136,9 +136,11 @@ export class APIClient {
 	}
 
 	private async executeRequest<T>(request: Request): Promise<T> {
-		if (IS_NODE && !this.agent) {
-			const https = await import('https');
-			this.agent = new https.Agent({keepAlive: true});
+		if (TSUP_IS_NODE) {
+			if (!this.agent) {
+				const https = await import('https');
+				this.agent = new https.Agent({keepAlive: true});
+			}
 		}
 
 		const response = await fetch(request, {
