@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.8.0
+
+### Minor Changes
+
+- cd3d4c2: Updated container log level type (deprecating `stderr` in favor for `error`)
+
 ## 1.7.0
 
 ### Minor Changes
