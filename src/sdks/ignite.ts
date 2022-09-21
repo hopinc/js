@@ -1,6 +1,11 @@
 import {create, Infer} from '@onehop/json-methods';
 import {API, assertId, Id} from '../rest/index.js';
-import {Deployment, Gateway, GatewayType} from '../rest/types/ignite.js';
+import {
+	Deployment,
+	Gateway,
+	GatewayType,
+	RuntimeType,
+} from '../rest/types/ignite.js';
 import {parseSize, validateId} from '../util/index.js';
 import {sdk} from './create.js';
 
@@ -103,6 +108,12 @@ export const ignite = sdk(client => {
 		if (parseSize(config.resources.ram) <= SIX_MB_IN_BYTES) {
 			throw new Error(
 				'Allocated memory must be greater than 6MB when creating a deployment.',
+			);
+		}
+
+		if (config.volume && config.type !== RuntimeType.STATEFUL) {
+			throw new Error(
+				'Cannot create a deployment with a volume that is not stateful.',
 			);
 		}
 

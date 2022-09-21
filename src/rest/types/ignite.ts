@@ -191,7 +191,7 @@ export interface Deployment {
 	/**
 	 * The config for this deployment
 	 */
-	config: DeploymentConfig;
+	config: Omit<DeploymentConfig, 'volume' | 'name'>;
 }
 
 // This is a type not an interface so we can make a union
@@ -240,6 +240,13 @@ export type DeploymentConfig = {
 	 * Restart policy for this deployment
 	 */
 	restart_policy: RestartPolicy;
+
+	/**
+	 * The volume definition for this deployment
+	 *
+	 * This can only be used when .type is 'stateful'
+	 */
+	volume?: VolumeDefinition;
 };
 
 /**
