@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.8.2
+
+### Patch Changes
+
+- a8a82bd: Added volume config to creating a deployment
+
 ## 1.8.1
 
 ### Patch Changes
