@@ -25,6 +25,11 @@ export enum RuntimeType {
 	 * Persistent deployments/containers will restart if they exit. They can also be started and stopped programmatically.
 	 */
 	PERSISTENT = 'persistent',
+
+	/**
+	 * Stateful deployments/containers can only run one container at a time, and will have a persistent volume attached.
+	 */
+	STATEFUL = 'stateful',
 }
 
 /**
