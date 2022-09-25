@@ -535,4 +535,10 @@ export type IgniteEndpoints =
 			'/v1/ignite/deployments/:deployment_id/gateways',
 			{gateway: Gateway},
 			{type: GatewayType; target_port: number; protocol: Gateway['protocol']}
+	  >
+	| Endpoint<
+			'PATCH',
+			'/v1/ignite/deployments/:deployment_id',
+			{deployment: Deployment},
+			DeploymentConfig
 	  >;
