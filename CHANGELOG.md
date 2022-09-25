@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.8.3
+
+### Patch Changes
+
+- 38f7c55: add patching deployments
+
 ## 1.8.2
 
 ### Patch Changes
