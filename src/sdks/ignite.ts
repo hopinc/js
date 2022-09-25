@@ -2,6 +2,7 @@ import {create, Infer} from '@onehop/json-methods';
 import {API, assertId, Id} from '../rest/index.js';
 import {
 	Deployment,
+	DeploymentConfig,
 	Gateway,
 	GatewayType,
 	RuntimeType,
@@ -217,6 +218,18 @@ export const ignite = sdk(client => {
 		deployments: {
 			create: createDeployment,
 			get: getDeployment,
+
+			async update(deploymentId: Id<'deployment'>, config: DeploymentConfig) {
+				const {deployment} = await client.patch(
+					'/v1/ignite/deployments/:deployment_id',
+					config,
+					{
+						deployment_id: deploymentId,
+					},
+				);
+
+				return deployment;
+			},
 
 			/**
 			 * Get all containers for a deployment
