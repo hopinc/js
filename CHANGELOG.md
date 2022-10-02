@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.9.0
+
+### Minor Changes
+
+- d10ca23: Add rollout ID to ID prefixes
+
 ## 1.8.3
 
 ### Patch Changes
