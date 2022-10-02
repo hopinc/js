@@ -103,6 +103,10 @@ export const ID_PREFIXES = [
 		prefix: 'build',
 		description: 'Build ID for build logs',
 	},
+	{
+		prefix: 'rollout',
+		description: 'Rollout ID for rollouts.',
+	},
 ] as const;
 
 export type IdPrefixes = typeof ID_PREFIXES[number]['prefix'];
