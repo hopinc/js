@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.9.1
+
+### Patch Changes
+
+- 202868e: Added type `DeploymentRollout` and `DeploymentBuild` to types. Added `active_build` and `active_rollout` to deployment type
+
 ## 1.9.0
 
 ### Minor Changes
