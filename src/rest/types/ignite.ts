@@ -63,6 +63,15 @@ export enum ContainerState {
 }
 
 /**
+ * Rollout state for deployments
+ */
+export enum RolloutState {
+	PENDING = 'pending',
+	FINISHED = 'finished',
+	FAILED = 'FAILED',
+}
+
+/**
  * Restart policy for deployments
  */
 export enum RestartPolicy {
@@ -160,7 +169,66 @@ export interface Deployment {
 	 * The config for this deployment
 	 */
 	config: DeploymentConfig;
+
+	/**
+	 * Current active rollout for deployment
+	 */
+	active_rollout: DeploymentRollout | null;
+
+	/**
+	 * Current active build for deployment
+	 */
+	active_build: DeploymentBuild | null;
 }
+
+export type DeploymentBuild = {
+	/**
+	 * Deployment ID for build
+	 */
+	deployment_id: Id<'deployment'>;
+
+	/**
+	 * Digest for image
+	 */
+	digest: string | null;
+
+	/**
+	 * Timestamp of when the build has finished
+	 */
+	finished_at: Timestamp | null;
+
+	/**
+	 * ID of the build
+	 */
+	id: Id<'build'>;
+};
+
+export type DeploymentRollout = {
+	/**
+	 * How many containers are being recreated
+	 */
+	count: number;
+
+	/**
+	 * When the rollout took place
+	 */
+	created_at: Timestamp;
+
+	/**
+	 * The deployment ID for rollout
+	 */
+	deployment_id: Id<'deployment'>;
+
+	/**
+	 * The rollout ID for rollout
+	 */
+	id: Id<'rollout'>;
+
+	/**
+	 * The state of the rollout
+	 */
+	state: RolloutState;
+};
 
 // This is a type not an interface so we can make a union
 // when future versions of deployment configs come out
