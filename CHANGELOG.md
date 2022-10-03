@@ -1,5 +1,29 @@
 # @onehop/js
 
+## 1.8.3
+
+### Patch Changes
+
+- 38f7c55: add patching deployments
+
+## 1.8.2
+
+### Patch Changes
+
+- a8a82bd: Added volume config to creating a deployment
+
+## 1.8.1
+
+### Patch Changes
+
+- c53642c: Added stateful RuntimeType
+
+## 1.8.0
+
+### Minor Changes
+
+- cd3d4c2: Updated container log level type (deprecating `stderr` in favor for `error`)
+
 ## 1.7.0
 
 ### Minor Changes

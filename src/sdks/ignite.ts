@@ -1,6 +1,12 @@
 import {create, Infer} from '@onehop/json-methods';
 import {API, assertId, Id} from '../rest/index.js';
-import {Deployment, Gateway, GatewayType} from '../rest/types/ignite.js';
+import {
+	Deployment,
+	DeploymentConfig,
+	Gateway,
+	GatewayType,
+	RuntimeType,
+} from '../rest/types/ignite.js';
 import {parseSize, validateId} from '../util/index.js';
 import {sdk} from './create.js';
 
@@ -106,6 +112,12 @@ export const ignite = sdk(client => {
 			);
 		}
 
+		if (config.volume && config.type !== RuntimeType.STATEFUL) {
+			throw new Error(
+				'Cannot create a deployment with a volume that is not stateful.',
+			);
+		}
+
 		const {deployment} = await client.post('/v1/ignite/deployments', config, {
 			project,
 		});
@@ -206,6 +218,18 @@ export const ignite = sdk(client => {
 		deployments: {
 			create: createDeployment,
 			get: getDeployment,
+
+			async update(deploymentId: Id<'deployment'>, config: DeploymentConfig) {
+				const {deployment} = await client.patch(
+					'/v1/ignite/deployments/:deployment_id',
+					config,
+					{
+						deployment_id: deploymentId,
+					},
+				);
+
+				return deployment;
+			},
 
 			/**
 			 * Get all containers for a deployment

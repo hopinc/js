@@ -1,4 +1,4 @@
-import {ByteString} from '../../util/index.js';
+import {ByteSizeString} from '../../util/index.js';
 import {Endpoint} from '../endpoints.js';
 import {
 	Empty,
@@ -25,6 +25,11 @@ export enum RuntimeType {
 	 * Persistent deployments/containers will restart if they exit. They can also be started and stopped programmatically.
 	 */
 	PERSISTENT = 'persistent',
+
+	/**
+	 * Stateful deployments/containers can only run one container at a time, and will have a persistent volume attached.
+	 */
+	STATEFUL = 'stateful',
 }
 
 /**
@@ -87,6 +92,28 @@ export enum VgpuType {
 	A400 = 'a400',
 }
 
+export enum VolumeFormat {
+	EXT4 = 'ext4',
+	XFS = 'xfs',
+}
+
+export interface VolumeDefinition {
+	/**
+	 * The format of the volume
+	 */
+	fs: VolumeFormat;
+
+	/**
+	 * The size of the volume in bytes
+	 */
+	size: ByteSizeString;
+
+	/**
+	 * The mount point of the volume
+	 */
+	mount_path: string;
+}
+
 export interface Container {
 	/**
 	 * The ID of the container
@@ -129,6 +156,11 @@ export interface Container {
 	type: RuntimeType;
 
 	/**
+	 * The volume definition for this container
+	 */
+	volume: VolumeDefinition | null;
+
+	/**
 	 * The internal IP of the container
 	 */
 	internal_ip: string;
@@ -168,7 +200,7 @@ export interface Deployment {
 	/**
 	 * The config for this deployment
 	 */
-	config: DeploymentConfig;
+	config: Omit<DeploymentConfig, 'volume' | 'name'>;
 
 	/**
 	 * Current active rollout for deployment
@@ -276,6 +308,13 @@ export type DeploymentConfig = {
 	 * Restart policy for this deployment
 	 */
 	restart_policy: RestartPolicy;
+
+	/**
+	 * The volume definition for this deployment
+	 *
+	 * This can only be used when .type is 'stateful'
+	 */
+	volume?: VolumeDefinition;
 };
 
 /**
@@ -340,7 +379,7 @@ export interface Resources {
 	 * Amount of memory to allocate in a readible format
 	 * You can use the `parseSize` function to convert this to bytes.
 	 */
-	ram: ByteString;
+	ram: ByteSizeString;
 
 	/**
 	 * vGPUs to allocate
@@ -564,4 +603,10 @@ export type IgniteEndpoints =
 			'/v1/ignite/deployments/:deployment_id/gateways',
 			{gateway: Gateway},
 			{type: GatewayType; target_port: number; protocol: Gateway['protocol']}
+	  >
+	| Endpoint<
+			'PATCH',
+			'/v1/ignite/deployments/:deployment_id',
+			{deployment: Deployment},
+			DeploymentConfig
 	  >;
