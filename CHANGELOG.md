@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.9.2
+
+### Patch Changes
+
+- fe85c73: fix importing @onehop/js in Node in ESM environments (conditional exports)
+
 ## 1.9.1
 
 ### Patch Changes
