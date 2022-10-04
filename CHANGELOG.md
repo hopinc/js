@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.9.3
+
+### Patch Changes
+
+- 4fb4b76: dep bump
+
 ## 1.9.2
 
 ### Patch Changes
