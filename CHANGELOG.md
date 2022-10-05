@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.9.4
+
+### Patch Changes
+
+- 4919c95: Added build to rollout object for if the rollout was triggered by a build
+
 ## 1.9.3
 
 ### Patch Changes
