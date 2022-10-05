@@ -260,6 +260,11 @@ export type DeploymentRollout = {
 	 * The state of the rollout
 	 */
 	state: RolloutState;
+
+	/**
+	 * The build that triggered the rollout
+	 */
+	build: DeploymentBuild | null;
 };
 
 // This is a type not an interface so we can make a union
