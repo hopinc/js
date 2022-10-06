@@ -215,6 +215,11 @@ export interface Deployment {
 
 export type DeploymentBuild = {
 	/**
+	 * ID of the build
+	 */
+	id: Id<'build'>;
+
+	/**
 	 * Deployment ID for build
 	 */
 	deployment_id: Id<'deployment'>;
@@ -230,9 +235,9 @@ export type DeploymentBuild = {
 	finished_at: Timestamp | null;
 
 	/**
-	 * ID of the build
+	 * State of the build
 	 */
-	id: Id<'build'>;
+	state: BuildState;
 };
 
 export type DeploymentRollout = {
@@ -509,6 +514,13 @@ export enum DomainState {
 	PENDING = 'pending',
 	VALID_CNAME = 'valid_cname',
 	SSL_ACTIVE = 'ssl_active',
+}
+
+export enum BuildState {
+	PENDING = 'pending',
+	FAILED = 'failed',
+	SUCCEEDED = 'succeeded',
+	CANCELLED = 'cancelled',
 }
 
 export interface Domain {
