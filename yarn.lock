@@ -407,7 +407,7 @@ __metadata:
     "@changesets/cli": 2.25.0
     "@onehop/json-methods": ^1.2.0
     "@types/glob": 8.0.0
-    "@types/node": 18.8.1
+    "@types/node": 18.8.2
     cross-fetch: ^3.1.5
     dotenv: 16.0.3
     glob: 8.0.3
@@ -476,10 +476,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.8.1":
-  version: 18.8.1
-  resolution: "@types/node@npm:18.8.1"
-  checksum: 6168dbdc42cbedff20fd16ed7c775038d6de52fe1458a9a3be07e39805c75d107f185908a8cdfe0b271f8f391a0c99fde27859975cf6b5a8fee385b3f5cfb42a
+"@types/node@npm:18.8.2":
+  version: 18.8.2
+  resolution: "@types/node@npm:18.8.2"
+  checksum: b7c74dea0e835fb7faf69b4a2e87d43c1d228d88adacdff464d9e92d18a0b43bec6147b9eb3287650ac75fe5af730c53391869d02175e6b032dcb99ae2f54c92
   languageName: node
   linkType: hard
 
