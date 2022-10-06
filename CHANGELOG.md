@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.9.6
+
+### Patch Changes
+
+- 1fd1c1c: Add build state to Build type
+
 ## 1.9.5
 
 ### Patch Changes
