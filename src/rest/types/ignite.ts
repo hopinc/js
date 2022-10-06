@@ -210,10 +210,62 @@ export interface Deployment {
 	/**
 	 * Current active build for deployment
 	 */
-	active_build: DeploymentBuild | null;
+	active_build: Build | null;
 }
 
-export type DeploymentBuild = {
+export interface BuildMetaData {
+	/**
+	 * Account type of repo owner
+	 */
+	account_type?: 'user' | 'organization';
+
+	/**
+	 * Author information about build
+	 */
+	author?: {
+		/**
+		 * Author's Pfp
+		 */
+		avatar_url: string;
+
+		/**
+		 * Author's username
+		 */
+		username: string;
+	};
+
+	/**
+	 * Repo ID for build
+	 */
+	repo_id: number;
+
+	/**
+	 * Repo name for build
+	 */
+	repo_name: string;
+
+	/**
+	 * Repo branch for build
+	 */
+	branch: string;
+
+	/**
+	 * commit SHA for build
+	 */
+	commit_sha: string;
+
+	/**
+	 * commit message for build
+	 */
+	commit_msg: string;
+
+	/**
+	 * commit URL for build
+	 */
+	commit_url?: string;
+}
+
+export interface Build {
 	/**
 	 * ID of the build
 	 */
@@ -225,9 +277,19 @@ export type DeploymentBuild = {
 	deployment_id: Id<'deployment'>;
 
 	/**
-	 * Digest for image
+	 * Metadata pertaining to build (mostly for GitHub)
 	 */
-	digest: string | null;
+	metadata: BuildMetaData | null;
+
+	/**
+	 * Build method (GitHub or CLI)
+	 */
+	method: BuildMethod;
+
+	/**
+	 * Timestamp of when the build has started
+	 */
+	started_at: Timestamp;
 
 	/**
 	 * Timestamp of when the build has finished
@@ -235,10 +297,15 @@ export type DeploymentBuild = {
 	finished_at: Timestamp | null;
 
 	/**
+	 * Digest for image
+	 */
+	digest: string | null;
+
+	/**
 	 * State of the build
 	 */
 	state: BuildState;
-};
+}
 
 export type DeploymentRollout = {
 	/**
@@ -269,7 +336,7 @@ export type DeploymentRollout = {
 	/**
 	 * The build that triggered the rollout
 	 */
-	build: DeploymentBuild | null;
+	build: Build | null;
 };
 
 // This is a type not an interface so we can make a union
@@ -436,6 +503,14 @@ export interface ContainerLog {
 	 * The level of the log. stdout becomes `info`
 	 */
 	level: 'info' | 'error';
+}
+
+/**
+ * Types of build methods supported by Hop
+ */
+export enum BuildMethod {
+	GITHUB = 'github',
+	CLI = 'cli',
 }
 
 /**

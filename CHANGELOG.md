@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.9.5
+
+### Patch Changes
+
+- 0295c80: update build type
+
 ## 1.9.4
 
 ### Patch Changes
