@@ -300,6 +300,11 @@ export interface Build {
 	 * Digest for image
 	 */
 	digest: string | null;
+
+	/**
+	 * State of the build
+	 */
+	state: BuildState;
 }
 
 export type DeploymentRollout = {
@@ -584,6 +589,13 @@ export enum DomainState {
 	PENDING = 'pending',
 	VALID_CNAME = 'valid_cname',
 	SSL_ACTIVE = 'ssl_active',
+}
+
+export enum BuildState {
+	PENDING = 'pending',
+	FAILED = 'failed',
+	SUCCEEDED = 'succeeded',
+	CANCELLED = 'cancelled',
 }
 
 export interface Domain {
