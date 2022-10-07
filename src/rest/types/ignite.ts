@@ -237,6 +237,16 @@ export type DeploymentBuild = {
 
 export type DeploymentRollout = {
 	/**
+	 * The rollout ID for rollout
+	 */
+	id: Id<'rollout'>;
+
+	/**
+	 * The deployment ID for rollout
+	 */
+	deployment_id: Id<'deployment'>;
+
+	/**
 	 * How many containers are being recreated
 	 */
 	count: number;
@@ -245,17 +255,6 @@ export type DeploymentRollout = {
 	 * When the rollout took place
 	 */
 	created_at: Timestamp;
-
-	/**
-	 * The deployment ID for rollout
-	 */
-	deployment_id: Id<'deployment'>;
-
-	/**
-	 * The rollout ID for rollout
-	 */
-	id: Id<'rollout'>;
-
 	/**
 	 * The state of the rollout
 	 */
@@ -614,4 +613,9 @@ export type IgniteEndpoints =
 			'/v1/ignite/deployments/:deployment_id',
 			{deployment: Deployment},
 			DeploymentConfig
+	  >
+	| Endpoint<
+			'POST',
+			'/v1/ignite/deployments/:deployment_id/rollouts',
+			{rollout: DeploymentRollout}
 	  >;

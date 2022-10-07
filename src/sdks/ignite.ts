@@ -219,6 +219,16 @@ export const ignite = sdk(client => {
 			create: createDeployment,
 			get: getDeployment,
 
+			async rollout(id: Id<'deployment'>) {
+				const {rollout} = await client.post(
+					'/v1/ignite/deployments/:deployment_id/rollouts',
+					undefined,
+					{deployment_id: id},
+				);
+
+				return rollout;
+			},
+
 			async update(deploymentId: Id<'deployment'>, config: DeploymentConfig) {
 				const {deployment} = await client.patch(
 					'/v1/ignite/deployments/:deployment_id',
