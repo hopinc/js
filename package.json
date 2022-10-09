@@ -25,7 +25,7 @@
 	"author": "Hop <developers@hop.io>",
 	"license": "MIT",
 	"sideEffects": false,
-	"packageManager": "yarn@3.2.3",
+	"packageManager": "yarn@3.2.4",
 	"publishConfig": {
 		"access": "public"
 	},
