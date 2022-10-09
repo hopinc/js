@@ -73,7 +73,7 @@ export enum ContainerState {
 export enum RolloutState {
 	PENDING = 'pending',
 	FINISHED = 'finished',
-	FAILED = 'FAILED',
+	FAILED = 'failed',
 }
 
 /**
