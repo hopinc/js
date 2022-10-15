@@ -235,6 +235,41 @@ export type DeploymentBuild = {
 	id: Id<'build'>;
 };
 
+export type HealthCheck = {
+	/**
+	 * The ID of health check
+	 */
+	id: Id<'health_check'>;
+
+	/**
+	 * Protocol for health check
+	 */
+	protocol: 'http';
+	path: string;
+	port: number;
+
+	/**
+	 * Interval for health check. This is how often the health check will be performed in seconds
+	 */
+	interval: number;
+
+	/**
+	 * How long to wait for a response before considering the health check failed
+	 */
+	timeout: number;
+
+	/**
+	 * How long we should wait when the container starts before performing the first health check.
+	 * This is useful for containers that take a while to start up, for example when running migrations.
+	 */
+	initial_delay: number;
+
+	/**
+	 * Maximum number of consecutive failures before the container is considered unhealthy
+	 */
+	max_retries: number;
+};
+
 export type DeploymentRollout = {
 	/**
 	 * The rollout ID for rollout
@@ -618,4 +653,10 @@ export type IgniteEndpoints =
 			'POST',
 			'/v1/ignite/deployments/:deployment_id/rollouts',
 			{rollout: DeploymentRollout}
+	  >
+	| Endpoint<
+			'POST',
+			'/v1/ignite/deployments/:deployment_id/health-checks',
+			{health_check: HealthCheck},
+			Omit<HealthCheck, 'id'>
 	  >;

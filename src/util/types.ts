@@ -107,6 +107,10 @@ export const ID_PREFIXES = [
 		prefix: 'rollout',
 		description: 'Rollout ID for rollouts.',
 	},
+	{
+		prefix: 'health_check',
+		description: 'Health check ID for health checks.',
+	},
 ] as const;
 
 export type IdPrefixes = typeof ID_PREFIXES[number]['prefix'];
