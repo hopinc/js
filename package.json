@@ -8,15 +8,18 @@
 		".": {
 			"node": {
 				"import": "./dist/node/index.js",
-				"require": "./dist/node/index.cjs"
+				"require": "./dist/node/index.cjs",
+				"types": "./dist/index.d.ts"
 			},
 			"browser": "./dist/index.js",
 			"import": "./dist/index.js",
-			"require": "./dist/index.cjs"
+			"require": "./dist/index.cjs",
+			"types": "./dist/index.d.ts"
 		},
 		"./utils/zod": {
 			"import": "./dist/utils/zod/index.js",
-			"require": "./dist/utils/zod/index.cjs"
+			"require": "./dist/utils/zod/index.cjs",
+			"types": "./dist/utils/zod/index.d.ts"
 		}
 	},
 	"type": "module",
@@ -46,13 +49,13 @@
 	"devDependencies": {
 		"@changesets/cli": "2.25.0",
 		"@types/glob": "8.0.0",
-		"@types/node": "18.8.1",
+		"@types/node": "18.11.0",
 		"dotenv": "16.0.3",
 		"glob": "8.0.3",
 		"prettier": "2.7.1",
 		"tsup": "6.2.3",
-		"tsx": "3.9.0",
-		"typedoc": "0.23.15",
+		"tsx": "3.10.1",
+		"typedoc": "0.23.16",
 		"typedoc-plugin-markdown": "3.13.6",
 		"typedoc-plugin-missing-exports": "1.0.0",
 		"typescript": "4.8.4"
