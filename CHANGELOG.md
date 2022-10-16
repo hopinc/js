@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.9.8
+
+### Patch Changes
+
+- a148382: fix types
+
 ## 1.9.7
 
 ### Patch Changes
