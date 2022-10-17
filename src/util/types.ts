@@ -115,6 +115,13 @@ export type HopShDomain = `${string}.hop.sh`;
 export type InternalHopDomain = `${string}.hop`;
 export type AnyId = Id<IdPrefixes>;
 
+/**
+ * Checks if a string is a valid Hop ID prefix
+ *
+ * @param prefix - A string that is a potential prefix
+ * @param expect - An expected prefix to check against
+ * @returns - Whether the prefix is valid
+ */
 export function validateIdPrefix<T extends IdPrefixes = IdPrefixes>(
 	prefix: string,
 	expect?: T,
@@ -129,9 +136,10 @@ export function validateIdPrefix<T extends IdPrefixes = IdPrefixes>(
 /**
  * Validates that a string is a valid ID
  *
- * @param maybeId A string that might be an id
- * @param prefix Optionally an id prefix to check against
- * @returns true if the string is an id
+ * @public
+ * @param maybeId - A string that might be an id
+ * @param prefix - Optionally an id prefix to check against
+ * @returns - true if the string is an id
  */
 export function validateId<T extends IdPrefixes = IdPrefixes>(
 	maybeId: string,
@@ -166,14 +174,30 @@ export function getIdPrefix<T extends IdPrefixes>(id: string, expect?: T) {
 	return prefix;
 }
 
+/**
+ * Casts a string to an ID and asserts that it is of the correct type.
+ * This function will throw if the string is not a valid ID.
+ *
+ * @public
+ * @param maybeId - Cast and assert that a string is an id
+ * @param prefix - Optionally an prefix or array of prefixes to check against
+ * @returns - The ID cast to the correct type
+ */
 export function id<T extends IdPrefixes = IdPrefixes>(
 	maybeId?: string,
 	prefix?: T | T[],
-) {
+): Id<T> {
 	assertId(maybeId, prefix);
 	return maybeId;
 }
 
+/**
+ * Asserts that a string is a valid ID
+ * @public
+ * @param maybeId - A string that is possibly an ID
+ * @param prefix - A prefix or array of prefixes to check against
+ * @param message - An error message to throw if the ID is invalid
+ */
 export function assertId<T extends IdPrefixes = IdPrefixes>(
 	maybeId?: string,
 	prefix?: T | T[],

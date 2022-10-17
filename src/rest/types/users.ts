@@ -41,7 +41,7 @@ export interface PAT {
 	/**
 	 * The pat token
 	 *
-	 * @warning This value will be partially censored if it
+	 * @alpha This value will be partially censored if it
 	 */
 	pat: string;
 

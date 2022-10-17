@@ -12,7 +12,9 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"jsx": "react",
-		"noFallthroughCasesInSwitch": true
+		"noFallthroughCasesInSwitch": true,
+		"declaration": true,
+		"declarationMap": true
 	},
 	"exclude": ["node_modules", "dist"],
 	"include": ["./**/*.ts", "./**/*.tsx", "gen-docs.mts"]

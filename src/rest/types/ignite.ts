@@ -352,7 +352,7 @@ export type DeploymentConfig = {
 	 *
 	 * Manual = add containers yourself
 	 *
-	 * @warning This property is not yet fully complete
+	 * @alpha This property is not yet fully complete
 	 */
 	container_strategy: 'manual';
 
@@ -550,7 +550,7 @@ export interface Gateway {
 	/**
 	 * The protocol for this gateway (Only for external)
 	 *
-	 * @warning Currently, hop only supports HTTP. This will eventually change to an enum
+	 * @alpha Currently, hop only supports HTTP. This will eventually change to an enum
 	 */
 	protocol: 'http' | null;
 
