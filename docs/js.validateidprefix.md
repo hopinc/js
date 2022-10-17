@@ -9,10 +9,7 @@ Checks if a string is a valid Hop ID prefix
 <b>Signature:</b>
 
 ```typescript
-declare function validateIdPrefix<T extends IdPrefixes = IdPrefixes>(
-	prefix: string,
-	expect?: T,
-): prefix is T;
+declare function validateIdPrefix<T extends IdPrefixes = IdPrefixes>(prefix: string, expect?: T): prefix is T;
 ```
 
 ## Parameters

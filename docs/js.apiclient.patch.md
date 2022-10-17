@@ -7,66 +7,28 @@
 <b>Signature:</b>
 
 ```typescript
-patch<
-		Path extends Extract<
-			Endpoints,
-			{
-				method: 'PATCH';
-			}
-		>['path'],
-	>(
-		path: Path,
-		body: Extract<
-			Endpoints,
-			{
-				path: Path;
-				method: 'PATCH';
-			}
-		>['body'],
-		query: Query<Path>,
-		init?: RequestInit,
-	): Promise<
-		(
-			| Extract<
-					Endpoint<'PATCH', '/v1/channels/:channel_id/state', void, State>,
-					{
-						path: Path;
-						method: 'PATCH';
-					}
-			  >
-			| Extract<
-					Endpoint<
-						'PATCH',
-						'/v1/channels/tokens/:token',
-						{
-							token: ChannelToken;
-						},
-						{
-							expiresAt?: Timestamp | null | undefined;
-							state: State;
-						}
-					>,
-					{
-						path: Path;
-						method: 'PATCH';
-					}
-			  >
-			| Extract<
-					Endpoint<
-						'PATCH',
-						'/v1/ignite/deployments/:deployment_id',
-						{
-							deployment: Deployment;
-						},
-						DeploymentConfig
-					>,
-					{
-						path: Path;
-						method: 'PATCH';
-					}
-			  >
-		)['res']
-	>;
+patch<Path extends Extract<Endpoints, {
+        method: 'PATCH';
+    }>['path']>(path: Path, body: Extract<Endpoints, {
+        path: Path;
+        method: 'PATCH';
+    }>['body'], query: Query<Path>, init?: RequestInit): Promise<(Extract<Endpoint<"PATCH", "/v1/channels/:channel_id/state", void, State>, {
+        path: Path;
+        method: 'PATCH';
+    }> | Extract<Endpoint<"PATCH", "/v1/channels/tokens/:token", {
+        token: ChannelToken;
+    }, {
+        expiresAt?: Timestamp | null | undefined;
+        state: State;
+    }>, {
+        path: Path;
+        method: 'PATCH';
+    }> | Extract<Endpoint<"PATCH", "/v1/ignite/deployments/:deployment_id", {
+        deployment: Deployment;
+    }, DeploymentConfig>, {
+        path: Path;
+        method: 'PATCH';
+    }>)["res"]>;
 ```
 
 ## Parameters
@@ -74,11 +36,11 @@ patch<
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  path | Path |  |
-|  body | Extract&lt; [Endpoints](./js.endpoints.md)<!-- -->, { path: Path; method: 'PATCH'; } &gt;\['body'\] |  |
+|  body | Extract&lt;[Endpoints](./js.endpoints.md)<!-- -->, { path: Path; method: 'PATCH'; }&gt;\['body'\] |  |
 |  query | [Query](./js.query.md)<!-- -->&lt;Path&gt; |  |
 |  init | RequestInit | <i>(Optional)</i> |
 
 <b>Returns:</b>
 
-Promise&lt; ( \| Extract&lt; [Endpoint](./js.endpoint.md)<!-- -->&lt;'PATCH', '/v1/channels/:channel\_id/state', void, [State](./js.state.md)<!-- -->&gt;, { path: Path; method: 'PATCH'; } &gt; \| Extract&lt; [Endpoint](./js.endpoint.md)<!-- -->&lt; 'PATCH', '/v1/channels/tokens/:token', { token: [ChannelToken](./js.channeltoken.md)<!-- -->; }, { expiresAt?: [Timestamp](./js.timestamp.md) \| null \| undefined; state: [State](./js.state.md)<!-- -->; } &gt;, { path: Path; method: 'PATCH'; } &gt; \| Extract&lt; [Endpoint](./js.endpoint.md)<!-- -->&lt; 'PATCH', '/v1/ignite/deployments/:deployment\_id', { deployment: [Deployment](./js.deployment.md)<!-- -->; }, [DeploymentConfig](./js.deploymentconfig.md) &gt;, { path: Path; method: 'PATCH'; } &gt; )\['res'\] &gt;
+Promise&lt;(Extract&lt;[Endpoint](./js.endpoint.md)<!-- -->&lt;"PATCH", "/v1/channels/:channel\_id/state", void, [State](./js.state.md)<!-- -->&gt;, { path: Path; method: 'PATCH'; }&gt; \| Extract&lt;[Endpoint](./js.endpoint.md)<!-- -->&lt;"PATCH", "/v1/channels/tokens/:token", { token: [ChannelToken](./js.channeltoken.md)<!-- -->; }, { expiresAt?: [Timestamp](./js.timestamp.md) \| null \| undefined; state: [State](./js.state.md)<!-- -->; }&gt;, { path: Path; method: 'PATCH'; }&gt; \| Extract&lt;[Endpoint](./js.endpoint.md)<!-- -->&lt;"PATCH", "/v1/ignite/deployments/:deployment\_id", { deployment: [Deployment](./js.deployment.md)<!-- -->; }, [DeploymentConfig](./js.deploymentconfig.md)<!-- -->&gt;, { path: Path; method: 'PATCH'; }&gt;)\["res"\]&gt;
 

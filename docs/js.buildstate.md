@@ -14,8 +14,8 @@ declare enum BuildState
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  CANCELLED | <code>'cancelled'</code> |  |
-|  FAILED | <code>'failed'</code> |  |
-|  PENDING | <code>'pending'</code> |  |
-|  SUCCEEDED | <code>'succeeded'</code> |  |
+|  CANCELLED | <code>&quot;cancelled&quot;</code> |  |
+|  FAILED | <code>&quot;failed&quot;</code> |  |
+|  PENDING | <code>&quot;pending&quot;</code> |  |
+|  SUCCEEDED | <code>&quot;succeeded&quot;</code> |  |
 

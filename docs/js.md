@@ -22,7 +22,7 @@
 |  [ContainerState](./js.containerstate.md) | Container state is relatively self-explanatory. It describes what the container is currently doing. |
 |  [DomainState](./js.domainstate.md) |  |
 |  [GatewayType](./js.gatewaytype.md) | Types of gateways supported by Hop |
-|  [PROJECT\_PERMISSION](./js.project_permission.md) |  |
+|  [PROJECT\_PERMISSION](./js.project_permission.md) | A list of all permissions and their representative names |
 |  [ProjectTier](./js.projecttier.md) |  |
 |  [ProjectType](./js.projecttype.md) | Type of a project |
 |  [Regions](./js.regions.md) |  |
@@ -37,7 +37,7 @@
 |  Function | Description |
 |  --- | --- |
 |  [assertId(maybeId, prefix, message)](./js.assertid.md) | Asserts that a string is a valid ID |
-|  [getIdPrefix(id, expect)](./js.getidprefix.md) |  |
+|  [getIdPrefix(id, expect)](./js.getidprefix.md) | Gets the prefix of an ID |
 |  [id(maybeId, prefix)](./js.id.md) | Casts a string to an ID and asserts that it is of the correct type. This function will throw if the string is not a valid ID. |
 |  [isValidByteString(value)](./js.isvalidbytestring.md) |  |
 |  [parseSize(size)](./js.parsesize.md) | Parses a byte size string into bytes |
@@ -51,8 +51,8 @@
 |  --- | --- |
 |  [APIClientOptions](./js.apiclientoptions.md) |  |
 |  [Auth](./js.auth.md) | Docker image registry authorization |
-|  [Build](./js.build.md) |  |
-|  [BuildMetaData](./js.buildmetadata.md) |  |
+|  [Build](./js.build.md) | A build entity |
+|  [BuildMetaData](./js.buildmetadata.md) | Metadata attached to a build |
 |  [Channel](./js.channel.md) |  |
 |  [ChannelToken](./js.channeltoken.md) |  |
 |  [Container](./js.container.md) |  |
@@ -93,22 +93,28 @@
 
 |  Variable | Description |
 |  --- | --- |
-|  [BROAD\_PERMISSIONS\_MAP](./js.broad_permissions_map.md) |  |
+|  [BROAD\_PERMISSIONS\_MAP](./js.broad_permissions_map.md) | Broader permission map |
 |  [byteUnits](./js.byteunits.md) |  |
+|  [channels](./js.channels.md) | Channels SDK client |
 |  [DEFAULT\_BASE\_URL](./js.default_base_url.md) | The default base URL for Hop's API. |
-|  [ID\_PREFIXES](./js.id_prefixes.md) |  |
+|  [ID\_PREFIXES](./js.id_prefixes.md) | An array of all IDs that can be used in the API |
+|  [ignite](./js.ignite.md) | Ignite SDK client |
 |  [IS\_BROWSER](./js.is_browser.md) | If we are in the browser. |
-|  [permissions](./js.permissions.md) |  |
-|  [permissionsMap](./js.permissionsmap.md) |  |
-|  [roles](./js.roles.md) |  |
+|  [permissions](./js.permissions.md) | Permission utility functions |
+|  [permissionsMap](./js.permissionsmap.md) | Individual bitwise permissions |
+|  [pipe](./js.pipe.md) | Pipe SDK client |
+|  [projects](./js.projects.md) | Projects SDK client |
+|  [registry](./js.registry.md) | Registry SDK client |
+|  [roles](./js.roles.md) | Bitwise role flags that a user can be as part of a project |
 |  [SUPPORTS\_INTL](./js.supports_intl.md) |  |
 |  [units](./js.units.md) |  |
+|  [users](./js.users.md) | Users SDK client |
 
 ## Type Aliases
 
 |  Type Alias | Description |
 |  --- | --- |
-|  [AnyId](./js.anyid.md) |  |
+|  [AnyId](./js.anyid.md) | Any/all IDs that are used within the API |
 |  [APIAuthentication](./js.apiauthentication.md) |  |
 |  [APIAuthenticationPrefix](./js.apiauthenticationprefix.md) |  |
 |  [APIResponse](./js.apiresponse.md) |  |
@@ -117,29 +123,26 @@
 |  [ByteUnit](./js.byteunit.md) |  |
 |  [ChannelEndpoints](./js.channelendpoints.md) |  |
 |  [DeliveryProtocol](./js.deliveryprotocol.md) |  |
-|  [DeploymentConfig](./js.deploymentconfig.md) |  |
-|  [DeploymentRollout](./js.deploymentrollout.md) |  |
-|  [Empty](./js.empty.md) |  |
+|  [DeploymentConfig](./js.deploymentconfig.md) | A config for creating a deployment |
+|  [DeploymentRollout](./js.deploymentrollout.md) | A deployment rollout |
 |  [Endpoint](./js.endpoint.md) |  |
 |  [Endpoints](./js.endpoints.md) |  |
 |  [ErroredAPIResponse](./js.erroredapiresponse.md) |  |
-|  [ExtractRouteParams](./js.extractrouteparams.md) |  |
-|  [HopShDomain](./js.hopshdomain.md) |  |
-|  [Id](./js.id.md) |  |
-|  [IdPrefixes](./js.idprefixes.md) |  |
+|  [HopShDomain](./js.hopshdomain.md) | A hop.sh domain (\*.hop.sh) |
+|  [Id](./js.id.md) | A Hop ID is a string that starts with a prefix and a underscore, followed by some unique text. It is a Pika ID — https://github.com/hopinc/pika |
+|  [IdPrefixes](./js.idprefixes.md) | A union of all ID prefixes used within the API |
 |  [IgniteEndpoints](./js.igniteendpoints.md) |  |
-|  [InternalHopDomain](./js.internalhopdomain.md) |  |
+|  [InternalHopDomain](./js.internalhopdomain.md) | A domain used with internal gateways (\*.hop.sh) |
 |  [Member](./js.member.md) |  |
-|  [Method](./js.method.md) |  |
 |  [PartialAPIOptions](./js.partialapioptions.md) |  |
 |  [PipeEndpoints](./js.pipeendpoints.md) |  |
 |  [ProjectsEndpoints](./js.projectsendpoints.md) |  |
 |  [Query](./js.query.md) |  |
 |  [RegistryEndpoints](./js.registryendpoints.md) |  |
+|  [SetStateAction](./js.setstateaction.md) | New state to set to a channel, or a callback function that will produce the new state |
 |  [State](./js.state.md) |  |
 |  [SuccessfulAPIResponse](./js.successfulapiresponse.md) |  |
-|  [Tag](./js.tag.md) |  |
-|  [Timestamp](./js.timestamp.md) | Hop's API uses ISO 8601 date strings |
+|  [Tag](./js.tag.md) | Tag a type to make it unique |
+|  [Timestamp](./js.timestamp.md) | An ISO 8601 date strings |
 |  [UserEndpoints](./js.userendpoints.md) |  |
-|  [Values](./js.values.md) |  |
 

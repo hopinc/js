@@ -4,10 +4,12 @@
 
 ## Tag type
 
+Tag a type to make it unique
+
 <b>Signature:</b>
 
 ```typescript
 declare type Tag<T, Name extends string> = T & {
-	___tag: Name;
+    ___tag: Name;
 };
 ```

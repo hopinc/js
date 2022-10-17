@@ -4,6 +4,8 @@
 
 ## Build interface
 
+A build entity
+
 <b>Signature:</b>
 
 ```typescript

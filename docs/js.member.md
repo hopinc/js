@@ -8,9 +8,9 @@
 
 ```typescript
 declare type Member = Omit<User, 'email' | 'id'> & {
-	id: Id<'pm'>;
-	role: MemberRole;
-	joined_at: Timestamp;
+    id: Id<'pm'>;
+    role: MemberRole;
+    joined_at: Timestamp;
 };
 ```
 <b>References:</b> [User](./js.user.md)<!-- -->, [Id](./js.id.md)<!-- -->, [MemberRole](./js.memberrole.md)<!-- -->, [Timestamp](./js.timestamp.md)

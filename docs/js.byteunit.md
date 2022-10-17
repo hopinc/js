@@ -7,9 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-declare type ByteUnit =
-	| typeof byteUnits[number]
-	| Uppercase<typeof byteUnits[number]>;
+declare type ByteUnit = typeof byteUnits[number] | Uppercase<typeof byteUnits[number]>;
 ```
 <b>References:</b> [byteUnits](./js.byteunits.md)
 

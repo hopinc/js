@@ -9,18 +9,14 @@ Asserts that a string is a valid ID
 <b>Signature:</b>
 
 ```typescript
-declare function assertId<T extends IdPrefixes = IdPrefixes>(
-	maybeId?: string,
-	prefix?: T | T[],
-	message?: string,
-): asserts maybeId is Id<T>;
+declare function assertId<T extends IdPrefixes = IdPrefixes>(maybeId: string | undefined | null, prefix?: T | T[], message?: string): asserts maybeId is Id<T>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  maybeId | string | <i>(Optional)</i> A string that is possibly an ID |
+|  maybeId | string \| undefined \| null | A string that is possibly an ID |
 |  prefix | T \| T\[\] | <i>(Optional)</i> A prefix or array of prefixes to check against |
 |  message | string | <i>(Optional)</i> An error message to throw if the ID is invalid |
 

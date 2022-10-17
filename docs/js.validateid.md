@@ -9,22 +9,19 @@ Validates that a string is a valid ID
 <b>Signature:</b>
 
 ```typescript
-declare function validateId<T extends IdPrefixes = IdPrefixes>(
-	maybeId: string,
-	prefix?: T | T[],
-): maybeId is Id<T>;
+declare function validateId<T extends IdPrefixes = IdPrefixes>(maybeId: string | undefined | null, prefix?: T | T[]): maybeId is Id<T>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  maybeId | string | A string that might be an id |
+|  maybeId | string \| undefined \| null | A string that might be an id |
 |  prefix | T \| T\[\] | <i>(Optional)</i> Optionally an id prefix to check against |
 
 <b>Returns:</b>
 
 maybeId is [Id](./js.id.md)<!-- -->&lt;T&gt;
 
-- true if the string is an id
+true if the string is an id
 

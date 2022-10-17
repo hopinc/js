@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-byteUnits: readonly ['GB', 'MB', 'KB', 'B']
+byteUnits: readonly ["GB", "MB", "KB", "B"]
 ```

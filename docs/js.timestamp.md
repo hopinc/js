@@ -4,7 +4,7 @@
 
 ## Timestamp type
 
-Hop's API uses ISO 8601 date strings
+An ISO 8601 date strings
 
 <b>Signature:</b>
 

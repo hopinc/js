@@ -1,7 +1,7 @@
 import {ByteSizeString} from '../../util/index.js';
 import {Endpoint} from '../endpoints.js';
 import {
-	Empty,
+	_Empty,
 	HopShDomain,
 	Id,
 	InternalHopDomain,
@@ -213,6 +213,9 @@ export interface Deployment {
 	active_build: Build | null;
 }
 
+/**
+ * Metadata attached to a build
+ */
 export interface BuildMetaData {
 	/**
 	 * Account type of repo owner
@@ -265,6 +268,9 @@ export interface BuildMetaData {
 	commit_url?: string;
 }
 
+/**
+ * A build entity
+ */
 export interface Build {
 	/**
 	 * ID of the build
@@ -307,6 +313,9 @@ export interface Build {
 	state: BuildState;
 }
 
+/**
+ * A deployment rollout
+ */
 export type DeploymentRollout = {
 	/**
 	 * How many containers are being recreated
@@ -339,8 +348,9 @@ export type DeploymentRollout = {
 	build: Build | null;
 };
 
-// This is a type not an interface so we can make a union
-// when future versions of deployment configs come out
+/**
+ * A config for creating a deployment
+ */
 export type DeploymentConfig = {
 	/**
 	 * The name of the deployment
@@ -654,8 +664,8 @@ export type IgniteEndpoints =
 			{deployment: Deployment},
 			DeploymentConfig
 	  >
-	| Endpoint<'DELETE', '/v1/ignite/deployments/:deployment_id', Empty>
-	| Endpoint<'DELETE', '/v1/ignite/containers/:container_id', Empty>
+	| Endpoint<'DELETE', '/v1/ignite/deployments/:deployment_id', _Empty>
+	| Endpoint<'DELETE', '/v1/ignite/containers/:container_id', _Empty>
 	| Endpoint<
 			'GET',
 			'/v1/ignite/containers/:container_id/logs',
@@ -670,7 +680,7 @@ export type IgniteEndpoints =
 	| Endpoint<
 			'PUT',
 			'/v1/ignite/containers/:container_id/state',
-			Empty,
+			_Empty,
 			{
 				/**
 				 * The state to update the container to
@@ -681,7 +691,7 @@ export type IgniteEndpoints =
 	| Endpoint<
 			'POST',
 			'/v1/ignite/gateways/:gateway_id/domains',
-			Empty,
+			_Empty,
 			{domain: string}
 	  >
 	| Endpoint<'GET', '/v1/ignite/gateways/:gateway_id', {gateway: Gateway}>

@@ -1,6 +1,6 @@
 import {Endpoint} from '../endpoints.js';
 import {MemberRole, Project} from './projects.js';
-import {Empty, Id, Timestamp} from '../../util/types.js';
+import {_Empty, Id, Timestamp} from '../../util/types.js';
 
 /**
  * A user objct
@@ -64,4 +64,4 @@ export type UserEndpoints =
 	  >
 	| Endpoint<'POST', '/v1/users/@me/pats', {pat: PAT}, {name: string}>
 	| Endpoint<'GET', '/v1/users/@me/pats', {pats: PAT[]}>
-	| Endpoint<'DELETE', '/v1/users/@me/pats/:pat_id', Empty>;
+	| Endpoint<'DELETE', '/v1/users/@me/pats/:pat_id', _Empty>;

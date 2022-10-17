@@ -1,6 +1,10 @@
 import {Id} from '../util/types.js';
 import {sdk} from './create.js';
 
+/**
+ * Users SDK client
+ * @public
+ */
 export const users = sdk(client => ({
 	me: {
 		/**
@@ -58,7 +62,7 @@ export const users = sdk(client => ({
 			/**
 			 * Deletes a pat
 			 *
-			 * @param id The ID of the pat to delete
+			 * @param id - The ID of the pat to delete
 			 */
 			async delete(id: Id<'pat'>) {
 				if (client.authType === 'ptk') {

@@ -7,13 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-declare type Endpoints =
-	| IgniteEndpoints
-	| RegistryEndpoints
-	| UserEndpoints
-	| ProjectsEndpoints
-	| PipeEndpoints
-	| ChannelEndpoints;
+declare type Endpoints = IgniteEndpoints | RegistryEndpoints | UserEndpoints | ProjectsEndpoints | PipeEndpoints | ChannelEndpoints;
 ```
 <b>References:</b> [IgniteEndpoints](./js.igniteendpoints.md)<!-- -->, [RegistryEndpoints](./js.registryendpoints.md)<!-- -->, [UserEndpoints](./js.userendpoints.md)<!-- -->, [ProjectsEndpoints](./js.projectsendpoints.md)<!-- -->, [PipeEndpoints](./js.pipeendpoints.md)<!-- -->, [ChannelEndpoints](./js.channelendpoints.md)
 

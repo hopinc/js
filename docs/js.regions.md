@@ -14,5 +14,5 @@ declare enum Regions
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  US\_EAST\_1 | <code>'us-east-1'</code> |  |
+|  US\_EAST\_1 | <code>&quot;us-east-1&quot;</code> |  |
 

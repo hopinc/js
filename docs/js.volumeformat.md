@@ -14,6 +14,6 @@ declare enum VolumeFormat
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  EXT4 | <code>'ext4'</code> |  |
-|  XFS | <code>'xfs'</code> |  |
+|  EXT4 | <code>&quot;ext4&quot;</code> |  |
+|  XFS | <code>&quot;xfs&quot;</code> |  |
 

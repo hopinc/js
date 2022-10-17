@@ -8,10 +8,10 @@
 
 ```typescript
 declare type ErroredAPIResponse = {
-	success: false;
-	error: {
-		code: string;
-		message: string;
-	};
+    success: false;
+    error: {
+        code: string;
+        message: string;
+    };
 };
 ```

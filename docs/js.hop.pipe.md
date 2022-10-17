@@ -8,32 +8,23 @@
 
 ```typescript
 readonly pipe: {
-		rooms: {
-			getAll(project?: `project_${string}` | undefined): Promise<
-				(Room & {
-					delete(): Promise<void>;
-				})[]
-			>;
-			create(
-				name: string,
-				options: {
-					deliveryProtocols: DeliveryProtocol[];
-					ephemeral?: boolean | undefined;
-					ingestProtocol: 'rtmp' | 'rtp';
-					hlsConfig?:
-						| {
-								wcl_delay: number;
-								artificial_delay: number;
-								max_playout_bitrate_preset: string;
-						  }
-						| undefined;
-				},
-			): Promise<
-				Room & {
-					delete(): Promise<void>;
-				}
-			>;
-			delete(room: `pipe_room_${string}`): Promise<void>;
-		};
-	};
+        rooms: {
+            getAll(project?: `project_${string}` | undefined): Promise<(Room & {
+                delete(): Promise<void>;
+            })[]>;
+            create(name: string, options: {
+                deliveryProtocols: DeliveryProtocol[];
+                ephemeral?: boolean | undefined;
+                ingestProtocol: "rtmp" | "rtp";
+                hlsConfig?: {
+                    wcl_delay: number;
+                    artificial_delay: number;
+                    max_playout_bitrate_preset: string;
+                } | undefined;
+            }): Promise<Room & {
+                delete(): Promise<void>;
+            }>;
+            delete(room: `pipe_room_${string}`): Promise<void>;
+        };
+    };
 ```

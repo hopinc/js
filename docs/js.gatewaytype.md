@@ -16,6 +16,6 @@ declare enum GatewayType
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  EXTERNAL | <code>'external'</code> | The gateway can be accessed from the internet |
-|  INTERNAL | <code>'internal'</code> | The gateway can only be accessed inside of a project's network |
+|  EXTERNAL | <code>&quot;external&quot;</code> | The gateway can be accessed from the internet |
+|  INTERNAL | <code>&quot;internal&quot;</code> | The gateway can only be accessed inside of a project's network |
 

@@ -4,6 +4,8 @@
 
 ## HopShDomain type
 
+A hop.sh domain (\*.hop.sh)
+
 <b>Signature:</b>
 
 ```typescript

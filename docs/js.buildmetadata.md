@@ -4,6 +4,8 @@
 
 ## BuildMetaData interface
 
+Metadata attached to a build
+
 <b>Signature:</b>
 
 ```typescript

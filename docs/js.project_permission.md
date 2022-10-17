@@ -4,6 +4,8 @@
 
 ## PROJECT\_PERMISSION enum
 
+A list of all permissions and their representative names
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,48 +16,48 @@ declare enum PROJECT_PERMISSION
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  ADD\_DOMAIN | <code>'add_domain'</code> |  |
-|  ADD\_MEMBER | <code>'add_member'</code> |  |
-|  CREATE\_CHANNEL | <code>'create_channel'</code> |  |
-|  CREATE\_CHANNEL\_TOKEN | <code>'create_channel_token'</code> |  |
-|  CREATE\_CONTAINER | <code>'create_container'</code> |  |
-|  CREATE\_DEPLOYMENT | <code>'create_deployment'</code> |  |
-|  CREATE\_GATEWAY | <code>'create_gateway'</code> |  |
-|  CREATE\_LEAP\_TOKEN | <code>'create_leap_token'</code> |  |
-|  CREATE\_PROJECT\_SECRET | <code>'create_project_secret'</code> |  |
-|  CREATE\_PROJECT\_TOKEN | <code>'create_project_token'</code> |  |
-|  CREATE\_ROOM | <code>'create_room'</code> |  |
-|  CREATE\_ROOM\_PRODUCER | <code>'create_room_producer'</code> |  |
-|  DELETE\_CHANNELS | <code>'delete_channels'</code> |  |
-|  DELETE\_CONTAINER | <code>'delete_container'</code> |  |
-|  DELETE\_DEPLOYMENT | <code>'delete_deployment'</code> |  |
-|  DELETE\_DOMAIN | <code>'delete_domain'</code> |  |
-|  DELETE\_GATEWAY | <code>'delete_gateway'</code> |  |
-|  DELETE\_PROJECT | <code>'delete_project'</code> |  |
-|  DELETE\_PROJECT\_SECRET | <code>'delete_project_secret'</code> |  |
-|  DELETE\_PROJECT\_TOKEN | <code>'delete_project_token'</code> |  |
-|  DELETE\_REGISTRY\_IMAGES | <code>'delete_registry_images'</code> |  |
-|  DELETE\_ROOM | <code>'delete_room'</code> |  |
-|  GET\_INTERNAL\_DOMAIN | <code>'get_internal_domain'</code> |  |
-|  GET\_PROJECT\_MEMBERS | <code>'get_project_members'</code> |  |
-|  GET\_REGISTRY\_IMAGES | <code>'get_registry_images'</code> |  |
-|  MANAGE\_CHANNEL\_SUBSCRIBERS | <code>'manage_channel_subscribers'</code> |  |
-|  MESSAGE\_TOKEN | <code>'message_token'</code> |  |
-|  PUBLISH\_CHANNEL\_MESSAGES | <code>'publish_channel_messages'</code> |  |
-|  READ\_BILLING | <code>'read_billing'</code> |  |
-|  READ\_CHANNELS | <code>'read_channels'</code> |  |
-|  READ\_CONTAINER\_LOGS | <code>'read_container_logs'</code> |  |
-|  READ\_DEPLOYMENTS | <code>'read_deployments'</code> |  |
-|  READ\_GATEWAYS | <code>'read_gateways'</code> |  |
-|  READ\_LEAP\_TOKENS | <code>'read_leap_tokens'</code> |  |
-|  READ\_PROJECT\_SECRETS | <code>'read_project_secrets'</code> |  |
-|  READ\_PROJECT\_TOKENS | <code>'read_project_tokens'</code> |  |
-|  READ\_ROOM | <code>'read_room'</code> |  |
-|  REMOVE\_MEMBER | <code>'remove_member'</code> |  |
-|  REQUEST\_QUOTA\_INCREASE | <code>'request_quota_increase'</code> |  |
-|  ROLLOUT | <code>'rollout'</code> |  |
-|  UPDATE\_CHANNEL\_STATE | <code>'update_channel_state'</code> |  |
-|  UPDATE\_CONTAINER\_CONFIG | <code>'update_container_config'</code> |  |
-|  UPDATE\_CONTAINER\_STATE | <code>'update_container_state'</code> |  |
-|  UPDATE\_LEAP\_TOKEN | <code>'update_leap_token'</code> |  |
+|  ADD\_DOMAIN | <code>&quot;add_domain&quot;</code> |  |
+|  ADD\_MEMBER | <code>&quot;add_member&quot;</code> |  |
+|  CREATE\_CHANNEL | <code>&quot;create_channel&quot;</code> |  |
+|  CREATE\_CHANNEL\_TOKEN | <code>&quot;create_channel_token&quot;</code> |  |
+|  CREATE\_CONTAINER | <code>&quot;create_container&quot;</code> |  |
+|  CREATE\_DEPLOYMENT | <code>&quot;create_deployment&quot;</code> |  |
+|  CREATE\_GATEWAY | <code>&quot;create_gateway&quot;</code> |  |
+|  CREATE\_LEAP\_TOKEN | <code>&quot;create_leap_token&quot;</code> |  |
+|  CREATE\_PROJECT\_SECRET | <code>&quot;create_project_secret&quot;</code> |  |
+|  CREATE\_PROJECT\_TOKEN | <code>&quot;create_project_token&quot;</code> |  |
+|  CREATE\_ROOM | <code>&quot;create_room&quot;</code> |  |
+|  CREATE\_ROOM\_PRODUCER | <code>&quot;create_room_producer&quot;</code> |  |
+|  DELETE\_CHANNELS | <code>&quot;delete_channels&quot;</code> |  |
+|  DELETE\_CONTAINER | <code>&quot;delete_container&quot;</code> |  |
+|  DELETE\_DEPLOYMENT | <code>&quot;delete_deployment&quot;</code> |  |
+|  DELETE\_DOMAIN | <code>&quot;delete_domain&quot;</code> |  |
+|  DELETE\_GATEWAY | <code>&quot;delete_gateway&quot;</code> |  |
+|  DELETE\_PROJECT | <code>&quot;delete_project&quot;</code> |  |
+|  DELETE\_PROJECT\_SECRET | <code>&quot;delete_project_secret&quot;</code> |  |
+|  DELETE\_PROJECT\_TOKEN | <code>&quot;delete_project_token&quot;</code> |  |
+|  DELETE\_REGISTRY\_IMAGES | <code>&quot;delete_registry_images&quot;</code> |  |
+|  DELETE\_ROOM | <code>&quot;delete_room&quot;</code> |  |
+|  GET\_INTERNAL\_DOMAIN | <code>&quot;get_internal_domain&quot;</code> |  |
+|  GET\_PROJECT\_MEMBERS | <code>&quot;get_project_members&quot;</code> |  |
+|  GET\_REGISTRY\_IMAGES | <code>&quot;get_registry_images&quot;</code> |  |
+|  MANAGE\_CHANNEL\_SUBSCRIBERS | <code>&quot;manage_channel_subscribers&quot;</code> |  |
+|  MESSAGE\_TOKEN | <code>&quot;message_token&quot;</code> |  |
+|  PUBLISH\_CHANNEL\_MESSAGES | <code>&quot;publish_channel_messages&quot;</code> |  |
+|  READ\_BILLING | <code>&quot;read_billing&quot;</code> |  |
+|  READ\_CHANNELS | <code>&quot;read_channels&quot;</code> |  |
+|  READ\_CONTAINER\_LOGS | <code>&quot;read_container_logs&quot;</code> |  |
+|  READ\_DEPLOYMENTS | <code>&quot;read_deployments&quot;</code> |  |
+|  READ\_GATEWAYS | <code>&quot;read_gateways&quot;</code> |  |
+|  READ\_LEAP\_TOKENS | <code>&quot;read_leap_tokens&quot;</code> |  |
+|  READ\_PROJECT\_SECRETS | <code>&quot;read_project_secrets&quot;</code> |  |
+|  READ\_PROJECT\_TOKENS | <code>&quot;read_project_tokens&quot;</code> |  |
+|  READ\_ROOM | <code>&quot;read_room&quot;</code> |  |
+|  REMOVE\_MEMBER | <code>&quot;remove_member&quot;</code> |  |
+|  REQUEST\_QUOTA\_INCREASE | <code>&quot;request_quota_increase&quot;</code> |  |
+|  ROLLOUT | <code>&quot;rollout&quot;</code> |  |
+|  UPDATE\_CHANNEL\_STATE | <code>&quot;update_channel_state&quot;</code> |  |
+|  UPDATE\_CONTAINER\_CONFIG | <code>&quot;update_container_config&quot;</code> |  |
+|  UPDATE\_CONTAINER\_STATE | <code>&quot;update_container_state&quot;</code> |  |
+|  UPDATE\_LEAP\_TOKEN | <code>&quot;update_leap_token&quot;</code> |  |
 

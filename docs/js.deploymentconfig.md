@@ -4,19 +4,21 @@
 
 ## DeploymentConfig type
 
+A config for creating a deployment
+
 <b>Signature:</b>
 
 ```typescript
 declare type DeploymentConfig = {
-	name: string;
-	container_strategy: 'manual';
-	type: RuntimeType;
-	version: '2022-05-17';
-	image: Image;
-	env: Record<string, string>;
-	resources: Resources;
-	restart_policy: RestartPolicy;
-	volume?: VolumeDefinition;
+    name: string;
+    container_strategy: 'manual';
+    type: RuntimeType;
+    version: '2022-05-17';
+    image: Image;
+    env: Record<string, string>;
+    resources: Resources;
+    restart_policy: RestartPolicy;
+    volume?: VolumeDefinition;
 };
 ```
 <b>References:</b> [RuntimeType](./js.runtimetype.md)<!-- -->, [Image](./js.image_2.md)<!-- -->, [Resources](./js.resources.md)<!-- -->, [RestartPolicy](./js.restartpolicy.md)<!-- -->, [VolumeDefinition](./js.volumedefinition.md)

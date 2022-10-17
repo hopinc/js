@@ -16,5 +16,5 @@ declare enum VgpuType
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  A400 | <code>'a400'</code> |  |
+|  A400 | <code>&quot;a400&quot;</code> |  |
 

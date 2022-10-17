@@ -1,9 +1,21 @@
 import {formatList} from './lists.js';
 
-export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+/**
+ * All methods the Hop API accepts
+ * @internal
+ */
+export type _Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
-export type Empty = void;
+/**
+ * An empty response type
+ * @internal
+ */
+export type _Empty = void;
 
+/**
+ * Tag a type to make it unique
+ * @public
+ */
 export type Tag<T, Name extends string> = T & {
 	/**
 	 * Mark a type as having a specific name in the API
@@ -13,20 +25,36 @@ export type Tag<T, Name extends string> = T & {
 };
 
 /**
- * Hop's API uses ISO 8601 date strings
+ * An ISO 8601 date strings
+ * @public
  */
 export type Timestamp = Tag<string, 'timestamp'>;
 
-export type ExtractRouteParams<T extends string> = string extends T
+/**
+ * Creates a record of params required for a given URL/path
+ * @internal
+ */
+export type _ExtractRouteParams<T extends string> = string extends T
 	? Record<string, string | number | undefined>
 	: T extends `${string}:${infer Param}/${infer Rest}`
-	? {[k in Param | keyof ExtractRouteParams<Rest>]: string | number}
+	? {[k in Param | keyof _ExtractRouteParams<Rest>]: string | number}
 	: T extends `${string}:${infer Param}`
 	? {[k in Param]: string | number}
 	: {};
 
-export type Values<T> = T[keyof T];
+/**
+ * Pull values of an object
+ * @internal
+ */
+export type _Values<T> = T[keyof T];
 
+// Technically, `channel`, it should be here, but channel IDs can also
+// be any random string if a developer decides to set it. For this reason,
+// channel is not included as a valid ID in this list
+/**
+ * An array of all IDs that can be used in the API
+ * @public
+ */
 export const ID_PREFIXES = [
 	{
 		prefix: 'user',
@@ -76,13 +104,6 @@ export const ID_PREFIXES = [
 		prefix: 'ptkid',
 		description: 'Project token ID',
 	},
-	// Technically, yes, it should be here, but channel IDs can also
-	// be any random string if a developer decides to set it
-	// themselves. So I'll leave it commented for now..
-	// {
-	// 	prefix: 'channel',
-	// 	description: 'Channel',
-	// },
 	{
 		prefix: 'secret',
 		description: 'Project secret ID',
@@ -109,15 +130,41 @@ export const ID_PREFIXES = [
 	},
 ] as const;
 
+/**
+ * A union of all ID prefixes used within the API
+ * @public
+ */
 export type IdPrefixes = typeof ID_PREFIXES[number]['prefix'];
+
+/**
+ * A Hop ID is a string that starts with a prefix and a underscore, followed by some unique text.
+ * It is a Pika ID — https://github.com/hopinc/pika
+ * @public
+ */
 export type Id<T extends IdPrefixes> = `${T}_${string}`;
+
+/**
+ * A hop.sh domain (*.hop.sh)
+ * @public
+ */
 export type HopShDomain = `${string}.hop.sh`;
+
+/**
+ * A domain used with internal gateways (*.hop.sh)
+ * @public
+ */
 export type InternalHopDomain = `${string}.hop`;
+
+/**
+ * Any/all IDs that are used within the API
+ * @public
+ */
 export type AnyId = Id<IdPrefixes>;
 
 /**
  * Checks if a string is a valid Hop ID prefix
  *
+ * @public
  * @param prefix - A string that is a potential prefix
  * @param expect - An expected prefix to check against
  * @returns - Whether the prefix is valid
@@ -139,14 +186,18 @@ export function validateIdPrefix<T extends IdPrefixes = IdPrefixes>(
  * @public
  * @param maybeId - A string that might be an id
  * @param prefix - Optionally an id prefix to check against
- * @returns - true if the string is an id
+ * @returns true if the string is an id
  */
 export function validateId<T extends IdPrefixes = IdPrefixes>(
-	maybeId: string,
+	maybeId: string | undefined | null,
 	prefix?: T | T[],
 ): maybeId is Id<T> {
 	if (Array.isArray(prefix)) {
 		return prefix.some(p => validateId(maybeId, p));
+	}
+
+	if (!maybeId) {
+		return false;
 	}
 
 	if (!prefix) {
@@ -156,6 +207,14 @@ export function validateId<T extends IdPrefixes = IdPrefixes>(
 	return maybeId.startsWith(`${prefix}_`);
 }
 
+/**
+ * Gets the prefix of an ID
+ *
+ * @public
+ * @param id - A full ID to extract the prefix from
+ * @param expect - An expected prefix to check against
+ * @returns - The prefix of the ID
+ */
 export function getIdPrefix<T extends IdPrefixes>(id: string, expect?: T) {
 	if (expect && !validateId(id, expect)) {
 		throw new Error(`Expected ${id} to be an id of type ${expect}`);
@@ -184,7 +243,7 @@ export function getIdPrefix<T extends IdPrefixes>(id: string, expect?: T) {
  * @returns - The ID cast to the correct type
  */
 export function id<T extends IdPrefixes = IdPrefixes>(
-	maybeId?: string,
+	maybeId: string | undefined | null,
 	prefix?: T | T[],
 ): Id<T> {
 	assertId(maybeId, prefix);
@@ -199,7 +258,7 @@ export function id<T extends IdPrefixes = IdPrefixes>(
  * @param message - An error message to throw if the ID is invalid
  */
 export function assertId<T extends IdPrefixes = IdPrefixes>(
-	maybeId?: string,
+	maybeId: string | undefined | null,
 	prefix?: T | T[],
 	message?: string,
 ): asserts maybeId is Id<T> {

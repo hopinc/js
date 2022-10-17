@@ -4,81 +4,64 @@
 
 ## ID\_PREFIXES variable
 
+An array of all IDs that can be used in the API
+
 <b>Signature:</b>
 
 ```typescript
-ID_PREFIXES: readonly [
-	{
-		readonly prefix: 'user';
-		readonly description: 'Users';
-	},
-	{
-		readonly prefix: 'project';
-		readonly description: 'Project';
-	},
-	{
-		readonly prefix: 'pm';
-		readonly description: 'Project Members';
-	},
-	{
-		readonly prefix: 'role';
-		readonly description: 'Roles';
-	},
-	{
-		readonly prefix: 'pi';
-		readonly description: 'Project Invite';
-	},
-	{
-		readonly prefix: 'ptk';
-		readonly description: 'Project token';
-	},
-	{
-		readonly prefix: 'pat';
-		readonly description: 'User personal access token';
-	},
-	{
-		readonly prefix: 'container';
-		readonly description: 'Ignite container';
-	},
-	{
-		readonly prefix: 'pipe_room';
-		readonly description: 'Pipe room';
-	},
-	{
-		readonly prefix: 'deployment';
-		readonly description: 'Ignite deployment';
-	},
-	{
-		readonly prefix: 'bearer';
-		readonly description: 'Users bearer token';
-	},
-	{
-		readonly prefix: 'ptkid';
-		readonly description: 'Project token ID';
-	},
-	{
-		readonly prefix: 'secret';
-		readonly description: 'Project secret ID';
-	},
-	{
-		readonly prefix: 'gateway';
-		readonly description: 'Gateway';
-	},
-	{
-		readonly prefix: 'domain';
-		readonly description: 'Domain for a gateway';
-	},
-	{
-		readonly prefix: 'leap_token';
-		readonly description: 'Token for connecting to leap as a client';
-	},
-	{
-		readonly prefix: 'build';
-		readonly description: 'Build ID for build logs';
-	},
-	{
-		readonly prefix: 'rollout';
-		readonly description: 'Rollout ID for rollouts.';
-	},
-]
+ID_PREFIXES: readonly [{
+    readonly prefix: "user";
+    readonly description: "Users";
+}, {
+    readonly prefix: "project";
+    readonly description: "Project";
+}, {
+    readonly prefix: "pm";
+    readonly description: "Project Members";
+}, {
+    readonly prefix: "role";
+    readonly description: "Roles";
+}, {
+    readonly prefix: "pi";
+    readonly description: "Project Invite";
+}, {
+    readonly prefix: "ptk";
+    readonly description: "Project token";
+}, {
+    readonly prefix: "pat";
+    readonly description: "User personal access token";
+}, {
+    readonly prefix: "container";
+    readonly description: "Ignite container";
+}, {
+    readonly prefix: "pipe_room";
+    readonly description: "Pipe room";
+}, {
+    readonly prefix: "deployment";
+    readonly description: "Ignite deployment";
+}, {
+    readonly prefix: "bearer";
+    readonly description: "Users bearer token";
+}, {
+    readonly prefix: "ptkid";
+    readonly description: "Project token ID";
+}, {
+    readonly prefix: "secret";
+    readonly description: "Project secret ID";
+}, {
+    readonly prefix: "gateway";
+    readonly description: "Gateway";
+}, {
+    readonly prefix: "domain";
+    readonly description: "Domain for a gateway";
+}, {
+    readonly prefix: "leap_token";
+    readonly description: "Token for connecting to leap as a client";
+}, {
+    readonly prefix: "build";
+    readonly description: "Build ID for build logs";
+}, {
+    readonly prefix: "rollout";
+    readonly description: "Rollout ID for rollouts.";
+}]
 ```

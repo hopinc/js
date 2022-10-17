@@ -8,51 +8,26 @@
 
 ```typescript
 readonly projects: {
-		getAllMembers(
-			projectId?: `project_${string}` | undefined,
-		): Promise<Member[]>;
-		getCurrentMember(projectId: `project_${string}`): Promise<Member>;
-		projectTokens: {
-			delete(
-				projectTokenId: `ptkid_${string}`,
-				project?: `project_${string}` | undefined,
-			): Promise<void>;
-			get(projectId?: `project_${string}` | undefined): Promise<ProjectToken[]>;
-			create(
-				flags: number,
-				projectId?: `project_${string}` | undefined,
-			): Promise<
-				ProjectToken & {
-					project: Project;
-				}
-			>;
-		};
-		tokens: {
-			delete(
-				projectTokenId: `ptkid_${string}`,
-				project?: `project_${string}` | undefined,
-			): Promise<void>;
-			get(projectId?: `project_${string}` | undefined): Promise<ProjectToken[]>;
-			create(
-				flags: number,
-				projectId?: `project_${string}` | undefined,
-			): Promise<
-				ProjectToken & {
-					project: Project;
-				}
-			>;
-		};
-		secrets: {
-			getAll(projectId?: `project_${string}` | undefined): Promise<Secret[]>;
-			create(
-				name: string,
-				value: string,
-				projectId?: `project_${string}` | undefined,
-			): Promise<Secret>;
-			delete(
-				id: string,
-				projectId?: `project_${string}` | undefined,
-			): Promise<void>;
-		};
-	};
+        getAllMembers(projectId?: `project_${string}` | undefined): Promise<Member[]>;
+        getCurrentMember(projectId: `project_${string}`): Promise<Member>;
+        projectTokens: {
+            delete(projectTokenId: `ptkid_${string}`, project?: `project_${string}` | undefined): Promise<void>;
+            get(projectId?: `project_${string}` | undefined): Promise<ProjectToken[]>;
+            create(flags: number, projectId?: `project_${string}` | undefined): Promise<ProjectToken & {
+                project: Project;
+            }>;
+        };
+        tokens: {
+            delete(projectTokenId: `ptkid_${string}`, project?: `project_${string}` | undefined): Promise<void>;
+            get(projectId?: `project_${string}` | undefined): Promise<ProjectToken[]>;
+            create(flags: number, projectId?: `project_${string}` | undefined): Promise<ProjectToken & {
+                project: Project;
+            }>;
+        };
+        secrets: {
+            getAll(projectId?: `project_${string}` | undefined): Promise<Secret[]>;
+            create(name: string, value: string, projectId?: `project_${string}` | undefined): Promise<Secret>;
+            delete(id: string, projectId?: `project_${string}` | undefined): Promise<void>;
+        };
+    };
 ```

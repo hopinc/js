@@ -7,29 +7,18 @@
 <b>Signature:</b>
 
 ```typescript
-declare type RegistryEndpoints =
-	| Endpoint<'DELETE', '/v1/registry/images/:image', Empty>
-	| Endpoint<
-			'GET',
-			'/v1/registry/images',
-			{
-				images: string[];
-			}
-	  >
-	| Endpoint<
-			'GET',
-			'/v1/registry/images/:image/manifests',
-			{
-				manifests: {
-					digest: {
-						digest: string;
-						size: number;
-						uploaded: string;
-					};
-					tag: string | null;
-				}[];
-			}
-	  >;
+declare type RegistryEndpoints = Endpoint<'DELETE', '/v1/registry/images/:image', _Empty> | Endpoint<'GET', '/v1/registry/images', {
+    images: string[];
+}> | Endpoint<'GET', '/v1/registry/images/:image/manifests', {
+    manifests: {
+        digest: {
+            digest: string;
+            size: number;
+            uploaded: string;
+        };
+        tag: string | null;
+    }[];
+}>;
 ```
-<b>References:</b> [Endpoint](./js.endpoint.md)<!-- -->, [Empty](./js.empty.md)
+<b>References:</b> [Endpoint](./js.endpoint.md)
 

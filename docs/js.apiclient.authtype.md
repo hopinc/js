@@ -7,5 +7,5 @@
 <b>Signature:</b>
 
 ```typescript
-readonly authType: 'ptk' | 'pat' | 'bearer';
+readonly authType: "ptk" | "pat" | "bearer";
 ```

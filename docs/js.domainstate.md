@@ -14,7 +14,7 @@ declare enum DomainState
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  PENDING | <code>'pending'</code> |  |
-|  SSL\_ACTIVE | <code>'ssl_active'</code> |  |
-|  VALID\_CNAME | <code>'valid_cname'</code> |  |
+|  PENDING | <code>&quot;pending&quot;</code> |  |
+|  SSL\_ACTIVE | <code>&quot;ssl_active&quot;</code> |  |
+|  VALID\_CNAME | <code>&quot;valid_cname&quot;</code> |  |
 

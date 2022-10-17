@@ -4,16 +4,18 @@
 
 ## DeploymentRollout type
 
+A deployment rollout
+
 <b>Signature:</b>
 
 ```typescript
 declare type DeploymentRollout = {
-	count: number;
-	created_at: Timestamp;
-	deployment_id: Id<'deployment'>;
-	id: Id<'rollout'>;
-	state: RolloutState;
-	build: Build | null;
+    count: number;
+    created_at: Timestamp;
+    deployment_id: Id<'deployment'>;
+    id: Id<'rollout'>;
+    state: RolloutState;
+    build: Build | null;
 };
 ```
 <b>References:</b> [Timestamp](./js.timestamp.md)<!-- -->, [Id](./js.id.md)<!-- -->, [RolloutState](./js.rolloutstate.md)<!-- -->, [Build](./js.build.md)

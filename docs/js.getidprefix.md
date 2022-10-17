@@ -4,6 +4,8 @@
 
 ## getIdPrefix() function
 
+Gets the prefix of an ID
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,10 +16,12 @@ declare function getIdPrefix<T extends IdPrefixes>(id: string, expect?: T): T;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  id | string |  |
-|  expect | T | <i>(Optional)</i> |
+|  id | string | A full ID to extract the prefix from |
+|  expect | T | <i>(Optional)</i> An expected prefix to check against |
 
 <b>Returns:</b>
 
 T
+
+- The prefix of the ID
 

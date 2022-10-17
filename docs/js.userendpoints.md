@@ -7,35 +7,18 @@
 <b>Signature:</b>
 
 ```typescript
-declare type UserEndpoints =
-	| Endpoint<
-			'GET',
-			'/v1/users/@me',
-			{
-				projects: Project[];
-				user: User;
-				project_member_role_map: Record<Id<'project'>, MemberRole>;
-				leap_token: string | null;
-			}
-	  >
-	| Endpoint<
-			'POST',
-			'/v1/users/@me/pats',
-			{
-				pat: PAT;
-			},
-			{
-				name: string;
-			}
-	  >
-	| Endpoint<
-			'GET',
-			'/v1/users/@me/pats',
-			{
-				pats: PAT[];
-			}
-	  >
-	| Endpoint<'DELETE', '/v1/users/@me/pats/:pat_id', Empty>;
+declare type UserEndpoints = Endpoint<'GET', '/v1/users/@me', {
+    projects: Project[];
+    user: User;
+    project_member_role_map: Record<Id<'project'>, MemberRole>;
+    leap_token: string | null;
+}> | Endpoint<'POST', '/v1/users/@me/pats', {
+    pat: PAT;
+}, {
+    name: string;
+}> | Endpoint<'GET', '/v1/users/@me/pats', {
+    pats: PAT[];
+}> | Endpoint<'DELETE', '/v1/users/@me/pats/:pat_id', _Empty>;
 ```
-<b>References:</b> [Endpoint](./js.endpoint.md)<!-- -->, [Project](./js.project.md)<!-- -->, [User](./js.user.md)<!-- -->, [Id](./js.id.md)<!-- -->, [MemberRole](./js.memberrole.md)<!-- -->, [PAT](./js.pat.md)<!-- -->, [Empty](./js.empty.md)
+<b>References:</b> [Endpoint](./js.endpoint.md)<!-- -->, [Project](./js.project.md)<!-- -->, [User](./js.user.md)<!-- -->, [Id](./js.id.md)<!-- -->, [MemberRole](./js.memberrole.md)<!-- -->, [PAT](./js.pat.md)
 

@@ -7,10 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-declare type PartialAPIOptions = Partial<
-	Omit<APIClientOptions, 'authentication'>
-> &
-	Pick<APIClientOptions, 'authentication'>;
+declare type PartialAPIOptions = Partial<Omit<APIClientOptions, 'authentication'>> & Pick<APIClientOptions, 'authentication'>;
 ```
 <b>References:</b> [APIClientOptions](./js.apiclientoptions.md)
 

@@ -16,10 +16,10 @@ declare enum ContainerState
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  EXITED | <code>'exited'</code> | The container exited (e.g. with a zero exit code) |
-|  FAILED | <code>'failed'</code> | The container's entrypoint failed (e.g. exited with a non-zero exit code) |
-|  PENDING | <code>'pending'</code> | The container is pending creation |
-|  RUNNING | <code>'running'</code> | The container is running |
-|  STOPPED | <code>'stopped'</code> | The container is stopped |
-|  TERMINATING | <code>'terminating'</code> | The container is being deleted |
+|  EXITED | <code>&quot;exited&quot;</code> | The container exited (e.g. with a zero exit code) |
+|  FAILED | <code>&quot;failed&quot;</code> | The container's entrypoint failed (e.g. exited with a non-zero exit code) |
+|  PENDING | <code>&quot;pending&quot;</code> | The container is pending creation |
+|  RUNNING | <code>&quot;running&quot;</code> | The container is running |
+|  STOPPED | <code>&quot;stopped&quot;</code> | The container is stopped |
+|  TERMINATING | <code>&quot;terminating&quot;</code> | The container is being deleted |
 

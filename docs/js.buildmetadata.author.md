@@ -10,7 +10,7 @@ Author information about build
 
 ```typescript
 author?: {
-		avatar_url: string;
-		username: string;
-	};
+        avatar_url: string;
+        username: string;
+    };
 ```

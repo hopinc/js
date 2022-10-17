@@ -4,12 +4,14 @@
 
 ## permissions variable
 
+Permission utility functions
+
 <b>Signature:</b>
 
 ```typescript
 permissions: {
-	add(value: bigint, flag: bigint): bigint;
-	test(value: bigint, flag: bigint): boolean;
-	subtract(value: bigint, flag: bigint): bigint;
+    add(value: bigint, flag: bigint): bigint;
+    test(value: bigint, flag: bigint): boolean;
+    subtract(value: bigint, flag: bigint): bigint;
 }
 ```

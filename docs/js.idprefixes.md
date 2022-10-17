@@ -4,6 +4,8 @@
 
 ## IdPrefixes type
 
+A union of all ID prefixes used within the API
+
 <b>Signature:</b>
 
 ```typescript

@@ -7,106 +7,41 @@
 <b>Signature:</b>
 
 ```typescript
-put<
-		Path extends Extract<
-			Endpoints,
-			{
-				method: 'PUT';
-			}
-		>['path'],
-	>(
-		path: Path,
-		body: Extract<
-			Endpoints,
-			{
-				path: Path;
-				method: 'PUT';
-			}
-		>['body'],
-		query: Query<Path>,
-		init?: RequestInit,
-	): Promise<
-		(
-			| Extract<
-					Endpoint<
-						'PUT',
-						'/v1/projects/:project_id/secrets/:name',
-						{
-							secret: Secret;
-						},
-						string
-					>,
-					{
-						path: Path;
-						method: 'PUT';
-					}
-			  >
-			| Extract<
-					Endpoint<
-						'PUT',
-						'/v1/projects/@this/secrets/:name',
-						{
-							secret: Secret;
-						},
-						string
-					>,
-					{
-						path: Path;
-						method: 'PUT';
-					}
-			  >
-			| Extract<
-					Endpoint<
-						'PUT',
-						'/v1/channels/:channel_id',
-						{
-							channel: Channel;
-						},
-						{
-							type: ChannelType;
-							state: Record<string, any> | null;
-						}
-					>,
-					{
-						path: Path;
-						method: 'PUT';
-					}
-			  >
-			| Extract<
-					Endpoint<
-						'PUT',
-						'/v1/channels/:channel_id/subscribers/:token',
-						void,
-						undefined
-					>,
-					{
-						path: Path;
-						method: 'PUT';
-					}
-			  >
-			| Extract<
-					Endpoint<'PUT', '/v1/channels/:channel_id/state', void, State>,
-					{
-						path: Path;
-						method: 'PUT';
-					}
-			  >
-			| Extract<
-					Endpoint<
-						'PUT',
-						'/v1/ignite/containers/:container_id/state',
-						void,
-						{
-							preferred_state: ContainerState.RUNNING | ContainerState.STOPPED;
-						}
-					>,
-					{
-						path: Path;
-						method: 'PUT';
-					}
-			  >
-		)['res']
-	>;
+put<Path extends Extract<Endpoints, {
+        method: 'PUT';
+    }>['path']>(path: Path, body: Extract<Endpoints, {
+        path: Path;
+        method: 'PUT';
+    }>['body'], query: Query<Path>, init?: RequestInit): Promise<(Extract<Endpoint<"PUT", "/v1/projects/:project_id/secrets/:name", {
+        secret: Secret;
+    }, string>, {
+        path: Path;
+        method: 'PUT';
+    }> | Extract<Endpoint<"PUT", "/v1/projects/@this/secrets/:name", {
+        secret: Secret;
+    }, string>, {
+        path: Path;
+        method: 'PUT';
+    }> | Extract<Endpoint<"PUT", "/v1/channels/:channel_id", {
+        channel: Channel;
+    }, {
+        type: ChannelType;
+        state: Record<string, any> | null;
+    }>, {
+        path: Path;
+        method: 'PUT';
+    }> | Extract<Endpoint<"PUT", "/v1/channels/:channel_id/subscribers/:token", void, undefined>, {
+        path: Path;
+        method: 'PUT';
+    }> | Extract<Endpoint<"PUT", "/v1/channels/:channel_id/state", void, State>, {
+        path: Path;
+        method: 'PUT';
+    }> | Extract<Endpoint<"PUT", "/v1/ignite/containers/:container_id/state", void, {
+        preferred_state: ContainerState.RUNNING | ContainerState.STOPPED;
+    }>, {
+        path: Path;
+        method: 'PUT';
+    }>)["res"]>;
 ```
 
 ## Parameters
@@ -114,11 +49,11 @@ put<
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  path | Path |  |
-|  body | Extract&lt; [Endpoints](./js.endpoints.md)<!-- -->, { path: Path; method: 'PUT'; } &gt;\['body'\] |  |
+|  body | Extract&lt;[Endpoints](./js.endpoints.md)<!-- -->, { path: Path; method: 'PUT'; }&gt;\['body'\] |  |
 |  query | [Query](./js.query.md)<!-- -->&lt;Path&gt; |  |
 |  init | RequestInit | <i>(Optional)</i> |
 
 <b>Returns:</b>
 
-Promise&lt; ( \| Extract&lt; [Endpoint](./js.endpoint.md)<!-- -->&lt; 'PUT', '/v1/projects/:project\_id/secrets/:name', { secret: [Secret](./js.secret.md)<!-- -->; }, string &gt;, { path: Path; method: 'PUT'; } &gt; \| Extract&lt; [Endpoint](./js.endpoint.md)<!-- -->&lt; 'PUT', '/v1/projects/@this/secrets/:name', { secret: [Secret](./js.secret.md)<!-- -->; }, string &gt;, { path: Path; method: 'PUT'; } &gt; \| Extract&lt; [Endpoint](./js.endpoint.md)<!-- -->&lt; 'PUT', '/v1/channels/:channel\_id', { channel: [Channel](./js.channel.md)<!-- -->; }, { type: [ChannelType](./js.channeltype.md)<!-- -->; state: Record&lt;string, any&gt; \| null; } &gt;, { path: Path; method: 'PUT'; } &gt; \| Extract&lt; [Endpoint](./js.endpoint.md)<!-- -->&lt; 'PUT', '/v1/channels/:channel\_id/subscribers/:token', void, undefined &gt;, { path: Path; method: 'PUT'; } &gt; \| Extract&lt; [Endpoint](./js.endpoint.md)<!-- -->&lt;'PUT', '/v1/channels/:channel\_id/state', void, [State](./js.state.md)<!-- -->&gt;, { path: Path; method: 'PUT'; } &gt; \| Extract&lt; [Endpoint](./js.endpoint.md)<!-- -->&lt; 'PUT', '/v1/ignite/containers/:container\_id/state', void, { preferred\_state: [ContainerState.RUNNING](./js.containerstate.md) \| [ContainerState.STOPPED](./js.containerstate.md)<!-- -->; } &gt;, { path: Path; method: 'PUT'; } &gt; )\['res'\] &gt;
+Promise&lt;(Extract&lt;[Endpoint](./js.endpoint.md)<!-- -->&lt;"PUT", "/v1/projects/:project\_id/secrets/:name", { secret: [Secret](./js.secret.md)<!-- -->; }, string&gt;, { path: Path; method: 'PUT'; }&gt; \| Extract&lt;[Endpoint](./js.endpoint.md)<!-- -->&lt;"PUT", "/v1/projects/@this/secrets/:name", { secret: [Secret](./js.secret.md)<!-- -->; }, string&gt;, { path: Path; method: 'PUT'; }&gt; \| Extract&lt;[Endpoint](./js.endpoint.md)<!-- -->&lt;"PUT", "/v1/channels/:channel\_id", { channel: [Channel](./js.channel.md)<!-- -->; }, { type: [ChannelType](./js.channeltype.md)<!-- -->; state: Record&lt;string, any&gt; \| null; }&gt;, { path: Path; method: 'PUT'; }&gt; \| Extract&lt;[Endpoint](./js.endpoint.md)<!-- -->&lt;"PUT", "/v1/channels/:channel\_id/subscribers/:token", void, undefined&gt;, { path: Path; method: 'PUT'; }&gt; \| Extract&lt;[Endpoint](./js.endpoint.md)<!-- -->&lt;"PUT", "/v1/channels/:channel\_id/state", void, [State](./js.state.md)<!-- -->&gt;, { path: Path; method: 'PUT'; }&gt; \| Extract&lt;[Endpoint](./js.endpoint.md)<!-- -->&lt;"PUT", "/v1/ignite/containers/:container\_id/state", void, { preferred\_state: [ContainerState.RUNNING](./js.containerstate.md) \| [ContainerState.STOPPED](./js.containerstate.md)<!-- -->; }&gt;, { path: Path; method: 'PUT'; }&gt;)\["res"\]&gt;
 

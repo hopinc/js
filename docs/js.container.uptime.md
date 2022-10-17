@@ -10,6 +10,6 @@ Information about uptime/downtime for this container
 
 ```typescript
 uptime: {
-		last_start: Timestamp;
-	};
+        last_start: Timestamp;
+    };
 ```

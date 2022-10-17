@@ -4,13 +4,15 @@
 
 ## roles variable
 
+Bitwise role flags that a user can be as part of a project
+
 <b>Signature:</b>
 
 ```typescript
 roles: {
-	viewer: bigint;
-	editor: bigint;
-	admin: bigint;
-	owner: bigint;
+    viewer: bigint;
+    editor: bigint;
+    admin: bigint;
+    owner: bigint;
 }
 ```

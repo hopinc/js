@@ -16,7 +16,7 @@ declare enum RolloutState
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  FAILED | <code>'failed'</code> |  |
-|  FINISHED | <code>'finished'</code> |  |
-|  PENDING | <code>'pending'</code> |  |
+|  FAILED | <code>&quot;failed&quot;</code> |  |
+|  FINISHED | <code>&quot;finished&quot;</code> |  |
+|  PENDING | <code>&quot;pending&quot;</code> |  |
 

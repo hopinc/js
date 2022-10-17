@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-static getAuthType(auth: APIAuthentication): 'ptk' | 'pat' | 'bearer';
+static getAuthType(auth: APIAuthentication): "ptk" | "pat" | "bearer";
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ static getAuthType(auth: APIAuthentication): 'ptk' | 'pat' | 'bearer';
 
 <b>Returns:</b>
 
-'ptk' \| 'pat' \| 'bearer'
+"ptk" \| "pat" \| "bearer"
 

@@ -10,6 +10,6 @@ Information about the container
 
 ```typescript
 metadata: {
-		last_exit_code?: number;
-	};
+        last_exit_code?: number;
+    };
 ```

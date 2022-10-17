@@ -9,5 +9,5 @@ The default base URL for Hop's API.
 <b>Signature:</b>
 
 ```typescript
-DEFAULT_BASE_URL = 'https://api.hop.io'
+DEFAULT_BASE_URL = "https://api.hop.io"
 ```

@@ -1,9 +1,9 @@
 import {fetch, Headers, Request} from '../util/fetch.js';
-import {ExtractRouteParams} from '../util/index.js';
+import {_ExtractRouteParams} from '../util/index.js';
 import {IS_BROWSER} from '../util/constants.js';
 import {createURLBuilder} from '../util/urls.js';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.js';
-import {getIdPrefix, Id, Method} from './types/index.js';
+import {getIdPrefix, Id, _Method} from './types/index.js';
 
 export type APIAuthentication = Id<'ptk'> | Id<'bearer'> | Id<'pat'>;
 
@@ -36,7 +36,7 @@ export class HopAPIError extends Error {
 	}
 }
 
-export type Query<Path extends string> = ExtractRouteParams<Path> &
+export type Query<Path extends string> = _ExtractRouteParams<Path> &
 	Record<string, string | number | undefined>;
 
 export class APIClient {
@@ -180,7 +180,7 @@ export class APIClient {
 	}
 
 	private async request<T>(
-		method: Method,
+		method: _Method,
 		path: string,
 		body: unknown,
 		query: Record<string, string | number | undefined> = {},

@@ -14,6 +14,6 @@ declare enum ProjectTier
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  FREE | <code>'free'</code> |  |
-|  PAID | <code>'paid'</code> |  |
+|  FREE | <code>&quot;free&quot;</code> |  |
+|  PAID | <code>&quot;paid&quot;</code> |  |
 

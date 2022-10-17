@@ -16,7 +16,7 @@ declare enum RuntimeType
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  EPHEMERAL | <code>'ephemeral'</code> | Ephemeral deployments/containers are sort of fire and forget. Containers won't restart if they exit but they can still be terminated programatically. |
-|  PERSISTENT | <code>'persistent'</code> | Persistent deployments/containers will restart if they exit. They can also be started and stopped programmatically. |
-|  STATEFUL | <code>'stateful'</code> | Stateful deployments/containers can only run one container at a time, and will have a persistent volume attached. |
+|  EPHEMERAL | <code>&quot;ephemeral&quot;</code> | Ephemeral deployments/containers are sort of fire and forget. Containers won't restart if they exit but they can still be terminated programatically. |
+|  PERSISTENT | <code>&quot;persistent&quot;</code> | Persistent deployments/containers will restart if they exit. They can also be started and stopped programmatically. |
+|  STATEFUL | <code>&quot;stateful&quot;</code> | Stateful deployments/containers can only run one container at a time, and will have a persistent volume attached. |
 

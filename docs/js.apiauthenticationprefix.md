@@ -7,9 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-declare type APIAuthenticationPrefix = APIAuthentication extends Id<infer T>
-	? T
-	: never;
+declare type APIAuthenticationPrefix = APIAuthentication extends Id<infer T> ? T : never;
 ```
 <b>References:</b> [APIAuthentication](./js.apiauthentication.md)<!-- -->, [Id](./js.id.md)
 

@@ -4,6 +4,8 @@
 
 ## InternalHopDomain type
 
+A domain used with internal gateways (\*.hop.sh)
+
 <b>Signature:</b>
 
 ```typescript

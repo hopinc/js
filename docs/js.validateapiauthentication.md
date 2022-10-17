@@ -7,9 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-declare function validateAPIAuthentication(
-	auth: string,
-): auth is APIAuthenticationPrefix;
+declare function validateAPIAuthentication(auth: string): auth is APIAuthenticationPrefix;
 ```
 
 ## Parameters

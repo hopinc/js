@@ -4,20 +4,22 @@
 
 ## BROAD\_PERMISSIONS\_MAP variable
 
+Broader permission map
+
 <b>Signature:</b>
 
 ```typescript
 BROAD_PERMISSIONS_MAP: {
-	MANAGE_MEMBERS: bigint;
-	MANAGE_PROJECT_TOKENS: bigint;
-	MANAGE_DEPLOYMENTS: bigint;
-	MANAGE_PIPE: bigint;
-	MANAGE_SECRETS: bigint;
-	MANAGE_CHANNELS: bigint;
-	MANAGE_REGISTRY: bigint;
-	READ_ONLY: bigint;
-	MANAGE_QUOTAS: bigint;
-	MANAGE_ROLLOUTS: bigint;
-	MANAGE_BILLING: bigint;
+    MANAGE_MEMBERS: bigint;
+    MANAGE_PROJECT_TOKENS: bigint;
+    MANAGE_DEPLOYMENTS: bigint;
+    MANAGE_PIPE: bigint;
+    MANAGE_SECRETS: bigint;
+    MANAGE_CHANNELS: bigint;
+    MANAGE_REGISTRY: bigint;
+    READ_ONLY: bigint;
+    MANAGE_QUOTAS: bigint;
+    MANAGE_ROLLOUTS: bigint;
+    MANAGE_BILLING: bigint;
 }
 ```

@@ -4,6 +4,8 @@
 
 ## Id type
 
+A Hop ID is a string that starts with a prefix and a underscore, followed by some unique text. It is a Pika ID — https://github.com/hopinc/pika
+
 <b>Signature:</b>
 
 ```typescript

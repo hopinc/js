@@ -16,6 +16,6 @@ declare enum ProjectType
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  PERSONAL | <code>'personal'</code> | A personal project are created when you register an account |
-|  REGULAR | <code>'regular'</code> | A standard project type |
+|  PERSONAL | <code>&quot;personal&quot;</code> | A personal project are created when you register an account |
+|  REGULAR | <code>&quot;regular&quot;</code> | A standard project type |
 

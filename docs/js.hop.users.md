@@ -8,18 +8,18 @@
 
 ```typescript
 readonly users: {
-		me: {
-			get(): Promise<{
-				projects: Project[];
-				user: User;
-				project_member_role_map: Record<`project_${string}`, MemberRole>;
-				leap_token: string | null;
-			}>;
-			pats: {
-				create(name: string): Promise<PAT>;
-				getAll(): Promise<PAT[]>;
-				delete(id: `pat_${string}`): Promise<void>;
-			};
-		};
-	};
+        me: {
+            get(): Promise<{
+                projects: Project[];
+                user: User;
+                project_member_role_map: Record<`project_${string}`, MemberRole>;
+                leap_token: string | null;
+            }>;
+            pats: {
+                create(name: string): Promise<PAT>;
+                getAll(): Promise<PAT[]>;
+                delete(id: `pat_${string}`): Promise<void>;
+            };
+        };
+    };
 ```

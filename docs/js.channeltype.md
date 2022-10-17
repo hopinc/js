@@ -14,7 +14,7 @@ declare enum ChannelType
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  PRIVATE | <code>'private'</code> |  |
-|  PUBLIC | <code>'public'</code> |  |
-|  UNPROTECTED | <code>'unprotected'</code> |  |
+|  PRIVATE | <code>&quot;private&quot;</code> |  |
+|  PUBLIC | <code>&quot;public&quot;</code> |  |
+|  UNPROTECTED | <code>&quot;unprotected&quot;</code> |  |
 

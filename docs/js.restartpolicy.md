@@ -16,7 +16,7 @@ declare enum RestartPolicy
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  ALWAYS | <code>'always'</code> |  |
-|  NEVER | <code>'never'</code> |  |
-|  ON\_FAILURE | <code>'on-failure'</code> |  |
+|  ALWAYS | <code>&quot;always&quot;</code> |  |
+|  NEVER | <code>&quot;never&quot;</code> |  |
+|  ON\_FAILURE | <code>&quot;on-failure&quot;</code> |  |
 

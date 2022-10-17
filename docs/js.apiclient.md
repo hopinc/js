@@ -20,7 +20,7 @@ declare class APIClient
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [authType](./js.apiclient.authtype.md) | <code>readonly</code> | 'ptk' \| 'pat' \| 'bearer' |  |
+|  [authType](./js.apiclient.authtype.md) | <code>readonly</code> | "ptk" \| "pat" \| "bearer" |  |
 |  [url](./js.apiclient.url.md) | <code>readonly</code> | &lt;Path extends string&gt;(path: Path, query: [Query](./js.query.md)<!-- -->&lt;Path&gt;) =&gt; string |  |
 
 ## Methods

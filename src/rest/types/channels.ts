@@ -1,6 +1,6 @@
 import {Endpoint} from '../endpoints.js';
 import {Project} from './projects.js';
-import {Empty, Id, Timestamp} from '../../util/types.js';
+import {_Empty, Id, Timestamp} from '../../util/types.js';
 
 export enum ChannelType {
 	PRIVATE = 'private',
@@ -83,23 +83,23 @@ export type ChannelEndpoints =
 			{token: ChannelToken},
 			{state: State}
 	  >
-	| Endpoint<'DELETE', '/v1/channels/:channel_id', Empty>
+	| Endpoint<'DELETE', '/v1/channels/:channel_id', _Empty>
 	| Endpoint<'GET', '/v1/channels/:channel_id', {channel: Channel}>
 	| Endpoint<'GET', '/v1/channels/:channel_id/tokens', {tokens: ChannelToken[]}>
 	| Endpoint<
 			'POST',
 			'/v1/channels/tokens/:token/messages',
-			Empty,
+			_Empty,
 			{e: string; d: unknown}
 	  >
-	| Endpoint<'PUT', '/v1/channels/:channel_id/subscribers/:token', Empty>
-	| Endpoint<'PATCH', '/v1/channels/:channel_id/state', Empty, State>
-	| Endpoint<'PUT', '/v1/channels/:channel_id/state', Empty, State>
+	| Endpoint<'PUT', '/v1/channels/:channel_id/subscribers/:token', _Empty>
+	| Endpoint<'PATCH', '/v1/channels/:channel_id/state', _Empty, State>
+	| Endpoint<'PUT', '/v1/channels/:channel_id/state', _Empty, State>
 	| Endpoint<'GET', '/v1/channels/:channel_id/state', {state: State}>
 	| Endpoint<
 			'POST',
 			'/v1/channels/:channel_id/messages',
-			Empty,
+			_Empty,
 			{e: string; d: unknown}
 	  >
 	| Endpoint<'GET', '/v1/channels', {channels: Channel[]}>
@@ -110,7 +110,7 @@ export type ChannelEndpoints =
 			{token: ChannelToken},
 			{expiresAt?: Timestamp | null; state: ChannelToken['state']}
 	  >
-	| Endpoint<'DELETE', '/v1/channels/tokens/:token', Empty>
+	| Endpoint<'DELETE', '/v1/channels/tokens/:token', _Empty>
 	| Endpoint<
 			'GET',
 			'/v1/channels/:channel_id/stats',

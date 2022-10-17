@@ -1,4 +1,4 @@
-import {ExtractRouteParams, Query} from '../rest/index.js';
+import {_ExtractRouteParams, Query} from '../rest/index.js';
 
 export function lead(x: string) {
 	return x.charCodeAt(0) === 47 ? x : '/' + x;
@@ -18,7 +18,8 @@ export function join(a: string, b: string) {
 
 /**
  * Generates a querystring to append to a URL. This function will include the ? character.
- * @param query An object of query params to be encoded
+ * @param query - An object of query params to be encoded
+ * @public
  * @returns A string of query params
  */
 export function querystring(query: Query<string>): string {
@@ -62,7 +63,7 @@ export function createURLBuilder(base: string) {
 
 			if (param in query) {
 				const {[param]: value, ...rest} = query;
-				query = rest as ExtractRouteParams<Path>;
+				query = rest as _ExtractRouteParams<Path>;
 
 				if (value === undefined) {
 					throw new Error(`URL param ${param} is undefined`);

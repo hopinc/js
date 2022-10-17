@@ -4,6 +4,10 @@ import {Regions} from '../rest/types/ignite.js';
 import {DeliveryProtocol} from '../rest/types/pipe.js';
 import {sdk} from './create.js';
 
+/**
+ * Pipe SDK client
+ * @public
+ */
 export const pipe = sdk(client => {
 	const Rooms = create<API.Pipe.Room>().methods({
 		async delete() {
@@ -60,7 +64,7 @@ export const pipe = sdk(client => {
 			/**
 			 * Deletes a Pipe room
 			 *
-			 * @param room The ID of the Pipe room to delete.
+			 * @param room - The ID of the Pipe room to delete.
 			 */
 			async delete(room: Id<'pipe_room'>) {
 				await client.delete('/v1/pipe/rooms/:room_id', undefined, {

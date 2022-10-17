@@ -8,7 +8,7 @@
 
 ```typescript
 declare type SuccessfulAPIResponse<T> = {
-	success: true;
-	data: T;
+    success: true;
+    data: T;
 };
 ```

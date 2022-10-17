@@ -12,5 +12,5 @@
 <b>Signature:</b>
 
 ```typescript
-units: readonly ['GB', 'MB', 'KB', 'B']
+units: readonly ["GB", "MB", "KB", "B"]
 ```

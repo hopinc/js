@@ -16,6 +16,6 @@ declare enum BuildMethod
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  CLI | <code>'cli'</code> |  |
-|  GITHUB | <code>'github'</code> |  |
+|  CLI | <code>&quot;cli&quot;</code> |  |
+|  GITHUB | <code>&quot;github&quot;</code> |  |
 

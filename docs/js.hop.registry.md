@@ -8,19 +8,17 @@
 
 ```typescript
 readonly registry: {
-		images: {
-			getAll(project?: `project_${string}` | undefined): Promise<string[]>;
-			getManifest(image: string): Promise<
-				{
-					digest: {
-						digest: string;
-						size: number;
-						uploaded: string;
-					};
-					tag: string | null;
-				}[]
-			>;
-			delete(image: string): Promise<void>;
-		};
-	};
+        images: {
+            getAll(project?: `project_${string}` | undefined): Promise<string[]>;
+            getManifest(image: string): Promise<{
+                digest: {
+                    digest: string;
+                    size: number;
+                    uploaded: string;
+                };
+                tag: string | null;
+            }[]>;
+            delete(image: string): Promise<void>;
+        };
+    };
 ```

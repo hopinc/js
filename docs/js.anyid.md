@@ -4,6 +4,8 @@
 
 ## AnyId type
 
+Any/all IDs that are used within the API
+
 <b>Signature:</b>
 
 ```typescript

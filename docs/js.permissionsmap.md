@@ -4,53 +4,55 @@
 
 ## permissionsMap variable
 
+Individual bitwise permissions
+
 <b>Signature:</b>
 
 ```typescript
 permissionsMap: {
-	add_member: bigint;
-	remove_member: bigint;
-	get_project_members: bigint;
-	delete_project: bigint;
-	delete_deployment: bigint;
-	delete_container: bigint;
-	update_container_state: bigint;
-	read_deployments: bigint;
-	create_deployment: bigint;
-	create_container: bigint;
-	update_container_config: bigint;
-	create_room: bigint;
-	read_room: bigint;
-	delete_room: bigint;
-	create_room_producer: bigint;
-	create_project_token: bigint;
-	delete_project_token: bigint;
-	read_project_tokens: bigint;
-	read_container_logs: bigint;
-	create_project_secret: bigint;
-	read_project_secrets: bigint;
-	delete_project_secret: bigint;
-	get_registry_images: bigint;
-	create_channel_token: bigint;
-	create_gateway: bigint;
-	add_domain: bigint;
-	delete_channels: bigint;
-	update_channel_state: bigint;
-	read_channels: bigint;
-	publish_channel_messages: bigint;
-	manage_channel_subscribers: bigint;
-	delete_domain: bigint;
-	delete_gateway: bigint;
-	get_internal_domain: bigint;
-	create_leap_token: bigint;
-	read_leap_tokens: bigint;
-	update_leap_token: bigint;
-	message_token: bigint;
-	create_channel: bigint;
-	rollout: bigint;
-	request_quota_increase: bigint;
-	read_billing: bigint;
-	read_gateways: bigint;
-	delete_registry_images: bigint;
+    add_member: bigint;
+    remove_member: bigint;
+    get_project_members: bigint;
+    delete_project: bigint;
+    delete_deployment: bigint;
+    delete_container: bigint;
+    update_container_state: bigint;
+    read_deployments: bigint;
+    create_deployment: bigint;
+    create_container: bigint;
+    update_container_config: bigint;
+    create_room: bigint;
+    read_room: bigint;
+    delete_room: bigint;
+    create_room_producer: bigint;
+    create_project_token: bigint;
+    delete_project_token: bigint;
+    read_project_tokens: bigint;
+    read_container_logs: bigint;
+    create_project_secret: bigint;
+    read_project_secrets: bigint;
+    delete_project_secret: bigint;
+    get_registry_images: bigint;
+    create_channel_token: bigint;
+    create_gateway: bigint;
+    add_domain: bigint;
+    delete_channels: bigint;
+    update_channel_state: bigint;
+    read_channels: bigint;
+    publish_channel_messages: bigint;
+    manage_channel_subscribers: bigint;
+    delete_domain: bigint;
+    delete_gateway: bigint;
+    get_internal_domain: bigint;
+    create_leap_token: bigint;
+    read_leap_tokens: bigint;
+    update_leap_token: bigint;
+    message_token: bigint;
+    create_channel: bigint;
+    rollout: bigint;
+    request_quota_increase: bigint;
+    read_billing: bigint;
+    read_gateways: bigint;
+    delete_registry_images: bigint;
 }
 ```

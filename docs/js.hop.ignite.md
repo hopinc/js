@@ -8,139 +8,78 @@
 
 ```typescript
 readonly ignite: {
-		gateways: {
-			addDomain(gatewayId: `gateway_${string}`, domain: string): Promise<void>;
-			get(gatewayId: `gateway_${string}`): Promise<Gateway>;
-		};
-		deployments: {
-			create: {
-				(
-					configOrProject: `project_${string}`,
-					bearerOrPatConfig: DeploymentConfig,
-				): Promise<
-					Deployment & {
-						getContainers(): Promise<Container[]>;
-						delete(): Promise<void>;
-						createContainer(): Promise<Container>;
-						createGateway(
-							type: GatewayType,
-							protocol: 'http' | null,
-							port: number,
-						): Promise<
-							Gateway & {
-								addDomain(domain: string): Promise<void>;
-							}
-						>;
-					}
-				>;
-				(configOrProject: DeploymentConfig): Promise<
-					Deployment & {
-						getContainers(): Promise<Container[]>;
-						delete(): Promise<void>;
-						createContainer(): Promise<Container>;
-						createGateway(
-							type: GatewayType,
-							protocol: 'http' | null,
-							port: number,
-						): Promise<
-							Gateway & {
-								addDomain(domain: string): Promise<void>;
-							}
-						>;
-					}
-				>;
-			};
-			get: {
-				(name: string, projectId?: `project_${string}` | undefined): Promise<
-					Deployment & {
-						getContainers(): Promise<Container[]>;
-						delete(): Promise<void>;
-						createContainer(): Promise<Container>;
-						createGateway(
-							type: GatewayType,
-							protocol: 'http' | null,
-							port: number,
-						): Promise<
-							Gateway & {
-								addDomain(domain: string): Promise<void>;
-							}
-						>;
-					}
-				>;
-				(
-					id: `deployment_${string}`,
-					projectId?: `project_${string}` | undefined,
-				): Promise<
-					Deployment & {
-						getContainers(): Promise<Container[]>;
-						delete(): Promise<void>;
-						createContainer(): Promise<Container>;
-						createGateway(
-							type: GatewayType,
-							protocol: 'http' | null,
-							port: number,
-						): Promise<
-							Gateway & {
-								addDomain(domain: string): Promise<void>;
-							}
-						>;
-					}
-				>;
-			};
-			update(
-				deploymentId: `deployment_${string}`,
-				config: DeploymentConfig,
-			): Promise<Deployment>;
-			getContainers(deployment: `deployment_${string}`): Promise<Container[]>;
-			getAll(projectId?: `project_${string}` | undefined): Promise<
-				(Deployment & {
-					getContainers(): Promise<Container[]>;
-					delete(): Promise<void>;
-					createContainer(): Promise<Container>;
-					createGateway(
-						type: GatewayType,
-						protocol: 'http' | null,
-						port: number,
-					): Promise<
-						Gateway & {
-							addDomain(domain: string): Promise<void>;
-						}
-					>;
-				})[]
-			>;
-			delete(deployment: `deployment_${string}`): Promise<void>;
-			gateways: {
-				getAll(deploymentId: `deployment_${string}`): Promise<
-					(Gateway & {
-						addDomain(domain: string): Promise<void>;
-					})[]
-				>;
-				create(
-					deployment: `deployment_${string}` | Deployment,
-					type: GatewayType,
-					protocol: 'http' | null,
-					targetPort: number,
-				): Promise<
-					Gateway & {
-						addDomain(domain: string): Promise<void>;
-					}
-				>;
-			};
-		};
-		containers: {
-			delete(container: `container_${string}`): Promise<void>;
-			getLogs(
-				container: `container_${string}`,
-				options?: Partial<{
-					sortBy: 'timestamp';
-					orderBy: 'desc' | 'asc';
-					limit: number;
-					offset: number;
-				}>,
-			): Promise<ContainerLog[]>;
-			stop(container: `container_${string}`): Promise<void>;
-			start(container: `container_${string}`): Promise<void>;
-			create(deployment: `deployment_${string}`): Promise<Container>;
-		};
-	};
+        gateways: {
+            addDomain(gatewayId: `gateway_${string}`, domain: string): Promise<void>;
+            get(gatewayId: `gateway_${string}`): Promise<Gateway>;
+        };
+        deployments: {
+            create: {
+                (configOrProject: `project_${string}`, bearerOrPatConfig: DeploymentConfig): Promise<Deployment & {
+                    getContainers(): Promise<Container[]>;
+                    delete(): Promise<void>;
+                    createContainer(): Promise<Container>;
+                    createGateway(type: GatewayType, protocol: "http" | null, port: number): Promise<Gateway & {
+                        addDomain(domain: string): Promise<void>;
+                    }>;
+                }>;
+                (configOrProject: DeploymentConfig): Promise<Deployment & {
+                    getContainers(): Promise<Container[]>;
+                    delete(): Promise<void>;
+                    createContainer(): Promise<Container>;
+                    createGateway(type: GatewayType, protocol: "http" | null, port: number): Promise<Gateway & {
+                        addDomain(domain: string): Promise<void>;
+                    }>;
+                }>;
+            };
+            get: {
+                (name: string, projectId?: `project_${string}` | undefined): Promise<Deployment & {
+                    getContainers(): Promise<Container[]>;
+                    delete(): Promise<void>;
+                    createContainer(): Promise<Container>;
+                    createGateway(type: GatewayType, protocol: "http" | null, port: number): Promise<Gateway & {
+                        addDomain(domain: string): Promise<void>;
+                    }>;
+                }>;
+                (id: `deployment_${string}`, projectId?: `project_${string}` | undefined): Promise<Deployment & {
+                    getContainers(): Promise<Container[]>;
+                    delete(): Promise<void>;
+                    createContainer(): Promise<Container>;
+                    createGateway(type: GatewayType, protocol: "http" | null, port: number): Promise<Gateway & {
+                        addDomain(domain: string): Promise<void>;
+                    }>;
+                }>;
+            };
+            update(deploymentId: `deployment_${string}`, config: DeploymentConfig): Promise<Deployment>;
+            getContainers(deployment: `deployment_${string}`): Promise<Container[]>;
+            getAll(projectId?: `project_${string}` | undefined): Promise<(Deployment & {
+                getContainers(): Promise<Container[]>;
+                delete(): Promise<void>;
+                createContainer(): Promise<Container>;
+                createGateway(type: GatewayType, protocol: "http" | null, port: number): Promise<Gateway & {
+                    addDomain(domain: string): Promise<void>;
+                }>;
+            })[]>;
+            delete(deployment: `deployment_${string}`): Promise<void>;
+            gateways: {
+                getAll(deploymentId: `deployment_${string}`): Promise<(Gateway & {
+                    addDomain(domain: string): Promise<void>;
+                })[]>;
+                create(deployment: `deployment_${string}` | Deployment, type: GatewayType, protocol: "http" | null, targetPort: number): Promise<Gateway & {
+                    addDomain(domain: string): Promise<void>;
+                }>;
+            };
+        };
+        containers: {
+            delete(container: `container_${string}`): Promise<void>;
+            getLogs(container: `container_${string}`, options?: Partial<{
+                sortBy: "timestamp";
+                orderBy: "desc" | "asc";
+                limit: number;
+                offset: number;
+            }>): Promise<ContainerLog[]>;
+            stop(container: `container_${string}`): Promise<void>;
+            start(container: `container_${string}`): Promise<void>;
+            create(deployment: `deployment_${string}`): Promise<Container>;
+        };
+    };
 ```
