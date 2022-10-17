@@ -43,7 +43,7 @@
 		"build": "rm -rf dist && tsup",
 		"bench": "HOP_DEBUG=true tsx _workbench.ts",
 		"release": "yarn build && yarn changeset publish",
-		"vercel-build": "yarn typedoc --plugin typedoc-plugin-missing-exports src/index.ts",
+		"vercel-build": "yarn build && api-extractor run --local --verbose && api-documenter markdown --input-folder ./docs --output-folder ./docs",
 		"test": "tsx tests/index.ts"
 	},
 	"devDependencies": {
@@ -57,9 +57,6 @@
 		"prettier": "2.7.1",
 		"tsup": "6.2.3",
 		"tsx": "3.10.1",
-		"typedoc": "0.23.16",
-		"typedoc-plugin-markdown": "3.13.6",
-		"typedoc-plugin-missing-exports": "1.0.0",
 		"typescript": "4.8.4"
 	},
 	"dependencies": {
