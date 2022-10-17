@@ -2,8 +2,6 @@ import {create} from '@onehop/json-methods';
 import {API, Id} from '../rest/index.js';
 import {sdk} from './create.js';
 
-type Token = Id<'leap_token'>;
-
 /**
  * New state to set to a channel, or a callback function that will produce the new state
  */
@@ -25,11 +23,11 @@ export const channels = sdk(client => {
 			await updateState(this.id, state, 'patch');
 		},
 
-		async subscribeToken(token: Token) {
+		async subscribeToken(token: Id<'leap_token'>) {
 			await channelsSDK.subscribeToken(this.id, token);
 		},
 
-		async subscribeTokens(tokens: Token[] | Set<Token>) {
+		async subscribeTokens(tokens: Id<'leap_token'>[] | Set<Id<'leap_token'>>) {
 			await channelsSDK.subscribeTokens(this.id, tokens);
 		},
 
@@ -122,7 +120,7 @@ export const channels = sdk(client => {
 
 		async subscribeToken(
 			channel: API.Channels.Channel | API.Channels.Channel['id'],
-			token: Token,
+			token: Id<'leap_token'>,
 		) {
 			const id = typeof channel === 'object' ? channel.id : channel;
 
@@ -135,7 +133,7 @@ export const channels = sdk(client => {
 
 		async subscribeTokens(
 			channel: API.Channels.Channel | API.Channels.Channel['id'],
-			tokens: Token[] | Set<Token>,
+			tokens: Id<'leap_token'>[] | Set<Id<'leap_token'>>,
 		) {
 			const promises: Array<Promise<void>> = [];
 

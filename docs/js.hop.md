@@ -4,7 +4,7 @@
 
 ## Hop class
 
-Constructs a new instance of Hop and all of its SDKs.
+Root class containing all methods and types for interacting with the Hop platform. This will be the entrypoint for most users of the Hop SDK.
 
 <b>Signature:</b>
 

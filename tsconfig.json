@@ -13,7 +13,9 @@
 		"isolatedModules": true,
 		"noFallthroughCasesInSwitch": true,
 		"declaration": true,
-		"declarationMap": true
+		"declarationMap": true,
+		"noEmit": true,
+		"rootDir": ".temp"
 	},
 	"exclude": ["node_modules", "dist"],
 	"include": ["./**/*.ts", "./**/*.tsx", "gen-docs.mts"]

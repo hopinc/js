@@ -4,6 +4,8 @@
 
 ## PartialAPIOptions type
 
+Partial options for the Hop client
+
 <b>Signature:</b>
 
 ```typescript

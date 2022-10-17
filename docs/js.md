@@ -9,7 +9,7 @@
 |  Class | Description |
 |  --- | --- |
 |  [APIClient](./js.apiclient.md) |  |
-|  [Hop](./js.hop.md) | Constructs a new instance of Hop and all of its SDKs. |
+|  [Hop](./js.hop.md) | Root class containing all methods and types for interacting with the Hop platform. This will be the entrypoint for most users of the Hop SDK. |
 |  [HopAPIError](./js.hopapierror.md) |  |
 
 ## Enumerations
@@ -134,7 +134,7 @@
 |  [IgniteEndpoints](./js.igniteendpoints.md) |  |
 |  [InternalHopDomain](./js.internalhopdomain.md) | A domain used with internal gateways (\*.hop.sh) |
 |  [Member](./js.member.md) |  |
-|  [PartialAPIOptions](./js.partialapioptions.md) |  |
+|  [PartialAPIOptions](./js.partialapioptions.md) | Partial options for the Hop client |
 |  [PipeEndpoints](./js.pipeendpoints.md) |  |
 |  [ProjectsEndpoints](./js.projectsendpoints.md) |  |
 |  [Query](./js.query.md) |  |

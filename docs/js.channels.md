@@ -15,26 +15,26 @@ channels: (client: APIClient) => {
     } | null | undefined, project?: Id<'project'>): Promise<Channel & {
         setState<T_1 extends State>(state: SetStateAction<T_1>): Promise<void>;
         patchState<T_2 extends State>(state: SetStateAction<T_2>): Promise<void>;
-        subscribeToken(token: Token): Promise<void>;
-        subscribeTokens(tokens: Token[] | Set<Token>): Promise<void>;
+        subscribeToken(token: Id<'leap_token'>): Promise<void>;
+        subscribeTokens(tokens: Id<'leap_token'>[] | Set<Id<'leap_token'>>): Promise<void>;
         publishMessage(name: string, data: unknown): Promise<void>;
     }>;
     get(id: string): Promise<Channel & {
         setState<T_1 extends State>(state: SetStateAction<T_1>): Promise<void>;
         patchState<T_2 extends State>(state: SetStateAction<T_2>): Promise<void>;
-        subscribeToken(token: Token): Promise<void>;
-        subscribeTokens(tokens: Token[] | Set<Token>): Promise<void>;
+        subscribeToken(token: Id<'leap_token'>): Promise<void>;
+        subscribeTokens(tokens: Id<'leap_token'>[] | Set<Id<'leap_token'>>): Promise<void>;
         publishMessage(name: string, data: unknown): Promise<void>;
     }>;
     getAll(project?: Id<'project'>): Promise<(Channel & {
         setState<T_1 extends State>(state: SetStateAction<T_1>): Promise<void>;
         patchState<T_2 extends State>(state: SetStateAction<T_2>): Promise<void>;
-        subscribeToken(token: Token): Promise<void>;
-        subscribeTokens(tokens: Token[] | Set<Token>): Promise<void>;
+        subscribeToken(token: Id<'leap_token'>): Promise<void>;
+        subscribeTokens(tokens: Id<'leap_token'>[] | Set<Id<'leap_token'>>): Promise<void>;
         publishMessage(name: string, data: unknown): Promise<void>;
     })[]>;
-    subscribeToken(channel: string | Channel, token: Token): Promise<void>;
-    subscribeTokens(channel: string | Channel, tokens: Token[] | Set<Token>): Promise<void>;
+    subscribeToken(channel: string | Channel, token: Id<'leap_token'>): Promise<void>;
+    subscribeTokens(channel: string | Channel, tokens: Id<'leap_token'>[] | Set<Id<'leap_token'>>): Promise<void>;
     getAllTokens(channel: string | Channel): Promise<ChannelToken[]>;
     setState<T_3 extends State = State>(channel: string | Channel, state: SetStateAction<T_3>): Promise<void>;
     patchState<T_4 extends State>(channel: string | Channel, state: SetStateAction<T_4>): Promise<void>;
