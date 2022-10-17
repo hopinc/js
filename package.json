@@ -43,7 +43,7 @@
 		"build": "rm -rf dist && tsup",
 		"bench": "HOP_DEBUG=true tsx _workbench.ts",
 		"release": "yarn build && yarn changeset publish",
-		"vercel-build": "yarn build && api-extractor run --local --verbose && api-documenter markdown --input-folder ./docs --output-folder ./docs",
+		"vercel-build": "yarn build && api-extractor run --local --verbose && api-documenter markdown --input-folder ./.temp --output-folder ./docs",
 		"test": "tsx tests/index.ts"
 	},
 	"devDependencies": {
@@ -51,17 +51,18 @@
 		"@microsoft/api-documenter": "^7.19.20",
 		"@microsoft/api-extractor": "^7.33.2",
 		"@types/glob": "8.0.0",
-		"@types/node": "18.11.0",
+		"@types/node": "^18.11.0",
 		"dotenv": "16.0.3",
 		"glob": "8.0.3",
 		"prettier": "2.7.1",
 		"tsup": "6.2.3",
 		"tsx": "3.10.1",
-		"typescript": "4.8.4"
+		"typescript": "^4.8.4"
 	},
 	"dependencies": {
 		"@onehop/json-methods": "^1.2.0",
 		"cross-fetch": "^3.1.5",
+		"es-urlcat": "^1.0.0",
 		"zod": "^3.19.1"
 	}
 }

@@ -7,4 +7,5 @@ node_modules
 dist
 _workbench.ts
 .env
-docs
+.temp
+.next

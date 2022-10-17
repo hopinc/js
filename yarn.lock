@@ -492,14 +492,15 @@ __metadata:
     "@microsoft/api-extractor": ^7.33.2
     "@onehop/json-methods": ^1.2.0
     "@types/glob": 8.0.0
-    "@types/node": 18.11.0
+    "@types/node": ^18.11.0
     cross-fetch: ^3.1.5
     dotenv: 16.0.3
+    es-urlcat: ^1.0.0
     glob: 8.0.3
     prettier: 2.7.1
     tsup: 6.2.3
     tsx: 3.10.1
-    typescript: 4.8.4
+    typescript: ^4.8.4
     zod: ^3.19.1
   languageName: unknown
   linkType: soft
@@ -610,17 +611,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.11.0":
-  version: 18.11.0
-  resolution: "@types/node@npm:18.11.0"
-  checksum: f27f899ab428e5732f04fadadc9203f44bdf3abf56474540ee27da90e4f2ba133faf87263cada4d2271955f92ee6a142bd50683c86290fe5070c19aac44fd654
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:^12.7.1":
   version: 12.20.55
   resolution: "@types/node@npm:12.20.55"
   checksum: e4f86785f4092706e0d3b0edff8dca5a13b45627e4b36700acd8dfe6ad53db71928c8dee914d4276c7fd3b6ccd829aa919811c9eb708a2c8e4c6eb3701178c37
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^18.11.0":
+  version: 18.11.0
+  resolution: "@types/node@npm:18.11.0"
+  checksum: f27f899ab428e5732f04fadadc9203f44bdf3abf56474540ee27da90e4f2ba133faf87263cada4d2271955f92ee6a142bd50683c86290fe5070c19aac44fd654
   languageName: node
   linkType: hard
 
@@ -1345,6 +1346,15 @@ __metadata:
     is-date-object: ^1.0.1
     is-symbol: ^1.0.2
   checksum: 4ead6671a2c1402619bdd77f3503991232ca15e17e46222b0a41a5d81aebc8740a77822f5b3c965008e631153e9ef0580540007744521e72de8e33599fca2eed
+  languageName: node
+  linkType: hard
+
+"es-urlcat@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "es-urlcat@npm:1.0.0"
+  dependencies:
+    qs: ^6.9.4
+  checksum: e646f8510f80e11951602178168d2348fcbc39ed12cc80b0c93d592224a4692c155250e136c05cae4f9a4325ba5f991554d94623b2ebbb431d6064119a2acacf
   languageName: node
   linkType: hard
 
@@ -3358,6 +3368,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qs@npm:^6.9.4":
+  version: 6.11.0
+  resolution: "qs@npm:6.11.0"
+  dependencies:
+    side-channel: ^1.0.4
+  checksum: 6e1f29dd5385f7488ec74ac7b6c92f4d09a90408882d0c208414a34dd33badc1a621019d4c799a3df15ab9b1d0292f97c1dd71dc7c045e69f81a8064e5af7297
+  languageName: node
+  linkType: hard
+
 "queue-microtask@npm:^1.2.2":
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
@@ -4153,7 +4172,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:4.8.4, typescript@npm:~4.8.4":
+"typescript@npm:^4.8.4, typescript@npm:~4.8.4":
   version: 4.8.4
   resolution: "typescript@npm:4.8.4"
   bin:
@@ -4163,7 +4182,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.8.4#~builtin<compat/typescript>, typescript@patch:typescript@~4.8.4#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.8.4#~builtin<compat/typescript>, typescript@patch:typescript@~4.8.4#~builtin<compat/typescript>":
   version: 4.8.4
   resolution: "typescript@patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=a1c5e5"
   bin:

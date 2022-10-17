@@ -13,7 +13,7 @@
 
 	"docModel": {
 		"enabled": true,
-		"apiJsonFilePath": "<projectFolder>/docs/js.api.json"
+		"apiJsonFilePath": "<projectFolder>/.temp/js.api.json"
 	},
 
 	"dtsRollup": {
