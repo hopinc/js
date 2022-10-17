@@ -43,7 +43,7 @@
 		"build": "rm -rf dist && tsup",
 		"bench": "HOP_DEBUG=true tsx _workbench.ts",
 		"release": "yarn build && yarn changeset publish",
-		"docs": "yarn tsc && api-extractor run --local --verbose && api-documenter markdown --input-folder ./.temp --output-folder ./docs",
+		"docs": "yarn build && api-extractor run --local --verbose && api-documenter markdown --input-folder ./.temp --output-folder ./docs",
 		"test": "tsx tests/index.ts"
 	},
 	"devDependencies": {

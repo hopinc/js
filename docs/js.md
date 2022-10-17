@@ -8,9 +8,9 @@
 
 |  Class | Description |
 |  --- | --- |
-|  [APIClient](./js.apiclient.md) |  |
+|  [APIClient](./js.apiclient.md) | API Client that is responsible for handling all requests |
 |  [Hop](./js.hop.md) | Root class containing all methods and types for interacting with the Hop platform. This will be the entrypoint for most users of the Hop SDK. |
-|  [HopAPIError](./js.hopapierror.md) |  |
+|  [HopAPIError](./js.hopapierror.md) | An error that occurred as a response from the Hop API. |
 
 ## Enumerations
 
@@ -41,7 +41,7 @@
 |  [id(maybeId, prefix)](./js.id.md) | Casts a string to an ID and asserts that it is of the correct type. This function will throw if the string is not a valid ID. |
 |  [isValidByteString(value)](./js.isvalidbytestring.md) |  |
 |  [parseSize(size)](./js.parsesize.md) | Parses a byte size string into bytes |
-|  [validateAPIAuthentication(auth)](./js.validateapiauthentication.md) |  |
+|  [validateAPIAuthentication(auth)](./js.validateapiauthentication.md) | Validates that an authentication prefix is valid |
 |  [validateId(maybeId, prefix)](./js.validateid.md) | Validates that a string is a valid ID |
 |  [validateIdPrefix(prefix, expect)](./js.validateidprefix.md) | Checks if a string is a valid Hop ID prefix |
 
@@ -49,7 +49,7 @@
 
 |  Interface | Description |
 |  --- | --- |
-|  [APIClientOptions](./js.apiclientoptions.md) |  |
+|  [APIClientOptions](./js.apiclientoptions.md) | Options passed to the API client. This will usually come from Hop\#constructor in most cases |
 |  [Auth](./js.auth.md) | Docker image registry authorization |
 |  [Build](./js.build.md) | A build entity |
 |  [BuildMetaData](./js.buildmetadata.md) | Metadata attached to a build |
@@ -106,7 +106,7 @@
 |  [projects](./js.projects.md) | Projects SDK client |
 |  [registry](./js.registry.md) | Registry SDK client |
 |  [roles](./js.roles.md) | Bitwise role flags that a user can be as part of a project |
-|  [SUPPORTS\_INTL](./js.supports_intl.md) |  |
+|  [SUPPORTS\_INTL](./js.supports_intl.md) | If this runtiem supports the Intl API |
 |  [units](./js.units.md) |  |
 |  [users](./js.users.md) | Users SDK client |
 
@@ -115,8 +115,8 @@
 |  Type Alias | Description |
 |  --- | --- |
 |  [AnyId](./js.anyid.md) | Any/all IDs that are used within the API |
-|  [APIAuthentication](./js.apiauthentication.md) |  |
-|  [APIAuthenticationPrefix](./js.apiauthenticationprefix.md) |  |
+|  [APIAuthentication](./js.apiauthentication.md) | All possible authentication ID types |
+|  [APIAuthenticationPrefix](./js.apiauthenticationprefix.md) | A valid ID prefix supported by the Hop API for authetication |
 |  [APIResponse](./js.apiresponse.md) |  |
 |  [ByteSizeString](./js.bytesizestring.md) |  |
 |  [ByteString](./js.bytestring.md) |  |
@@ -125,19 +125,22 @@
 |  [DeliveryProtocol](./js.deliveryprotocol.md) |  |
 |  [DeploymentConfig](./js.deploymentconfig.md) | A config for creating a deployment |
 |  [DeploymentRollout](./js.deploymentrollout.md) | A deployment rollout |
+|  [Empty](./js.empty.md) | An empty response type |
 |  [Endpoint](./js.endpoint.md) |  |
 |  [Endpoints](./js.endpoints.md) |  |
 |  [ErroredAPIResponse](./js.erroredapiresponse.md) |  |
+|  [ExtractRouteParams](./js.extractrouteparams.md) | Creates a record of params required for a given URL/path |
 |  [HopShDomain](./js.hopshdomain.md) | A hop.sh domain (\*.hop.sh) |
 |  [Id](./js.id.md) | A Hop ID is a string that starts with a prefix and a underscore, followed by some unique text. It is a Pika ID — https://github.com/hopinc/pika |
 |  [IdPrefixes](./js.idprefixes.md) | A union of all ID prefixes used within the API |
 |  [IgniteEndpoints](./js.igniteendpoints.md) |  |
 |  [InternalHopDomain](./js.internalhopdomain.md) | A domain used with internal gateways (\*.hop.sh) |
 |  [Member](./js.member.md) |  |
+|  [Method](./js.method.md) | All methods the Hop API accepts |
 |  [PartialAPIOptions](./js.partialapioptions.md) | Partial options for the Hop client |
 |  [PipeEndpoints](./js.pipeendpoints.md) |  |
 |  [ProjectsEndpoints](./js.projectsendpoints.md) |  |
-|  [Query](./js.query.md) |  |
+|  [Query](./js.query.md) | Generate a query object that includes typed URL params |
 |  [RegistryEndpoints](./js.registryendpoints.md) |  |
 |  [SetStateAction](./js.setstateaction.md) | New state to set to a channel, or a callback function that will produce the new state |
 |  [State](./js.state.md) |  |

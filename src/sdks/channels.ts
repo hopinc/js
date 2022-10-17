@@ -4,6 +4,7 @@ import {sdk} from './create.js';
 
 /**
  * New state to set to a channel, or a callback function that will produce the new state
+ * @public
  */
 export type SetStateAction<T extends API.Channels.State> =
 	| T

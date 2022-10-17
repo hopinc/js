@@ -1,4 +1,4 @@
-import {_Method} from './types/index.js';
+import {Method} from './types/index.js';
 import {ChannelEndpoints} from './types/channels.js';
 import {IgniteEndpoints} from './types/ignite.js';
 import {PipeEndpoints} from './types/pipe.js';
@@ -22,7 +22,7 @@ export type ErroredAPIResponse = {
 export type APIResponse<T> = SuccessfulAPIResponse<T> | ErroredAPIResponse;
 
 export type Endpoint<
-	M extends _Method,
+	M extends Method,
 	Path extends string,
 	Res,
 	Body = undefined,

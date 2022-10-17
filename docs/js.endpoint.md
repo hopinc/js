@@ -7,10 +7,12 @@
 <b>Signature:</b>
 
 ```typescript
-declare type Endpoint<M extends _Method, Path extends string, Res, Body = undefined> = {
+declare type Endpoint<M extends Method, Path extends string, Res, Body = undefined> = {
     method: M;
     path: Path;
     res: Res;
     body: Body;
 };
 ```
+<b>References:</b> [Method](./js.method.md)
+

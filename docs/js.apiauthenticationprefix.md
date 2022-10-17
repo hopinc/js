@@ -4,6 +4,8 @@
 
 ## APIAuthenticationPrefix type
 
+A valid ID prefix supported by the Hop API for authetication
+
 <b>Signature:</b>
 
 ```typescript

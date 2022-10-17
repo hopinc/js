@@ -1,27 +1,51 @@
 import {fetch, Headers, Request} from '../util/fetch.js';
-import {_ExtractRouteParams} from '../util/index.js';
+import {ExtractRouteParams} from '../util/index.js';
 import {IS_BROWSER} from '../util/constants.js';
 import {createURLBuilder} from '../util/urls.js';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.js';
-import {getIdPrefix, Id, _Method} from './types/index.js';
+import {getIdPrefix, Id, Method} from './types/index.js';
 
+/**
+ * All possible authentication ID types
+ * @public
+ */
 export type APIAuthentication = Id<'ptk'> | Id<'bearer'> | Id<'pat'>;
 
+/**
+ * A valid ID prefix supported by the Hop API for authetication
+ * @public
+ */
 export type APIAuthenticationPrefix = APIAuthentication extends Id<infer T>
 	? T
 	: never;
 
+/**
+ * Validates that an authentication prefix is valid
+ * @param auth - The prefix to validate
+ * @returns `true` if the prefix is valid, `false` otherwise
+ * @public
+ */
 export function validateAPIAuthentication(
 	auth: string,
 ): auth is APIAuthenticationPrefix {
 	return auth === 'bearer' || auth === 'pat' || auth === 'ptk';
 }
 
+/**
+ * Options passed to the API client.
+ * This will usually come from Hop#constructor in most cases
+ *
+ * @public
+ */
 export interface APIClientOptions {
 	readonly baseUrl: string;
 	readonly authentication: APIAuthentication;
 }
 
+/**
+ * An error that occurred as a response from the Hop API.
+ * @public
+ */
 export class HopAPIError extends Error {
 	public readonly status: number;
 
@@ -36,9 +60,17 @@ export class HopAPIError extends Error {
 	}
 }
 
-export type Query<Path extends string> = _ExtractRouteParams<Path> &
+/**
+ * Generate a query object that includes typed URL params
+ * @public
+ */
+export type Query<Path extends string> = ExtractRouteParams<Path> &
 	Record<string, string | number | undefined>;
 
+/**
+ * API Client that is responsible for handling all requests
+ * @public
+ */
 export class APIClient {
 	public static getAuthType(auth: APIAuthentication) {
 		const prefix = getIdPrefix(auth);
@@ -180,7 +212,7 @@ export class APIClient {
 	}
 
 	private async request<T>(
-		method: _Method,
+		method: Method,
 		path: string,
 		body: unknown,
 		query: Record<string, string | number | undefined> = {},

@@ -4,6 +4,8 @@
 
 ## SUPPORTS\_INTL variable
 
+If this runtiem supports the Intl API
+
 <b>Signature:</b>
 
 ```typescript

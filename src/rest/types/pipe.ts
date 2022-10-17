@@ -1,6 +1,6 @@
 import {Endpoint} from '../endpoints.js';
 import {Regions} from './ignite.js';
-import {_Empty, Id, Timestamp} from '../../util/types.js';
+import {Empty, Id, Timestamp} from '../../util/types.js';
 
 export type DeliveryProtocol = 'webrtc' | 'hls';
 
@@ -78,4 +78,4 @@ export type PipeEndpoints =
 				};
 			}
 	  >
-	| Endpoint<'DELETE', '/v1/pipe/rooms/:room_id', _Empty>;
+	| Endpoint<'DELETE', '/v1/pipe/rooms/:room_id', Empty>;

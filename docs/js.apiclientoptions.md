@@ -4,6 +4,8 @@
 
 ## APIClientOptions interface
 
+Options passed to the API client. This will usually come from Hop\#constructor in most cases
+
 <b>Signature:</b>
 
 ```typescript

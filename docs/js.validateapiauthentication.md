@@ -4,6 +4,8 @@
 
 ## validateAPIAuthentication() function
 
+Validates that an authentication prefix is valid
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,9 +16,11 @@ declare function validateAPIAuthentication(auth: string): auth is APIAuthenticat
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  auth | string |  |
+|  auth | string | The prefix to validate |
 
 <b>Returns:</b>
 
 auth is [APIAuthenticationPrefix](./js.apiauthenticationprefix.md)
+
+`true` if the prefix is valid, `false` otherwise
 

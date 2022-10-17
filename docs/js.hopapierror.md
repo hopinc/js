@@ -4,6 +4,8 @@
 
 ## HopAPIError class
 
+An error that occurred as a response from the Hop API.
+
 <b>Signature:</b>
 
 ```typescript

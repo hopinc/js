@@ -1,5 +1,5 @@
 import {Endpoint} from '../endpoints.js';
-import {_Empty, Id, Timestamp} from '../../util/types.js';
+import {Empty, Id, Timestamp} from '../../util/types.js';
 import {User} from './users.js';
 
 export type Member = Omit<User, 'email' | 'id'> & {
@@ -162,9 +162,9 @@ export type ProjectsEndpoints =
 	| Endpoint<
 			'DELETE',
 			'/v1/projects/:project_id/tokens/:project_token_id',
-			_Empty
+			Empty
 	  >
-	| Endpoint<'DELETE', '/v1/projects/@this/tokens/:project_token_id', _Empty>
+	| Endpoint<'DELETE', '/v1/projects/@this/tokens/:project_token_id', Empty>
 	| Endpoint<
 			'GET',
 			'/v1/projects/:project_id/members/@me',
@@ -208,5 +208,5 @@ export type ProjectsEndpoints =
 	  >
 	| Endpoint<'GET', '/v1/projects/:project_id/secrets', {secrets: Secret[]}>
 	| Endpoint<'GET', '/v1/projects/@this/secrets', {secrets: Secret[]}>
-	| Endpoint<'DELETE', '/v1/projects/:project_id/secrets/:secret_id', _Empty>
-	| Endpoint<'DELETE', '/v1/projects/@this/secrets/:secret_id', _Empty>;
+	| Endpoint<'DELETE', '/v1/projects/:project_id/secrets/:secret_id', Empty>
+	| Endpoint<'DELETE', '/v1/projects/@this/secrets/:secret_id', Empty>;

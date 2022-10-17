@@ -1,4 +1,4 @@
-import {_ExtractRouteParams, Query} from '../rest/index.js';
+import {ExtractRouteParams, Query} from '../rest/index.js';
 
 export function lead(x: string) {
 	return x.charCodeAt(0) === 47 ? x : '/' + x;
@@ -63,7 +63,7 @@ export function createURLBuilder(base: string) {
 
 			if (param in query) {
 				const {[param]: value, ...rest} = query;
-				query = rest as _ExtractRouteParams<Path>;
+				query = rest as ExtractRouteParams<Path>;
 
 				if (value === undefined) {
 					throw new Error(`URL param ${param} is undefined`);

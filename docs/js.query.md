@@ -4,8 +4,12 @@
 
 ## Query type
 
+Generate a query object that includes typed URL params
+
 <b>Signature:</b>
 
 ```typescript
-declare type Query<Path extends string> = _ExtractRouteParams<Path> & Record<string, string | number | undefined>;
+declare type Query<Path extends string> = ExtractRouteParams<Path> & Record<string, string | number | undefined>;
 ```
+<b>References:</b> [ExtractRouteParams](./js.extractrouteparams.md)
+

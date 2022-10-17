@@ -4,6 +4,8 @@
 
 ## APIAuthentication type
 
+All possible authentication ID types
+
 <b>Signature:</b>
 
 ```typescript

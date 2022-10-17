@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-declare type ProjectsEndpoints = Endpoint<'DELETE', '/v1/projects/:project_id/tokens/:project_token_id', _Empty> | Endpoint<'DELETE', '/v1/projects/@this/tokens/:project_token_id', _Empty> | Endpoint<'GET', '/v1/projects/:project_id/members/@me', {
+declare type ProjectsEndpoints = Endpoint<'DELETE', '/v1/projects/:project_id/tokens/:project_token_id', Empty> | Endpoint<'DELETE', '/v1/projects/@this/tokens/:project_token_id', Empty> | Endpoint<'GET', '/v1/projects/:project_id/members/@me', {
     project_member: Member;
 }> | Endpoint<'GET', '/v1/projects/:project_id/tokens', {
     project_tokens: ProjectToken[];
@@ -37,7 +37,7 @@ declare type ProjectsEndpoints = Endpoint<'DELETE', '/v1/projects/:project_id/to
     secrets: Secret[];
 }> | Endpoint<'GET', '/v1/projects/@this/secrets', {
     secrets: Secret[];
-}> | Endpoint<'DELETE', '/v1/projects/:project_id/secrets/:secret_id', _Empty> | Endpoint<'DELETE', '/v1/projects/@this/secrets/:secret_id', _Empty>;
+}> | Endpoint<'DELETE', '/v1/projects/:project_id/secrets/:secret_id', Empty> | Endpoint<'DELETE', '/v1/projects/@this/secrets/:secret_id', Empty>;
 ```
-<b>References:</b> [Endpoint](./js.endpoint.md)<!-- -->, [Member](./js.member.md)<!-- -->, [ProjectToken](./js.projecttoken.md)<!-- -->, [Project](./js.project.md)<!-- -->, [Secret](./js.secret.md)
+<b>References:</b> [Endpoint](./js.endpoint.md)<!-- -->, [Empty](./js.empty.md)<!-- -->, [Member](./js.member.md)<!-- -->, [ProjectToken](./js.projecttoken.md)<!-- -->, [Project](./js.project.md)<!-- -->, [Secret](./js.secret.md)
 

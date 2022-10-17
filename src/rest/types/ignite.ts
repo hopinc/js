@@ -1,7 +1,7 @@
 import {ByteSizeString} from '../../util/index.js';
 import {Endpoint} from '../endpoints.js';
 import {
-	_Empty,
+	Empty,
 	HopShDomain,
 	Id,
 	InternalHopDomain,
@@ -664,8 +664,8 @@ export type IgniteEndpoints =
 			{deployment: Deployment},
 			DeploymentConfig
 	  >
-	| Endpoint<'DELETE', '/v1/ignite/deployments/:deployment_id', _Empty>
-	| Endpoint<'DELETE', '/v1/ignite/containers/:container_id', _Empty>
+	| Endpoint<'DELETE', '/v1/ignite/deployments/:deployment_id', Empty>
+	| Endpoint<'DELETE', '/v1/ignite/containers/:container_id', Empty>
 	| Endpoint<
 			'GET',
 			'/v1/ignite/containers/:container_id/logs',
@@ -680,7 +680,7 @@ export type IgniteEndpoints =
 	| Endpoint<
 			'PUT',
 			'/v1/ignite/containers/:container_id/state',
-			_Empty,
+			Empty,
 			{
 				/**
 				 * The state to update the container to
@@ -691,7 +691,7 @@ export type IgniteEndpoints =
 	| Endpoint<
 			'POST',
 			'/v1/ignite/gateways/:gateway_id/domains',
-			_Empty,
+			Empty,
 			{domain: string}
 	  >
 	| Endpoint<'GET', '/v1/ignite/gateways/:gateway_id', {gateway: Gateway}>

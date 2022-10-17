@@ -4,6 +4,8 @@
 
 ## APIClient class
 
+API Client that is responsible for handling all requests
+
 <b>Signature:</b>
 
 ```typescript

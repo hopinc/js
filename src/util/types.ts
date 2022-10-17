@@ -2,15 +2,15 @@ import {formatList} from './lists.js';
 
 /**
  * All methods the Hop API accepts
- * @internal
+ * @public
  */
-export type _Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 /**
  * An empty response type
- * @internal
+ * @public
  */
-export type _Empty = void;
+export type Empty = void;
 
 /**
  * Tag a type to make it unique
@@ -32,12 +32,12 @@ export type Timestamp = Tag<string, 'timestamp'>;
 
 /**
  * Creates a record of params required for a given URL/path
- * @internal
+ * @public
  */
-export type _ExtractRouteParams<T extends string> = string extends T
+export type ExtractRouteParams<T extends string> = string extends T
 	? Record<string, string | number | undefined>
 	: T extends `${string}:${infer Param}/${infer Rest}`
-	? {[k in Param | keyof _ExtractRouteParams<Rest>]: string | number}
+	? {[k in Param | keyof ExtractRouteParams<Rest>]: string | number}
 	: T extends `${string}:${infer Param}`
 	? {[k in Param]: string | number}
 	: {};

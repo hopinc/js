@@ -22,7 +22,7 @@ declare type PipeEndpoints = Endpoint<'GET', '/v1/pipe/rooms', {
         artificial_delay: number;
         max_playout_bitrate_preset: string;
     };
-}> | Endpoint<'DELETE', '/v1/pipe/rooms/:room_id', _Empty>;
+}> | Endpoint<'DELETE', '/v1/pipe/rooms/:room_id', Empty>;
 ```
-<b>References:</b> [Endpoint](./js.endpoint.md)<!-- -->, [Room](./js.room.md)<!-- -->, [DeliveryProtocol](./js.deliveryprotocol.md)<!-- -->, [Regions](./js.regions.md)
+<b>References:</b> [Endpoint](./js.endpoint.md)<!-- -->, [Room](./js.room.md)<!-- -->, [DeliveryProtocol](./js.deliveryprotocol.md)<!-- -->, [Regions](./js.regions.md)<!-- -->, [Empty](./js.empty.md)
 

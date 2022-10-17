@@ -18,15 +18,15 @@ declare type IgniteEndpoints = Endpoint<'GET', '/v1/ignite/deployments', {
     container_id: Id<'container'>;
 }> | Endpoint<'POST', '/v1/ignite/deployments', {
     deployment: Deployment;
-}, DeploymentConfig> | Endpoint<'DELETE', '/v1/ignite/deployments/:deployment_id', _Empty> | Endpoint<'DELETE', '/v1/ignite/containers/:container_id', _Empty> | Endpoint<'GET', '/v1/ignite/containers/:container_id/logs', {
+}, DeploymentConfig> | Endpoint<'DELETE', '/v1/ignite/deployments/:deployment_id', Empty> | Endpoint<'DELETE', '/v1/ignite/containers/:container_id', Empty> | Endpoint<'GET', '/v1/ignite/containers/:container_id/logs', {
     logs: ContainerLog[];
 }> | Endpoint<'GET', '/v1/ignite/deployments/search', {
     deployment: Deployment;
 }> | Endpoint<'GET', '/v1/ignite/deployments/:deployment_id', {
     deployment: Deployment;
-}> | Endpoint<'PUT', '/v1/ignite/containers/:container_id/state', _Empty, {
+}> | Endpoint<'PUT', '/v1/ignite/containers/:container_id/state', Empty, {
     preferred_state: ContainerState.STOPPED | ContainerState.RUNNING;
-}> | Endpoint<'POST', '/v1/ignite/gateways/:gateway_id/domains', _Empty, {
+}> | Endpoint<'POST', '/v1/ignite/gateways/:gateway_id/domains', Empty, {
     domain: string;
 }> | Endpoint<'GET', '/v1/ignite/gateways/:gateway_id', {
     gateway: Gateway;
@@ -42,5 +42,5 @@ declare type IgniteEndpoints = Endpoint<'GET', '/v1/ignite/deployments', {
     deployment: Deployment;
 }, DeploymentConfig>;
 ```
-<b>References:</b> [Endpoint](./js.endpoint.md)<!-- -->, [Deployment](./js.deployment.md)<!-- -->, [Container](./js.container.md)<!-- -->, [Id](./js.id.md)<!-- -->, [DeploymentConfig](./js.deploymentconfig.md)<!-- -->, [ContainerLog](./js.containerlog.md)<!-- -->, [ContainerState.STOPPED](./js.containerstate.md)<!-- -->, [ContainerState.RUNNING](./js.containerstate.md)<!-- -->, [Gateway](./js.gateway.md)<!-- -->, [GatewayType](./js.gatewaytype.md)
+<b>References:</b> [Endpoint](./js.endpoint.md)<!-- -->, [Deployment](./js.deployment.md)<!-- -->, [Container](./js.container.md)<!-- -->, [Id](./js.id.md)<!-- -->, [DeploymentConfig](./js.deploymentconfig.md)<!-- -->, [Empty](./js.empty.md)<!-- -->, [ContainerLog](./js.containerlog.md)<!-- -->, [ContainerState.STOPPED](./js.containerstate.md)<!-- -->, [ContainerState.RUNNING](./js.containerstate.md)<!-- -->, [Gateway](./js.gateway.md)<!-- -->, [GatewayType](./js.gatewaytype.md)
 
