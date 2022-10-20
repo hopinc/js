@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.9.9
+
+### Patch Changes
+
+- 9ca2fc1: Add entrypoint to deployment config
+
 ## 1.9.8
 
 ### Patch Changes
