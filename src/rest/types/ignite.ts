@@ -392,6 +392,11 @@ export type DeploymentConfig = {
 	 * This can only be used when .type is 'stateful'
 	 */
 	volume?: VolumeDefinition;
+
+	/**
+	 * Entrypoint for this deployment
+	 */
+	entrypoint?: string[];
 };
 
 /**
