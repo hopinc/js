@@ -211,6 +211,11 @@ export interface Deployment {
 	 * Current active build for deployment
 	 */
 	active_build: Build | null;
+
+	/**
+	 * The target amount of containers a deployment should run
+	 */
+	target_container_count: number;
 }
 
 export interface BuildMetaData {
