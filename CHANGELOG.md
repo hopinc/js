@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.9.10
+
+### Patch Changes
+
+- 1c0ad0b: Add target container count to deployment type
+
 ## 1.9.9
 
 ### Patch Changes
