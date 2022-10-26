@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.9.11
+
+### Patch Changes
+
+- 7882842: added container metrics
+
 ## 1.9.10
 
 ### Patch Changes
