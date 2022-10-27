@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.9.13
+
+### Patch Changes
+
+- d8cd9b3: Force version bump
+
 ## 1.9.11
 
 ### Patch Changes
