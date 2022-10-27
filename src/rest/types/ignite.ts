@@ -221,6 +221,11 @@ export interface Deployment {
 	active_build: Build | null;
 
 	/**
+	 * The amount of containers in the running state
+	 */
+	running_container_count: number;
+
+	/**
 	 * The target amount of containers a deployment should run
 	 */
 	target_container_count: number;
