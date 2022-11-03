@@ -47,7 +47,7 @@
 		"test": "tsx tests/index.ts"
 	},
 	"devDependencies": {
-		"@changesets/cli": "2.25.0",
+		"@changesets/cli": "2.25.2",
 		"@types/glob": "8.0.0",
 		"@types/node": "18.11.0",
 		"dotenv": "16.0.3",
