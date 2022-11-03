@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.10.1
+
+### Patch Changes
+
+- 2c9faf5: Add hopsh_domain_enabled to gateway type
+
 ## 1.10.0
 
 ### Minor Changes
