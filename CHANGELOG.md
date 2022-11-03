@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.9.14
+
+### Patch Changes
+
+- 771fbeb: Added support for fetching deployment storage stats
+
 ## 1.9.13
 
 ### Patch Changes
