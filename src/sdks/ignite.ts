@@ -36,6 +36,10 @@ export const ignite = sdk(client => {
 			return igniteSDK.containers.create(this.id);
 		},
 
+		getStorageStats() {
+			return igniteSDK.deployments.getStorageStats(this.id);
+		},
+
 		createGateway(
 			type: API.Ignite.GatewayType,
 			protocol: API.Ignite.Gateway['protocol'],
@@ -218,6 +222,12 @@ export const ignite = sdk(client => {
 		deployments: {
 			create: createDeployment,
 			get: getDeployment,
+
+			async getStorageStats(id: Id<'deployment'>) {
+				return client.get('/v1/ignite/deployments/:deployment_id/storage', {
+					deployment_id: id,
+				});
+			},
 
 			async update(deploymentId: Id<'deployment'>, config: DeploymentConfig) {
 				const {deployment} = await client.patch(

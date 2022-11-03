@@ -711,4 +711,12 @@ export type IgniteEndpoints =
 			'/v1/ignite/deployments/:deployment_id',
 			{deployment: Deployment},
 			DeploymentConfig
+	  >
+	| Endpoint<
+			'GET',
+			'/v1/ignite/deployments/:deployment_id/storage',
+			Record<
+				'volume' | 'build_cache',
+				Record<'provisioned_size' | 'used_size', number> | null
+			>
 	  >;
