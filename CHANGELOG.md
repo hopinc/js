@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.10.2
+
+### Patch Changes
+
+- 7fd062e: chore(deps): update dependency tsx to v3.11.0
+
 ## 1.10.1
 
 ### Patch Changes
