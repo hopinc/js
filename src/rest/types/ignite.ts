@@ -628,6 +628,11 @@ export interface Gateway {
 	hopsh_domain: HopShDomain | null;
 
 	/**
+	 * Determines if the hop.sh domain is current active.
+	 */
+	hopsh_domain_enabled: boolean;
+
+	/**
 	 * Internal domain assigned by user upon gateway creation
 	 */
 	internal_domain: InternalHopDomain | null;
