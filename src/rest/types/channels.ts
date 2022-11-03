@@ -8,8 +8,15 @@ export enum ChannelType {
 	UNPROTECTED = 'unprotected',
 }
 
+/**
+ * Generic state type of a channel
+ * @public
+ */
 export type State = Record<string, unknown>;
 
+/**
+ * @public
+ */
 export interface Channel {
 	/**
 	 * The ID of the channel

@@ -141,6 +141,14 @@ export interface Container {
 	};
 
 	/**
+	 * Metrics for this container
+	 */
+	metrics: {
+		cpu_usage_percent: number;
+		memory_usage_percent: number;
+	} | null;
+
+	/**
 	 * Information about the container
 	 */
 	metadata: {
@@ -211,6 +219,11 @@ export interface Deployment {
 	 * Current active build for deployment
 	 */
 	active_build: Build | null;
+
+	/**
+	 * The amount of containers in the running state
+	 */
+	running_container_count: number;
 
 	/**
 	 * The target amount of containers a deployment should run
