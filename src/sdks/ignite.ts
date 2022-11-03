@@ -36,21 +36,18 @@ export const ignite = sdk(client => {
 			return igniteSDK.containers.create(this.id);
 		},
 
-		getStorageStats() {
-			return igniteSDK.deployments.getStorageStats(this.id);
+		createGateway(config: {
+			type: API.Ignite.GatewayType;
+			protocol: API.Ignite.Gateway['protocol'];
+			port: number;
+			name: string;
+			targetPort: number;
+		}) {
+			return igniteSDK.gateways.create(this.id, config);
 		},
 
-		createGateway(
-			type: API.Ignite.GatewayType,
-			protocol: API.Ignite.Gateway['protocol'],
-			port: number,
-		) {
-			return igniteSDK.deployments.gateways.create(
-				this.id,
-				type,
-				protocol,
-				port,
-			);
+		getStorageStats() {
+			return igniteSDK.deployments.getStorageStats(this.id);
 		},
 	});
 
@@ -189,8 +186,57 @@ export const ignite = sdk(client => {
 		return Deployments.from(deployment);
 	}
 
+	const deploymentGateways = {
+		/**
+		 * Fecthes all gateways attached to a deployment
+		 *
+		 * @param deploymentId The ID of the deployment to fetch gateways for
+		 */
+		async getAll(deploymentId: Id<'deployment'>) {
+			const {gateways} = await client.get(
+				'/v1/ignite/deployments/:deployment_id/gateways',
+				{deployment_id: deploymentId},
+			);
+
+			return gateways.map(Gateways.from);
+		},
+
+		/**
+		 * Creates and attaches a gateway to a deployment
+		 *
+		 * @param deployment The deployment to create a gateway on
+		 * @param type The type of the gatway to create, either internal or external
+		 * @param protocol The protocol that the gateway will listen for
+		 * @param targetPort The port to listen on
+		 */
+		async create(
+			deployment: Deployment | Deployment['id'],
+			config: {
+				type: GatewayType;
+				protocol: Gateway['protocol'];
+				targetPort: number;
+				name: string;
+			},
+		) {
+			const deploymentId =
+				typeof deployment === 'object' ? deployment.id : deployment;
+
+			const {targetPort, ...rest} = config;
+
+			const {gateway} = await client.post(
+				'/v1/ignite/deployments/:deployment_id/gateways',
+				{...rest, target_port: targetPort},
+				{deployment_id: deploymentId},
+			);
+
+			return Gateways.from(gateway);
+		},
+	};
+
 	const igniteSDK = {
 		gateways: {
+			...deploymentGateways,
+
 			/**
 			 * Adds a domain to a gateway
 			 *
@@ -219,9 +265,34 @@ export const ignite = sdk(client => {
 			},
 		},
 
+		healthChecks: {
+			async create(
+				deployment: Id<'deployment'>,
+				config: Omit<API.Ignite.HealthCheck, 'id'>,
+			) {
+				const {health_check: check} = await client.post(
+					'/v1/ignite/deployments/:deployment_id/health-check',
+					config,
+					{deployment_id: deployment},
+				);
+
+				return check;
+			},
+		},
+
 		deployments: {
 			create: createDeployment,
 			get: getDeployment,
+
+			async rollout(id: Id<'deployment'>) {
+				const {rollout} = await client.post(
+					'/v1/ignite/deployments/:deployment_id/rollouts',
+					undefined,
+					{deployment_id: id},
+				);
+
+				return rollout;
+			},
 
 			async getStorageStats(id: Id<'deployment'>) {
 				return client.get('/v1/ignite/deployments/:deployment_id/storage', {
@@ -296,47 +367,10 @@ export const ignite = sdk(client => {
 				);
 			},
 
-			gateways: {
-				/**
-				 * Fecthes all gateways attached to a deployment
-				 *
-				 * @param deploymentId The ID of the deployment to fetch gateways for
-				 */
-				async getAll(deploymentId: Id<'deployment'>) {
-					const {gateways} = await client.get(
-						'/v1/ignite/deployments/:deployment_id/gateways',
-						{deployment_id: deploymentId},
-					);
-
-					return gateways.map(Gateways.from);
-				},
-
-				/**
-				 * Creates and attaches a gateway to a deployment
-				 *
-				 * @param deployment The deployment to create a gateway on
-				 * @param type The type of the gatway to create, either internal or external
-				 * @param protocol The protocol that the gateway will listen for
-				 * @param targetPort The port to listen on
-				 */
-				async create(
-					deployment: Deployment | Deployment['id'],
-					type: GatewayType,
-					protocol: Gateway['protocol'],
-					targetPort: number,
-				) {
-					const deploymentId =
-						typeof deployment === 'object' ? deployment.id : deployment;
-
-					const {gateway} = await client.post(
-						'/v1/ignite/deployments/:deployment_id/gateways',
-						{type, protocol, target_port: targetPort},
-						{deployment_id: deploymentId},
-					);
-
-					return Gateways.from(gateway);
-				},
-			},
+			/**
+			 * @deprecated This property has moved — use hop.ignite.gateways instead
+			 */
+			gateways: deploymentGateways,
 		},
 
 		containers: {
