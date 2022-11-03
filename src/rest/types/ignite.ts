@@ -344,13 +344,14 @@ export type HealthCheck = {
 	interval: number;
 
 	/**
-	 * How long to wait for a response before considering the health check failed
+	 * How long to wait for a response before considering the health check failed in milliseconds
 	 */
 	timeout: number;
 
 	/**
 	 * How long we should wait when the container starts before performing the first health check.
 	 * This is useful for containers that take a while to start up, for example when running migrations.
+	 * This value is in seconds
 	 */
 	initial_delay: number;
 
