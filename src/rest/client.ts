@@ -5,11 +5,8 @@ import {createURLBuilder} from '../util/urls.js';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.js';
 import {getIdPrefix, Id, Method} from './types/index.js';
 
-export type APIAuthentication = Id<'ptk'> | Id<'bearer'> | Id<'pat'>;
-
-export type APIAuthenticationPrefix = APIAuthentication extends Id<infer T>
-	? T
-	: never;
+export type APIAuthenticationPrefix = 'ptk' | 'bearer' | 'pat';
+export type APIAuthentication = Id<APIAuthenticationPrefix>;
 
 export function validateAPIAuthentication(
 	auth: string,
@@ -60,6 +57,10 @@ export class APIClient {
 		this.options = options;
 		this.authType = APIClient.getAuthType(options.authentication);
 		this.url = createURLBuilder(options.baseUrl);
+
+		// Be careful when using this property. It will only
+		// have a value in Node.js environments. This is because
+		// we add code at build time
 		this.agent = null;
 	}
 

@@ -1,5 +1,30 @@
 # @onehop/js
 
+## 1.10.2
+
+### Patch Changes
+
+- 7fd062e: chore(deps): update dependency tsx to v3.11.0
+
+## 1.10.1
+
+### Patch Changes
+
+- 2c9faf5: Add hopsh_domain_enabled to gateway type
+
+## 1.10.0
+
+### Minor Changes
+
+- b5837ae: Update API for creating a gateway
+- 9a6c73e: Deprecate old ignite SDK properties
+
+## 1.9.14
+
+### Patch Changes
+
+- 771fbeb: Added support for fetching deployment storage stats
+
 ## 1.9.13
 
 ### Patch Changes

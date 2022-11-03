@@ -334,7 +334,53 @@ export interface Build {
 	state: BuildState;
 }
 
+export type HealthCheck = {
+	/**
+	 * The ID of health check
+	 */
+	id: Id<'health_check'>;
+
+	/**
+	 * Protocol for health check
+	 */
+	protocol: 'http';
+	path: string;
+	port: number;
+
+	/**
+	 * Interval for health check. This is how often the health check will be performed in seconds
+	 */
+	interval: number;
+
+	/**
+	 * How long to wait for a response before considering the health check failed in milliseconds
+	 */
+	timeout: number;
+
+	/**
+	 * How long we should wait when the container starts before performing the first health check.
+	 * This is useful for containers that take a while to start up, for example when running migrations.
+	 * This value is in seconds
+	 */
+	initial_delay: number;
+
+	/**
+	 * Maximum number of consecutive failures before the container is considered unhealthy
+	 */
+	max_retries: number;
+};
+
 export type DeploymentRollout = {
+	/**
+	 * The rollout ID for rollout
+	 */
+	id: Id<'rollout'>;
+
+	/**
+	 * The deployment ID for rollout
+	 */
+	deployment_id: Id<'deployment'>;
+
 	/**
 	 * How many containers are being recreated
 	 */
@@ -344,17 +390,6 @@ export type DeploymentRollout = {
 	 * When the rollout took place
 	 */
 	created_at: Timestamp;
-
-	/**
-	 * The deployment ID for rollout
-	 */
-	deployment_id: Id<'deployment'>;
-
-	/**
-	 * The rollout ID for rollout
-	 */
-	id: Id<'rollout'>;
-
 	/**
 	 * The state of the rollout
 	 */
@@ -602,6 +637,11 @@ export interface Gateway {
 	hopsh_domain: HopShDomain | null;
 
 	/**
+	 * Determines if the hop.sh domain is current active.
+	 */
+	hopsh_domain_enabled: boolean;
+
+	/**
 	 * Internal domain assigned by user upon gateway creation
 	 */
 	internal_domain: InternalHopDomain | null;
@@ -726,11 +766,35 @@ export type IgniteEndpoints =
 			'POST',
 			'/v1/ignite/deployments/:deployment_id/gateways',
 			{gateway: Gateway},
-			{type: GatewayType; target_port: number; protocol: Gateway['protocol']}
+			{
+				type: GatewayType;
+				target_port: number;
+				protocol: Gateway['protocol'];
+				name: string;
+			}
 	  >
 	| Endpoint<
 			'PATCH',
 			'/v1/ignite/deployments/:deployment_id',
 			{deployment: Deployment},
 			DeploymentConfig
+	  >
+	| Endpoint<
+			'POST',
+			'/v1/ignite/deployments/:deployment_id/rollouts',
+			{rollout: DeploymentRollout}
+	  >
+	| Endpoint<
+			'POST',
+			'/v1/ignite/deployments/:deployment_id/health-check',
+			{health_check: HealthCheck},
+			Omit<HealthCheck, 'id'>
+	  >
+	| Endpoint<
+			'GET',
+			'/v1/ignite/deployments/:deployment_id/storage',
+			Record<
+				'volume' | 'build_cache',
+				Record<'provisioned_size' | 'used_size', number> | null
+			>
 	  >;
