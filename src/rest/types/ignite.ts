@@ -229,6 +229,15 @@ export interface Deployment {
 	 * The target amount of containers a deployment should run
 	 */
 	target_container_count: number;
+
+	/**
+	 * Metadata for deployment
+	 */
+	metadata: DeploymentMetaData | null;
+}
+
+export interface DeploymentMetaData {
+	container_port_mappings: Record<string, string[]>;
 }
 
 export interface BuildMetaData {
