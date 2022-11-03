@@ -271,7 +271,7 @@ export const ignite = sdk(client => {
 				config: Omit<API.Ignite.HealthCheck, 'id'>,
 			) {
 				const {health_check: check} = await client.post(
-					'/v1/ignite/deployments/:deployment_id/health-checks',
+					'/v1/ignite/deployments/:deployment_id/health-check',
 					config,
 					{deployment_id: deployment},
 				);

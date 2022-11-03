@@ -771,7 +771,7 @@ export type IgniteEndpoints =
 	  >
 	| Endpoint<
 			'POST',
-			'/v1/ignite/deployments/:deployment_id/health-checks',
+			'/v1/ignite/deployments/:deployment_id/health-check',
 			{health_check: HealthCheck},
 			Omit<HealthCheck, 'id'>
 	  >
