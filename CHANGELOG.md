@@ -1,5 +1,12 @@
 # @onehop/js
 
+## 1.10.0
+
+### Minor Changes
+
+- b5837ae: Update API for creating a gateway
+- 9a6c73e: Deprecate old ignite SDK properties
+
 ## 1.9.14
 
 ### Patch Changes
