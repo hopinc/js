@@ -1,5 +1,53 @@
 # @onehop/js
 
+## 1.9.13
+
+### Patch Changes
+
+- d8cd9b3: Force version bump
+
+## 1.9.11
+
+### Patch Changes
+
+- 7882842: added container metrics
+
+## 1.9.10
+
+### Patch Changes
+
+- 1c0ad0b: Add target container count to deployment type
+
+## 1.9.9
+
+### Patch Changes
+
+- 9ca2fc1: Add entrypoint to deployment config
+
+## 1.9.8
+
+### Patch Changes
+
+- a148382: fix types
+
+## 1.9.7
+
+### Patch Changes
+
+- 8f8c907: Fix RolloutState enum
+
+## 1.9.6
+
+### Patch Changes
+
+- 1fd1c1c: Add build state to Build type
+
+## 1.9.5
+
+### Patch Changes
+
+- 0295c80: update build type
+
 ## 1.9.4
 
 ### Patch Changes

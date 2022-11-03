@@ -73,7 +73,7 @@ export enum ContainerState {
 export enum RolloutState {
 	PENDING = 'pending',
 	FINISHED = 'finished',
-	FAILED = 'FAILED',
+	FAILED = 'failed',
 }
 
 /**
@@ -139,6 +139,14 @@ export interface Container {
 		 */
 		last_start: Timestamp;
 	};
+
+	/**
+	 * Metrics for this container
+	 */
+	metrics: {
+		cpu_usage_percent: number;
+		memory_usage_percent: number;
+	} | null;
 
 	/**
 	 * Information about the container
@@ -210,19 +218,96 @@ export interface Deployment {
 	/**
 	 * Current active build for deployment
 	 */
-	active_build: DeploymentBuild | null;
+	active_build: Build | null;
+
+	/**
+	 * The amount of containers in the running state
+	 */
+	running_container_count: number;
+
+	/**
+	 * The target amount of containers a deployment should run
+	 */
+	target_container_count: number;
 }
 
-export type DeploymentBuild = {
+export interface BuildMetaData {
+	/**
+	 * Account type of repo owner
+	 */
+	account_type?: 'user' | 'organization';
+
+	/**
+	 * Author information about build
+	 */
+	author?: {
+		/**
+		 * Author's Pfp
+		 */
+		avatar_url: string;
+
+		/**
+		 * Author's username
+		 */
+		username: string;
+	};
+
+	/**
+	 * Repo ID for build
+	 */
+	repo_id: number;
+
+	/**
+	 * Repo name for build
+	 */
+	repo_name: string;
+
+	/**
+	 * Repo branch for build
+	 */
+	branch: string;
+
+	/**
+	 * commit SHA for build
+	 */
+	commit_sha: string;
+
+	/**
+	 * commit message for build
+	 */
+	commit_msg: string;
+
+	/**
+	 * commit URL for build
+	 */
+	commit_url?: string;
+}
+
+export interface Build {
+	/**
+	 * ID of the build
+	 */
+	id: Id<'build'>;
+
 	/**
 	 * Deployment ID for build
 	 */
 	deployment_id: Id<'deployment'>;
 
 	/**
-	 * Digest for image
+	 * Metadata pertaining to build (mostly for GitHub)
 	 */
-	digest: string | null;
+	metadata: BuildMetaData | null;
+
+	/**
+	 * Build method (GitHub or CLI)
+	 */
+	method: BuildMethod;
+
+	/**
+	 * Timestamp of when the build has started
+	 */
+	started_at: Timestamp;
 
 	/**
 	 * Timestamp of when the build has finished
@@ -230,10 +315,15 @@ export type DeploymentBuild = {
 	finished_at: Timestamp | null;
 
 	/**
-	 * ID of the build
+	 * Digest for image
 	 */
-	id: Id<'build'>;
-};
+	digest: string | null;
+
+	/**
+	 * State of the build
+	 */
+	state: BuildState;
+}
 
 export type HealthCheck = {
 	/**
@@ -298,7 +388,7 @@ export type DeploymentRollout = {
 	/**
 	 * The build that triggered the rollout
 	 */
-	build: DeploymentBuild | null;
+	build: Build | null;
 };
 
 // This is a type not an interface so we can make a union
@@ -354,6 +444,11 @@ export type DeploymentConfig = {
 	 * This can only be used when .type is 'stateful'
 	 */
 	volume?: VolumeDefinition;
+
+	/**
+	 * Entrypoint for this deployment
+	 */
+	entrypoint?: string[];
 };
 
 /**
@@ -468,6 +563,14 @@ export interface ContainerLog {
 }
 
 /**
+ * Types of build methods supported by Hop
+ */
+export enum BuildMethod {
+	GITHUB = 'github',
+	CLI = 'cli',
+}
+
+/**
  * Types of gateways supported by Hop
  */
 export enum GatewayType {
@@ -543,6 +646,13 @@ export enum DomainState {
 	PENDING = 'pending',
 	VALID_CNAME = 'valid_cname',
 	SSL_ACTIVE = 'ssl_active',
+}
+
+export enum BuildState {
+	PENDING = 'pending',
+	FAILED = 'failed',
+	SUCCEEDED = 'succeeded',
+	CANCELLED = 'cancelled',
 }
 
 export interface Domain {
@@ -664,4 +774,12 @@ export type IgniteEndpoints =
 			'/v1/ignite/deployments/:deployment_id/health-checks',
 			{health_check: HealthCheck},
 			Omit<HealthCheck, 'id'>
+	  >
+	| Endpoint<
+			'GET',
+			'/v1/ignite/deployments/:deployment_id/storage',
+			Record<
+				'volume' | 'build_cache',
+				Record<'provisioned_size' | 'used_size', number> | null
+			>
 	  >;

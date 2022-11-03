@@ -45,6 +45,10 @@ export const ignite = sdk(client => {
 		}) {
 			return igniteSDK.gateways.create(this.id, config);
 		},
+
+		getStorageStats() {
+			return igniteSDK.deployments.getStorageStats(this.id);
+		},
 	});
 
 	/**
@@ -288,6 +292,12 @@ export const ignite = sdk(client => {
 				);
 
 				return rollout;
+			},
+
+			async getStorageStats(id: Id<'deployment'>) {
+				return client.get('/v1/ignite/deployments/:deployment_id/storage', {
+					deployment_id: id,
+				});
 			},
 
 			async update(deploymentId: Id<'deployment'>, config: DeploymentConfig) {
