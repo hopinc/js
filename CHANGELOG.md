@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.10.3
+
+### Patch Changes
+
+- f5c258a: Add metadata to deployment
+
 ## 1.10.2
 
 ### Patch Changes
