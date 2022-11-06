@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.10.4
+
+### Patch Changes
+
+- 1761ce6: Added support for hop.ignite.healthChecks.update
+
 ## 1.10.3
 
 ### Patch Changes
