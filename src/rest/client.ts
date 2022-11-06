@@ -147,7 +147,7 @@ export class APIClient {
 		const response = await fetch(request, {
 			keepalive: true,
 
-			// @ts-expect-error 2345 Targeting multiple runtimes, this will only work in node
+			// @ts-expect-error Targeting multiple runtimes, this will only work in node
 			agent: this.agent,
 		});
 
