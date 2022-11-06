@@ -266,10 +266,10 @@ export const ignite = sdk(client => {
 		},
 
 		healthChecks: {
-			async create(
+			create: async (
 				deployment: Id<'deployment'>,
 				config: Omit<API.Ignite.HealthCheck, 'id'>,
-			) {
+			) => {
 				const {health_check: check} = await client.post(
 					'/v1/ignite/deployments/:deployment_id/health-check',
 					config,
@@ -277,6 +277,17 @@ export const ignite = sdk(client => {
 				);
 
 				return check;
+			},
+
+			update: async (
+				deployment: Id<'deployment'>,
+				config: Partial<Omit<API.Ignite.HealthCheck, 'id'>>,
+			) => {
+				await client.patch(
+					'/v1/ignite/deployments/:deployment_id/health-check',
+					config,
+					{deployment_id: deployment},
+				);
 			},
 		},
 

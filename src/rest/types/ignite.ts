@@ -797,4 +797,10 @@ export type IgniteEndpoints =
 				'volume' | 'build_cache',
 				Record<'provisioned_size' | 'used_size', number> | null
 			>
+	  >
+	| Endpoint<
+			'PATCH',
+			'/v1/ignite/deployments/:deployment_id/health-check',
+			{health_check: HealthCheck},
+			Partial<Omit<HealthCheck, 'id'>>
 	  >;
