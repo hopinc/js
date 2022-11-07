@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.10.5
+
+### Patch Changes
+
+- cc4a86c: Add volume to QuotaUsage and DefaultQuotas
+
 ## 1.10.4
 
 ### Patch Changes
