@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.10.6
+
+### Patch Changes
+
+- f73fa21: Made container_port_mappings type in DeploymentMetaData better with a more explicit key in the KV
+
 ## 1.10.5
 
 ### Patch Changes
