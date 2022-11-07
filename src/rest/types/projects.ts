@@ -127,6 +127,7 @@ export interface Project {
 export interface DefaultQuotas {
 	vcpu: number;
 	ram: number;
+  volume: number;
 }
 
 export interface QuotaOverrides {}
@@ -134,6 +135,7 @@ export interface QuotaOverrides {}
 export interface QuotaUsage {
 	vcpu: number;
 	ram: number;
+  volume: number;
 }
 
 export interface Secret {
