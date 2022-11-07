@@ -237,7 +237,7 @@ export interface Deployment {
 }
 
 export interface DeploymentMetaData {
-	container_port_mappings: Record<string, string[]>;
+	container_port_mappings: Record<Id<'container'>, string[]>;
 }
 
 export interface BuildMetaData {
