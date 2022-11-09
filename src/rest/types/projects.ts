@@ -14,7 +14,7 @@ export type Member = Omit<User, 'email' | 'id'> & {
 	role: MemberRole;
 
 	/**
-	 * The role that this member has in a project
+	 * If user has multi-factor authentication enabled.
 	 */
 	mfa_enabled: boolean;
 
