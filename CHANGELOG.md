@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.11.1
+
+### Patch Changes
+
+- e82c25f: add mfa_enabled field to Project Member type
+
 ## 1.11.0
 
 ### Minor Changes
