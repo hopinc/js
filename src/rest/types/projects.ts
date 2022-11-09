@@ -14,6 +14,11 @@ export type Member = Omit<User, 'email' | 'id'> & {
 	role: MemberRole;
 
 	/**
+	 * The role that this member has in a project
+	 */
+	mfa_enabled: boolean;
+
+	/**
 	 * The date that this member joined the project
 	 */
 	joined_at: Timestamp;
@@ -127,7 +132,7 @@ export interface Project {
 export interface DefaultQuotas {
 	vcpu: number;
 	ram: number;
-  volume: number;
+	volume: number;
 }
 
 export interface QuotaOverrides {}
@@ -135,7 +140,7 @@ export interface QuotaOverrides {}
 export interface QuotaUsage {
 	vcpu: number;
 	ram: number;
-  volume: number;
+	volume: number;
 }
 
 export interface Secret {
