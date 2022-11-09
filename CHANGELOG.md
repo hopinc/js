@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.11.0
+
+### Minor Changes
+
+- af1fe38: Add permission node for ssh'ing into containers
+
 ## 1.10.6
 
 ### Patch Changes
