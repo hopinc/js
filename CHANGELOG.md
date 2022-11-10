@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.12.0
+
+### Minor Changes
+
+- 40b4d96: deprecation warning for active_rollout in favor for latest_rollout, new fields for rollout including init_container_id, health_check_failed, and last_updated_at.
+
 ## 1.11.1
 
 ### Patch Changes
