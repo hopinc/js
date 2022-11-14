@@ -211,9 +211,14 @@ export interface Deployment {
 	config: Omit<DeploymentConfig, 'volume' | 'name'>;
 
 	/**
-	 * Current active rollout for deployment
+	 * @deprecated Use latest_rollout
 	 */
 	active_rollout: DeploymentRollout | null;
+
+	/**
+	 * Current active rollout for deployment
+	 */
+	latest_rollout: DeploymentRollout | null;
 
 	/**
 	 * Current active build for deployment
@@ -399,6 +404,21 @@ export type DeploymentRollout = {
 	 * The build that triggered the rollout
 	 */
 	build: Build | null;
+
+	/**
+	 * Container ID that the rollout is pertaining to
+	 */
+	init_container_id: string | null;
+
+	/**
+	 * If a health check failed (causing the rollout to fail)
+	 */
+	health_check_failed: boolean;
+
+	/**
+	 * Last time latest rollout was updated
+	 */
+	last_updated_at: Timestamp;
 };
 
 // This is a type not an interface so we can make a union

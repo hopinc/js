@@ -1,5 +1,29 @@
 # @onehop/js
 
+## 1.12.1
+
+### Patch Changes
+
+- ba14e92: Fix rollout type for init_container_id
+
+## 1.12.0
+
+### Minor Changes
+
+- 40b4d96: deprecation warning for active_rollout in favor for latest_rollout, new fields for rollout including init_container_id, health_check_failed, and last_updated_at.
+
+## 1.11.1
+
+### Patch Changes
+
+- e82c25f: add mfa_enabled field to Project Member type
+
+## 1.11.0
+
+### Minor Changes
+
+- af1fe38: Add permission node for ssh'ing into containers
+
 ## 1.10.6
 
 ### Patch Changes
