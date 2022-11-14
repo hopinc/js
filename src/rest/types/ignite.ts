@@ -408,7 +408,7 @@ export type DeploymentRollout = {
 	/**
 	 * Container ID that the rollout is pertaining to
 	 */
-	init_container_id: string;
+	init_container_id: string | null;
 
 	/**
 	 * If a health check failed (causing the rollout to fail)
