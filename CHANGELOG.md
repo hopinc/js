@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.13.0
+
+### Minor Changes
+
+- 71cc8cf: Add tunnel deployment permission node, add read gateways permission to manage deployments group
+
 ## 1.12.1
 
 ### Patch Changes
