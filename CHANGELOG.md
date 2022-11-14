@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.13.1
+
+### Patch Changes
+
+- 72816cf: Added missing domain routes
+
 ## 1.13.0
 
 ### Minor Changes
