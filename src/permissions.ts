@@ -44,6 +44,7 @@ export enum PROJECT_PERMISSION {
 	READ_GATEWAYS = 'read_gateways',
 	DELETE_REGISTRY_IMAGES = 'delete_registry_images',
 	CONTAINER_SSH = 'container_ssh',
+	TUNNEL_DEPLOYMENT = 'tunnel_deployment',
 }
 
 export const permissionsMap = {
@@ -92,6 +93,7 @@ export const permissionsMap = {
 	[PROJECT_PERMISSION.READ_GATEWAYS]: 1n << 43n,
 	[PROJECT_PERMISSION.DELETE_REGISTRY_IMAGES]: 1n << 44n,
 	[PROJECT_PERMISSION.CONTAINER_SSH]: 1n << 45n,
+	[PROJECT_PERMISSION.TUNNEL_DEPLOYMENT]: 1n << 46n,
 };
 
 export const BROAD_PERMISSIONS_MAP = {
@@ -117,7 +119,9 @@ export const BROAD_PERMISSIONS_MAP = {
 		permissionsMap.rollout |
 		permissionsMap.delete_gateway |
 		permissionsMap.get_internal_domain |
-		permissionsMap.container_ssh,
+		permissionsMap.container_ssh |
+		permissionsMap.read_gateways |
+		permissionsMap.tunnel_deployment,
 	MANAGE_PIPE:
 		permissionsMap.create_room |
 		permissionsMap.delete_room |
