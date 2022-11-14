@@ -823,4 +823,6 @@ export type IgniteEndpoints =
 			'/v1/ignite/deployments/:deployment_id/health-check',
 			{health_check: HealthCheck},
 			Partial<Omit<HealthCheck, 'id'>>
-	  >;
+	  >
+	| Endpoint<'DELETE', '/v1/ignite/domains/:domain_id', Empty>
+	| Endpoint<'GET', '/v1/ignite/domains/:domain_id', {domain: Domain}>;

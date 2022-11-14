@@ -21,6 +21,12 @@ export const ignite = sdk(client => {
 				{gateway_id: this.id},
 			);
 		},
+
+		async deleteDomain(domainId: Id<'domain'>) {
+			await client.delete('/v1/ignite/domains/:domain_id', undefined, {
+				domain_id: domainId,
+			});
+		},
 	});
 
 	const Deployments = create<API.Ignite.Deployment>().methods({
@@ -234,6 +240,22 @@ export const ignite = sdk(client => {
 	};
 
 	const igniteSDK = {
+		domains: {
+			delete: async (id: Id<'domain'>) => {
+				await client.delete('/v1/ignite/domains/:domain_id', undefined, {
+					domain_id: id,
+				});
+			},
+
+			get: async (id: Id<'domain'>) => {
+				const {domain} = await client.get('/v1/ignite/domains/:domain_id', {
+					domain_id: id,
+				});
+
+				return domain;
+			},
+		},
+
 		gateways: {
 			...deploymentGateways,
 
@@ -315,9 +337,7 @@ export const ignite = sdk(client => {
 				const {deployment} = await client.patch(
 					'/v1/ignite/deployments/:deployment_id',
 					config,
-					{
-						deployment_id: deploymentId,
-					},
+					{deployment_id: deploymentId},
 				);
 
 				return deployment;
