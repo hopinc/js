@@ -420,7 +420,7 @@ __metadata:
     glob: 8.0.3
     prettier: 2.7.1
     tsup: 6.2.3
-    tsx: 3.11.0
+    tsx: 3.12.1
     typedoc: 0.23.16
     typedoc-plugin-markdown: 3.13.6
     typedoc-plugin-missing-exports: 1.0.0
@@ -3880,9 +3880,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:3.11.0":
-  version: 3.11.0
-  resolution: "tsx@npm:3.11.0"
+"tsx@npm:3.12.1":
+  version: 3.12.1
+  resolution: "tsx@npm:3.12.1"
   dependencies:
     "@esbuild-kit/cjs-loader": ^2.4.0
     "@esbuild-kit/core-utils": ^3.0.0
@@ -3893,7 +3893,7 @@ __metadata:
       optional: true
   bin:
     tsx: dist/cli.js
-  checksum: 07b5230d1bd5242eac13915553564721c5e879e6827ddfd18dbfff297dea96dcf8ec5671071679b9df8697612e8c57e5685b60af09a499f67391df919a60f682
+  checksum: 7251ad550b82cc95716599b5f4fc8825d3896722f30ee6abfff5e5dd63b9ba8ad1c41fefbf27657ff5375f71bb69fb2b001dfe87f1f81e5d017b55616e1691cb
   languageName: node
   linkType: hard
 
