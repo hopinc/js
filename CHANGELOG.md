@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.12.1
+
+### Patch Changes
+
+- ba14e92: Fix rollout type for init_container_id
+
 ## 1.12.0
 
 ### Minor Changes
