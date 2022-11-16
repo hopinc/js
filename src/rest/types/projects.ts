@@ -163,6 +163,11 @@ export interface Secret {
 	 * The time this secret was created at
 	 */
 	created_at: Timestamp;
+
+	/**
+	 * deployment names that are dependent on the project secret
+	 */
+	in_use_by: string[];
 }
 
 export type ProjectsEndpoints =
