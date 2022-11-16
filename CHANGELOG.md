@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.13.2
+
+### Patch Changes
+
+- b07eade: add in_use_by to project secret
+
 ## 1.13.1
 
 ### Patch Changes
