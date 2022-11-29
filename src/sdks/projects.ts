@@ -1,6 +1,6 @@
 import {API, Endpoints, Id} from '../rest/index.js';
-import {sdk} from './create.js';
 import {Request} from '../util/fetch.js';
+import {sdk} from './create.js';
 
 export const projects = sdk(client => {
 	const tokens = {

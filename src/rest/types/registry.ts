@@ -1,5 +1,5 @@
-import {Endpoint} from '../endpoints.js';
 import {Empty} from '../../util/types.js';
+import {Endpoint} from '../endpoints.js';
 
 export type RegistryEndpoints =
 	| Endpoint<'DELETE', '/v1/registry/images/:image', Empty>

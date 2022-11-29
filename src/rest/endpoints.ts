@@ -1,6 +1,6 @@
-import {Method} from './types/index.js';
 import {ChannelEndpoints} from './types/channels.js';
 import {IgniteEndpoints} from './types/ignite.js';
+import {Method} from './types/index.js';
 import {PipeEndpoints} from './types/pipe.js';
 import {ProjectsEndpoints} from './types/projects.js';
 import {RegistryEndpoints} from './types/registry.js';

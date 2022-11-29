@@ -47,18 +47,18 @@
 		"test": "tsx tests/index.ts"
 	},
 	"devDependencies": {
-		"@changesets/cli": "2.25.0",
+		"@changesets/cli": "2.25.2",
 		"@types/glob": "8.0.0",
-		"@types/node": "18.11.0",
+		"@types/node": "18.11.9",
 		"dotenv": "16.0.3",
 		"glob": "8.0.3",
-		"prettier": "2.7.1",
-		"tsup": "6.2.3",
-		"tsx": "3.11.0",
-		"typedoc": "0.23.16",
+		"prettier": "2.8.0",
+		"tsup": "6.5.0",
+		"tsx": "3.12.1",
+		"typedoc": "0.23.21",
 		"typedoc-plugin-markdown": "3.13.6",
 		"typedoc-plugin-missing-exports": "1.0.0",
-		"typescript": "4.8.4"
+		"typescript": "^4.9.3"
 	},
 	"dependencies": {
 		"@onehop/json-methods": "^1.2.0",

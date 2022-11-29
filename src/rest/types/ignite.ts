@@ -1,5 +1,4 @@
 import {ByteSizeString} from '../../util/index.js';
-import {Endpoint} from '../endpoints.js';
 import {
 	Empty,
 	HopShDomain,
@@ -7,6 +6,7 @@ import {
 	InternalHopDomain,
 	Timestamp,
 } from '../../util/types.js';
+import {Endpoint} from '../endpoints.js';
 
 export enum Regions {
 	US_EAST_1 = 'us-east-1',

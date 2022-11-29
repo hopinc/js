@@ -41,9 +41,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@changesets/apply-release-plan@npm:^6.1.1":
-  version: 6.1.1
-  resolution: "@changesets/apply-release-plan@npm:6.1.1"
+"@changesets/apply-release-plan@npm:^6.1.2":
+  version: 6.1.2
+  resolution: "@changesets/apply-release-plan@npm:6.1.2"
   dependencies:
     "@babel/runtime": ^7.10.4
     "@changesets/config": ^2.2.0
@@ -58,7 +58,7 @@ __metadata:
     prettier: ^2.7.1
     resolve-from: ^5.0.0
     semver: ^5.4.1
-  checksum: 34da2d52eced00bc5f51c8e8ce16c0e487743219f057da2b3e6c6597bb2d50498f3996c779e4fc29b19d357c9b700d82310d723395ba09350b9a139c9e0e0d23
+  checksum: efe2cdc493cb2182140b73ff76e34ee7c90887bfa2f42b4ec07db0107ec94b9c0e95519912dafcf9eb530ad2414487fbd61ca6e6d5f853fe383db93856d0d362
   languageName: node
   linkType: hard
 
@@ -85,12 +85,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@changesets/cli@npm:2.25.0":
-  version: 2.25.0
-  resolution: "@changesets/cli@npm:2.25.0"
+"@changesets/cli@npm:2.25.2":
+  version: 2.25.2
+  resolution: "@changesets/cli@npm:2.25.2"
   dependencies:
     "@babel/runtime": ^7.10.4
-    "@changesets/apply-release-plan": ^6.1.1
+    "@changesets/apply-release-plan": ^6.1.2
     "@changesets/assemble-release-plan": ^5.2.2
     "@changesets/changelog-git": ^0.1.13
     "@changesets/config": ^2.2.0
@@ -102,7 +102,7 @@ __metadata:
     "@changesets/pre": ^1.0.13
     "@changesets/read": ^0.5.8
     "@changesets/types": ^5.2.0
-    "@changesets/write": ^0.2.1
+    "@changesets/write": ^0.2.2
     "@manypkg/get-packages": ^1.1.3
     "@types/is-ci": ^3.0.0
     "@types/semver": ^6.0.0
@@ -124,7 +124,7 @@ __metadata:
     tty-table: ^4.1.5
   bin:
     changeset: bin.js
-  checksum: 54439bdfa7ca115964482f6323e9475b5917d68c2e0752a272ed133b863fce51eeba86366d8740a275dc0b891af8e272602da69d04144f40e4bf3531f48fe8fb
+  checksum: 815c69cb6cee75ede88361582581d94a860d96335e7bab179481cd5e2bb1e60cc39662dccd2b2b87818e9c63a84ff9eb469ed27f13b6adf4401a699e49beb79c
   languageName: node
   linkType: hard
 
@@ -263,16 +263,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@changesets/write@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "@changesets/write@npm:0.2.1"
+"@changesets/write@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "@changesets/write@npm:0.2.2"
   dependencies:
     "@babel/runtime": ^7.10.4
     "@changesets/types": ^5.2.0
     fs-extra: ^7.0.1
     human-id: ^1.0.2
     prettier: ^2.7.1
-  checksum: 98b4d9c12fe13177860407557979d475361076a596103895440f52b2724f7004d6c98af39105fda0eaa52ceca8c0dc0ec9c8ab10eec7a0cb9bf83301f2ca48b3
+  checksum: e23fb4a88e12af32db59d2f1866380ec4a50e7fa55cb55d860619f0735c5078ed170f832125672bb007b7a0cced67d9304a1b81260a7224af6afe0e3957dc999
   languageName: node
   linkType: hard
 
@@ -411,20 +411,20 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@onehop/js@workspace:."
   dependencies:
-    "@changesets/cli": 2.25.0
+    "@changesets/cli": 2.25.2
     "@onehop/json-methods": ^1.2.0
     "@types/glob": 8.0.0
-    "@types/node": 18.11.0
+    "@types/node": 18.11.9
     cross-fetch: ^3.1.5
     dotenv: 16.0.3
     glob: 8.0.3
-    prettier: 2.7.1
-    tsup: 6.2.3
-    tsx: 3.11.0
-    typedoc: 0.23.16
+    prettier: 2.8.0
+    tsup: 6.5.0
+    tsx: 3.12.1
+    typedoc: 0.23.21
     typedoc-plugin-markdown: 3.13.6
     typedoc-plugin-missing-exports: 1.0.0
-    typescript: 4.8.4
+    typescript: ^4.9.3
     zod: ^3.19.1
   languageName: unknown
   linkType: soft
@@ -483,10 +483,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.11.0":
-  version: 18.11.0
-  resolution: "@types/node@npm:18.11.0"
-  checksum: f27f899ab428e5732f04fadadc9203f44bdf3abf56474540ee27da90e4f2ba133faf87263cada4d2271955f92ee6a142bd50683c86290fe5070c19aac44fd654
+"@types/node@npm:18.11.9":
+  version: 18.11.9
+  resolution: "@types/node@npm:18.11.9"
+  checksum: cc0aae109e9b7adefc32eecb838d6fad931663bb06484b5e9cbbbf74865c721b03d16fd8d74ad90e31dbe093d956a7c2c306ba5429ba0c00f3f7505103d7a496
   languageName: node
   linkType: hard
 
@@ -716,14 +716,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bundle-require@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "bundle-require@npm:3.1.0"
+"bundle-require@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "bundle-require@npm:3.1.2"
   dependencies:
     load-tsconfig: ^0.2.0
   peerDependencies:
     esbuild: ">=0.13"
-  checksum: e433dd18ad2ccaf9d210040c5ce300a8c60f4caf0472856fd5162ec407f7b5b3e0559e540aa92b7381a18a6ff2b45bbe9270dc2fd7ace17e445e72a9cbc7fa95
+  checksum: 71f8cb81bcde97825317b0e516b7e479ec70bd2370f55a8f02795c0df6d541e6562c4b9ec0427cc7b5b835103a8dcf306da04e3846fa468146358471490fcf81
   languageName: node
   linkType: hard
 
@@ -3152,7 +3152,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.7.1, prettier@npm:^2.7.1":
+"prettier@npm:2.8.0":
+  version: 2.8.0
+  resolution: "prettier@npm:2.8.0"
+  bin:
+    prettier: bin-prettier.js
+  checksum: 72004ce0cc9bb097daf3e3833f62495768724392c1d5b178dd47372337616e9e50ecbb0804f236596223f7b5eb1bbe69cefc8957dca21112c5777e77ef73a564
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.7.1":
   version: 2.7.1
   resolution: "prettier@npm:2.7.1"
   bin:
@@ -3361,9 +3370,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.74.1":
-  version: 2.74.1
-  resolution: "rollup@npm:2.74.1"
+"rollup@npm:^3.2.5":
+  version: 3.5.0
+  resolution: "rollup@npm:3.5.0"
   dependencies:
     fsevents: ~2.3.2
   dependenciesMeta:
@@ -3371,7 +3380,7 @@ __metadata:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: c34dc78317aa0a153010061e5954225b3e18f4013feb9c0476f6878dc3485ac765c28b7849441e4a2ab69c337892bc66399fb7d4b239b94f4758adfdb1f99440
+  checksum: 57aa8e17c7a8d5b80b7a26c8acd52779369826049dbc370b929d73a6015fb69161f5aca699e8c54f7ea410d4ce5b5a45b26b07d5c99724becd555eef0ffe35be
   languageName: node
   linkType: hard
 
@@ -3844,11 +3853,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsup@npm:6.2.3":
-  version: 6.2.3
-  resolution: "tsup@npm:6.2.3"
+"tsup@npm:6.5.0":
+  version: 6.5.0
+  resolution: "tsup@npm:6.5.0"
   dependencies:
-    bundle-require: ^3.1.0
+    bundle-require: ^3.1.2
     cac: ^6.7.12
     chokidar: ^3.5.1
     debug: ^4.3.1
@@ -3858,7 +3867,7 @@ __metadata:
     joycon: ^3.0.1
     postcss-load-config: ^3.0.1
     resolve-from: ^5.0.0
-    rollup: ^2.74.1
+    rollup: ^3.2.5
     source-map: 0.8.0-beta.0
     sucrase: ^3.20.3
     tree-kill: ^1.2.2
@@ -3876,13 +3885,13 @@ __metadata:
   bin:
     tsup: dist/cli-default.js
     tsup-node: dist/cli-node.js
-  checksum: f1cb8f4f83a4a304f61d57dc62fb7176d1fa8842485a7dec4c3fd7cb98e169dbdc4bf52c45ff8cede6843b791fe4a0f70579b34684f568af3c2c3cb2f8469af4
+  checksum: 625082f2a2afc63024ddd54f5aca28372a7b4ec4f7c402f8aacefd0c56d8da7250665dbb4097d40edcf2cbd4168d96ed4593ecb903ab36e625628f375980e266
   languageName: node
   linkType: hard
 
-"tsx@npm:3.11.0":
-  version: 3.11.0
-  resolution: "tsx@npm:3.11.0"
+"tsx@npm:3.12.1":
+  version: 3.12.1
+  resolution: "tsx@npm:3.12.1"
   dependencies:
     "@esbuild-kit/cjs-loader": ^2.4.0
     "@esbuild-kit/core-utils": ^3.0.0
@@ -3893,7 +3902,7 @@ __metadata:
       optional: true
   bin:
     tsx: dist/cli.js
-  checksum: 07b5230d1bd5242eac13915553564721c5e879e6827ddfd18dbfff297dea96dcf8ec5671071679b9df8697612e8c57e5685b60af09a499f67391df919a60f682
+  checksum: 7251ad550b82cc95716599b5f4fc8825d3896722f30ee6abfff5e5dd63b9ba8ad1c41fefbf27657ff5375f71bb69fb2b001dfe87f1f81e5d017b55616e1691cb
   languageName: node
   linkType: hard
 
@@ -3955,39 +3964,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:0.23.16":
-  version: 0.23.16
-  resolution: "typedoc@npm:0.23.16"
+"typedoc@npm:0.23.21":
+  version: 0.23.21
+  resolution: "typedoc@npm:0.23.21"
   dependencies:
     lunr: ^2.3.9
     marked: ^4.0.19
     minimatch: ^5.1.0
     shiki: ^0.11.1
   peerDependencies:
-    typescript: 4.6.x || 4.7.x || 4.8.x
+    typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x
   bin:
     typedoc: bin/typedoc
-  checksum: 3574ee4a5fe3ca485b8a7d18cbe745bffe6d21886fcbc09c59551d0442d90b6391d435b06245199293914500c4f237fd0e7cc3eec678f1f8ee796b88b3d96089
+  checksum: 931520b21ae25ba8ea86111ea7c66f474468bb83cbe1d04c0ea19490f130ea44ba58b7ee4d12f7f02368cfe053ed1fa291c8843c466c8af383ef956de177360d
   languageName: node
   linkType: hard
 
-"typescript@npm:4.8.4":
-  version: 4.8.4
-  resolution: "typescript@npm:4.8.4"
+"typescript@npm:^4.9.3":
+  version: 4.9.3
+  resolution: "typescript@npm:4.9.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 3e4f061658e0c8f36c820802fa809e0fd812b85687a9a2f5430bc3d0368e37d1c9605c3ce9b39df9a05af2ece67b1d844f9f6ea8ff42819f13bcb80f85629af0
+  checksum: 17b8f816050b412403e38d48eef0e893deb6be522d6dc7caf105e54a72e34daf6835c447735fd2b28b66784e72bfbf87f627abb4818a8e43d1fa8106396128dc
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.8.4#~builtin<compat/typescript>":
-  version: 4.8.4
-  resolution: "typescript@patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=a1c5e5"
+"typescript@patch:typescript@^4.9.3#~builtin<compat/typescript>":
+  version: 4.9.3
+  resolution: "typescript@patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=a1c5e5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 563a0ef47abae6df27a9a3ab38f75fc681f633ccf1a3502b1108e252e187787893de689220f4544aaf95a371a4eb3141e4a337deb9895de5ac3c1ca76430e5f0
+  checksum: ef65c22622d864497d0a0c5db693523329b3284c15fe632e93ad9aa059e8dc38ef3bd767d6f26b1e5ecf9446f49bd0f6c4e5714a2eeaf352805dc002479843d1
   languageName: node
   linkType: hard
 
