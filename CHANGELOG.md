@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.13.2
+
+### Patch Changes
+
+- 485dc82: Bump dependencies
+
 ## 1.13.1
 
 ### Patch Changes
