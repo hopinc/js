@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.13.3
+
+### Patch Changes
+
+- 491ddfa: Deprecate Deployment.active\_{build,rollout}
+
 ## 1.13.2
 
 ### Patch Changes
