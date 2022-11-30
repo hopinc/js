@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.14.0
+
+### Minor Changes
+
+- 78427ad: Remove deployment.latest_build
+
 ## 1.13.4
 
 ### Patch Changes
