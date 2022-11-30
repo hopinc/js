@@ -218,14 +218,12 @@ export interface Deployment {
 
 	/**
 	 * Current active build for deployment
-	 * @deprecated Use latest_build instead
 	 */
 	active_build: Build | null;
 
 	/**
-	 * The active build ID to use. This can differ from .latest_build.id
-	 * because if we promote an older build to production, then the latest_build
-	 * will *not* be the active build.
+	 * The ID of the build currently being used in production by this deployment.
+	 * This will change if another build has been promoted to production.
 	 */
 	build_id: Build['id'] | null;
 
@@ -233,12 +231,6 @@ export interface Deployment {
 	 * Current active rollout for deployment
 	 */
 	latest_rollout: DeploymentRollout | null;
-
-	/**
-	 * Current active build for deployment.
-	 * Is nullable if the deployment has no builds yet.
-	 */
-	latest_build: Build | null;
 
 	/**
 	 * The amount of containers in the running state
