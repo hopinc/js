@@ -163,6 +163,11 @@ export interface Secret {
 	 * The time this secret was created at
 	 */
 	created_at: Timestamp;
+
+	/**
+	 * Deployment IDs this secret is used by
+	 */
+	in_use_by: Id<'deployment'>[];
 }
 
 export type ProjectsEndpoints =
