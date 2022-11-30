@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.13.4
+
+### Patch Changes
+
+- 646d66d: Added ProjectSecret#in_use_by
+
 ## 1.13.3
 
 ### Patch Changes
