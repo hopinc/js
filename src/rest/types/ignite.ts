@@ -717,6 +717,16 @@ export interface Domain {
 	 * The date this domain was created
 	 */
 	created_at: Timestamp;
+
+	/**
+	 * Where the domain redirects to and its status code, null if N/A
+	 */
+	redirect: DomainRedirect | null;
+}
+
+export interface DomainRedirect {
+	url: string;
+	status_code: 301 | 302 | 307 | 308;
 }
 
 export type IgniteEndpoints =
