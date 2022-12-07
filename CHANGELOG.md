@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.15.0
+
+### Minor Changes
+
+- 3bfed18: Add domain redirect object
+
 ## 1.14.0
 
 ### Minor Changes
