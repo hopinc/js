@@ -426,6 +426,11 @@ export type DeploymentRollout = {
 	 * Last time latest rollout was updated
 	 */
 	last_updated_at: Timestamp;
+
+	/**
+	 * Has the rollout been acknowledged by a user
+	 */
+	acknowledged: boolean;
 };
 
 // This is a type not an interface so we can make a union
