@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.16.0
+
+### Minor Changes
+
+- ad2859c: Add acknowledge boolean to rollout
+
 ## 1.15.0
 
 ### Minor Changes
