@@ -4,6 +4,9 @@ export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export type Empty = void;
 
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
+	Partial<Pick<T, K>>;
+
 export type Tag<T, Name extends string> = T & {
 	/**
 	 * Mark a type as having a specific name in the API

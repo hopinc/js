@@ -66,7 +66,7 @@ export const ignite = sdk(client => {
 	 */
 	async function createDeployment(
 		configOrProject: Id<'project'>,
-		bearerOrPatConfig: API.Ignite.DeploymentConfig,
+		bearerOrPatConfig: API.Ignite.CreateDeploymentConfig,
 	): Promise<Infer<typeof Deployments>>;
 
 	/**
@@ -76,14 +76,14 @@ export const ignite = sdk(client => {
 	 * @param configOrProject The config for this deployment.
 	 */
 	async function createDeployment(
-		configOrProject: API.Ignite.DeploymentConfig,
+		configOrProject: API.Ignite.CreateDeploymentConfig,
 	): Promise<Infer<typeof Deployments>>;
 
 	async function createDeployment(
-		configOrProject: Id<'project'> | API.Ignite.DeploymentConfig,
-		bearerOrPatConfig?: API.Ignite.DeploymentConfig,
+		configOrProject: Id<'project'> | API.Ignite.CreateDeploymentConfig,
+		bearerOrPatConfig?: API.Ignite.CreateDeploymentConfig,
 	): Promise<Infer<typeof Deployments>> {
-		let config: API.Ignite.DeploymentConfig;
+		let config: API.Ignite.CreateDeploymentConfig;
 		let project: Id<'project'> | undefined = undefined;
 
 		if (typeof configOrProject === 'object') {

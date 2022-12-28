@@ -4,6 +4,7 @@ import {
 	HopShDomain,
 	Id,
 	InternalHopDomain,
+	MakeOptional,
 	Timestamp,
 } from '../../util/types.js';
 import {Endpoint} from '../endpoints.js';
@@ -433,9 +434,9 @@ export type DeploymentRollout = {
 	acknowledged: boolean;
 };
 
-// This is a type not an interface so we can make a union
-// when future versions of deployment configs come out
-export type DeploymentConfig = {
+export type CreateDeploymentConfig = MakeOptional<DeploymentConfig, 'cmd'>;
+
+export interface DeploymentConfig {
 	/**
 	 * The name of the deployment
 	 */
@@ -458,7 +459,12 @@ export type DeploymentConfig = {
 	/**
 	 * The version of this config
 	 */
-	version: '2022-05-17';
+	version: '12-12-2022';
+
+	/**
+	 * Entrypoint command for the image
+	 */
+	cmd: string[];
 
 	/**
 	 * The docker image config for this deployment
@@ -491,7 +497,7 @@ export type DeploymentConfig = {
 	 * Entrypoint for this deployment
 	 */
 	entrypoint?: string[];
-};
+}
 
 /**
  * Docker image config
@@ -766,7 +772,7 @@ export type IgniteEndpoints =
 			'POST',
 			'/v1/ignite/deployments',
 			{deployment: Deployment},
-			DeploymentConfig
+			CreateDeploymentConfig
 	  >
 	| Endpoint<'DELETE', '/v1/ignite/deployments/:deployment_id', Empty>
 	| Endpoint<'DELETE', '/v1/ignite/containers/:container_id', Empty>
