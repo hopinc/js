@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.17.0
+
+### Minor Changes
+
+- b74b4a8: Add .cmd to deployment config
+
 ## 1.16.0
 
 ### Minor Changes
