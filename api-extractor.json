@@ -5,10 +5,15 @@
 
 	"bundledPackages": [],
 
-	"compiler": {},
+	"compiler": {
+		"overrideTsconfig": {
+			"moduleResolution": "NodeNext"
+		}
+	},
 
 	"apiReport": {
-		"enabled": false
+		"enabled": true,
+		"reportFolder": "<projectFolder>/.temp"
 	},
 
 	"docModel": {
@@ -34,6 +39,7 @@
 				"logLevel": "warning"
 			}
 		},
+
 		"tsdocMessageReporting": {
 			"default": {
 				"logLevel": "warning"

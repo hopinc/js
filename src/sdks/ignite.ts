@@ -1,4 +1,4 @@
-import {type Infer, create} from '@onehop/json-methods';
+import {Infer, create} from '@onehop/json-methods';
 import {API, Id, assertId} from '../rest/index.ts';
 import {
 	Deployment,

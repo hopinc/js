@@ -1,5 +1,6 @@
 import {APIClient} from '../rest/index.ts';
 
-export function sdk<const T>(builder: (client: APIClient) => T) {
+// TODO: Add `const T` here when esbuild supports it
+export function sdk<T>(builder: (client: APIClient) => T) {
 	return builder;
 }
