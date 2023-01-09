@@ -1,3 +1,7 @@
+/**
+ * A list of all permissions and their representative names
+ * @public
+ */
 export enum PROJECT_PERMISSION {
 	ADD_MEMBER = 'add_member',
 	REMOVE_MEMBER = 'remove_member',
@@ -47,6 +51,10 @@ export enum PROJECT_PERMISSION {
 	TUNNEL_DEPLOYMENT = 'tunnel_deployment',
 }
 
+/**
+ * Individual bitwise permissions
+ * @public
+ */
 export const permissionsMap = {
 	[PROJECT_PERMISSION.ADD_MEMBER]: 1n << 0n,
 	[PROJECT_PERMISSION.REMOVE_MEMBER]: 1n << 1n,
@@ -96,6 +104,10 @@ export const permissionsMap = {
 	[PROJECT_PERMISSION.TUNNEL_DEPLOYMENT]: 1n << 46n,
 };
 
+/**
+ * Broader permission map
+ * @public
+ */
 export const BROAD_PERMISSIONS_MAP = {
 	MANAGE_MEMBERS:
 		permissionsMap.add_member |
@@ -160,6 +172,10 @@ export const BROAD_PERMISSIONS_MAP = {
 	MANAGE_BILLING: permissionsMap.read_billing,
 };
 
+/**
+ * Bitwise role flags that a user can be as part of a project
+ * @public
+ */
 export const roles = {
 	viewer: BROAD_PERMISSIONS_MAP.READ_ONLY,
 	editor:
@@ -192,6 +208,10 @@ export const roles = {
 		BROAD_PERMISSIONS_MAP.MANAGE_BILLING,
 };
 
+/**
+ * Permission utility functions
+ * @public
+ */
 export const permissions = {
 	add(value: bigint, flag: bigint) {
 		return BigInt(value) | BigInt(flag);

@@ -4,11 +4,16 @@ import {sdk} from './create.ts';
 
 /**
  * New state to set to a channel, or a callback function that will produce the new state
+ * @public
  */
 export type SetStateAction<T extends API.Channels.State> =
 	| T
 	| ((oldState: T) => T | Promise<T>);
 
+/**
+ * Channels SDK client
+ * @public
+ */
 export const channels = sdk(client => {
 	const Channels = create<API.Channels.Channel>().methods({
 		async setState<T extends API.Channels.State>(state: SetStateAction<T>) {
@@ -65,9 +70,9 @@ export const channels = sdk(client => {
 		/**
 		 * Creates a new channel
 		 *
-		 * @param type The type of the channel to create
-		 * @param id An ID to assign to the channel (optional, set this to `undefined` or `null` if you do not want to specify an ID)
-		 * @param project A project ID (if necessary) to assign this to
+		 * @param type - The type of the channel to create
+		 * @param id - An ID to assign to the channel (optional, set this to `undefined` or `null` if you do not want to specify an ID)
+		 * @param project - A project ID (if necessary) to assign this to
 		 */
 		async create<T extends API.Channels.State>(
 			type: API.Channels.ChannelType,
@@ -107,7 +112,7 @@ export const channels = sdk(client => {
 		/**
 		 * Get all channels for a project
 		 *
-		 * @param project An optional project ID if authenticating with a PAT or Bearer
+		 * @param project - An optional project ID if authenticating with a PAT or Bearer
 		 */
 		async getAll(project?: Id<'project'>) {
 			const {channels} = await client.get('/v1/channels', {project});
@@ -171,9 +176,9 @@ export const channels = sdk(client => {
 		/**
 		 * Publishes a new event to a channel
 		 *
-		 * @param channel The channel to publish to
-		 * @param event The event name
-		 * @param data The data for this event
+		 * @param channel - The channel to publish to
+		 * @param event - The event name
+		 * @param data - The data for this event
 		 */
 		async publishMessage<T>(
 			channel: API.Channels.Channel | API.Channels.Channel['id'],
@@ -213,8 +218,8 @@ export const channels = sdk(client => {
 			/**
 			 * Creates a new channel token for a project
 			 *
-			 * @param state The state to set on the token
-			 * @param project The project to attach this token to
+			 * @param state - The state to set on the token
+			 * @param project - The project to attach this token to
 			 */
 			async create(state: API.Channels.State = {}, project?: Id<'project'>) {
 				if (!project && client.authType !== 'ptk') {
@@ -267,9 +272,9 @@ export const channels = sdk(client => {
 
 			/**
 			 * Publishes a direct message to a single token
-			 * @param token The token to publish a direct message to
-			 * @param event The event name
-			 * @param data The data for this event
+			 * @param token - The token to publish a direct message to
+			 * @param event - The event name
+			 * @param data - The data for this event
 			 */
 			async publishDirectMessage<T>(
 				token: Id<'leap_token'>,

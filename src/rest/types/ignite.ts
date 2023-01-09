@@ -253,6 +253,9 @@ export interface DeploymentMetaData {
 	container_port_mappings: Record<Id<'container'>, string[]>;
 }
 
+/**
+ * Metadata attached to a build
+ */
 export interface BuildMetaData {
 	/**
 	 * Account type of repo owner
@@ -305,6 +308,9 @@ export interface BuildMetaData {
 	commit_url?: string;
 }
 
+/**
+ * A build entity
+ */
 export interface Build {
 	/**
 	 * ID of the build
@@ -383,6 +389,9 @@ export type HealthCheck = {
 	max_retries: number;
 };
 
+/**
+ * A deployment rollout
+ */
 export type DeploymentRollout = {
 	/**
 	 * The rollout ID for rollout
@@ -436,7 +445,10 @@ export type DeploymentRollout = {
 
 export type CreateDeploymentConfig = MakeOptional<DeploymentConfig, 'cmd'>;
 
-export interface DeploymentConfig {
+/**
+ * A config for creating a deployment
+ */
+export type DeploymentConfig = {
 	/**
 	 * The name of the deployment
 	 */
@@ -447,7 +459,7 @@ export interface DeploymentConfig {
 	 *
 	 * Manual = add containers yourself
 	 *
-	 * @warning This property is not yet fully complete
+	 * @alpha This property is not yet fully complete
 	 */
 	container_strategy: 'manual';
 
@@ -497,7 +509,7 @@ export interface DeploymentConfig {
 	 * Entrypoint for this deployment
 	 */
 	entrypoint?: string[];
-}
+};
 
 /**
  * Docker image config
@@ -655,7 +667,7 @@ export interface Gateway {
 	/**
 	 * The protocol for this gateway (Only for external)
 	 *
-	 * @warning Currently, hop only supports HTTP. This will eventually change to an enum
+	 * @alpha Currently, hop only supports HTTP. This will eventually change to an enum
 	 */
 	protocol: 'http' | null;
 

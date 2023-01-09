@@ -9,13 +9,20 @@ import {
 } from './sdks/index.ts';
 import {DEFAULT_BASE_URL} from './util/constants.ts';
 
+/**
+ * Partial options for the Hop client
+ * @public
+ */
 export type PartialAPIOptions = Partial<
 	Omit<APIClientOptions, 'authentication'>
 > &
 	Pick<APIClientOptions, 'authentication'>;
 
 /**
- * Constructs a new instance of Hop and all of its SDKs.
+ * Root class containing all methods and types for interacting with the Hop platform.
+ * This will be the entrypoint for most users of the Hop SDK.
+ *
+ * @public
  *
  * @example
  * ```ts

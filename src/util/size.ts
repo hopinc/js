@@ -41,7 +41,7 @@ export function gigabytes(size: number): ByteSizeString {
 
 /**
  * Parses a byte size string into bytes
- * @param size The size of anything in gigabytes, megabytes, kilobytes or bytes
+ * @param size - The size of anything in gigabytes, megabytes, kilobytes or bytes
  */
 export function parseSize(size: string) {
 	size = size.toUpperCase();

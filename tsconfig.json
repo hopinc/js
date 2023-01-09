@@ -19,7 +19,9 @@
 		"noUnusedParameters": true,
 		"noImplicitReturns": true,
 		"noUncheckedIndexedAccess": true,
-		"allowImportingTsExtensions": true
+		"allowImportingTsExtensions": true,
+		"declaration": true,
+		"declarationMap": true
 	},
 	"exclude": ["node_modules", "dist"],
 	"include": ["./**/*.ts", "./**/*.tsx"]

@@ -3,8 +3,9 @@ import {Id, IdPrefixes, validateId} from '../../rest/index.ts';
 
 /**
  * Generate a Zod schema for an ID prefix
- * @param prefix Prefix of the ID
+ * @param prefix - Prefix of the ID
  * @returns A Zod schema that resolve to a valid ID
+ * @public
  *
  * @example
  * ```ts

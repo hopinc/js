@@ -18,7 +18,8 @@ export function join(a: string, b: string) {
 
 /**
  * Generates a querystring to append to a URL. This function will include the ? character.
- * @param query An object of query params to be encoded
+ * @param query - An object of query params to be encoded
+ * @public
  * @returns A string of query params
  */
 export function querystring(query: Query<string>): string {

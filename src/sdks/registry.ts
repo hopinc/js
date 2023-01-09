@@ -1,6 +1,10 @@
 import {Id} from '../rest/index.ts';
 import {sdk} from './create.ts';
 
+/**
+ * Registry SDK client
+ * @public
+ */
 export const registry = sdk(client => {
 	return {
 		images: {
