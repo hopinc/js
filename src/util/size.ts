@@ -1,8 +1,5 @@
 export const byteUnits = ['GB', 'MB', 'KB', 'B'] as const;
-
-export type ByteUnit =
-	| typeof byteUnits[number]
-	| Uppercase<typeof byteUnits[number]>;
+export type ByteUnit = typeof byteUnits[number];
 
 export type ByteSizeString = `${number}${ByteUnit}`;
 
@@ -25,6 +22,22 @@ const multipliers: Record<ByteUnit, number> = {
 	MB: 1024 * 1024,
 	GB: 1024 * 1024 * 1024,
 };
+
+export function bytes(size: number, unit: ByteUnit = 'B'): ByteSizeString {
+	return `${size}${unit}`;
+}
+
+export function kilobytes(size: number): ByteSizeString {
+	return bytes(size, 'KB');
+}
+
+export function megabytes(size: number): ByteSizeString {
+	return bytes(size, 'MB');
+}
+
+export function gigabytes(size: number): ByteSizeString {
+	return bytes(size, 'GB');
+}
 
 /**
  * Parses a byte size string into bytes

@@ -20,6 +20,6 @@ export function hopId<Prefix extends IdPrefixes>(prefix: Prefix) {
 		.string()
 		.refine(
 			(value): value is Id<Prefix> => validateId(value, prefix),
-			`Id must be a valid ${prefix} id`,
+			`Id must be a valid \`${prefix}\` id`,
 		);
 }

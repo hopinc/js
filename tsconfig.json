@@ -22,5 +22,5 @@
 		"allowImportingTsExtensions": true
 	},
 	"exclude": ["node_modules", "dist"],
-	"include": ["./**/*.ts", "./**/*.tsx", "gen-docs.mts"]
+	"include": ["./**/*.ts", "./**/*.tsx"]
 }
