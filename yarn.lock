@@ -276,13 +276,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild-kit/cjs-loader@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "@esbuild-kit/cjs-loader@npm:2.4.0"
+"@esbuild-kit/cjs-loader@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "@esbuild-kit/cjs-loader@npm:2.4.1"
   dependencies:
     "@esbuild-kit/core-utils": ^3.0.0
     get-tsconfig: ^4.2.0
-  checksum: 267aef1c921317daa40345d2a58fb5482bf69cf32949458af2d78dbeeaf527860928111c550fbaa30f0c710314f9c2e1cec703f8104a6b5464c35e9692ba7cdf
+  checksum: a516065907be0ead76ac2199ccb08ff92659ba5e2edb4bb8772b6a63afe4faed7eb45a3b4d87266a68c7c135c3dba971cd087bc6f16c382356e835c7dd3440f5
   languageName: node
   linkType: hard
 
@@ -296,13 +296,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild-kit/esm-loader@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "@esbuild-kit/esm-loader@npm:2.5.0"
+"@esbuild-kit/esm-loader@npm:^2.5.4":
+  version: 2.5.4
+  resolution: "@esbuild-kit/esm-loader@npm:2.5.4"
   dependencies:
     "@esbuild-kit/core-utils": ^3.0.0
     get-tsconfig: ^4.2.0
-  checksum: 49611646f8b02ff7b41e6aacae797c4aae9edbf7c73f2c8a5ea43208e317473005930b8751749b607089110e5b93a52059b6cab4fff8e32b6acdb1811529a8d8
+  checksum: 8f4b4b6470f7afeb58ddc15ddcc4e35a6d25910133f2b21a82a793918c6f8e28768d5cd77b1c90a003f2f1c83cb476b68354580a4e04e83e2da3312afe5b5895
   languageName: node
   linkType: hard
 
@@ -420,7 +420,7 @@ __metadata:
     glob: 8.0.3
     prettier: 2.8.0
     tsup: 6.5.0
-    tsx: 3.12.1
+    tsx: 3.12.2
     typedoc: 0.23.21
     typedoc-plugin-markdown: 3.13.6
     typedoc-plugin-missing-exports: 1.0.0
@@ -3889,20 +3889,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:3.12.1":
-  version: 3.12.1
-  resolution: "tsx@npm:3.12.1"
+"tsx@npm:3.12.2":
+  version: 3.12.2
+  resolution: "tsx@npm:3.12.2"
   dependencies:
-    "@esbuild-kit/cjs-loader": ^2.4.0
+    "@esbuild-kit/cjs-loader": ^2.4.1
     "@esbuild-kit/core-utils": ^3.0.0
-    "@esbuild-kit/esm-loader": ^2.5.0
+    "@esbuild-kit/esm-loader": ^2.5.4
     fsevents: ~2.3.2
   dependenciesMeta:
     fsevents:
       optional: true
   bin:
     tsx: dist/cli.js
-  checksum: 7251ad550b82cc95716599b5f4fc8825d3896722f30ee6abfff5e5dd63b9ba8ad1c41fefbf27657ff5375f71bb69fb2b001dfe87f1f81e5d017b55616e1691cb
+  checksum: c227512ed7b480bd295c5420c560ec8311a4827b92e8040b7ca519627c7e1d35d48c25b26b4b11277cc437bba98696149f5148a9a06334f37b48bbaa870bff64
   languageName: node
   linkType: hard
 
