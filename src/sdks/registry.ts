@@ -1,5 +1,5 @@
-import {Id} from '../rest/index.js';
-import {sdk} from './create.js';
+import {Id} from '../rest/index.ts';
+import {sdk} from './create.ts';
 
 export const registry = sdk(client => {
 	return {

@@ -1,4 +1,4 @@
-import {ByteSizeString} from '../../util/index.js';
+import {ByteSizeString} from '../../util/index.ts';
 import {
 	Empty,
 	HopShDomain,
@@ -6,8 +6,8 @@ import {
 	InternalHopDomain,
 	MakeOptional,
 	Timestamp,
-} from '../../util/types.js';
-import {Endpoint} from '../endpoints.js';
+} from '../../util/types.ts';
+import {Endpoint} from '../endpoints.ts';
 
 export enum Regions {
 	US_EAST_1 = 'us-east-1',

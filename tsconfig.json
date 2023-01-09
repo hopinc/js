@@ -7,7 +7,7 @@
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"module": "NodeNext",
-		"moduleResolution": "NodeNext",
+		"moduleResolution": "bundler",
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"jsx": "react",
@@ -18,7 +18,8 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noImplicitReturns": true,
-		"noUncheckedIndexedAccess": true
+		"noUncheckedIndexedAccess": true,
+		"allowImportingTsExtensions": true
 	},
 	"exclude": ["node_modules", "dist"],
 	"include": ["./**/*.ts", "./**/*.tsx", "gen-docs.mts"]

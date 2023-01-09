@@ -1,1 +1,1 @@
-export * from './ids.js';
+export * from './ids.ts';

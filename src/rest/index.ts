@@ -1,3 +1,3 @@
-export * from './client.js';
-export * from './endpoints.js';
-export * from './types/index.js';
+export * from './client.ts';
+export * from './endpoints.ts';
+export * from './types/index.ts';

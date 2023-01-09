@@ -1,4 +1,4 @@
-import {APIAuthentication, APIClient, APIClientOptions} from './rest/client.js';
+import {APIAuthentication, APIClient, APIClientOptions} from './rest/client.ts';
 import {
 	channels,
 	ignite,
@@ -6,8 +6,8 @@ import {
 	projects,
 	registry,
 	users,
-} from './sdks/index.js';
-import {DEFAULT_BASE_URL} from './util/constants.js';
+} from './sdks/index.ts';
+import {DEFAULT_BASE_URL} from './util/constants.ts';
 
 export type PartialAPIOptions = Partial<
 	Omit<APIClientOptions, 'authentication'>

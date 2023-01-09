@@ -1,6 +1,6 @@
 import {create} from '@onehop/json-methods';
-import {API, Id} from '../rest/index.js';
-import {sdk} from './create.js';
+import {API, Id} from '../rest/index.ts';
+import {sdk} from './create.ts';
 
 /**
  * New state to set to a channel, or a callback function that will produce the new state

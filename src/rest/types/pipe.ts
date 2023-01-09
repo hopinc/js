@@ -1,6 +1,6 @@
-import {Empty, Id, Timestamp} from '../../util/types.js';
-import {Endpoint} from '../endpoints.js';
-import {Regions} from './ignite.js';
+import {Empty, Id, Timestamp} from '../../util/types.ts';
+import {Endpoint} from '../endpoints.ts';
+import {Regions} from './ignite.ts';
 
 export type DeliveryProtocol = 'webrtc' | 'hls';
 

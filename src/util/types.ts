@@ -1,4 +1,4 @@
-import {formatList} from './lists.js';
+import {formatList} from './lists.ts';
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 

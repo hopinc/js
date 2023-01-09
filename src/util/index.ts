@@ -1,3 +1,3 @@
-export * from './constants.js';
-export * from './size.js';
-export * from './types.js';
+export * from './constants.ts';
+export * from './size.ts';
+export * from './types.ts';

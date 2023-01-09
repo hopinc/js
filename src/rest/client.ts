@@ -1,9 +1,9 @@
-import {IS_BROWSER} from '../util/constants.js';
-import {fetch, Headers, Request} from '../util/fetch.js';
-import {ExtractRouteParams} from '../util/index.js';
-import {createURLBuilder} from '../util/urls.js';
-import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.js';
-import {getIdPrefix, Id, Method} from './types/index.js';
+import {IS_BROWSER} from '../util/constants.ts';
+import {fetch, Headers, Request} from '../util/fetch.ts';
+import {ExtractRouteParams} from '../util/index.ts';
+import {createURLBuilder} from '../util/urls.ts';
+import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.ts';
+import {getIdPrefix, Id, Method} from './types/index.ts';
 
 export type APIAuthenticationPrefix = 'ptk' | 'bearer' | 'pat';
 export type APIAuthentication = Id<APIAuthenticationPrefix>;

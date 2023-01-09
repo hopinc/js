@@ -1,3 +1,3 @@
-import * as API from './api.js';
-export * from '../../util/types.js';
+import * as API from './api.ts';
+export * from '../../util/types.ts';
 export {API};
