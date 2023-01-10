@@ -1,4 +1,4 @@
-import {Id} from '../rest/index.ts';
+import type {Id} from '../rest/index.ts';
 import {sdk} from './create.ts';
 
 /**

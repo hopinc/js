@@ -1,6 +1,6 @@
-import {Empty, Id, Timestamp} from '../../util/types.ts';
-import {Endpoint} from '../endpoints.ts';
-import {MemberRole, Project} from './projects.ts';
+import type {Empty, Id, Timestamp} from '../../util/types.ts';
+import type {Endpoint} from '../endpoints.ts';
+import type {MemberRole, Project} from './projects.ts';
 
 /**
  * A user objct

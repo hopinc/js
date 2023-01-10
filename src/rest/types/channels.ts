@@ -1,6 +1,6 @@
-import {Empty, Id, Timestamp} from '../../util/types.ts';
-import {Endpoint} from '../endpoints.ts';
-import {Project} from './projects.ts';
+import type {Empty, Id, Timestamp} from '../../util/types.ts';
+import type {Endpoint} from '../endpoints.ts';
+import type {Project} from './projects.ts';
 
 /**
  * Types that a channel can be

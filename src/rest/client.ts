@@ -1,8 +1,8 @@
 import {IS_BROWSER} from '../util/constants.ts';
 import {fetch, Headers, Request} from '../util/fetch.ts';
-import {ExtractRouteParams} from '../util/index.ts';
+import type {ExtractRouteParams} from '../util/index.ts';
 import {createURLBuilder} from '../util/urls.ts';
-import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.ts';
+import type {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.ts';
 import {getIdPrefix, Id, Method} from './types/index.ts';
 
 /**
@@ -10,6 +10,16 @@ import {getIdPrefix, Id, Method} from './types/index.ts';
  * @public
  */
 export type APIAuthenticationPrefix = 'ptk' | 'bearer' | 'pat';
+
+export type ExtractEndpoint<
+	Method extends string,
+	Path extends string,
+> = Extract<Endpoints, {path: Path; method: Method}>;
+
+export type PathsFor<M extends Method> = Extract<
+	Endpoints,
+	{method: M}
+>['path'];
 
 /**
  * All possible authentication ID types
@@ -32,7 +42,6 @@ export function validateAPIAuthentication(
 /**
  * Options passed to the API client.
  * This will usually come from Hop#constructor in most cases
- *
  * @public
  */
 export interface APIClientOptions {
@@ -81,7 +90,7 @@ export class APIClient {
 	}
 
 	private readonly options;
-	private agent: unknown;
+	private agent: import('node:https').Agent | null;
 
 	public readonly authType;
 	public readonly url;
@@ -97,7 +106,7 @@ export class APIClient {
 		this.agent = null;
 	}
 
-	async get<Path extends Extract<Endpoints, {method: 'GET'}>['path']>(
+	async get<Path extends PathsFor<'GET'>>(
 		path: Path,
 		query: Query<Path>,
 		init?: RequestInit,
@@ -243,7 +252,7 @@ export class APIClient {
 
 		const request = new Request(url, {
 			method,
-			body: body ? JSON.stringify(body) : undefined,
+			body: body ? JSON.stringify(body) : null,
 			headers,
 			...init,
 		});

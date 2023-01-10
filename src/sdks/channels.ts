@@ -1,5 +1,5 @@
 import {create} from '@onehop/json-methods';
-import {API, Id} from '../rest/index.ts';
+import type {API, Id} from '../rest/index.ts';
 import {sdk} from './create.ts';
 
 /**

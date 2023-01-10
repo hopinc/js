@@ -1,6 +1,6 @@
-import {Empty, Id, Timestamp} from '../../util/types.ts';
-import {Endpoint} from '../endpoints.ts';
-import {User} from './users.ts';
+import type {Empty, Id, Timestamp} from '../../util/types.ts';
+import type {Endpoint} from '../endpoints.ts';
+import type {User} from './users.ts';
 
 export type Member = Omit<User, 'email' | 'id'> & {
 	/**

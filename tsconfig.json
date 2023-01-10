@@ -21,7 +21,9 @@
 		"noUncheckedIndexedAccess": true,
 		"allowImportingTsExtensions": true,
 		"declaration": true,
-		"declarationMap": true
+		"declarationMap": true,
+		"exactOptionalPropertyTypes": true,
+		"importsNotUsedAsValues": "error"
 	},
 	"exclude": ["node_modules", "dist"],
 	"include": ["./**/*.ts", "./**/*.tsx"]

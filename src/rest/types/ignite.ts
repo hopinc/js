@@ -1,5 +1,5 @@
-import {ByteSizeString} from '../../util/index.ts';
-import {
+import type {ByteSizeString} from '../../util/index.ts';
+import type {
 	Empty,
 	HopShDomain,
 	Id,
@@ -7,7 +7,7 @@ import {
 	MakeOptional,
 	Timestamp,
 } from '../../util/types.ts';
-import {Endpoint} from '../endpoints.ts';
+import type {Endpoint} from '../endpoints.ts';
 
 export enum Regions {
 	US_EAST_1 = 'us-east-1',

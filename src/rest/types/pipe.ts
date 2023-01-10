@@ -1,6 +1,6 @@
-import {Empty, Id, Timestamp} from '../../util/types.ts';
-import {Endpoint} from '../endpoints.ts';
-import {Regions} from './ignite.ts';
+import type {Empty, Id, Timestamp} from '../../util/types.ts';
+import type {Endpoint} from '../endpoints.ts';
+import type {Regions} from './ignite.ts';
 
 export type DeliveryProtocol = 'webrtc' | 'hls';
 
@@ -71,11 +71,13 @@ export type PipeEndpoints =
 
 				ephemeral: boolean;
 
-				llhls_config?: {
-					wcl_delay: number;
-					artificial_delay: number;
-					max_playout_bitrate_preset: string;
-				};
+				llhls_config?:
+					| {
+							wcl_delay: number;
+							artificial_delay: number;
+							max_playout_bitrate_preset: string;
+					  }
+					| undefined;
 			}
 	  >
 	| Endpoint<'DELETE', '/v1/pipe/rooms/:room_id', Empty>;

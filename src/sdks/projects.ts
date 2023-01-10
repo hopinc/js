@@ -1,4 +1,4 @@
-import {API, Endpoints, Id} from '../rest/index.ts';
+import type {API, Endpoints, Id} from '../rest/index.ts';
 import {Request} from '../util/fetch.ts';
 import {sdk} from './create.ts';
 

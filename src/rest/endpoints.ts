@@ -1,10 +1,10 @@
-import {ChannelEndpoints} from './types/channels.ts';
-import {IgniteEndpoints} from './types/ignite.ts';
-import {Method} from './types/index.ts';
-import {PipeEndpoints} from './types/pipe.ts';
-import {ProjectsEndpoints} from './types/projects.ts';
-import {RegistryEndpoints} from './types/registry.ts';
-import {UserEndpoints} from './types/users.ts';
+import type {ChannelEndpoints} from './types/channels.ts';
+import type {IgniteEndpoints} from './types/ignite.ts';
+import type {Method} from './types/index.ts';
+import type {PipeEndpoints} from './types/pipe.ts';
+import type {ProjectsEndpoints} from './types/projects.ts';
+import type {RegistryEndpoints} from './types/registry.ts';
+import type {UserEndpoints} from './types/users.ts';
 
 export type SuccessfulAPIResponse<T> = {
 	success: true;

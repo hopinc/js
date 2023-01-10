@@ -1,5 +1,5 @@
-import {Empty} from '../../util/types.ts';
-import {Endpoint} from '../endpoints.ts';
+import type {Empty} from '../../util/types.ts';
+import type {Endpoint} from '../endpoints.ts';
 
 export type RegistryEndpoints =
 	| Endpoint<'DELETE', '/v1/registry/images/:image', Empty>
