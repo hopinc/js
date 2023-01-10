@@ -2,6 +2,10 @@ import {Empty, Id, Timestamp} from '../../util/types.ts';
 import {Endpoint} from '../endpoints.ts';
 import {Project} from './projects.ts';
 
+/**
+ * Types that a channel can be
+ * @public
+ */
 export enum ChannelType {
 	PRIVATE = 'private',
 	PUBLIC = 'public',
@@ -15,6 +19,7 @@ export enum ChannelType {
 export type State = Record<string, unknown>;
 
 /**
+ * Definition of a channel
  * @public
  */
 export interface Channel {
