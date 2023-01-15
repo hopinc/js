@@ -1,6 +1,5 @@
-import {IS_BROWSER} from '../util/constants.js';
 import {fetch, Headers, Request} from '../util/fetch.js';
-import {ExtractRouteParams} from '../util/index.js';
+import {ExtractRouteParams, IS_BROWSER} from '../util/index.js';
 import {createURLBuilder} from '../util/urls.js';
 import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.js';
 import {getIdPrefix, Id, Method} from './types/index.js';

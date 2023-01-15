@@ -67,6 +67,7 @@ export const channels = sdk(client => {
 		 *
 		 * @param type The type of the channel to create
 		 * @param id An ID to assign to the channel (optional, set this to `undefined` or `null` if you do not want to specify an ID)
+		 * @param options The options to use when creating the channel
 		 * @param project A project ID (if necessary) to assign this to
 		 */
 		async create<T extends API.Channels.State>(

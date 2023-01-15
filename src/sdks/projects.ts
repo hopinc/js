@@ -8,6 +8,7 @@ export const projects = sdk(client => {
 		 * Deletes a project token by its ID
 		 *
 		 * @param projectTokenId The ID of the project token to delete
+		 * @param project The project ID to delete the token from
 		 */
 		async delete(projectTokenId: Id<'ptkid'>, project?: Id<'project'>) {
 			if (client.authType !== 'ptk' && !project) {

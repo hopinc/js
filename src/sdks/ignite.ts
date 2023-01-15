@@ -160,6 +160,7 @@ export const ignite = sdk(client => {
 	 * Gets a deployment by id
 	 *
 	 * @param id The deployment ID
+	 * @param projectId The project ID
 	 */
 	async function getDeployment(
 		id: Id<'deployment'>,

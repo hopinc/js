@@ -7,7 +7,7 @@ import {
 	registry,
 	users,
 } from './sdks/index.js';
-import {DEFAULT_BASE_URL} from './util/constants.js';
+import {DEFAULT_BASE_URL} from './util/index.js';
 
 export type PartialAPIOptions = Partial<
 	Omit<APIClientOptions, 'authentication'>
