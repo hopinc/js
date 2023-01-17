@@ -18,7 +18,7 @@ export enum Regions {
  */
 export enum RuntimeType {
 	/**
-	 * Ephemeral deployments/containers are sort of fire and forget. Containers won't restart if they exit but they can still be terminated programatically.
+	 * Ephemeral deployments/containers are sort of fire and forget. Containers won't restart if they exit, but they can still be terminated programmatically.
 	 */
 	EPHEMERAL = 'ephemeral',
 

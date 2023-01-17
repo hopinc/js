@@ -3,7 +3,7 @@ import {Endpoint} from '../endpoints.js';
 import {MemberRole, Project} from './projects.js';
 
 /**
- * A user objct
+ * A user object
  */
 export interface User {
 	/**
