@@ -8,3 +8,4 @@ dist
 _workbench.ts
 docs
 .env
+.idea
