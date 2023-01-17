@@ -195,7 +195,7 @@ export const ignite = sdk(client => {
 
 	const deploymentGateways = {
 		/**
-		 * Fecthes all gateways attached to a deployment
+		 * Fetches all gateways attached to a deployment
 		 *
 		 * @param deploymentId The ID of the deployment to fetch gateways for
 		 */
@@ -212,9 +212,11 @@ export const ignite = sdk(client => {
 		 * Creates and attaches a gateway to a deployment
 		 *
 		 * @param deployment The deployment to create a gateway on
-		 * @param type The type of the gatway to create, either internal or external
-		 * @param protocol The protocol that the gateway will listen for
-		 * @param targetPort The port to listen on
+		 * @param config The gateway config
+		 * @param config.type The type of the gateway to create, either internal or external
+		 * @param config.protocol The protocol that the gateway will listen for
+		 * @param config.targetPort The port to listen on
+		 * @param config.name The name of the gateway
 		 */
 		async create(
 			deployment: Deployment | Deployment['id'],
@@ -421,6 +423,11 @@ export const ignite = sdk(client => {
 			 * Get the logs for a container
 			 *
 			 * @param container The ID of the container
+			 * @param options The options to use for the logs
+			 * @param options.sortBy The field to sort by
+			 * @param options.orderBy The order to sort by
+			 * @param options.limit The number of logs to return
+			 * @param options.offset The offset to start at
 			 * @returns
 			 */
 			async getLogs(
