@@ -160,6 +160,14 @@ export interface Container {
 	};
 
 	/**
+	 * Overrides that were provided manually to the container
+	 */
+
+	overrides: {
+		resources?: Partial<Resources>;
+	} | null;
+
+	/**
 	 * The type of this container
 	 */
 	type: RuntimeType;
