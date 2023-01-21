@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.18.0
+
+### Minor Changes
+
+- 93fe56b: Add overrides to container object
+
 ## 1.17.0
 
 ### Minor Changes
