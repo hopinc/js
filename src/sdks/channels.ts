@@ -158,7 +158,7 @@ export const channels = sdk(client => {
 			state: SetStateAction<T>,
 		) {
 			const id = typeof channel === 'object' ? channel.id : channel;
-			return updateState(id, state, 'set');
+			await updateState(id, state, 'set');
 		},
 
 		async patchState<T extends API.Channels.State>(
@@ -166,7 +166,7 @@ export const channels = sdk(client => {
 			state: SetStateAction<T>,
 		) {
 			const id = typeof channel === 'object' ? channel.id : channel;
-			return updateState(id, state, 'patch');
+			await updateState(id, state, 'patch');
 		},
 
 		/**
