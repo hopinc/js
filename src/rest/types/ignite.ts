@@ -255,6 +255,18 @@ export interface Deployment {
 	 * Metadata for deployment
 	 */
 	metadata: DeploymentMetaData | null;
+
+	/**
+	 * Build cache settings for deployment
+	 */
+	build_cache_enabled: boolean;
+
+	/**
+	 * Build settings for deployment
+	 */
+	build_settings: {
+		root_directory?: string;
+	};
 }
 
 export interface DeploymentMetaData {
