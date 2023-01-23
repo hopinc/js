@@ -160,6 +160,14 @@ export interface Container {
 	};
 
 	/**
+	 * Overrides that were provided manually to the container
+	 */
+
+	overrides: {
+		resources?: Partial<Resources>;
+	} | null;
+
+	/**
 	 * The type of this container
 	 */
 	type: RuntimeType;
@@ -247,6 +255,23 @@ export interface Deployment {
 	 * Metadata for deployment
 	 */
 	metadata: DeploymentMetaData | null;
+
+	/**
+	 * Build cache settings for deployment
+	 */
+	build_cache_enabled: boolean;
+
+	/**
+	 * Build settings for deployment
+	 */
+	build_settings: BuildSettings;
+}
+
+export interface BuildSettings {
+	/**
+	 * Root directory for build
+	 */
+	root_directory?: string;
 }
 
 export interface DeploymentMetaData {
