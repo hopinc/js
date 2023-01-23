@@ -264,9 +264,14 @@ export interface Deployment {
 	/**
 	 * Build settings for deployment
 	 */
-	build_settings: {
-		root_directory?: string;
-	};
+	build_settings: BuildSettings;
+}
+
+export interface BuildSettings {
+	/**
+	 * Root directory for build
+	 */
+	root_directory?: string;
 }
 
 export interface DeploymentMetaData {
