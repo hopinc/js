@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.19.0
+
+### Minor Changes
+
+- 1e0145e: Add build_settings and build_cache_enabled to deployment
+
 ## 1.18.0
 
 ### Minor Changes
