@@ -410,8 +410,10 @@ export const ignite = sdk(client => {
 			 *
 			 * @param container The ID of the container to delete.
 			 */
-			async delete(container: Id<'container'>) {
-				await client.delete('/v1/ignite/containers/:container_id', undefined, {
+			async delete(container: Id<'container'>, options: Partial<{
+				recreate: boolean
+			}> = {}) {
+				await client.delete('/v1/ignite/containers/:container_id', options, {
 					container_id: container,
 				});
 			},

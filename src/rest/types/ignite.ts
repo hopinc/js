@@ -800,7 +800,7 @@ export type IgniteEndpoints =
 			CreateDeploymentConfig
 	  >
 	| Endpoint<'DELETE', '/v1/ignite/deployments/:deployment_id', Empty>
-	| Endpoint<'DELETE', '/v1/ignite/containers/:container_id', Empty>
+	| Endpoint<'DELETE', '/v1/ignite/containers/:container_id', Empty | {container: Container}, {recreate?: boolean}>
 	| Endpoint<
 			'GET',
 			'/v1/ignite/containers/:container_id/logs',
