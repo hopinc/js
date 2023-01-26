@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.20.0
+
+### Minor Changes
+
+- 527b63b: Fix build settings type
+
 ## 1.19.0
 
 ### Minor Changes
