@@ -264,7 +264,7 @@ export interface Deployment {
 	/**
 	 * Build settings for deployment
 	 */
-	build_settings: BuildSettings;
+	build_settings?: BuildSettings;
 }
 
 export interface BuildSettings {
