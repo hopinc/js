@@ -7,7 +7,7 @@ import {
 	GatewayType,
 	RuntimeType,
 } from '../rest/types/ignite.ts';
-import {Empty, parseSize, validateId} from '../util/index.ts';
+import {parseSize, validateId} from '../util/index.ts';
 import {sdk} from './create.ts';
 
 const SIX_MB_IN_BYTES = 6 * 1024 * 1024;
@@ -233,10 +233,7 @@ export const ignite = sdk(client => {
 		const d = await client.delete(
 			'/v1/ignite/containers/:container_id',
 			undefined,
-			{
-				container_id,
-				recreate: options.recreate ? 'true' : undefined,
-			},
+			{container_id, recreate: options.recreate ? 'true' : undefined},
 		);
 
 		if (!d) {
