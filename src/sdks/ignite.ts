@@ -411,7 +411,9 @@ export const ignite = sdk(client => {
 			/**
 			 * Deletes a container
 			 *
-			 * @param container The ID of the container to delete.
+			 * @param container_id container The ID of the container to delete.
+			 * @param options Options for deleting the container
+			 * @param options.recreate Whether to recreate the container after deleting it
 			 */
 			async delete(
 				container_id: Id<'container'>,
