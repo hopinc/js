@@ -264,7 +264,7 @@ export interface Deployment {
 	/**
 	 * Build settings for deployment
 	 */
-	build_settings: BuildSettings;
+	build_settings?: BuildSettings;
 }
 
 export interface BuildSettings {
@@ -800,7 +800,11 @@ export type IgniteEndpoints =
 			CreateDeploymentConfig
 	  >
 	| Endpoint<'DELETE', '/v1/ignite/deployments/:deployment_id', Empty>
-	| Endpoint<'DELETE', '/v1/ignite/containers/:container_id', Empty>
+	| Endpoint<
+			'DELETE',
+			'/v1/ignite/containers/:container_id',
+			Empty | {container: Container}
+	  >
 	| Endpoint<
 			'GET',
 			'/v1/ignite/containers/:container_id/logs',

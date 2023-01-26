@@ -1,5 +1,17 @@
 # @onehop/js
 
+## 1.20.1
+
+### Patch Changes
+
+- 2a64d7b: Bump
+
+## 1.20.0
+
+### Minor Changes
+
+- 527b63b: Fix build settings type
+
 ## 1.19.0
 
 ### Minor Changes
