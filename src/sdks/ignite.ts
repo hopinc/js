@@ -7,7 +7,7 @@ import {
 	GatewayType,
 	RuntimeType,
 } from '../rest/types/ignite.ts';
-import {parseSize, validateId} from '../util/index.ts';
+import {Empty, parseSize, validateId} from '../util/index.ts';
 import {sdk} from './create.ts';
 
 const SIX_MB_IN_BYTES = 6 * 1024 * 1024;
@@ -194,6 +194,56 @@ export const ignite = sdk(client => {
 		);
 
 		return Deployments.from(deployment);
+	}
+
+	/**
+	 * Deletes a container and recreates it after deletion
+	 *
+	 * @param container_id The ID of the container to delete
+	 * @param options - Options object
+	 */
+	async function deleteContainer(
+		container_id: Id<'container'>,
+		options: {recreate: true},
+	): Promise<API.Ignite.Container>;
+
+	/**
+	 * Deletes a container. This will not recreate the container.
+	 *
+	 * @param container - The ID of the container to delete
+	 * @param options - Options object
+	 */
+	async function deleteContainer(
+		container_id: Id<'container'>,
+		options?: {recreate?: false},
+	): Promise<undefined>;
+
+	/**
+	 * Deletes a container, and optionally recreates it after deletion
+	 *
+	 * @param container - The ID of the container to delete
+	 * @param options - Options object
+	 */
+	async function deleteContainer(
+		container_id: Id<'container'>,
+		options: {
+			recreate?: boolean;
+		} = {},
+	) {
+		const d = await client.delete(
+			'/v1/ignite/containers/:container_id',
+			undefined,
+			{
+				container_id,
+				recreate: options.recreate ? 'true' : undefined,
+			},
+		);
+
+		if (!d) {
+			return;
+		}
+
+		return d.container;
 	}
 
 	const deploymentGateways = {
@@ -412,30 +462,7 @@ export const ignite = sdk(client => {
 		},
 
 		containers: {
-			/**
-			 * Deletes a container
-			 *
-			 * @param container - The ID of the container to delete.
-			 */
-			async delete(
-				container_id: Id<'container'>,
-				options: Partial<{
-					recreate: boolean;
-				}> = {},
-			) {
-				const d = await client.delete(
-					'/v1/ignite/containers/:container_id',
-					undefined,
-					{
-						container_id,
-						recreate: options.recreate ? 'true' : undefined,
-					},
-				);
-
-				if (!d) return;
-
-				return d;
-			},
+			delete: deleteContainer,
 
 			/**
 			 * Get the logs for a container
