@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.20.1
+
+### Patch Changes
+
+- 2a64d7b: Bump
+
 ## 1.20.0
 
 ### Minor Changes
