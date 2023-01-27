@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.21.0
+
+### Minor Changes
+
+- 0d8804d: Add session ID to ID Prefixes
+
 ## 1.20.1
 
 ### Patch Changes
