@@ -112,7 +112,7 @@ export interface VolumeDefinition {
 	/**
 	 * The mount point of the volume
 	 */
-	mount_path: string;
+	mountpath: string;
 }
 
 export interface Container {
@@ -484,7 +484,7 @@ export interface DeploymentConfig {
 	/**
 	 * The version of this config
 	 */
-	version: '12-12-2022';
+	version: '2022-05-17' | '2022-10-19' | '2022-12-12' | '2022-12-28';
 
 	/**
 	 * Entrypoint command for the image
