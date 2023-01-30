@@ -1,12 +1,6 @@
 import {create, Infer} from '@onehop/json-methods';
 import {API, assertId, Id} from '../rest/index.js';
-import {
-	Deployment,
-	DeploymentConfig,
-	Gateway,
-	GatewayType,
-	RuntimeType,
-} from '../rest/types/ignite.js';
+import {Deployment, DeploymentConfig, Gateway, GatewayType, RuntimeType} from '../rest/types/ignite.js';
 import {parseSize, validateId} from '../util/index.js';
 import {sdk} from './create.js';
 
@@ -52,7 +46,7 @@ export const ignite = sdk(client => {
 			protocol: API.Ignite.Gateway['protocol'];
 			name: string;
 			targetPort: number;
-			internal_domain: string;
+			internalDomain: string;
 		}) {
 			return igniteSDK.gateways.create(this.id, config);
 		},
@@ -232,17 +226,21 @@ export const ignite = sdk(client => {
 				protocol: Gateway['protocol'];
 				targetPort: number;
 				name: string;
-				internal_domain: string;
+				internalDomain: string;
 			},
 		) {
 			const deploymentId =
 				typeof deployment === 'object' ? deployment.id : deployment;
 
-			const {targetPort, ...rest} = config;
+			let body = config.type === GatewayType.EXTERNAL ? (
+				{...config, target_port: config.targetPort}
+			) : (
+				{...config, target_port: config.targetPort, internal_domain: config.internalDomain}
+			);
 
 			const {gateway} = await client.post(
 				'/v1/ignite/deployments/:deployment_id/gateways',
-				{...rest, target_port: targetPort},
+				body,
 				{deployment_id: deploymentId},
 			);
 
