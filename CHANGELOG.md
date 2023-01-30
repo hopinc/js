@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.21.1
+
+### Patch Changes
+
+- 2dcd012: Added preset form schema (to ask questions before a preset is deployed, e.g. postgres username)
+
 ## 1.21.0
 
 ### Minor Changes
