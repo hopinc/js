@@ -222,6 +222,7 @@ export const ignite = sdk(client => {
 		 * @param config.protocol The protocol that the gateway will listen for
 		 * @param config.targetPort The port to listen on
 		 * @param config.name The name of the gateway
+		 * @param config.internalDomain The internal domain to use for the gateway
 		 */
 		async create(
 			deployment: Deployment | Deployment['id'],
