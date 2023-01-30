@@ -1,6 +1,12 @@
 import {create, Infer} from '@onehop/json-methods';
 import {API, assertId, Id} from '../rest/index.js';
-import {Deployment, DeploymentConfig, Gateway, GatewayType, RuntimeType} from '../rest/types/ignite.js';
+import {
+	Deployment,
+	DeploymentConfig,
+	Gateway,
+	GatewayType,
+	RuntimeType,
+} from '../rest/types/ignite.js';
 import {parseSize, validateId} from '../util/index.js';
 import {sdk} from './create.js';
 
@@ -232,7 +238,7 @@ export const ignite = sdk(client => {
 			const deploymentId =
 				typeof deployment === 'object' ? deployment.id : deployment;
 
-			let body = config.type === GatewayType.EXTERNAL ? (
+			const body = config.type === GatewayType.EXTERNAL ? (
 				{...config, target_port: config.targetPort}
 			) : (
 				{...config, target_port: config.targetPort, internal_domain: config.internalDomain}
