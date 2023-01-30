@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.22.0
+
+### Minor Changes
+
+- 2e8a02b: PR changes from https://github.com/tomheaton (thank you!)
+
 ## 1.21.1
 
 ### Patch Changes
