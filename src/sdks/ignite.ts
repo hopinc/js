@@ -43,11 +43,16 @@ export const ignite = sdk(client => {
 		},
 
 		createGateway(config: {
-			type: API.Ignite.GatewayType;
+			type: API.Ignite.GatewayType.EXTERNAL;
 			protocol: API.Ignite.Gateway['protocol'];
-			port: number;
 			name: string;
 			targetPort: number;
+		} | {
+			type: API.Ignite.GatewayType.INTERNAL;
+			protocol: API.Ignite.Gateway['protocol'];
+			name: string;
+			targetPort: number;
+			internalDomain: string;
 		}) {
 			return igniteSDK.gateways.create(this.id, config);
 		},
@@ -218,20 +223,30 @@ export const ignite = sdk(client => {
 		async create(
 			deployment: Deployment | Deployment['id'],
 			config: {
-				type: GatewayType;
+				type: GatewayType.EXTERNAL;
 				protocol: Gateway['protocol'];
 				targetPort: number;
 				name: string;
+			} | {
+				type: GatewayType.INTERNAL;
+				protocol: Gateway['protocol'];
+				targetPort: number;
+				name: string;
+				internalDomain: string;
 			},
 		) {
 			const deploymentId =
 				typeof deployment === 'object' ? deployment.id : deployment;
 
-			const {targetPort, ...rest} = config;
+			const body = config.type === GatewayType.EXTERNAL ? (
+				{...config, target_port: config.targetPort}
+			) : (
+				{...config, target_port: config.targetPort, internal_domain: config.internalDomain}
+			);
 
 			const {gateway} = await client.post(
 				'/v1/ignite/deployments/:deployment_id/gateways',
-				{...rest, target_port: targetPort},
+				body,
 				{deployment_id: deploymentId},
 			);
 
