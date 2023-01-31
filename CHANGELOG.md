@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.22.1
+
+### Patch Changes
+
+- 43dff2b: Add max_length and validator to preset form schema input field
+
 ## 1.22.0
 
 ### Minor Changes
