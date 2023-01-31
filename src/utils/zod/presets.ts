@@ -15,6 +15,7 @@ export const presetFormSchema = z.object({
 			]),
 			title: z.string(),
 			required: z.boolean().optional().default(false),
+			description: z.string().optional(),
 			map_to: z.array(
 				z.object({
 					type: z.enum(['env']),
