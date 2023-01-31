@@ -9,6 +9,8 @@ export const presetFormSchema = z.object({
 					type: z.literal('string'),
 					default: z.string().optional(),
 					autogen: z.enum(['PROJECT_NAMESPACE', 'SECURE_TOKEN']).optional(),
+					max_length: z.number().optional(),
+					validator: z.string().optional(),
 				}),
 			]),
 			title: z.string(),
