@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.22.2
+
+### Patch Changes
+
+- 6c7c726: add optional description to preset form schema fields
+
 ## 1.22.1
 
 ### Patch Changes
