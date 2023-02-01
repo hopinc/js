@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.22.3
+
+### Patch Changes
+
+- bf4e706: Add API.Ignite.BuildEnvironment type
+
 ## 1.22.2
 
 ### Patch Changes
