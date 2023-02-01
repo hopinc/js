@@ -904,7 +904,7 @@ export type IgniteEndpoints =
 			'PATCH',
 			'/v1/ignite/deployments/:deployment_id',
 			{deployment: Deployment},
-			DeploymentConfig
+			Partial<DeploymentConfig>
 	  >
 	| Endpoint<
 			'POST',
