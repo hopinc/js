@@ -343,6 +343,11 @@ export interface BuildEnvironment {
 	};
 }
 
+export interface ValidationFailure {
+	reason: string;
+	help_link: string | null;
+}
+
 export interface Build {
 	/**
 	 * ID of the build
@@ -388,6 +393,11 @@ export interface Build {
 	 * Environment for build
 	 */
 	environment: BuildEnvironment;
+
+	/**
+	 * Validation failure for build; present if build state is VALIDATION_FAILED
+	 */
+	validation_failure?: ValidationFailure;
 }
 
 export type HealthCheck = {
@@ -745,10 +755,12 @@ export enum DomainState {
 }
 
 export enum BuildState {
+	VALIDATING = 'validating',
 	PENDING = 'pending',
 	FAILED = 'failed',
 	SUCCEEDED = 'succeeded',
 	CANCELLED = 'cancelled',
+	VALIDATION_FAILED = 'validation_failed',
 }
 
 export interface Domain {
