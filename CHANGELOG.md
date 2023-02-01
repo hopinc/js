@@ -1,5 +1,17 @@
 # @onehop/js
 
+## 1.22.3
+
+### Patch Changes
+
+- bf4e706: Add API.Ignite.BuildEnvironment type
+
+## 1.22.2
+
+### Patch Changes
+
+- 6c7c726: add optional description to preset form schema fields
+
 ## 1.22.1
 
 ### Patch Changes

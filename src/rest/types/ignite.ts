@@ -330,6 +330,19 @@ export interface BuildMetaData {
 	commit_url?: string;
 }
 
+/**
+ * Build environment contians information about the
+ * language and build commands used to build the deployment
+ */
+export interface BuildEnvironment {
+	language: string | null;
+	cmds: {
+		build: string | null;
+		start: string | null;
+		install: string | null;
+	};
+}
+
 export interface Build {
 	/**
 	 * ID of the build
@@ -370,6 +383,11 @@ export interface Build {
 	 * State of the build
 	 */
 	state: BuildState;
+
+	/**
+	 * Environment for build
+	 */
+	environment: BuildEnvironment;
 }
 
 export type HealthCheck = {
