@@ -12,15 +12,27 @@ export const presetFormSchema = z.object({
 					max_length: z.number().optional(),
 					validator: z.string().optional(),
 				}),
+				z.object({
+					type: z.literal('range'),
+					default: z.number().optional(),
+					min: z.number(),
+					max: z.number(),
+					increment: z.number().optional(),
+				}),
 			]),
 			title: z.string(),
 			required: z.boolean().optional().default(false),
 			description: z.string().optional(),
 			map_to: z.array(
-				z.object({
-					type: z.enum(['env']),
-					key: z.string(),
-				}),
+				z.discriminatedUnion('type', [
+					z.object({
+						type: z.literal('env'),
+						key: z.string(),
+					}),
+					z.object({
+						type: z.literal('volume_size'),
+					}),
+				]),
 			),
 		}),
 	),
