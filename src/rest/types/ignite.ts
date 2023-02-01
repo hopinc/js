@@ -217,7 +217,7 @@ export interface Deployment {
 	/**
 	 * The config for this deployment
 	 */
-	config: Omit<DeploymentConfig, 'volume' | 'name'>;
+	config: Omit<DeploymentConfig, 'name'>;
 
 	/**
 	 * Current active rollout for deployment
