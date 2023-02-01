@@ -1,5 +1,12 @@
 # @onehop/js
 
+## 1.22.7
+
+### Patch Changes
+
+- 3eb75f5: validation_failure is nullable, but not optional
+- 8238fa5: updates to build environment
+
 ## 1.22.6
 
 ### Patch Changes
