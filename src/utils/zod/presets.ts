@@ -18,6 +18,7 @@ export const presetFormSchema = z.object({
 					min: z.number(),
 					max: z.number(),
 					increment: z.number().optional(),
+					unit: z.string().optional(),
 				}),
 			]),
 			title: z.string(),
