@@ -1,5 +1,12 @@
 # @onehop/js
 
+## 1.22.6
+
+### Patch Changes
+
+- 1ca6d81: build validation fields
+- b2d01d0: optional unit in preset form range type
+
 ## 1.22.5
 
 ### Patch Changes
