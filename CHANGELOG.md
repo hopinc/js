@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.23.0
+
+### Minor Changes
+
+- b7b1f90: Fix deployment config type
+
 ## 1.22.7
 
 ### Patch Changes
