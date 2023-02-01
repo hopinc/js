@@ -397,7 +397,7 @@ export interface Build {
 	/**
 	 * Validation failure for build; present if build state is VALIDATION_FAILED
 	 */
-	validation_failure?: ValidationFailure;
+	validation_failure: ValidationFailure | null;
 }
 
 export type HealthCheck = {
