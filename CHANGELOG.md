@@ -1,5 +1,12 @@
 # @onehop/js
 
+## 1.22.5
+
+### Patch Changes
+
+- 9e7ccb4: export buildenv
+- 9323685: fix type export
+
 ## 1.22.4
 
 ### Patch Changes
