@@ -331,11 +331,19 @@ export interface BuildMetaData {
 }
 
 /**
- * Build environment contians information about the
- * language and build commands used to build the deployment
+ * The inferred environment type of a build
  */
-export interface BuildEnvironment {
+export enum BuildEnvironmentType {
+	NIXPACKS = 'nixpacks',
+	DOCKERFILE = 'dockerfile',
+}
+
+/**
+ * The validated nixpacks plan for this build
+ */
+export interface NixPlan {
 	language: string | null;
+	pkgs: string[] | null;
 	cmds: {
 		build: string | null;
 		start: string | null;
@@ -343,6 +351,18 @@ export interface BuildEnvironment {
 	};
 }
 
+/**
+ * Build environment contians information about the
+ * language and build commands used to build the deployment
+ */
+export interface BuildEnvironment {
+	type: BuildEnvironmentType;
+	nix_plan?: NixPlan | null;
+}
+
+/**
+ * Why the uploaded build content was rejected
+ */
 export interface ValidationFailure {
 	reason: string;
 	help_link: string | null;
@@ -392,7 +412,7 @@ export interface Build {
 	/**
 	 * Environment for build
 	 */
-	environment: BuildEnvironment;
+	environment: BuildEnvironment | null;
 
 	/**
 	 * Validation failure for build; present if build state is VALIDATION_FAILED
