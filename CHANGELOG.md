@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.22.4
+
+### Patch Changes
+
+- 21fa991: add range input type to preset form schema
+
 ## 1.22.3
 
 ### Patch Changes
