@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.26.0
+
+### Minor Changes
+
+- c82036c: add created_at and change started_at for build types
+
 ## 1.25.0
 
 ### Minor Changes
