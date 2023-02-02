@@ -537,7 +537,7 @@ export interface DeploymentConfig {
 	/**
 	 * Entrypoint command for the image
 	 */
-	cmd: string[];
+	cmd?: string[];
 
 	/**
 	 * The docker image config for this deployment
