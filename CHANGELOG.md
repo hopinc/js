@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.25.0
+
+### Minor Changes
+
+- 1530a06: Adds BuildState, DomainState, and BuildMethod to be exported
+
 ## 1.24.0
 
 ### Minor Changes
