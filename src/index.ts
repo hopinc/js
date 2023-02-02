@@ -9,6 +9,9 @@ export {
 	RestartPolicy,
 	RolloutState,
 	RuntimeType,
+	BuildState,
+	DomainState,
+	BuildMethod,
 	type BuildEnvironment,
 } from './rest/types/ignite.js';
 export * from './util/index.js';
