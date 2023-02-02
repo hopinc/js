@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.24.0
+
+### Minor Changes
+
+- 67d2aeb: Fixes cmd to be undefined or string array
+
 ## 1.23.0
 
 ### Minor Changes
