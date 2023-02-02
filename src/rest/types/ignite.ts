@@ -390,9 +390,14 @@ export interface Build {
 	method: BuildMethod;
 
 	/**
+	 * Timestamp of when the build was created/queued
+	 */
+	created_at?: Timestamp;
+
+	/**
 	 * Timestamp of when the build has started
 	 */
-	started_at: Timestamp;
+	started_at: Timestamp | null;
 
 	/**
 	 * Timestamp of when the build has finished
