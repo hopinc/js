@@ -358,7 +358,10 @@ export const ignite = sdk(client => {
 				});
 			},
 
-            async update(deploymentId: Id<'deployment'>, config: Partial<DeploymentConfig>) {
+			async update(
+				deploymentId: Id<'deployment'>,
+				config: Partial<DeploymentConfig>,
+			) {
 				const {deployment} = await client.patch(
 					'/v1/ignite/deployments/:deployment_id',
 					config,
@@ -425,7 +428,7 @@ export const ignite = sdk(client => {
 
 			async patchMetadata(
 				deploymentId: Id<'deployment'>,
-				metadata: DeploymentMetaData,
+				metadata: Partial<DeploymentMetaData>,
 			) {
 				const {deployment} = await client.patch(
 					'/v1/ignite/deployments/:deployment_id/metadata',
