@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.26.2
+
+### Patch Changes
+
+- f9985bf: allow partial metadata
+
 ## 1.26.1
 
 ### Patch Changes
