@@ -276,6 +276,9 @@ export interface BuildSettings {
 
 export interface DeploymentMetaData {
 	container_port_mappings: Record<Id<'container'>, string[]>;
+	ignored_boarding?: boolean;
+	created_from_preset?: string;
+	created_first_gateway?: boolean;
 }
 
 export interface BuildMetaData {
@@ -905,6 +908,12 @@ export type IgniteEndpoints =
 			'/v1/ignite/deployments/:deployment_id',
 			{deployment: Deployment},
 			DeploymentConfig
+	  >
+	| Endpoint<
+			'PATCH',
+			'/v1/ignite/deployments/:deployment_id/metadata',
+			{deployment: Deployment},
+			Partial<DeploymentMetaData>
 	  >
 	| Endpoint<
 			'POST',

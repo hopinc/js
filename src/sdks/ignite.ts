@@ -3,6 +3,7 @@ import {API, assertId, Id} from '../rest/index.js';
 import {
 	Deployment,
 	DeploymentConfig,
+	DeploymentMetaData,
 	Gateway,
 	GatewayType,
 	RuntimeType,
@@ -42,18 +43,22 @@ export const ignite = sdk(client => {
 			return igniteSDK.containers.create(this.id);
 		},
 
-		createGateway(config: {
-			type: API.Ignite.GatewayType.EXTERNAL;
-			protocol: API.Ignite.Gateway['protocol'];
-			name: string;
-			targetPort: number;
-		} | {
-			type: API.Ignite.GatewayType.INTERNAL;
-			protocol: API.Ignite.Gateway['protocol'];
-			name: string;
-			targetPort: number;
-			internalDomain: string;
-		}) {
+		createGateway(
+			config:
+				| {
+						type: API.Ignite.GatewayType.EXTERNAL;
+						protocol: API.Ignite.Gateway['protocol'];
+						name: string;
+						targetPort: number;
+				  }
+				| {
+						type: API.Ignite.GatewayType.INTERNAL;
+						protocol: API.Ignite.Gateway['protocol'];
+						name: string;
+						targetPort: number;
+						internalDomain: string;
+				  },
+		) {
 			return igniteSDK.gateways.create(this.id, config);
 		},
 
@@ -222,27 +227,32 @@ export const ignite = sdk(client => {
 		 */
 		async create(
 			deployment: Deployment | Deployment['id'],
-			config: {
-				type: GatewayType.EXTERNAL;
-				protocol: Gateway['protocol'];
-				targetPort: number;
-				name: string;
-			} | {
-				type: GatewayType.INTERNAL;
-				protocol: Gateway['protocol'];
-				targetPort: number;
-				name: string;
-				internalDomain: string;
-			},
+			config:
+				| {
+						type: GatewayType.EXTERNAL;
+						protocol: Gateway['protocol'];
+						targetPort: number;
+						name: string;
+				  }
+				| {
+						type: GatewayType.INTERNAL;
+						protocol: Gateway['protocol'];
+						targetPort: number;
+						name: string;
+						internalDomain: string;
+				  },
 		) {
 			const deploymentId =
 				typeof deployment === 'object' ? deployment.id : deployment;
 
-			const body = config.type === GatewayType.EXTERNAL ? (
-				{...config, target_port: config.targetPort}
-			) : (
-				{...config, target_port: config.targetPort, internal_domain: config.internalDomain}
-			);
+			const body =
+				config.type === GatewayType.EXTERNAL
+					? {...config, target_port: config.targetPort}
+					: {
+							...config,
+							target_port: config.targetPort,
+							internal_domain: config.internalDomain,
+					  };
 
 			const {gateway} = await client.post(
 				'/v1/ignite/deployments/:deployment_id/gateways',
@@ -411,6 +421,19 @@ export const ignite = sdk(client => {
 					undefined,
 					{deployment_id: deployment},
 				);
+			},
+
+			async patchMetadata(
+				deploymentId: Id<'deployment'>,
+				metadata: DeploymentMetaData,
+			) {
+				const {deployment} = await client.patch(
+					'/v1/ignite/deployments/:deployment_id/metadata',
+					metadata,
+					{deployment_id: deploymentId},
+				);
+
+				return deployment;
 			},
 
 			/**
