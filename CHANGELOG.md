@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.26.1
+
+### Patch Changes
+
+- e118440: patch deployment metadata
+
 ## 1.26.0
 
 ### Minor Changes
