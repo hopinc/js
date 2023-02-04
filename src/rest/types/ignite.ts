@@ -217,7 +217,7 @@ export interface Deployment {
 	/**
 	 * The config for this deployment
 	 */
-	config: Omit<DeploymentConfig, 'volume' | 'name'>;
+	config: Omit<DeploymentConfig, 'name'>;
 
 	/**
 	 * Current active rollout for deployment
@@ -393,9 +393,14 @@ export interface Build {
 	method: BuildMethod;
 
 	/**
+	 * Timestamp of when the build was created/queued
+	 */
+	created_at?: Timestamp;
+
+	/**
 	 * Timestamp of when the build has started
 	 */
-	started_at: Timestamp;
+	started_at: Timestamp | null;
 
 	/**
 	 * Timestamp of when the build has finished
@@ -540,7 +545,7 @@ export interface DeploymentConfig {
 	/**
 	 * Entrypoint command for the image
 	 */
-	cmd: string[];
+	cmd?: string[];
 
 	/**
 	 * The docker image config for this deployment
@@ -907,7 +912,7 @@ export type IgniteEndpoints =
 			'PATCH',
 			'/v1/ignite/deployments/:deployment_id',
 			{deployment: Deployment},
-			DeploymentConfig
+			Partial<DeploymentConfig>
 	  >
 	| Endpoint<
 			'PATCH',

@@ -1,5 +1,36 @@
 # @onehop/js
 
+## 1.26.0
+
+### Minor Changes
+
+- c82036c: add created_at and change started_at for build types
+
+## 1.25.0
+
+### Minor Changes
+
+- 1530a06: Adds BuildState, DomainState, and BuildMethod to be exported
+
+## 1.24.0
+
+### Minor Changes
+
+- 67d2aeb: Fixes cmd to be undefined or string array
+
+## 1.23.0
+
+### Minor Changes
+
+- b7b1f90: Fix deployment config type
+
+## 1.22.7
+
+### Patch Changes
+
+- 3eb75f5: validation_failure is nullable, but not optional
+- 8238fa5: updates to build environment
+
 ## 1.22.6
 
 ### Patch Changes
