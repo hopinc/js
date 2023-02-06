@@ -462,6 +462,11 @@ export type HealthCheck = {
 	 * Maximum number of consecutive failures before the container is considered unhealthy
 	 */
 	max_retries: number;
+
+	/**
+	 * When the health check was created
+	 */
+	created_at: Timestamp;
 };
 
 export type DeploymentRollout = {
