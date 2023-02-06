@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.27.0
+
+### Minor Changes
+
+- 2a88749: Adds created_at to health check
+
 ## 1.26.2
 
 ### Patch Changes
