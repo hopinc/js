@@ -52,7 +52,7 @@
 		"@types/node": "18.11.18",
 		"dotenv": "16.0.3",
 		"glob": "8.1.0",
-		"prettier": "2.8.3",
+		"prettier": "2.8.4",
 		"tsup": "6.5.0",
 		"tsx": "3.12.2",
 		"typedoc": "0.23.24",
