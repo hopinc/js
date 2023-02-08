@@ -522,6 +522,23 @@ export type DeploymentRollout = {
 
 export type CreateDeploymentConfig = MakeOptional<DeploymentConfig, 'cmd'>;
 
+/**
+ * The strategy for scaling multiple containers.
+ * @warning This property is not yet fully complete
+ */
+export enum ContainerStrategy {
+	/**
+	 * Add containers yourself with the API or Console
+	 */
+	MANUAL = 'manual',
+
+	/**
+	 * Have Hop automatically scale containers based on load
+	 * @warning This is incomplete
+	 */
+	// AUTOSCALE = 'autoscale',
+}
+
 export interface DeploymentConfig {
 	/**
 	 * The name of the deployment
@@ -530,12 +547,8 @@ export interface DeploymentConfig {
 
 	/**
 	 * The strategy for scaling multiple containers.
-	 *
-	 * Manual = add containers yourself
-	 *
-	 * @warning This property is not yet fully complete
 	 */
-	container_strategy: 'manual';
+	container_strategy: ContainerStrategy;
 
 	/**
 	 * The type of this deployment
