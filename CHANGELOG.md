@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.27.1
+
+### Patch Changes
+
+- debaf7f: Add ignite zod schemas
+
 ## 1.27.0
 
 ### Minor Changes
