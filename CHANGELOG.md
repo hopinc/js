@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.28.0
+
+### Minor Changes
+
+- b785f89: Adds type SelfUser for references to your authorized user. + adds missing types to that specified user (mfa_enabled, admin, webauthn, and totp)
+
 ## 1.27.1
 
 ### Patch Changes
