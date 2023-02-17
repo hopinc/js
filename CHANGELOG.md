@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.28.1
+
+### Patch Changes
+
+- e2f461e: Add volume max size in bytes (500gb)
+
 ## 1.28.0
 
 ### Minor Changes
