@@ -18,7 +18,9 @@ export const deploymentMetaDataSchema = z.object({
 
 const UNIX_DIR_REGEX = /^\/([a-zA-Z0-9_\-]+\/)*([a-zA-Z0-9_\-]+)$/g;
 
-const MIN_VOLUME_SIZE_BYTES = 1073741824; // 1gb
+const MIN_VOLUME_SIZE_BYTES = 1024 * 1024 * 1024;
+const MAX_VOLUME_SIZE_BYTES = 500 * 1024 * 1024 * 1024;
+
 const MIN_RAM_SIZE_BYTES = 134217728;
 
 export const volumeFormatSchema = z.nativeEnum(VolumeFormat);
@@ -39,7 +41,7 @@ export const volumeSchema = z
 				try {
 					const size = parseSize(v);
 
-					return size >= MIN_VOLUME_SIZE_BYTES;
+					return size >= MIN_VOLUME_SIZE_BYTES && size <= MAX_VOLUME_SIZE_BYTES;
 				} catch (err) {
 					return false;
 				}
