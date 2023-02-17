@@ -576,7 +576,7 @@ __metadata:
     dotenv: 16.0.3
     glob: 8.1.0
     prettier: 2.8.4
-    tsup: 6.6.0
+    tsup: 6.6.3
     tsx: 3.12.3
     typedoc: 0.23.24
     typedoc-plugin-markdown: 3.14.0
@@ -3902,9 +3902,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsup@npm:6.6.0":
-  version: 6.6.0
-  resolution: "tsup@npm:6.6.0"
+"tsup@npm:6.6.3":
+  version: 6.6.3
+  resolution: "tsup@npm:6.6.3"
   dependencies:
     bundle-require: ^4.0.0
     cac: ^6.7.12
@@ -3934,7 +3934,7 @@ __metadata:
   bin:
     tsup: dist/cli-default.js
     tsup-node: dist/cli-node.js
-  checksum: 202ed7a6b607190f47dd7503994e8e62ce672a35ff3ecaf4c1dc4c8a9590b99f91ce8c1303e28781b5a089450140492729a41d93874e87936aed94e205155551
+  checksum: 4fa45fd7493971e5bf1f142a2590eabc1de536dc251d4b90bfce7dfaf1d7f40e19ef04ee541f9d2ab6a55841b72d265b7ddd3ea70c6371d746b5aed782f08094
   languageName: node
   linkType: hard
 
