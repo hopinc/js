@@ -360,6 +360,7 @@ export interface NixPlan {
 /**
  * Build environment contians information about the
  * language and build commands used to build the deployment
+ * @public
  */
 export interface BuildEnvironment {
 	type: BuildEnvironmentType;
@@ -368,12 +369,17 @@ export interface BuildEnvironment {
 
 /**
  * Why the uploaded build content was rejected
+ * @public
  */
 export interface ValidationFailure {
 	reason: string;
 	help_link: string | null;
 }
 
+/**
+ * A build is a single build of a deployment
+ * @public
+ */
 export interface Build {
 	/**
 	 * ID of the build
@@ -431,6 +437,10 @@ export interface Build {
 	validation_failure: ValidationFailure | null;
 }
 
+/**
+ * Information about a deployment's health check configuration
+ * @public
+ */
 export type HealthCheck = {
 	/**
 	 * The ID of health check
@@ -441,7 +451,15 @@ export type HealthCheck = {
 	 * Protocol for health check
 	 */
 	protocol: 'http';
+
+	/**
+	 * Path for health check
+	 */
 	path: string;
+
+	/**
+	 * Port for health check
+	 */
 	port: number;
 
 	/**
@@ -474,6 +492,7 @@ export type HealthCheck = {
 
 /**
  * A deployment rollout
+ * @public
  */
 export type DeploymentRollout = {
 	/**
@@ -526,11 +545,16 @@ export type DeploymentRollout = {
 	acknowledged: boolean;
 };
 
+/**
+ * Data required to create a deployment
+ * @internal
+ */
 export type CreateDeploymentConfig = MakeOptional<DeploymentConfig, 'cmd'>;
 
 /**
  * The strategy for scaling multiple containers.
  * @warning This property is not yet fully complete
+ * @public
  */
 export enum ContainerStrategy {
 	/**
@@ -545,6 +569,10 @@ export enum ContainerStrategy {
 	// AUTOSCALE = 'autoscale',
 }
 
+/**
+ * A deployment's config
+ * @public
+ */
 export interface DeploymentConfig {
 	/**
 	 * The name of the deployment
@@ -606,6 +634,7 @@ export interface DeploymentConfig {
 
 /**
  * Docker image config
+ * @public
  */
 export interface Image {
 	/**
@@ -627,6 +656,7 @@ export interface Image {
 
 /**
  * Docker image registry authorization
+ * @public
  */
 export interface Auth {
 	username: string;
@@ -635,6 +665,7 @@ export interface Auth {
 
 /**
  * GitHub repo type sent from API (NOT USED IN IMAGES)
+ * @public
  */
 export interface GHRepo {
 	id: number;
@@ -646,6 +677,7 @@ export interface GHRepo {
 
 /**
  * GitHub repo partial used for images
+ * @public
  */
 export interface ImageGHRepo {
 	repo_id: number;
@@ -655,6 +687,7 @@ export interface ImageGHRepo {
 
 /**
  * Resources allocated to a deployment
+ * @public
  */
 export interface Resources {
 	/**
@@ -676,6 +709,7 @@ export interface Resources {
 
 /**
  * Virtual GPU config
+ * @public
  */
 export interface Vgpu {
 	/**
@@ -691,6 +725,7 @@ export interface Vgpu {
 
 /**
  * Logs from a container
+ * @public
  */
 export interface ContainerLog {
 	/**
@@ -717,6 +752,7 @@ export interface ContainerLog {
 
 /**
  * Types of build methods supported by Hop
+ * @public
  */
 export enum BuildMethod {
 	GITHUB = 'github',
@@ -725,6 +761,7 @@ export enum BuildMethod {
 
 /**
  * Types of gateways supported by Hop
+ * @public
  */
 export enum GatewayType {
 	/**
@@ -740,6 +777,7 @@ export enum GatewayType {
 
 /**
  * Gateways are used to connect services to the internet or a private network
+ * @public
  */
 export interface Gateway {
 	/**
@@ -800,12 +838,20 @@ export interface Gateway {
 	domains: Domain[];
 }
 
+/**
+ * An enum of states a domain can be in
+ * @public
+ */
 export enum DomainState {
 	PENDING = 'pending',
 	VALID_CNAME = 'valid_cname',
 	SSL_ACTIVE = 'ssl_active',
 }
 
+/**
+ * An enum of states a build can be in
+ * @public
+ */
 export enum BuildState {
 	VALIDATING = 'validating',
 	PENDING = 'pending',
@@ -815,6 +861,10 @@ export enum BuildState {
 	VALIDATION_FAILED = 'validation_failed',
 }
 
+/**
+ * A domain is a DNS record that points to a gateway
+ * @public
+ */
 export interface Domain {
 	/**
 	 * The ID of the domain
@@ -842,11 +892,19 @@ export interface Domain {
 	redirect: DomainRedirect | null;
 }
 
+/**
+ * A redirect setup for a domain
+ * @public
+ */
 export interface DomainRedirect {
 	url: string;
 	status_code: 301 | 302 | 307 | 308;
 }
 
+/**
+ * All endpoints for the Ignite API
+ * @public
+ */
 export type IgniteEndpoints =
 	| Endpoint<'GET', '/v1/ignite/deployments', {deployments: Deployment[]}>
 	| Endpoint<

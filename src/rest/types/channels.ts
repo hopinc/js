@@ -76,6 +76,10 @@ export interface ChannelToken {
 	is_online: boolean;
 }
 
+/**
+ * Endpoints for channels
+ * @public
+ */
 export type ChannelEndpoints =
 	| Endpoint<
 			'POST',

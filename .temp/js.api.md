@@ -423,7 +423,7 @@ export interface APIClientOptions {
     readonly baseUrl: string;
 }
 
-// @public
+// @public (undocumented)
 export type APIResponse<T> = SuccessfulAPIResponse<T> | ErroredAPIResponse;
 
 // @public
@@ -780,7 +780,7 @@ export enum DomainState {
 // @public
 export type Empty = void;
 
-// @public
+// @public (undocumented)
 export type Endpoint<M extends Method, Path extends string, Res, Body = undefined> = {
     method: M;
     path: Path;
@@ -788,10 +788,10 @@ export type Endpoint<M extends Method, Path extends string, Res, Body = undefine
     body: Body;
 };
 
-// @public
+// @public (undocumented)
 export type Endpoints = IgniteEndpoints | RegistryEndpoints | UserEndpoints | ProjectsEndpoints | PipeEndpoints | ChannelEndpoints;
 
-// @public
+// @public (undocumented)
 export type ErroredAPIResponse = {
     success: false;
     error: {
@@ -1442,7 +1442,7 @@ export function parseSize(size: string): number;
 // @public
 export type PartialAPIOptions = Partial<Omit<APIClientOptions, 'authentication'>> & Pick<APIClientOptions, 'authentication'>;
 
-// @public
+// @public (undocumented)
 export interface PAT {
     created_at: Timestamp;
     id: Id<'pat'>;
@@ -1845,7 +1845,7 @@ export interface SelfUser extends User {
 // @public
 export type State = Record<string, unknown>;
 
-// @public
+// @public (undocumented)
 export type SuccessfulAPIResponse<T> = {
     success: true;
     data: T;
@@ -1873,7 +1873,7 @@ export interface User {
     username: string;
 }
 
-// @public
+// @public (undocumented)
 export type UserEndpoints = Endpoint<'GET', '/v1/users/@me', {
     projects: Project[];
     user: SelfUser;

@@ -4,6 +4,7 @@ import type {MemberRole, Project} from './projects.ts';
 
 /**
  * A user object
+ * @public
  */
 export interface User {
 	/**
@@ -29,6 +30,7 @@ export interface User {
 
 /**
  * Self User Object
+ * @public
  */
 export interface SelfUser extends User {
 	/**
@@ -57,6 +59,10 @@ export interface SelfUser extends User {
 	admin: boolean;
 }
 
+/**
+ * A personal access token
+ * @public
+ */
 export interface PAT {
 	/**
 	 * The ID of the pat
@@ -81,6 +87,10 @@ export interface PAT {
 	created_at: Timestamp;
 }
 
+/**
+ * All user endpoints
+ * @public
+ */
 export type UserEndpoints =
 	| Endpoint<
 			'GET',

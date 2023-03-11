@@ -13,12 +13,12 @@
 
 	"apiReport": {
 		"enabled": true,
-		"reportFolder": "<projectFolder>/.temp"
+		"reportFolder": "<projectFolder>/temp"
 	},
 
 	"docModel": {
 		"enabled": true,
-		"apiJsonFilePath": "<projectFolder>/.temp/js.api.json"
+		"apiJsonFilePath": "<projectFolder>/temp/js.api.json"
 	},
 
 	"dtsRollup": {

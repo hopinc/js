@@ -43,12 +43,13 @@
 		"build": "rm -rf dist && tsup",
 		"bench": "HOP_DEBUG=true tsx _workbench.ts",
 		"release": "yarn build && yarn changeset publish",
-		"docs": "api-extractor run --local --verbose && api-documenter markdown --input-folder ./.temp --output-folder ./docs",
+		"api": "yarn build && api-extractor run --local --verbose",
 		"fullbuild": "yarn build && yarn docs",
 		"test": "tsx tests/index.ts"
 	},
 	"devDependencies": {
 		"@changesets/cli": "2.26.0",
+		"@microsoft/api-extractor": "^7.34.4",
 		"@types/glob": "8.1.0",
 		"@types/node": "18.15.0",
 		"dotenv": "16.0.3",
