@@ -3,7 +3,7 @@ import {API, Id, assertId} from '../rest/index.ts';
 import {
 	Deployment,
 	DeploymentConfig,
-	DeploymentMetaData,
+	DeploymentMetadata,
 	Gateway,
 	GatewayType,
 	RuntimeType,
@@ -479,7 +479,7 @@ export const ignite = sdk(client => {
 
 			async patchMetadata(
 				deploymentId: Id<'deployment'>,
-				metadata: Partial<DeploymentMetaData>,
+				metadata: Partial<DeploymentMetadata>,
 			) {
 				const {deployment} = await client.patch(
 					'/v1/ignite/deployments/:deployment_id/metadata',

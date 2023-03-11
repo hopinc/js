@@ -257,6 +257,8 @@ export class APIClient {
         path: Path;
         method: 'PATCH';
     }>)["res"]>;
+    // Warning: (ae-incompatible-release-tags) The symbol "post" is marked as @public, but its signature references "CreateDeploymentConfig" which is marked as @internal
+    //
     // (undocumented)
     post<Path extends Extract<Endpoints, {
         method: 'POST';
@@ -452,7 +454,7 @@ export const BROAD_PERMISSIONS_MAP: {
     MANAGE_BILLING: bigint;
 };
 
-// @public (undocumented)
+// @public
 export interface Build {
     created_at?: Timestamp;
     deployment_id: Id<'deployment'>;
@@ -511,7 +513,7 @@ export interface BuildSettings {
     root_directory?: string;
 }
 
-// @public (undocumented)
+// @public
 export enum BuildState {
     // (undocumented)
     CANCELLED = "cancelled",
@@ -671,7 +673,9 @@ export enum ContainerStrategy {
     MANUAL = "manual"
 }
 
-// @public (undocumented)
+// Warning: (ae-internal-missing-underscore) The name "CreateDeploymentConfig" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal
 export type CreateDeploymentConfig = MakeOptional<DeploymentConfig, 'cmd'>;
 
 // @public
@@ -709,7 +713,7 @@ export interface Deployment {
     target_container_count: number;
 }
 
-// @public (undocumented)
+// @public
 export interface DeploymentConfig {
     cmd?: string[];
     container_strategy: ContainerStrategy;
@@ -750,7 +754,7 @@ export type DeploymentRollout = {
     acknowledged: boolean;
 };
 
-// @public (undocumented)
+// @public
 export interface Domain {
     created_at: Timestamp;
     domain: string;
@@ -759,7 +763,7 @@ export interface Domain {
     state: DomainState;
 }
 
-// @public (undocumented)
+// @public
 export interface DomainRedirect {
     // (undocumented)
     status_code: 301 | 302 | 307 | 308;
@@ -767,7 +771,7 @@ export interface DomainRedirect {
     url: string;
 }
 
-// @public (undocumented)
+// @public
 export enum DomainState {
     // (undocumented)
     PENDING = "pending",
@@ -855,7 +859,7 @@ export interface GHRepo {
 // @public
 export function gigabytes(size: number): ByteSizeString;
 
-// @public (undocumented)
+// @public
 export type HealthCheck = {
     id: Id<'health_check'>;
     protocol: 'http';
@@ -1319,7 +1323,9 @@ export namespace Ignite {
     };
 }
 
-// @public (undocumented)
+// Warning: (ae-incompatible-release-tags) The symbol "IgniteEndpoints" is marked as @public, but its signature references "CreateDeploymentConfig" which is marked as @internal
+//
+// @public
 export type IgniteEndpoints = Endpoint<'GET', '/v1/ignite/deployments', {
     deployments: Deployment[];
 }> | Endpoint<'GET', '/v1/ignite/deployments/:deployment_id/containers', {
@@ -1946,6 +1952,8 @@ export enum VolumeFormat {
 
 // Warnings were encountered during analysis:
 //
+// dist/index.d.ts:527:17 - (ae-incompatible-release-tags) The symbol "__call" is marked as @public, but its signature references "CreateDeploymentConfig" which is marked as @internal
+// dist/index.d.ts:548:17 - (ae-incompatible-release-tags) The symbol "__call" is marked as @public, but its signature references "CreateDeploymentConfig" which is marked as @internal
 // dist/index.d.ts:759:13 - (ae-forgotten-export) The symbol "SetStateAction" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)

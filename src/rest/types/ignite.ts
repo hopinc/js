@@ -9,12 +9,17 @@ import type {
 } from '../../util/types.ts';
 import type {Endpoint} from '../endpoints.ts';
 
+/**
+ * All regions that Hop operates in
+ * @public
+ */
 export enum Regions {
 	US_EAST_1 = 'us-east-1',
 }
 
 /**
  * Runtime types are used to describe the type of a deployment or container
+ * @public
  */
 export enum RuntimeType {
 	/**
@@ -34,7 +39,8 @@ export enum RuntimeType {
 }
 
 /**
- * Container state is relatively self-explanatory. It describes what the container is currently doing.
+ * An enum of states a container can be in
+ * @public
  */
 export enum ContainerState {
 	/**
@@ -70,6 +76,7 @@ export enum ContainerState {
 
 /**
  * Rollout state for deployments
+ * @public
  */
 export enum RolloutState {
 	PENDING = 'pending',
@@ -79,6 +86,7 @@ export enum RolloutState {
 
 /**
  * Restart policy for deployments
+ * @public
  */
 export enum RestartPolicy {
 	NEVER = 'never',
@@ -88,16 +96,25 @@ export enum RestartPolicy {
 
 /**
  * Types for supported GPU
+ * @public
  */
 export enum VgpuType {
 	A400 = 'a400',
 }
 
+/**
+ * Formats of volumes
+ * @public
+ */
 export enum VolumeFormat {
 	EXT4 = 'ext4',
 	XFS = 'xfs',
 }
 
+/**
+ * A definition of a volume
+ * @public
+ */
 export interface VolumeDefinition {
 	/**
 	 * The format of the volume
@@ -115,6 +132,10 @@ export interface VolumeDefinition {
 	mount_path: string;
 }
 
+/**
+ * The definition of a container
+ * @public
+ */
 export interface Container {
 	/**
 	 * The ID of the container
@@ -193,6 +214,10 @@ export interface Container {
 	state: ContainerState;
 }
 
+/**
+ * A definition of a deployment
+ * @public
+ */
 export interface Deployment {
 	/**
 	 * The ID of the deployment
@@ -254,7 +279,7 @@ export interface Deployment {
 	/**
 	 * Metadata for deployment
 	 */
-	metadata: DeploymentMetaData | null;
+	metadata: DeploymentMetadata | null;
 
 	/**
 	 * Build cache settings for deployment
@@ -267,6 +292,10 @@ export interface Deployment {
 	build_settings?: BuildSettings;
 }
 
+/**
+ * A definition of a build's settings
+ * @public
+ */
 export interface BuildSettings {
 	/**
 	 * Root directory for build
@@ -274,7 +303,11 @@ export interface BuildSettings {
 	root_directory?: string;
 }
 
-export interface DeploymentMetaData {
+/**
+ * Deployment metadata
+ * @public
+ */
+export interface DeploymentMetadata {
 	container_port_mappings: Record<Id<'container'>, string[]>;
 	ignored_boarding?: boolean;
 	created_from_preset?: string;
@@ -282,9 +315,16 @@ export interface DeploymentMetaData {
 }
 
 /**
- * Metadata attached to a build
+ * Deployment metadata
+ * @deprecated Use DeploymentMetadata. This will be removed in a future release
  */
-export interface BuildMetaData {
+export type DeploymentMetaData = DeploymentMetadata;
+
+/**
+ * Metadata attached to a build
+ * @public
+ */
+export interface BuildMetadata {
 	/**
 	 * Account type of repo owner
 	 */
@@ -337,7 +377,14 @@ export interface BuildMetaData {
 }
 
 /**
+ * Metadata attached to a build
+ * @deprecated Use BuildMetadata. This will be removed in a future release
+ */
+export type BuildMetaData = BuildMetadata;
+
+/**
  * The inferred environment type of a build
+ * @public
  */
 export enum BuildEnvironmentType {
 	NIXPACKS = 'nixpacks',
@@ -346,6 +393,7 @@ export enum BuildEnvironmentType {
 
 /**
  * The validated nixpacks plan for this build
+ * @public
  */
 export interface NixPlan {
 	language: string | null;
@@ -394,7 +442,7 @@ export interface Build {
 	/**
 	 * Metadata pertaining to build (mostly for GitHub)
 	 */
-	metadata: BuildMetaData | null;
+	metadata: BuildMetadata | null;
 
 	/**
 	 * Build method (GitHub or CLI)
@@ -1000,7 +1048,7 @@ export type IgniteEndpoints =
 			'PATCH',
 			'/v1/ignite/deployments/:deployment_id/metadata',
 			{deployment: Deployment},
-			Partial<DeploymentMetaData>
+			Partial<DeploymentMetadata>
 	  >
 	| Endpoint<
 			'POST',
