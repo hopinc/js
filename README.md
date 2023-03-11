@@ -4,7 +4,7 @@ Hop's JavaScript library. Requires Node.js 12+
 
 ## Usage
 
-Create a [project token](https://docs.hop.io/reference/project_tokens) or personal access token.
+Create a [project token](https://docs.hop.io/reference/project-tokens) or personal access token.
 
 ```ts
 import {Hop} from '@onehop/js';

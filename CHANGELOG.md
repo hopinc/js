@@ -1,5 +1,128 @@
 # @onehop/js
 
+## 1.28.1
+
+### Patch Changes
+
+- e2f461e: Add volume max size in bytes (500gb)
+
+## 1.28.0
+
+### Minor Changes
+
+- b785f89: Adds type SelfUser for references to your authorized user. + adds missing types to that specified user (mfa_enabled, admin, webauthn, and totp)
+
+## 1.27.1
+
+### Patch Changes
+
+- debaf7f: Add ignite zod schemas
+
+## 1.27.0
+
+### Minor Changes
+
+- 2a88749: Adds created_at to health check
+
+## 1.26.2
+
+### Patch Changes
+
+- f9985bf: allow partial metadata
+
+## 1.26.1
+
+### Patch Changes
+
+- e118440: patch deployment metadata
+
+## 1.26.0
+
+### Minor Changes
+
+- c82036c: add created_at and change started_at for build types
+
+## 1.25.0
+
+### Minor Changes
+
+- 1530a06: Adds BuildState, DomainState, and BuildMethod to be exported
+
+## 1.24.0
+
+### Minor Changes
+
+- 67d2aeb: Fixes cmd to be undefined or string array
+
+## 1.23.0
+
+### Minor Changes
+
+- b7b1f90: Fix deployment config type
+
+## 1.22.7
+
+### Patch Changes
+
+- 3eb75f5: validation_failure is nullable, but not optional
+- 8238fa5: updates to build environment
+
+## 1.22.6
+
+### Patch Changes
+
+- 1ca6d81: build validation fields
+- b2d01d0: optional unit in preset form range type
+
+## 1.22.5
+
+### Patch Changes
+
+- 9e7ccb4: export buildenv
+- 9323685: fix type export
+
+## 1.22.4
+
+### Patch Changes
+
+- 21fa991: add range input type to preset form schema
+
+## 1.22.3
+
+### Patch Changes
+
+- bf4e706: Add API.Ignite.BuildEnvironment type
+
+## 1.22.2
+
+### Patch Changes
+
+- 6c7c726: add optional description to preset form schema fields
+
+## 1.22.1
+
+### Patch Changes
+
+- 43dff2b: Add max_length and validator to preset form schema input field
+
+## 1.22.0
+
+### Minor Changes
+
+- 2e8a02b: PR changes from https://github.com/tomheaton (thank you!)
+
+## 1.21.1
+
+### Patch Changes
+
+- 2dcd012: Added preset form schema (to ask questions before a preset is deployed, e.g. postgres username)
+
+## 1.21.0
+
+### Minor Changes
+
+- 0d8804d: Add session ID to ID Prefixes
+
 ## 1.20.1
 
 ### Patch Changes

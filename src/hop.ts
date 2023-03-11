@@ -1,4 +1,8 @@
-import {APIAuthentication, APIClient, APIClientOptions} from './rest/client.ts';
+import {
+	type APIAuthentication,
+	APIClient,
+	type APIClientOptions,
+} from './rest/client.ts';
 import {
 	channels,
 	ignite,

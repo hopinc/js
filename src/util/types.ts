@@ -139,6 +139,10 @@ export const ID_PREFIXES = [
 		prefix: 'health_check',
 		description: 'Health check ID for health checks.',
 	},
+	{
+		prefix: 'session',
+		description: 'Session ID for sessions on your account.',
+	},
 ] as const;
 
 /**

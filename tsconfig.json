@@ -1,17 +1,17 @@
 {
 	"compilerOptions": {
-		"target": "ES2020",
+		"target": "ESNext",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"module": "NodeNext",
+		"module": "ESNext",
 		"moduleResolution": "bundler",
 		"resolveJsonModule": true,
-		"isolatedModules": true,
 		"jsx": "react",
 		"strict": true,
+		"noEmit": true,
 		"useUnknownInCatchVariables": true,
 		"noImplicitOverride": true,
 		"noFallthroughCasesInSwitch": true,
@@ -23,7 +23,7 @@
 		"declaration": true,
 		"declarationMap": true,
 		"exactOptionalPropertyTypes": true,
-		"importsNotUsedAsValues": "error"
+		"verbatimModuleSyntax": true
 	},
 	"exclude": ["node_modules", "dist"],
 	"include": ["./**/*.ts", "./**/*.tsx"]

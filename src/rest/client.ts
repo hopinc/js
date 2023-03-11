@@ -3,7 +3,7 @@ import {fetch, Headers, Request} from '../util/fetch.ts';
 import type {ExtractRouteParams} from '../util/index.ts';
 import {createURLBuilder} from '../util/urls.ts';
 import type {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.ts';
-import {getIdPrefix, Id, Method} from './types/index.ts';
+import {getIdPrefix, type Id, type Method} from './types/index.ts';
 
 /**
  * A valid ID prefix supported by the Hop API for authetication

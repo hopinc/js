@@ -1,6 +1,7 @@
 {
 	"name": "@onehop/js",
-	"version": "1.20.1",
+	"version": "1.28.1",
+	"type": "module",
 	"main": "./dist/index.cjs",
 	"types": "./dist/index.d.ts",
 	"module": "./dist/index.js",
@@ -11,8 +12,8 @@
 				"require": "./dist/node/index.cjs",
 				"types": "./dist/index.d.ts"
 			},
-			"browser": "./dist/index.js",
 			"import": "./dist/index.js",
+			"browser": "./dist/index.js",
 			"require": "./dist/index.cjs",
 			"types": "./dist/index.d.ts"
 		},
@@ -22,13 +23,12 @@
 			"types": "./dist/utils/zod/index.d.ts"
 		}
 	},
-	"type": "module",
 	"repository": "https://github.com/hopinc/js.git",
 	"homepage": "https://hop.io",
 	"author": "Hop <developers@hop.io>",
 	"license": "MIT",
 	"sideEffects": false,
-	"packageManager": "yarn@3.2.3",
+	"packageManager": "yarn@3.4.1",
 	"publishConfig": {
 		"access": "public"
 	},
@@ -49,16 +49,14 @@
 	},
 	"devDependencies": {
 		"@changesets/cli": "2.26.0",
-		"@microsoft/api-documenter": "^7.19.27",
-		"@microsoft/api-extractor": "^7.33.7",
-		"@types/glob": "8.0.0",
-		"@types/node": "18.11.18",
+		"@types/glob": "8.1.0",
+		"@types/node": "18.15.0",
 		"dotenv": "16.0.3",
-		"glob": "8.0.3",
-		"prettier": "2.8.2",
-		"tsup": "6.5.0",
-		"tsx": "3.12.2",
-		"typedoc": "0.23.24",
+		"glob": "9.2.1",
+		"prettier": "2.8.4",
+		"tsup": "6.6.3",
+		"tsx": "3.12.3",
+		"typedoc": "0.23.26",
 		"typedoc-plugin-markdown": "3.14.0",
 		"typedoc-plugin-missing-exports": "1.0.0",
 		"typescript": "next"
@@ -66,6 +64,6 @@
 	"dependencies": {
 		"@onehop/json-methods": "^1.2.0",
 		"cross-fetch": "^3.1.5",
-		"zod": "^3.20.2"
+		"zod": "^3.21.4"
 	}
 }

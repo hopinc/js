@@ -3,7 +3,7 @@ import type {Endpoint} from '../endpoints.ts';
 import type {MemberRole, Project} from './projects.ts';
 
 /**
- * A user objct
+ * A user object
  */
 export interface User {
 	/**
@@ -25,6 +25,36 @@ export interface User {
 	 * The email of the user
 	 */
 	email: string;
+}
+
+/**
+ * Self User Object
+ */
+export interface SelfUser extends User {
+	/**
+	 * If user has verified their email
+	 */
+	email_verified: boolean;
+
+	/**
+	 * If user has enabled totp authentication
+	 */
+	totp_enabled: boolean;
+
+	/**
+	 * If user has enabled webauthn authentication
+	 */
+	webauthn_enabled: boolean;
+
+	/**
+	 * If user has enabled mfa authentication
+	 */
+	mfa_enabled: boolean;
+
+	/**
+	 * If user is an admin
+	 */
+	admin: boolean;
 }
 
 export interface PAT {
@@ -57,7 +87,7 @@ export type UserEndpoints =
 			'/v1/users/@me',
 			{
 				projects: Project[];
-				user: User;
+				user: SelfUser;
 				project_member_role_map: Record<Id<'project'>, MemberRole>;
 				leap_token: string | null;
 			}

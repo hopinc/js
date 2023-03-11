@@ -217,7 +217,7 @@ export interface Deployment {
 	/**
 	 * The config for this deployment
 	 */
-	config: Omit<DeploymentConfig, 'volume' | 'name'>;
+	config: Omit<DeploymentConfig, 'name'>;
 
 	/**
 	 * Current active rollout for deployment
@@ -276,6 +276,9 @@ export interface BuildSettings {
 
 export interface DeploymentMetaData {
 	container_port_mappings: Record<Id<'container'>, string[]>;
+	ignored_boarding?: boolean;
+	created_from_preset?: string;
+	created_first_gateway?: boolean;
 }
 
 /**
@@ -334,8 +337,43 @@ export interface BuildMetaData {
 }
 
 /**
- * A build entity
+ * The inferred environment type of a build
  */
+export enum BuildEnvironmentType {
+	NIXPACKS = 'nixpacks',
+	DOCKERFILE = 'dockerfile',
+}
+
+/**
+ * The validated nixpacks plan for this build
+ */
+export interface NixPlan {
+	language: string | null;
+	pkgs: string[] | null;
+	cmds: {
+		build: string | null;
+		start: string | null;
+		install: string | null;
+	};
+}
+
+/**
+ * Build environment contians information about the
+ * language and build commands used to build the deployment
+ */
+export interface BuildEnvironment {
+	type: BuildEnvironmentType;
+	nix_plan?: NixPlan | null;
+}
+
+/**
+ * Why the uploaded build content was rejected
+ */
+export interface ValidationFailure {
+	reason: string;
+	help_link: string | null;
+}
+
 export interface Build {
 	/**
 	 * ID of the build
@@ -358,9 +396,14 @@ export interface Build {
 	method: BuildMethod;
 
 	/**
+	 * Timestamp of when the build was created/queued
+	 */
+	created_at?: Timestamp;
+
+	/**
 	 * Timestamp of when the build has started
 	 */
-	started_at: Timestamp;
+	started_at: Timestamp | null;
 
 	/**
 	 * Timestamp of when the build has finished
@@ -376,6 +419,16 @@ export interface Build {
 	 * State of the build
 	 */
 	state: BuildState;
+
+	/**
+	 * Environment for build
+	 */
+	environment: BuildEnvironment | null;
+
+	/**
+	 * Validation failure for build; present if build state is VALIDATION_FAILED
+	 */
+	validation_failure: ValidationFailure | null;
 }
 
 export type HealthCheck = {
@@ -412,6 +465,11 @@ export type HealthCheck = {
 	 * Maximum number of consecutive failures before the container is considered unhealthy
 	 */
 	max_retries: number;
+
+	/**
+	 * When the health check was created
+	 */
+	created_at: Timestamp;
 };
 
 /**
@@ -471,9 +529,23 @@ export type DeploymentRollout = {
 export type CreateDeploymentConfig = MakeOptional<DeploymentConfig, 'cmd'>;
 
 /**
- * A config for creating a deployment
+ * The strategy for scaling multiple containers.
+ * @warning This property is not yet fully complete
  */
-export type DeploymentConfig = {
+export enum ContainerStrategy {
+	/**
+	 * Add containers yourself with the API or Console
+	 */
+	MANUAL = 'manual',
+
+	/**
+	 * Have Hop automatically scale containers based on load
+	 * @warning This is incomplete
+	 */
+	// AUTOSCALE = 'autoscale',
+}
+
+export interface DeploymentConfig {
 	/**
 	 * The name of the deployment
 	 */
@@ -481,12 +553,8 @@ export type DeploymentConfig = {
 
 	/**
 	 * The strategy for scaling multiple containers.
-	 *
-	 * Manual = add containers yourself
-	 *
-	 * @alpha This property is not yet fully complete
 	 */
-	container_strategy: 'manual';
+	container_strategy: ContainerStrategy;
 
 	/**
 	 * The type of this deployment
@@ -501,7 +569,7 @@ export type DeploymentConfig = {
 	/**
 	 * Entrypoint command for the image
 	 */
-	cmd: string[];
+	cmd?: string[];
 
 	/**
 	 * The docker image config for this deployment
@@ -534,7 +602,7 @@ export type DeploymentConfig = {
 	 * Entrypoint for this deployment
 	 */
 	entrypoint?: string[];
-};
+}
 
 /**
  * Docker image config
@@ -739,10 +807,12 @@ export enum DomainState {
 }
 
 export enum BuildState {
+	VALIDATING = 'validating',
 	PENDING = 'pending',
 	FAILED = 'failed',
 	SUCCEEDED = 'succeeded',
 	CANCELLED = 'cancelled',
+	VALIDATION_FAILED = 'validation_failed',
 }
 
 export interface Domain {
@@ -867,6 +937,12 @@ export type IgniteEndpoints =
 			'/v1/ignite/deployments/:deployment_id',
 			{deployment: Deployment},
 			Partial<DeploymentConfig>
+	  >
+	| Endpoint<
+			'PATCH',
+			'/v1/ignite/deployments/:deployment_id/metadata',
+			{deployment: Deployment},
+			Partial<DeploymentMetaData>
 	  >
 	| Endpoint<
 			'POST',
