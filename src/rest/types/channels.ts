@@ -16,7 +16,12 @@ export enum ChannelType {
  * Generic state type of a channel
  * @public
  */
-export type State = Record<string, unknown>;
+export type AnyStateObject = Record<string, unknown>;
+
+/**
+ * @deprecated Use {@link AnyStateObject} instead
+ */
+export type State = AnyStateObject;
 
 /**
  * Definition of a channel
@@ -36,7 +41,7 @@ export interface Channel {
 	/**
 	 * State metadata
 	 */
-	state: State;
+	state: AnyStateObject;
 
 	/**
 	 * Capabilities of the channel
@@ -63,7 +68,7 @@ export interface ChannelToken {
 	/**
 	 * State for this token
 	 */
-	state: State;
+	state: AnyStateObject;
 
 	/**
 	 * The project this channel token is associated with
@@ -97,7 +102,7 @@ export type ChannelEndpoints =
 			'POST',
 			'/v1/channels/tokens',
 			{token: ChannelToken},
-			{state: State}
+			{state: AnyStateObject}
 	  >
 	| Endpoint<'DELETE', '/v1/channels/:channel_id', Empty>
 	| Endpoint<'GET', '/v1/channels/:channel_id', {channel: Channel}>
@@ -109,9 +114,9 @@ export type ChannelEndpoints =
 			{e: string; d: unknown}
 	  >
 	| Endpoint<'PUT', '/v1/channels/:channel_id/subscribers/:token', Empty>
-	| Endpoint<'PATCH', '/v1/channels/:channel_id/state', Empty, State>
-	| Endpoint<'PUT', '/v1/channels/:channel_id/state', Empty, State>
-	| Endpoint<'GET', '/v1/channels/:channel_id/state', {state: State}>
+	| Endpoint<'PATCH', '/v1/channels/:channel_id/state', Empty, AnyStateObject>
+	| Endpoint<'PUT', '/v1/channels/:channel_id/state', Empty, AnyStateObject>
+	| Endpoint<'GET', '/v1/channels/:channel_id/state', {state: AnyStateObject}>
 	| Endpoint<
 			'POST',
 			'/v1/channels/:channel_id/messages',

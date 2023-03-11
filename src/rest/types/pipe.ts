@@ -2,8 +2,16 @@ import type {Empty, Id, Timestamp} from '../../util/types.ts';
 import type {Endpoint} from '../endpoints.ts';
 import type {Regions} from './ignite.ts';
 
+/**
+ * A protocol that can be used to deliver a stream
+ * @public
+ */
 export type DeliveryProtocol = 'webrtc' | 'hls';
 
+/**
+ * A room that you can stream to
+ * @public
+ */
 export interface Room {
 	/**
 	 * The ID of this stream
@@ -51,6 +59,10 @@ export interface Room {
 	state: 'live' | 'offline';
 }
 
+/**
+ * The endpoints for the pipe API
+ * @public
+ */
 export type PipeEndpoints =
 	| Endpoint<'GET', '/v1/pipe/rooms', {rooms: Room[]}>
 	| Endpoint<

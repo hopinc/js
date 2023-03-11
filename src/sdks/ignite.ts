@@ -3,7 +3,7 @@ import {API, Id, assertId} from '../rest/index.ts';
 import {
 	Deployment,
 	DeploymentConfig,
-	DeploymentMetadata,
+	DeploymentMetaData,
 	Gateway,
 	GatewayType,
 	RuntimeType,
@@ -479,7 +479,7 @@ export const ignite = sdk(client => {
 
 			async patchMetadata(
 				deploymentId: Id<'deployment'>,
-				metadata: Partial<DeploymentMetadata>,
+				metadata: Partial<DeploymentMetaData>,
 			) {
 				const {deployment} = await client.patch(
 					'/v1/ignite/deployments/:deployment_id/metadata',
@@ -489,11 +489,6 @@ export const ignite = sdk(client => {
 
 				return deployment;
 			},
-
-			/**
-			 * @deprecated This property has moved — use hop.ignite.gateways instead
-			 */
-			gateways: deploymentGateways,
 		},
 
 		containers: {

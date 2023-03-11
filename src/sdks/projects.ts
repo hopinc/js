@@ -139,7 +139,7 @@ export const projects = sdk(client => {
 		},
 
 		/**
-		 * @deprecated Use .tokens instead
+		 * @deprecated Use {@link projectsSDK.tokens} instead
 		 */
 		projectTokens: tokens,
 

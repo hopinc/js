@@ -8,7 +8,7 @@ export const byteUnits = ['GB', 'MB', 'KB', 'B'] as const;
  * Byte size unit type
  * @public
  */
-export type ByteUnit = typeof byteUnits[number];
+export type ByteUnit = (typeof byteUnits)[number];
 
 /**
  * A string representing a byte size
@@ -17,9 +17,7 @@ export type ByteUnit = typeof byteUnits[number];
 export type ByteSizeString = `${number}${ByteUnit}`;
 
 /**
- * A string representing a byte size
- * @public
- * @deprecated use `ByteSizeString` instead
+ * @deprecated Use {@link ByteSizeString} instead
  */
 export type ByteString = ByteSizeString;
 
@@ -109,7 +107,6 @@ export function parseSize(size: string) {
 }
 
 /**
- * @deprecated use `byteUnits` instead
- * @public
+ * @deprecated Use {@link byteUnits} instead
  */
 export const units = byteUnits;

@@ -246,7 +246,7 @@ export interface Deployment {
 
 	/**
 	 * Current active rollout for deployment
-	 * @deprecated Use latest_rollout
+	 * @deprecated Use {@link Deployment.latest_rollout} instead
 	 */
 	active_rollout: DeploymentRollout | null;
 
@@ -316,7 +316,7 @@ export interface DeploymentMetadata {
 
 /**
  * Deployment metadata
- * @deprecated Use DeploymentMetadata. This will be removed in a future release
+ * @deprecated Use {@link DeploymentMetadata} instead
  */
 export type DeploymentMetaData = DeploymentMetadata;
 
@@ -378,7 +378,7 @@ export interface BuildMetadata {
 
 /**
  * Metadata attached to a build
- * @deprecated Use BuildMetadata. This will be removed in a future release
+ * @deprecated Use {@see BuildMetadata} instead
  */
 export type BuildMetaData = BuildMetadata;
 
