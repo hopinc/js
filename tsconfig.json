@@ -26,5 +26,10 @@
 		"verbatimModuleSyntax": true
 	},
 	"exclude": ["node_modules", "dist"],
-	"include": ["./**/*.ts", "./**/*.tsx"]
+	"include": [
+		"./**/*.ts",
+		"./**/*.tsx",
+		"dist/index.d.cts",
+		"dist/utils/zod/index.d.cts"
+	]
 }

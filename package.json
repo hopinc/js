@@ -3,24 +3,19 @@
 	"version": "1.28.1",
 	"type": "module",
 	"main": "./dist/index.cjs",
-	"types": "./dist/index.d.ts",
 	"module": "./dist/index.js",
 	"exports": {
 		".": {
 			"node": {
 				"import": "./dist/node/index.js",
-				"require": "./dist/node/index.cjs",
-				"types": "./dist/index.d.ts"
+				"require": "./dist/node/index.cjs"
 			},
 			"import": "./dist/index.js",
-			"browser": "./dist/index.js",
-			"require": "./dist/index.cjs",
-			"types": "./dist/index.d.ts"
+			"require": "./dist/index.cjs"
 		},
 		"./utils/zod": {
 			"import": "./dist/utils/zod/index.js",
-			"require": "./dist/utils/zod/index.cjs",
-			"types": "./dist/utils/zod/index.d.ts"
+			"require": "./dist/utils/zod/index.cjs"
 		}
 	},
 	"repository": "https://github.com/hopinc/js.git",
@@ -40,7 +35,7 @@
 		"utils"
 	],
 	"scripts": {
-		"build": "rm -rf dist && tsup",
+		"build": "rm -rf dist && tsup && node ./build/copy.js",
 		"bench": "HOP_DEBUG=true tsx _workbench.ts",
 		"release": "yarn build && yarn changeset publish",
 		"api": "yarn build && api-extractor run --local --verbose",

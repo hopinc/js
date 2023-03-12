@@ -1,10 +1,10 @@
-import {Infer, create} from '@onehop/json-methods';
-import {API, Id, assertId} from '../rest/index.ts';
+import {type Infer, create} from '@onehop/json-methods';
+import {API, type Id, assertId} from '../rest/index.ts';
 import {
-	Deployment,
-	DeploymentConfig,
-	DeploymentMetaData,
-	Gateway,
+	type Deployment,
+	type DeploymentConfig,
+	type DeploymentMetadata,
+	type Gateway,
 	GatewayType,
 	RuntimeType,
 } from '../rest/types/ignite.ts';
@@ -479,7 +479,7 @@ export const ignite = sdk(client => {
 
 			async patchMetadata(
 				deploymentId: Id<'deployment'>,
-				metadata: Partial<DeploymentMetaData>,
+				metadata: Partial<DeploymentMetadata>,
 			) {
 				const {deployment} = await client.patch(
 					'/v1/ignite/deployments/:deployment_id/metadata',
