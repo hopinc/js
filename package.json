@@ -54,7 +54,7 @@
 		"glob": "8.1.0",
 		"prettier": "2.8.4",
 		"tsup": "6.6.0",
-		"tsx": "3.12.3",
+		"tsx": "3.12.5",
 		"typedoc": "0.23.24",
 		"typedoc-plugin-markdown": "3.14.0",
 		"typedoc-plugin-missing-exports": "1.0.0",
