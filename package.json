@@ -41,7 +41,8 @@
 		"release": "yarn build && yarn changeset publish",
 		"api": "yarn build && api-extractor run --local --verbose",
 		"fullbuild": "yarn build && yarn docs",
-		"test": "tsx tests/index.ts"
+		"test": "tsx tests/index.ts",
+		"package": "yarn build && yarn pack"
 	},
 	"devDependencies": {
 		"@changesets/cli": "2.26.0",
