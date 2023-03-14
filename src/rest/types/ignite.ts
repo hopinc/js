@@ -168,6 +168,7 @@ export interface Container {
 	metrics: {
 		cpu_usage_percent: number;
 		memory_usage_percent: number;
+		memory_usage_bytes: number;
 	} | null;
 
 	/**

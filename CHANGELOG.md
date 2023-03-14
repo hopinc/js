@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.29.0
+
+### Minor Changes
+
+- 5d3df5b: Adds memory_usage_bytes to container's metrics object
+
 ## 1.28.1
 
 ### Patch Changes
