@@ -611,7 +611,7 @@ __metadata:
     typedoc: 0.23.26
     typedoc-plugin-markdown: 3.14.0
     typedoc-plugin-missing-exports: 1.0.0
-    typescript: next
+    typescript: ^5.0.2
     zod: ^3.21.4
   languageName: unknown
   linkType: soft
@@ -4116,13 +4116,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:next":
-  version: 5.1.0-dev.20230313
-  resolution: "typescript@npm:5.1.0-dev.20230313"
+"typescript@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "typescript@npm:5.0.2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 6b908aa13466db900d6a7ca8352441a354ca917632bf8c5da80f3de984fed2fb4ada779572957593af019443e06d2e89be0b899e21d2182db7498e69a52e185c
+  checksum: bef1dcd166acfc6934b2ec4d72f93edb8961a5fab36b8dd2aaf6f4f4cd5c0210f2e0850aef4724f3b4913d5aef203a94a28ded731b370880c8bcff7e4ff91fc1
   languageName: node
   linkType: hard
 
@@ -4136,13 +4136,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@next#~builtin<compat/typescript>":
-  version: 5.1.0-dev.20230313
-  resolution: "typescript@patch:typescript@npm%3A5.1.0-dev.20230313#~builtin<compat/typescript>::version=5.1.0-dev.20230313&hash=1f5320"
+"typescript@patch:typescript@^5.0.2#~builtin<compat/typescript>":
+  version: 5.0.2
+  resolution: "typescript@patch:typescript@npm%3A5.0.2#~builtin<compat/typescript>::version=5.0.2&hash=1f5320"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 3ece0a4ba98dc947478c22df469e5ad402b2c45f4122588d09bbfa8e8da2228def17d118cc3ce8842009d6374dd73f2e6141ed6923f679e023d3aab90e1b34a7
+  checksum: bdbf3d0aac0d6cf010fbe0536753dc19f278eb4aba88140dcd25487dfe1c56ca8b33abc0dcd42078790a939b08ebc4046f3e9bb961d77d3d2c3cfa9829da4d53
   languageName: node
   linkType: hard
 
