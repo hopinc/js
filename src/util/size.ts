@@ -18,12 +18,13 @@ export type ByteSizeString = `${number}${ByteUnit}`;
 
 /**
  * @deprecated Use {@link ByteSizeString} instead
+ * @public
  */
 export type ByteString = ByteSizeString;
 
 /**
  * Validates if a string is a valid byte size string
- * @param value A string to validate if it is a valid byte size string
+ * @param value - A string to validate if it is a valid byte size string
  * @returns If the string is a valid byte size string
  * @public
  */
@@ -46,8 +47,8 @@ const multipliers: Record<ByteUnit, number> = {
 
 /**
  * Helper function to converts a numerical size to a valid byte size string
- * @param size A size to convert to a valid byte size string
- * @param unit An optional unit to as the size unit. Defaults to B
+ * @param size - A size to convert to a valid byte size string
+ * @param unit - An optional unit to as the size unit. Defaults to B
  * @returns a byte size string
  * @public
  */
@@ -57,7 +58,7 @@ export function bytes(size: number, unit: ByteUnit = 'B'): ByteSizeString {
 
 /**
  * Converts a kilobyte size to a byte size string
- * @param size Kilobytes to convert to a byte size string
+ * @param size - Kilobytes to convert to a byte size string
  * @returns a byte size string
  * @public
  */
@@ -67,7 +68,7 @@ export function kilobytes(size: number): ByteSizeString {
 
 /**
  * Converts a megabyte size to a byte size string
- * @param size Megabytes to convert to a byte size string
+ * @param size - Megabytes to convert to a byte size string
  * @returns a byte size string
  * @public
  */
@@ -77,7 +78,7 @@ export function megabytes(size: number): ByteSizeString {
 
 /**
  * Converts a gigabyte size to a byte size string
- * @param size Gigabytes to convert to a byte size string
+ * @param size - Gigabytes to convert to a byte size string
  * @returns a byte size string
  * @public
  */
@@ -108,5 +109,6 @@ export function parseSize(size: string) {
 
 /**
  * @deprecated Use {@link byteUnits} instead
+ * @public
  */
 export const units = byteUnits;

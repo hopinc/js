@@ -1,4 +1,4 @@
-import {ExtractRouteParams, Query} from '../rest/index.ts';
+import type {ExtractRouteParams, Query} from '../rest/index.ts';
 
 export function lead(x: string) {
 	return x.charCodeAt(0) === 47 ? x : '/' + x;

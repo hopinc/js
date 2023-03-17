@@ -49,12 +49,6 @@ export type ExtractRouteParams<T extends string> = string extends T
 	? {[k in Param]: string | number}
 	: {};
 
-/**
- * Pull values of an object
- * @internal
- */
-export type _Values<T> = T[keyof T];
-
 // Technically, `channel`, it should be here, but channel IDs can also
 // be any random string if a developer decides to set it. For this reason,
 // channel is not included as a valid ID in this list
@@ -149,7 +143,7 @@ export const ID_PREFIXES = [
  * A union of all ID prefixes used within the API
  * @public
  */
-export type IdPrefixes = typeof ID_PREFIXES[number]['prefix'];
+export type IdPrefixes = (typeof ID_PREFIXES)[number]['prefix'];
 
 /**
  * A Hop ID is a string that starts with a prefix and a underscore, followed by some unique text.
@@ -279,7 +273,7 @@ export function assertId<T extends IdPrefixes = IdPrefixes>(
 ): asserts maybeId is Id<T> {
 	const expectedPrefix =
 		prefix === undefined
-			? '<prefix>'
+			? '<any prefix>'
 			: Array.isArray(prefix)
 			? formatList(prefix, 'disjunction')
 			: prefix;

@@ -318,6 +318,7 @@ export interface DeploymentMetadata {
 /**
  * Deployment metadata
  * @deprecated Use {@link DeploymentMetadata} instead
+ * @public
  */
 export type DeploymentMetaData = DeploymentMetadata;
 
@@ -379,7 +380,8 @@ export interface BuildMetadata {
 
 /**
  * Metadata attached to a build
- * @deprecated Use {@see BuildMetadata} instead
+ * @deprecated Use {@link BuildMetadata} instead
+ * @public
  */
 export type BuildMetaData = BuildMetadata;
 
@@ -602,7 +604,6 @@ export type CreateDeploymentConfig = MakeOptional<DeploymentConfig, 'cmd'>;
 
 /**
  * The strategy for scaling multiple containers.
- * @warning This property is not yet fully complete
  * @public
  */
 export enum ContainerStrategy {
@@ -613,7 +614,6 @@ export enum ContainerStrategy {
 
 	/**
 	 * Have Hop automatically scale containers based on load
-	 * @warning This is incomplete
 	 */
 	// AUTOSCALE = 'autoscale',
 }

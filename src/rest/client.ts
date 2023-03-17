@@ -11,11 +11,19 @@ import {getIdPrefix, type Id, type Method} from './types/index.ts';
  */
 export type APIAuthenticationPrefix = 'ptk' | 'bearer' | 'pat';
 
+/**
+ * Extract an endpoint from a given method and path
+ * @public
+ */
 export type ExtractEndpoint<
 	Method extends string,
 	Path extends string,
 > = Extract<Endpoints, {path: Path; method: Method}>;
 
+/**
+ * Pull all paths for a given method
+ * @internal
+ */
 export type PathsFor<M extends Method> = Extract<
 	Endpoints,
 	{method: M}

@@ -2,6 +2,10 @@ import type {Empty, Id, Timestamp} from '../../util/types.ts';
 import type {Endpoint} from '../endpoints.ts';
 import type {User} from './users.ts';
 
+/**
+ * A member is a partial user with information about their membership in a project
+ * @public
+ */
 export type Member = Omit<User, 'email' | 'id'> & {
 	/**
 	 * The ID of the project member
@@ -24,11 +28,19 @@ export type Member = Omit<User, 'email' | 'id'> & {
 	joined_at: Timestamp;
 };
 
+/**
+ * A project tier
+ * @public
+ */
 export enum ProjectTier {
 	FREE = 'free',
 	PAID = 'paid',
 }
 
+/**
+ * A role that a member can have in a project
+ * @public
+ */
 export interface MemberRole {
 	/**
 	 * The ID of the role
@@ -48,6 +60,7 @@ export interface MemberRole {
 
 /**
  * A project token for a project
+ * @public
  */
 export interface ProjectToken {
 	/**
@@ -73,6 +86,7 @@ export interface ProjectToken {
 
 /**
  * Type of a project
+ * @public
  */
 export enum ProjectType {
 	/**
@@ -86,6 +100,10 @@ export enum ProjectType {
 	PERSONAL = 'personal',
 }
 
+/**
+ * A project on Hop
+ * @public
+ */
 export interface Project {
 	/**
 	 * The ID of the project
@@ -129,20 +147,36 @@ export interface Project {
 	quota_usage: QuotaUsage;
 }
 
+/**
+ * Default quotas for a project
+ * @public
+ */
 export interface DefaultQuotas {
 	vcpu: number;
 	ram: number;
 	volume: number;
 }
 
+/**
+ * Quota overrides for a project
+ * @public
+ */
 export interface QuotaOverrides {}
 
+/**
+ * Current usage of a quota for a project
+ * @public
+ */
 export interface QuotaUsage {
 	vcpu: number;
 	ram: number;
 	volume: number;
 }
 
+/**
+ * A secret is a key/value pair that can be used to store sensitive information
+ * @public
+ */
 export interface Secret {
 	/**
 	 * The ID of the secret
@@ -170,6 +204,10 @@ export interface Secret {
 	in_use_by: Id<'deployment'>[];
 }
 
+/**
+ * The endpoints for projects
+ * @public
+ */
 export type ProjectsEndpoints =
 	| Endpoint<
 			'DELETE',

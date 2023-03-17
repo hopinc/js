@@ -20,6 +20,7 @@ export type AnyStateObject = Record<string, unknown>;
 
 /**
  * @deprecated Use {@link AnyStateObject} instead
+ * @public
  */
 export type State = AnyStateObject;
 
@@ -59,6 +60,10 @@ export interface Channel {
 	type: ChannelType;
 }
 
+/**
+ * A token for a channel
+ * @public
+ */
 export interface ChannelToken {
 	/**
 	 * The ID for the token

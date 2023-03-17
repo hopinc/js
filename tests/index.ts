@@ -16,9 +16,7 @@ const hop = new Hop(
 	BASE_URL,
 );
 
-test('The HTTP client correctly forms URLs', t => {
-	t.todo('Move these tests to a describe() call');
-
+test('The HTTP client correctly forms URLs', () => {
 	assert.equal(
 		hop.client.url('/v1/path/to/:resource', {
 			resource: 'my-resource',

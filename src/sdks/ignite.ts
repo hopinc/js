@@ -209,7 +209,7 @@ export const ignite = sdk(client => {
 	/**
 	 * Deletes a container and recreates it after deletion
 	 *
-	 * @param container_id The ID of the container to delete
+	 * @param container_id - The ID of the container to delete
 	 * @param options - Options object
 	 */
 	async function deleteContainer(
@@ -257,7 +257,7 @@ export const ignite = sdk(client => {
 		/**
 		 * Fecthes all gateways attached to a deployment
 		 *
-		 * @param deploymentId The ID of the deployment to fetch gateways for
+		 * @param deploymentId - The ID of the deployment to fetch gateways for
 		 */
 		async getAll(deploymentId: Id<'deployment'>) {
 			const {gateways} = await client.get(
@@ -271,10 +271,10 @@ export const ignite = sdk(client => {
 		/**
 		 * Creates and attaches a gateway to a deployment
 		 *
-		 * @param deployment The deployment to create a gateway on
-		 * @param type The type of the gatway to create, either internal or external
-		 * @param protocol The protocol that the gateway will listen for
-		 * @param targetPort The port to listen on
+		 * @param deployment - The deployment to create a gateway on
+		 * @param type - The type of the gatway to create, either internal or external
+		 * @param protocol - The protocol that the gateway will listen for
+		 * @param targetPort - The port to listen on
 		 */
 		async create(
 			deployment: Deployment | Deployment['id'],
