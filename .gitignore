@@ -6,5 +6,8 @@ node_modules
 .DS_Store
 dist
 _workbench.ts
-docs
 .env
+temp
+.next
+docs
+package.tgz

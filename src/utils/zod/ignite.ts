@@ -4,8 +4,8 @@ import {
 	RestartPolicy,
 	RuntimeType,
 	VolumeFormat,
-} from '../../rest/types/ignite.js';
-import {byteUnits, parseSize, isValidByteString} from '../../util/size.js';
+} from '../../rest/types/ignite.ts';
+import {byteUnits, parseSize, isValidByteString} from '../../util/size.ts';
 
 export const deploymentMetaDataSchema = z.object({
 	preset: z.string().optional(),

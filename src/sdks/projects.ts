@@ -1,13 +1,17 @@
-import {API, Endpoints, Id} from '../rest/index.js';
-import {Request} from '../util/fetch.js';
-import {sdk} from './create.js';
+import type {API, Endpoints, Id} from '../rest/index.ts';
+import {Request} from '../util/fetch.ts';
+import {sdk} from './create.ts';
 
+/**
+ * Projects SDK client
+ * @public
+ */
 export const projects = sdk(client => {
 	const tokens = {
 		/**
 		 * Deletes a project token by its ID
 		 *
-		 * @param projectTokenId The ID of the project token to delete
+		 * @param projectTokenId - The ID of the project token to delete
 		 */
 		async delete(projectTokenId: Id<'ptkid'>, project?: Id<'project'>) {
 			if (client.authType !== 'ptk' && !project) {
@@ -30,7 +34,7 @@ export const projects = sdk(client => {
 		/**
 		 * Get all project tokens for a project
 		 *
-		 * @param projectId The project to fetch secrets for
+		 * @param projectId - The project to fetch secrets for
 		 * @returns An array of all secrets for the project
 		 */
 		async get(projectId?: Id<'project'>) {
@@ -60,8 +64,8 @@ export const projects = sdk(client => {
 		/**
 		 * Creates a new project token
 		 *
-		 * @param projectId The project to create a key for
-		 * @param flags Permissions for this flag
+		 * @param projectId - The project to create a key for
+		 * @param flags - Permissions for this flag
 		 * @returns A newly created project token
 		 */
 		async create(flags: number, projectId?: Id<'project'>) {
@@ -116,7 +120,7 @@ export const projects = sdk(client => {
 		 * Fetch the currently authorized member from a project.
 		 * You cannot use this route if you are authorizing with a project token as there is no user attached to it.
 		 *
-		 * @param projectId The project ID to fetch a member from
+		 * @param projectId - The project ID to fetch a member from
 		 * @returns The member authorized by the SDK
 		 */
 		async getCurrentMember(projectId: Id<'project'>) {
@@ -135,7 +139,7 @@ export const projects = sdk(client => {
 		},
 
 		/**
-		 * @deprecated Use .tokens instead
+		 * @deprecated Use {@link projectsSDK.tokens} instead
 		 */
 		projectTokens: tokens,
 
@@ -145,7 +149,7 @@ export const projects = sdk(client => {
 			/**
 			 * Gets all secrets in a project
 			 *
-			 * @param projectId The project to fetch secrets for
+			 * @param projectId - The project to fetch secrets for
 			 */
 			async getAll(projectId?: Id<'project'>) {
 				if (client.authType !== 'ptk' && !projectId) {
@@ -170,9 +174,9 @@ export const projects = sdk(client => {
 			/**
 			 * Creates a new project secret
 			 *
-			 * @param name The name of the secret
-			 * @param value The value of the secret
-			 * @param projectId The project to create the secret in
+			 * @param name - The name of the secret
+			 * @param value - The value of the secret
+			 * @param projectId - The project to create the secret in
 			 */
 			async create(name: string, value: string, projectId?: Id<'project'>) {
 				if (client.authType !== 'ptk' && !projectId) {
@@ -207,8 +211,8 @@ export const projects = sdk(client => {
 			/**
 			 * Deletes a secret from a project
 			 *
-			 * @param id The secret ID to delete
-			 * @param projectId The project to delete the secret from
+			 * @param id - The secret ID to delete
+			 * @param projectId - The project to delete the secret from
 			 */
 			async delete(
 				id: Id<'secret'> | API.Projects.Secret['name'],

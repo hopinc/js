@@ -1,4 +1,4 @@
-import {SUPPORTS_INTL} from './constants.js';
+import {SUPPORTS_INTL} from './constants.ts';
 
 export function formatList(list: string[], type: Intl.ListFormatType): string {
 	if (SUPPORTS_INTL) {

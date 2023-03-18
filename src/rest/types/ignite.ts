@@ -1,20 +1,25 @@
-import {ByteSizeString} from '../../util/index.js';
-import {
+import type {ByteSizeString} from '../../util/index.ts';
+import type {
 	Empty,
 	HopShDomain,
 	Id,
 	InternalHopDomain,
 	MakeOptional,
 	Timestamp,
-} from '../../util/types.js';
-import {Endpoint} from '../endpoints.js';
+} from '../../util/types.ts';
+import type {Endpoint} from '../endpoints.ts';
 
+/**
+ * All regions that Hop operates in
+ * @public
+ */
 export enum Regions {
 	US_EAST_1 = 'us-east-1',
 }
 
 /**
  * Runtime types are used to describe the type of a deployment or container
+ * @public
  */
 export enum RuntimeType {
 	/**
@@ -34,7 +39,8 @@ export enum RuntimeType {
 }
 
 /**
- * Container state is relatively self-explanatory. It describes what the container is currently doing.
+ * An enum of states a container can be in
+ * @public
  */
 export enum ContainerState {
 	/**
@@ -70,6 +76,7 @@ export enum ContainerState {
 
 /**
  * Rollout state for deployments
+ * @public
  */
 export enum RolloutState {
 	PENDING = 'pending',
@@ -79,6 +86,7 @@ export enum RolloutState {
 
 /**
  * Restart policy for deployments
+ * @public
  */
 export enum RestartPolicy {
 	NEVER = 'never',
@@ -88,16 +96,25 @@ export enum RestartPolicy {
 
 /**
  * Types for supported GPU
+ * @public
  */
 export enum VgpuType {
 	A400 = 'a400',
 }
 
+/**
+ * Formats of volumes
+ * @public
+ */
 export enum VolumeFormat {
 	EXT4 = 'ext4',
 	XFS = 'xfs',
 }
 
+/**
+ * A definition of a volume
+ * @public
+ */
 export interface VolumeDefinition {
 	/**
 	 * The format of the volume
@@ -115,6 +132,10 @@ export interface VolumeDefinition {
 	mount_path: string;
 }
 
+/**
+ * The definition of a container
+ * @public
+ */
 export interface Container {
 	/**
 	 * The ID of the container
@@ -194,6 +215,10 @@ export interface Container {
 	state: ContainerState;
 }
 
+/**
+ * A definition of a deployment
+ * @public
+ */
 export interface Deployment {
 	/**
 	 * The ID of the deployment
@@ -222,7 +247,7 @@ export interface Deployment {
 
 	/**
 	 * Current active rollout for deployment
-	 * @deprecated Use latest_rollout
+	 * @deprecated Use {@link Deployment.latest_rollout} instead
 	 */
 	active_rollout: DeploymentRollout | null;
 
@@ -255,7 +280,7 @@ export interface Deployment {
 	/**
 	 * Metadata for deployment
 	 */
-	metadata: DeploymentMetaData | null;
+	metadata: DeploymentMetadata | null;
 
 	/**
 	 * Build cache settings for deployment
@@ -268,6 +293,10 @@ export interface Deployment {
 	build_settings?: BuildSettings;
 }
 
+/**
+ * A definition of a build's settings
+ * @public
+ */
 export interface BuildSettings {
 	/**
 	 * Root directory for build
@@ -275,14 +304,29 @@ export interface BuildSettings {
 	root_directory?: string;
 }
 
-export interface DeploymentMetaData {
+/**
+ * Deployment metadata
+ * @public
+ */
+export interface DeploymentMetadata {
 	container_port_mappings: Record<Id<'container'>, string[]>;
 	ignored_boarding?: boolean;
 	created_from_preset?: string;
 	created_first_gateway?: boolean;
 }
 
-export interface BuildMetaData {
+/**
+ * Deployment metadata
+ * @deprecated Use {@link DeploymentMetadata} instead
+ * @public
+ */
+export type DeploymentMetaData = DeploymentMetadata;
+
+/**
+ * Metadata attached to a build
+ * @public
+ */
+export interface BuildMetadata {
 	/**
 	 * Account type of repo owner
 	 */
@@ -335,7 +379,15 @@ export interface BuildMetaData {
 }
 
 /**
+ * Metadata attached to a build
+ * @deprecated Use {@link BuildMetadata} instead
+ * @public
+ */
+export type BuildMetaData = BuildMetadata;
+
+/**
  * The inferred environment type of a build
+ * @public
  */
 export enum BuildEnvironmentType {
 	NIXPACKS = 'nixpacks',
@@ -344,6 +396,7 @@ export enum BuildEnvironmentType {
 
 /**
  * The validated nixpacks plan for this build
+ * @public
  */
 export interface NixPlan {
 	language: string | null;
@@ -358,6 +411,7 @@ export interface NixPlan {
 /**
  * Build environment contians information about the
  * language and build commands used to build the deployment
+ * @public
  */
 export interface BuildEnvironment {
 	type: BuildEnvironmentType;
@@ -366,12 +420,17 @@ export interface BuildEnvironment {
 
 /**
  * Why the uploaded build content was rejected
+ * @public
  */
 export interface ValidationFailure {
 	reason: string;
 	help_link: string | null;
 }
 
+/**
+ * A build is a single build of a deployment
+ * @public
+ */
 export interface Build {
 	/**
 	 * ID of the build
@@ -386,7 +445,7 @@ export interface Build {
 	/**
 	 * Metadata pertaining to build (mostly for GitHub)
 	 */
-	metadata: BuildMetaData | null;
+	metadata: BuildMetadata | null;
 
 	/**
 	 * Build method (GitHub or CLI)
@@ -429,6 +488,10 @@ export interface Build {
 	validation_failure: ValidationFailure | null;
 }
 
+/**
+ * Information about a deployment's health check configuration
+ * @public
+ */
 export type HealthCheck = {
 	/**
 	 * The ID of health check
@@ -439,7 +502,15 @@ export type HealthCheck = {
 	 * Protocol for health check
 	 */
 	protocol: 'http';
+
+	/**
+	 * Path for health check
+	 */
 	path: string;
+
+	/**
+	 * Port for health check
+	 */
 	port: number;
 
 	/**
@@ -470,6 +541,10 @@ export type HealthCheck = {
 	created_at: Timestamp;
 };
 
+/**
+ * A deployment rollout
+ * @public
+ */
 export type DeploymentRollout = {
 	/**
 	 * The rollout ID for rollout
@@ -521,11 +596,15 @@ export type DeploymentRollout = {
 	acknowledged: boolean;
 };
 
+/**
+ * Data required to create a deployment
+ * @internal
+ */
 export type CreateDeploymentConfig = MakeOptional<DeploymentConfig, 'cmd'>;
 
 /**
  * The strategy for scaling multiple containers.
- * @warning This property is not yet fully complete
+ * @public
  */
 export enum ContainerStrategy {
 	/**
@@ -535,11 +614,14 @@ export enum ContainerStrategy {
 
 	/**
 	 * Have Hop automatically scale containers based on load
-	 * @warning This is incomplete
 	 */
 	// AUTOSCALE = 'autoscale',
 }
 
+/**
+ * A deployment's config
+ * @public
+ */
 export interface DeploymentConfig {
 	/**
 	 * The name of the deployment
@@ -601,6 +683,7 @@ export interface DeploymentConfig {
 
 /**
  * Docker image config
+ * @public
  */
 export interface Image {
 	/**
@@ -622,6 +705,7 @@ export interface Image {
 
 /**
  * Docker image registry authorization
+ * @public
  */
 export interface Auth {
 	username: string;
@@ -630,6 +714,7 @@ export interface Auth {
 
 /**
  * GitHub repo type sent from API (NOT USED IN IMAGES)
+ * @public
  */
 export interface GHRepo {
 	id: number;
@@ -641,6 +726,7 @@ export interface GHRepo {
 
 /**
  * GitHub repo partial used for images
+ * @public
  */
 export interface ImageGHRepo {
 	repo_id: number;
@@ -650,6 +736,7 @@ export interface ImageGHRepo {
 
 /**
  * Resources allocated to a deployment
+ * @public
  */
 export interface Resources {
 	/**
@@ -671,6 +758,7 @@ export interface Resources {
 
 /**
  * Virtual GPU config
+ * @public
  */
 export interface Vgpu {
 	/**
@@ -686,6 +774,7 @@ export interface Vgpu {
 
 /**
  * Logs from a container
+ * @public
  */
 export interface ContainerLog {
 	/**
@@ -712,6 +801,7 @@ export interface ContainerLog {
 
 /**
  * Types of build methods supported by Hop
+ * @public
  */
 export enum BuildMethod {
 	GITHUB = 'github',
@@ -720,6 +810,7 @@ export enum BuildMethod {
 
 /**
  * Types of gateways supported by Hop
+ * @public
  */
 export enum GatewayType {
 	/**
@@ -735,6 +826,7 @@ export enum GatewayType {
 
 /**
  * Gateways are used to connect services to the internet or a private network
+ * @public
  */
 export interface Gateway {
 	/**
@@ -755,7 +847,7 @@ export interface Gateway {
 	/**
 	 * The protocol for this gateway (Only for external)
 	 *
-	 * @warning Currently, hop only supports HTTP. This will eventually change to an enum
+	 * @alpha Currently, hop only supports HTTP. This will eventually change to an enum
 	 */
 	protocol: 'http' | null;
 
@@ -795,12 +887,20 @@ export interface Gateway {
 	domains: Domain[];
 }
 
+/**
+ * An enum of states a domain can be in
+ * @public
+ */
 export enum DomainState {
 	PENDING = 'pending',
 	VALID_CNAME = 'valid_cname',
 	SSL_ACTIVE = 'ssl_active',
 }
 
+/**
+ * An enum of states a build can be in
+ * @public
+ */
 export enum BuildState {
 	VALIDATING = 'validating',
 	PENDING = 'pending',
@@ -810,6 +910,10 @@ export enum BuildState {
 	VALIDATION_FAILED = 'validation_failed',
 }
 
+/**
+ * A domain is a DNS record that points to a gateway
+ * @public
+ */
 export interface Domain {
 	/**
 	 * The ID of the domain
@@ -837,11 +941,19 @@ export interface Domain {
 	redirect: DomainRedirect | null;
 }
 
+/**
+ * A redirect setup for a domain
+ * @public
+ */
 export interface DomainRedirect {
 	url: string;
 	status_code: 301 | 302 | 307 | 308;
 }
 
+/**
+ * All endpoints for the Ignite API
+ * @public
+ */
 export type IgniteEndpoints =
 	| Endpoint<'GET', '/v1/ignite/deployments', {deployments: Deployment[]}>
 	| Endpoint<
@@ -937,7 +1049,7 @@ export type IgniteEndpoints =
 			'PATCH',
 			'/v1/ignite/deployments/:deployment_id/metadata',
 			{deployment: Deployment},
-			Partial<DeploymentMetaData>
+			Partial<DeploymentMetadata>
 	  >
 	| Endpoint<
 			'POST',

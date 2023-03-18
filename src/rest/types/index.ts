@@ -1,3 +1,10 @@
-import * as API from './api.js';
-export * from '../../util/types.js';
-export {API};
+export * from '../../util/types.ts';
+import * as API from './api.ts';
+
+export {
+	/**
+	 * All types defined in the Hop API
+	 * @public
+	 */
+	API,
+};

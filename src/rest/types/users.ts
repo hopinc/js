@@ -1,9 +1,10 @@
-import {Empty, Id, Timestamp} from '../../util/types.js';
-import {Endpoint} from '../endpoints.js';
-import {MemberRole, Project} from './projects.js';
+import type {Empty, Id, Timestamp} from '../../util/types.ts';
+import type {Endpoint} from '../endpoints.ts';
+import type {MemberRole, Project} from './projects.ts';
 
 /**
  * A user object
+ * @public
  */
 export interface User {
 	/**
@@ -29,6 +30,7 @@ export interface User {
 
 /**
  * Self User Object
+ * @public
  */
 export interface SelfUser extends User {
 	/**
@@ -57,6 +59,10 @@ export interface SelfUser extends User {
 	admin: boolean;
 }
 
+/**
+ * A personal access token
+ * @public
+ */
 export interface PAT {
 	/**
 	 * The ID of the pat
@@ -71,7 +77,7 @@ export interface PAT {
 	/**
 	 * The pat token
 	 *
-	 * @warning This value will be partially censored if it
+	 * @alpha This value will be partially censored if it
 	 */
 	pat: string;
 
@@ -81,6 +87,10 @@ export interface PAT {
 	created_at: Timestamp;
 }
 
+/**
+ * All user endpoints
+ * @public
+ */
 export type UserEndpoints =
 	| Endpoint<
 			'GET',

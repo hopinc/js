@@ -1,7 +1,11 @@
-import {Empty, Id, Timestamp} from '../../util/types.js';
-import {Endpoint} from '../endpoints.js';
-import {Project} from './projects.js';
+import type {Empty, Id, Timestamp} from '../../util/types.ts';
+import type {Endpoint} from '../endpoints.ts';
+import type {Project} from './projects.ts';
 
+/**
+ * Types that a channel can be
+ * @public
+ */
 export enum ChannelType {
 	PRIVATE = 'private',
 	PUBLIC = 'public',
@@ -12,9 +16,16 @@ export enum ChannelType {
  * Generic state type of a channel
  * @public
  */
-export type State = Record<string, unknown>;
+export type AnyStateObject = Record<string, unknown>;
 
 /**
+ * @deprecated Use {@link AnyStateObject} instead
+ * @public
+ */
+export type State = AnyStateObject;
+
+/**
+ * Definition of a channel
  * @public
  */
 export interface Channel {
@@ -31,7 +42,7 @@ export interface Channel {
 	/**
 	 * State metadata
 	 */
-	state: State;
+	state: AnyStateObject;
 
 	/**
 	 * Capabilities of the channel
@@ -49,6 +60,10 @@ export interface Channel {
 	type: ChannelType;
 }
 
+/**
+ * A token for a channel
+ * @public
+ */
 export interface ChannelToken {
 	/**
 	 * The ID for the token
@@ -58,7 +73,7 @@ export interface ChannelToken {
 	/**
 	 * State for this token
 	 */
-	state: State;
+	state: AnyStateObject;
 
 	/**
 	 * The project this channel token is associated with
@@ -71,6 +86,10 @@ export interface ChannelToken {
 	is_online: boolean;
 }
 
+/**
+ * Endpoints for channels
+ * @public
+ */
 export type ChannelEndpoints =
 	| Endpoint<
 			'POST',
@@ -88,7 +107,7 @@ export type ChannelEndpoints =
 			'POST',
 			'/v1/channels/tokens',
 			{token: ChannelToken},
-			{state: State}
+			{state: AnyStateObject}
 	  >
 	| Endpoint<'DELETE', '/v1/channels/:channel_id', Empty>
 	| Endpoint<'GET', '/v1/channels/:channel_id', {channel: Channel}>
@@ -100,9 +119,9 @@ export type ChannelEndpoints =
 			{e: string; d: unknown}
 	  >
 	| Endpoint<'PUT', '/v1/channels/:channel_id/subscribers/:token', Empty>
-	| Endpoint<'PATCH', '/v1/channels/:channel_id/state', Empty, State>
-	| Endpoint<'PUT', '/v1/channels/:channel_id/state', Empty, State>
-	| Endpoint<'GET', '/v1/channels/:channel_id/state', {state: State}>
+	| Endpoint<'PATCH', '/v1/channels/:channel_id/state', Empty, AnyStateObject>
+	| Endpoint<'PUT', '/v1/channels/:channel_id/state', Empty, AnyStateObject>
+	| Endpoint<'GET', '/v1/channels/:channel_id/state', {state: AnyStateObject}>
 	| Endpoint<
 			'POST',
 			'/v1/channels/:channel_id/messages',

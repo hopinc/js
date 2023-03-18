@@ -1,24 +1,66 @@
-import {IS_BROWSER} from '../util/constants.js';
-import {fetch, Headers, Request} from '../util/fetch.js';
-import {ExtractRouteParams} from '../util/index.js';
-import {createURLBuilder} from '../util/urls.js';
-import {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.js';
-import {getIdPrefix, Id, Method} from './types/index.js';
+import {IS_BROWSER} from '../util/constants.ts';
+import {fetch, Headers, Request} from '../util/fetch.ts';
+import type {ExtractRouteParams} from '../util/index.ts';
+import {createURLBuilder} from '../util/urls.ts';
+import type {APIResponse, Endpoints, ErroredAPIResponse} from './endpoints.ts';
+import {getIdPrefix, type Id, type Method} from './types/index.ts';
 
+/**
+ * A valid ID prefix supported by the Hop API for authetication
+ * @public
+ */
 export type APIAuthenticationPrefix = 'ptk' | 'bearer' | 'pat';
+
+/**
+ * Extract an endpoint from a given method and path
+ * @public
+ */
+export type ExtractEndpoint<
+	Method extends string,
+	Path extends string,
+> = Extract<Endpoints, {path: Path; method: Method}>;
+
+/**
+ * Pull all paths for a given method
+ * @internal
+ */
+export type PathsFor<M extends Method> = Extract<
+	Endpoints,
+	{method: M}
+>['path'];
+
+/**
+ * All possible authentication ID types
+ * @public
+ */
 export type APIAuthentication = Id<APIAuthenticationPrefix>;
 
+/**
+ * Validates that an authentication prefix is valid
+ * @param auth - The prefix to validate
+ * @returns `true` if the prefix is valid, `false` otherwise
+ * @public
+ */
 export function validateAPIAuthentication(
 	auth: string,
 ): auth is APIAuthenticationPrefix {
 	return auth === 'bearer' || auth === 'pat' || auth === 'ptk';
 }
 
+/**
+ * Options passed to the API client.
+ * This will usually come from Hop#constructor in most cases
+ * @public
+ */
 export interface APIClientOptions {
 	readonly baseUrl: string;
 	readonly authentication: APIAuthentication;
 }
 
+/**
+ * An error that occurred as a response from the Hop API.
+ * @public
+ */
 export class HopAPIError extends Error {
 	public readonly status: number;
 
@@ -33,9 +75,17 @@ export class HopAPIError extends Error {
 	}
 }
 
+/**
+ * Generate a query object that includes typed URL params
+ * @public
+ */
 export type Query<Path extends string> = ExtractRouteParams<Path> &
 	Record<string, string | number | undefined>;
 
+/**
+ * API Client that is responsible for handling all requests
+ * @public
+ */
 export class APIClient {
 	public static getAuthType(auth: APIAuthentication) {
 		const prefix = getIdPrefix(auth);
@@ -48,7 +98,7 @@ export class APIClient {
 	}
 
 	private readonly options;
-	private agent: unknown;
+	private agent: import('node:https').Agent | null;
 
 	public readonly authType;
 	public readonly url;
@@ -64,7 +114,7 @@ export class APIClient {
 		this.agent = null;
 	}
 
-	async get<Path extends Extract<Endpoints, {method: 'GET'}>['path']>(
+	async get<Path extends PathsFor<'GET'>>(
 		path: Path,
 		query: Query<Path>,
 		init?: RequestInit,
@@ -210,7 +260,7 @@ export class APIClient {
 
 		const request = new Request(url, {
 			method,
-			body: body ? JSON.stringify(body) : undefined,
+			body: body ? JSON.stringify(body) : null,
 			headers,
 			...init,
 		});

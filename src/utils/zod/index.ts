@@ -1,3 +1,3 @@
-export * from './ids.js';
-export * from './presets.js';
-export * from './ignite.js';
+export * from './ids.ts';
+export * from './presets.ts';
+export * from './ignite.ts';

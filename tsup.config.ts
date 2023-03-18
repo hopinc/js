@@ -21,13 +21,13 @@ const define = ({node = false} = {}) => ({
 export default defineConfig([
 	{
 		...commonBuild,
-		entry: ['src/index.ts', 'src/utils/*/index.ts'],
+		entry: ['./src/index.ts', './src/utils/*/index.ts'],
 		define: define(),
 	},
 	{
 		...commonBuild,
 		entry: ['src/index.ts'],
-		outDir: 'dist/node',
+		outDir: './dist/node',
 		define: define({
 			node: true,
 		}),

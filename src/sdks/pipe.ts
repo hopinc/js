@@ -1,9 +1,13 @@
 import {create} from '@onehop/json-methods';
-import {API, Id} from '../rest/index.js';
-import {Regions} from '../rest/types/ignite.js';
-import {DeliveryProtocol} from '../rest/types/pipe.js';
-import {sdk} from './create.js';
+import type {API, Id} from '../rest/index.ts';
+import {Regions} from '../rest/types/ignite.ts';
+import type {DeliveryProtocol} from '../rest/types/pipe.ts';
+import {sdk} from './create.ts';
 
+/**
+ * Pipe SDK client
+ * @public
+ */
 export const pipe = sdk(client => {
 	const Rooms = create<API.Pipe.Room>().methods({
 		async delete() {
@@ -60,7 +64,7 @@ export const pipe = sdk(client => {
 			/**
 			 * Deletes a Pipe room
 			 *
-			 * @param room The ID of the Pipe room to delete.
+			 * @param room - The ID of the Pipe room to delete.
 			 */
 			async delete(room: Id<'pipe_room'>) {
 				await client.delete('/v1/pipe/rooms/:room_id', undefined, {

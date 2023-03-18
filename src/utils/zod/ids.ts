@@ -1,10 +1,11 @@
 import {z} from 'zod';
-import {Id, IdPrefixes, validateId} from '../../rest/index.js';
+import {type Id, type IdPrefixes, validateId} from '../../rest/index.ts';
 
 /**
  * Generate a Zod schema for an ID prefix
- * @param prefix Prefix of the ID
+ * @param prefix - Prefix of the ID
  * @returns A Zod schema that resolve to a valid ID
+ * @public
  *
  * @example
  * ```ts
@@ -20,6 +21,6 @@ export function hopId<Prefix extends IdPrefixes>(prefix: Prefix) {
 		.string()
 		.refine(
 			(value): value is Id<Prefix> => validateId(value, prefix),
-			`Id must be a valid ${prefix} id`,
+			`Id must be a valid \`${prefix}\` id`,
 		);
 }

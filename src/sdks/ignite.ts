@@ -1,18 +1,22 @@
-import {create, Infer} from '@onehop/json-methods';
-import {API, assertId, Id} from '../rest/index.js';
+import {type Infer, create} from '@onehop/json-methods';
+import {API, type Id, assertId} from '../rest/index.ts';
 import {
-	Deployment,
-	DeploymentConfig,
-	DeploymentMetaData,
-	Gateway,
+	type Deployment,
+	type DeploymentConfig,
+	type DeploymentMetadata,
+	type Gateway,
 	GatewayType,
 	RuntimeType,
-} from '../rest/types/ignite.js';
-import {parseSize, validateId} from '../util/index.js';
-import {sdk} from './create.js';
+} from '../rest/types/ignite.ts';
+import {parseSize, validateId} from '../util/index.ts';
+import {sdk} from './create.ts';
 
 const SIX_MB_IN_BYTES = 6 * 1024 * 1024;
 
+/**
+ * Ignite SDK client
+ * @public
+ */
 export const ignite = sdk(client => {
 	const Gateways = create<API.Ignite.Gateway>().methods({
 		async addDomain(domain: string) {
@@ -71,8 +75,8 @@ export const ignite = sdk(client => {
 	 * Creates a new deployment.
 	 * You should use this overload if you are authorizing with a bearer or pat.
 	 *
-	 * @param configOrProject The project ID to create the deployment in.
-	 * @param bearerOrPatConfig The deployment config to create.
+	 * @param configOrProject - The project ID to create the deployment in.
+	 * @param bearerOrPatConfig - The deployment config to create.
 	 */
 	async function createDeployment(
 		configOrProject: Id<'project'>,
@@ -83,7 +87,7 @@ export const ignite = sdk(client => {
 	 * Create a new deployment. You should use this overload if you are authorizing with a project token and
 	 * not with a bearer or pat.
 	 *
-	 * @param configOrProject The config for this deployment.
+	 * @param configOrProject - The config for this deployment.
 	 */
 	async function createDeployment(
 		configOrProject: API.Ignite.CreateDeploymentConfig,
@@ -158,8 +162,8 @@ export const ignite = sdk(client => {
 	/**
 	 * Gets a deployment by name
 	 *
-	 * @param projectId The project ID. You only need to provide this if you are getting by name.
-	 * @param name The deployment name to get
+	 * @param projectId - The project ID. You only need to provide this if you are getting by name.
+	 * @param name - The deployment name to get
 	 */
 	async function getDeployment(
 		name: string,
@@ -169,7 +173,7 @@ export const ignite = sdk(client => {
 	/**
 	 * Gets a deployment by id
 	 *
-	 * @param id The deployment ID
+	 * @param id - The deployment ID
 	 */
 	async function getDeployment(
 		id: Id<'deployment'>,
@@ -202,11 +206,58 @@ export const ignite = sdk(client => {
 		return Deployments.from(deployment);
 	}
 
+	/**
+	 * Deletes a container and recreates it after deletion
+	 *
+	 * @param container_id - The ID of the container to delete
+	 * @param options - Options object
+	 */
+	async function deleteContainer(
+		container_id: Id<'container'>,
+		options: {recreate: true},
+	): Promise<API.Ignite.Container>;
+
+	/**
+	 * Deletes a container. This will not recreate the container.
+	 *
+	 * @param container - The ID of the container to delete
+	 * @param options - Options object
+	 */
+	async function deleteContainer(
+		container_id: Id<'container'>,
+		options?: {recreate?: false},
+	): Promise<undefined>;
+
+	/**
+	 * Deletes a container, and optionally recreates it after deletion
+	 *
+	 * @param container - The ID of the container to delete
+	 * @param options - Options object
+	 */
+	async function deleteContainer(
+		container_id: Id<'container'>,
+		options: {
+			recreate?: boolean;
+		} = {},
+	) {
+		const d = await client.delete(
+			'/v1/ignite/containers/:container_id',
+			undefined,
+			{container_id, recreate: options.recreate ? 'true' : undefined},
+		);
+
+		if (!d) {
+			return;
+		}
+
+		return d.container;
+	}
+
 	const deploymentGateways = {
 		/**
 		 * Fecthes all gateways attached to a deployment
 		 *
-		 * @param deploymentId The ID of the deployment to fetch gateways for
+		 * @param deploymentId - The ID of the deployment to fetch gateways for
 		 */
 		async getAll(deploymentId: Id<'deployment'>) {
 			const {gateways} = await client.get(
@@ -220,10 +271,10 @@ export const ignite = sdk(client => {
 		/**
 		 * Creates and attaches a gateway to a deployment
 		 *
-		 * @param deployment The deployment to create a gateway on
-		 * @param type The type of the gatway to create, either internal or external
-		 * @param protocol The protocol that the gateway will listen for
-		 * @param targetPort The port to listen on
+		 * @param deployment - The deployment to create a gateway on
+		 * @param type - The type of the gatway to create, either internal or external
+		 * @param protocol - The protocol that the gateway will listen for
+		 * @param targetPort - The port to listen on
 		 */
 		async create(
 			deployment: Deployment | Deployment['id'],
@@ -287,8 +338,8 @@ export const ignite = sdk(client => {
 			/**
 			 * Adds a domain to a gateway
 			 *
-			 * @param gatewayId The ID of the gateway
-			 * @param domain The full name of the domain
+			 * @param gatewayId - The ID of the gateway
+			 * @param domain - The full name of the domain
 			 */
 			async addDomain(gatewayId: Id<'gateway'>, domain: string) {
 				await client.post(
@@ -301,7 +352,7 @@ export const ignite = sdk(client => {
 			/**
 			 * Fetches a gateway by ID
 			 *
-			 * @param gatewayId The ID of the gateway to retrieve
+			 * @param gatewayId - The ID of the gateway to retrieve
 			 */
 			async get(gatewayId: Id<'gateway'>) {
 				const {gateway} = await client.get('/v1/ignite/gateways/:gateway_id', {
@@ -374,7 +425,7 @@ export const ignite = sdk(client => {
 			/**
 			 * Get all containers for a deployment
 			 *
-			 * @param deployment The ID of the deployment to get
+			 * @param deployment - The ID of the deployment to get
 			 * @returns A list of all containers for that project
 			 */
 			async getContainers(deployment: Id<'deployment'>) {
@@ -389,7 +440,7 @@ export const ignite = sdk(client => {
 			/**
 			 * Gets all deployments for a project
 			 *
-			 * @param projectId The project ID to list deployments for. You only need to provide this if you are using bearer or PAT authentication.
+			 * @param projectId - The project ID to list deployments for. You only need to provide this if you are using bearer or PAT authentication.
 			 * @returns A list of deployments for the given project.
 			 */
 			async getAll(projectId?: Id<'project'>) {
@@ -416,7 +467,7 @@ export const ignite = sdk(client => {
 			/**
 			 * Deletes a deployment
 			 *
-			 * @param deployment The ID of the deployment
+			 * @param deployment - The ID of the deployment
 			 */
 			async delete(deployment: Id<'deployment'>) {
 				await client.delete(
@@ -428,7 +479,7 @@ export const ignite = sdk(client => {
 
 			async patchMetadata(
 				deploymentId: Id<'deployment'>,
-				metadata: Partial<DeploymentMetaData>,
+				metadata: Partial<DeploymentMetadata>,
 			) {
 				const {deployment} = await client.patch(
 					'/v1/ignite/deployments/:deployment_id/metadata',
@@ -438,43 +489,15 @@ export const ignite = sdk(client => {
 
 				return deployment;
 			},
-
-			/**
-			 * @deprecated This property has moved — use hop.ignite.gateways instead
-			 */
-			gateways: deploymentGateways,
 		},
 
 		containers: {
-			/**
-			 * Deletes a container
-			 *
-			 * @param container The ID of the container to delete.
-			 */
-			async delete(
-				container_id: Id<'container'>,
-				options: Partial<{
-					recreate: boolean;
-				}> = {},
-			) {
-				const d = await client.delete(
-					'/v1/ignite/containers/:container_id',
-					undefined,
-					{
-						container_id,
-						recreate: options.recreate ? 'true' : undefined,
-					},
-				);
-
-				if (!d) return;
-
-				return d;
-			},
+			delete: deleteContainer,
 
 			/**
 			 * Get the logs for a container
 			 *
-			 * @param container The ID of the container
+			 * @param container - The ID of the container
 			 * @returns
 			 */
 			async getLogs(
@@ -494,6 +517,10 @@ export const ignite = sdk(client => {
 				return logs;
 			},
 
+			/**
+			 * Stop a container
+			 * @param container - The ID of the container
+			 */
 			async stop(container: Id<'container'>) {
 				await updateContainerState(
 					container,
@@ -501,6 +528,10 @@ export const ignite = sdk(client => {
 				);
 			},
 
+			/**
+			 * Start a container
+			 * @param container - The ID of the container
+			 */
 			async start(container: Id<'container'>) {
 				await updateContainerState(
 					container,
@@ -511,7 +542,7 @@ export const ignite = sdk(client => {
 			/**
 			 * Creates a container
 			 *
-			 * @param deployment The ID of a deployment to create a container in.
+			 * @param deployment - The ID of a deployment to create a container in.
 			 * @returns The newly created container.
 			 */
 			async create(deployment: Id<'deployment'>) {

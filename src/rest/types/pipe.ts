@@ -1,9 +1,17 @@
-import {Empty, Id, Timestamp} from '../../util/types.js';
-import {Endpoint} from '../endpoints.js';
-import {Regions} from './ignite.js';
+import type {Empty, Id, Timestamp} from '../../util/types.ts';
+import type {Endpoint} from '../endpoints.ts';
+import type {Regions} from './ignite.ts';
 
+/**
+ * A protocol that can be used to deliver a stream
+ * @public
+ */
 export type DeliveryProtocol = 'webrtc' | 'hls';
 
+/**
+ * A room that you can stream to
+ * @public
+ */
 export interface Room {
 	/**
 	 * The ID of this stream
@@ -51,6 +59,10 @@ export interface Room {
 	state: 'live' | 'offline';
 }
 
+/**
+ * The endpoints for the pipe API
+ * @public
+ */
 export type PipeEndpoints =
 	| Endpoint<'GET', '/v1/pipe/rooms', {rooms: Room[]}>
 	| Endpoint<
@@ -71,11 +83,13 @@ export type PipeEndpoints =
 
 				ephemeral: boolean;
 
-				llhls_config?: {
-					wcl_delay: number;
-					artificial_delay: number;
-					max_playout_bitrate_preset: string;
-				};
+				llhls_config?:
+					| {
+							wcl_delay: number;
+							artificial_delay: number;
+							max_playout_bitrate_preset: string;
+					  }
+					| undefined;
 			}
 	  >
 	| Endpoint<'DELETE', '/v1/pipe/rooms/:room_id', Empty>;

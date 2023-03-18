@@ -1,21 +1,30 @@
 import {create} from '@onehop/json-methods';
-import {API, Id} from '../rest/index.js';
-import {sdk} from './create.js';
+import type {API, Id} from '../rest/index.ts';
+import {sdk} from './create.ts';
 
 /**
  * New state to set to a channel, or a callback function that will produce the new state
+ * @public
  */
-export type SetStateAction<T extends API.Channels.State> =
+export type SetStateAction<T extends API.Channels.AnyStateObject> =
 	| T
 	| ((oldState: T) => T | Promise<T>);
 
+/**
+ * Channels SDK client
+ * @public
+ */
 export const channels = sdk(client => {
 	const Channels = create<API.Channels.Channel>().methods({
-		async setState<T extends API.Channels.State>(state: SetStateAction<T>) {
+		async setState<T extends API.Channels.AnyStateObject>(
+			state: SetStateAction<T>,
+		) {
 			await updateState(this.id, state, 'set');
 		},
 
-		async patchState<T extends API.Channels.State>(state: SetStateAction<T>) {
+		async patchState<T extends API.Channels.AnyStateObject>(
+			state: SetStateAction<T>,
+		) {
 			await updateState(this.id, state, 'patch');
 		},
 
@@ -32,12 +41,12 @@ export const channels = sdk(client => {
 		},
 	});
 
-	async function updateState<T extends API.Channels.State>(
+	async function updateState<T extends API.Channels.AnyStateObject>(
 		channelId: API.Channels.Channel['id'],
 		newState: SetStateAction<T>,
 		mode: 'patch' | 'set',
 	) {
-		let state: API.Channels.State;
+		let state: API.Channels.AnyStateObject;
 
 		if (typeof newState === 'function') {
 			const {state: oldState} = await client.get(
@@ -65,11 +74,11 @@ export const channels = sdk(client => {
 		/**
 		 * Creates a new channel
 		 *
-		 * @param type The type of the channel to create
-		 * @param id An ID to assign to the channel (optional, set this to `undefined` or `null` if you do not want to specify an ID)
-		 * @param project A project ID (if necessary) to assign this to
+		 * @param type - The type of the channel to create
+		 * @param id - An ID to assign to the channel (optional, set this to `undefined` or `null` if you do not want to specify an ID)
+		 * @param project - A project ID (if necessary) to assign this to
 		 */
-		async create<T extends API.Channels.State>(
+		async create<T extends API.Channels.AnyStateObject>(
 			type: API.Channels.ChannelType,
 			id?: string | null,
 			options?: {state?: T} | null,
@@ -107,7 +116,7 @@ export const channels = sdk(client => {
 		/**
 		 * Get all channels for a project
 		 *
-		 * @param project An optional project ID if authenticating with a PAT or Bearer
+		 * @param project - An optional project ID if authenticating with a PAT or Bearer
 		 */
 		async getAll(project?: Id<'project'>) {
 			const {channels} = await client.get('/v1/channels', {project});
@@ -152,7 +161,9 @@ export const channels = sdk(client => {
 			return tokens;
 		},
 
-		async setState<T extends API.Channels.State = API.Channels.State>(
+		async setState<
+			T extends API.Channels.AnyStateObject = API.Channels.AnyStateObject,
+		>(
 			channel: API.Channels.Channel | API.Channels.Channel['id'],
 			state: SetStateAction<T>,
 		) {
@@ -160,7 +171,7 @@ export const channels = sdk(client => {
 			return updateState(id, state, 'set');
 		},
 
-		async patchState<T extends API.Channels.State>(
+		async patchState<T extends API.Channels.AnyStateObject>(
 			channel: API.Channels.Channel | API.Channels.Channel['id'],
 			state: SetStateAction<T>,
 		) {
@@ -171,9 +182,9 @@ export const channels = sdk(client => {
 		/**
 		 * Publishes a new event to a channel
 		 *
-		 * @param channel The channel to publish to
-		 * @param event The event name
-		 * @param data The data for this event
+		 * @param channel - The channel to publish to
+		 * @param event - The event name
+		 * @param data - The data for this event
 		 */
 		async publishMessage<T>(
 			channel: API.Channels.Channel | API.Channels.Channel['id'],
@@ -213,10 +224,13 @@ export const channels = sdk(client => {
 			/**
 			 * Creates a new channel token for a project
 			 *
-			 * @param state The state to set on the token
-			 * @param project The project to attach this token to
+			 * @param state - The state to set on the token
+			 * @param project - The project to attach this token to
 			 */
-			async create(state: API.Channels.State = {}, project?: Id<'project'>) {
+			async create(
+				state: API.Channels.AnyStateObject = {},
+				project?: Id<'project'>,
+			) {
 				if (!project && client.authType !== 'ptk') {
 					throw new Error(
 						'Project must be provided when creating a channel token with bearer or PAT auth',
@@ -267,9 +281,9 @@ export const channels = sdk(client => {
 
 			/**
 			 * Publishes a direct message to a single token
-			 * @param token The token to publish a direct message to
-			 * @param event The event name
-			 * @param data The data for this event
+			 * @param token - The token to publish a direct message to
+			 * @param event - The event name
+			 * @param data - The data for this event
 			 */
 			async publishDirectMessage<T>(
 				token: Id<'leap_token'>,
