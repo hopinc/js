@@ -1,5 +1,16 @@
 # @onehop/js
 
+## 1.30.0
+
+### Minor Changes
+
+- e065176: Convert to ts 5, export more symbols, deprecate some others
+
+### Patch Changes
+
+- 4b6e668: Converted to .ts imports, added some byte helper fns (from hop-go)
+- abb1326: Properly JSDoc all symbols
+
 ## 1.29.0
 
 ### Minor Changes
