@@ -90,25 +90,3 @@ export namespace typedChannelsClient {
 		return {schemas};
 	}
 }
-
-declare const hop: Hop;
-
-const client = typedChannelsClient.create(
-	hop,
-	typedChannelsClient.state<{name: string}>(),
-	typedChannelsClient.events<{
-		CREATE_MESSAGE: {
-			content: string;
-		};
-	}>({
-		CREATE_MESSAGE: z.object({
-			content: z.string(),
-		}),
-	}),
-);
-
-const messages = client.selectChannel('messages');
-
-await messages.publish('CREATE_MESSAGE', {
-	content: 'Hello world',
-});

@@ -2,7 +2,7 @@
 
 Typed channels is a small experiment that will (probably) ship eventually. It's a small wrapper to make it easier to work with channels and TypeScript. You can share a single object of all possible events between your backend and client, so that you'll get compile-time errors if you try to send an event that doesn't exist .
 
-> **Info**
+> **Note**
 > Types can be defined in two ways here. Either with Zod schemas, or with TypeScript types. The Zod schemas are recommended, as you'll still have compile time safety, but you'll also get runtime validation. If you're using TypeScript types, you'll only get compile-time safety.
 
 ## Example
