@@ -19,7 +19,7 @@ export type EventsClientDefinition<Events> = {
 		| undefined;
 };
 
-export namespace typedChannelsClient {
+export namespace unstable_typedChannelsClient {
 	export function create<
 		State extends AnyStateObject,
 		Events extends AnyEventsDefinition,
@@ -34,10 +34,15 @@ export namespace typedChannelsClient {
 					event: Extract<K, string>,
 					data: Events[K],
 				) => {
-					const parsed =
-						(await eventsDefinition.schemas?.[event].parseAsync(data)) ?? data;
+					if (eventsDefinition.schemas?.[event]) {
+						const parsed = await eventsDefinition.schemas[event].parseAsync(
+							data,
+						);
 
-					return hop.channels.publishMessage(channel, event, parsed);
+						return hop.channels.publishMessage(channel, event, parsed);
+					}
+
+					return hop.channels.publishMessage(channel, event, data);
 				},
 
 				delete: async () => {
@@ -51,6 +56,7 @@ export namespace typedChannelsClient {
 				setState: async (state: sdks.ChannelSetStateAction<State>) => {
 					if (stateDefinition.schema) {
 						const parsed = await stateDefinition.schema.parseAsync(state);
+
 						return hop.channels.setState(channel, parsed);
 					}
 
