@@ -33,9 +33,7 @@ jobs:
         run: yarn changeset version
 
       - name: Publish to npm
-        id: publish_npm
         uses: changesets/action@v1
-        continue-on-error: true
         with:
           publish: yarn release
         env:
@@ -43,7 +41,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Commit changes
-        if: steps.publish_npm.outcome == 'success'
+        continue-on-error: true
         run: |
           git config --global user.email "ci@hop.io"
           git config --global user.name "Hop CI"
