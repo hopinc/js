@@ -24,19 +24,3 @@ export function createTypedChannelsEmitter<
 		}),
 	};
 }
-
-declare const hop: Hop;
-
-type PublishableEvents = {
-	CREATE_MESSAGE: {
-		content: string;
-	};
-};
-
-const client = createTypedChannelsEmitter<PublishableEvents>(hop);
-
-const messages = client.selectChannel('messages');
-
-await messages.publish('CREATE_MESSAGE', {
-	content: '',
-});
