@@ -6,7 +6,7 @@ import {sdk} from './create.ts';
  * New state to set to a channel, or a callback function that will produce the new state
  * @public
  */
-export type SetStateAction<T extends API.Channels.AnyStateObject> =
+export type ChannelSetStateAction<T extends API.Channels.AnyStateObject> =
 	| T
 	| ((oldState: T) => T | Promise<T>);
 
@@ -17,13 +17,13 @@ export type SetStateAction<T extends API.Channels.AnyStateObject> =
 export const channels = sdk(client => {
 	const Channels = create<API.Channels.Channel>().methods({
 		async setState<T extends API.Channels.AnyStateObject>(
-			state: SetStateAction<T>,
+			state: ChannelSetStateAction<T>,
 		) {
 			await updateState(this.id, state, 'set');
 		},
 
 		async patchState<T extends API.Channels.AnyStateObject>(
-			state: SetStateAction<T>,
+			state: ChannelSetStateAction<T>,
 		) {
 			await updateState(this.id, state, 'patch');
 		},
@@ -43,7 +43,7 @@ export const channels = sdk(client => {
 
 	async function updateState<T extends API.Channels.AnyStateObject>(
 		channelId: API.Channels.Channel['id'],
-		newState: SetStateAction<T>,
+		newState: ChannelSetStateAction<T>,
 		mode: 'patch' | 'set',
 	) {
 		let state: API.Channels.AnyStateObject;
@@ -138,7 +138,7 @@ export const channels = sdk(client => {
 
 		async subscribeTokens(
 			channel: API.Channels.Channel | API.Channels.Channel['id'],
-			tokens: Id<'leap_token'>[] | Set<Id<'leap_token'>>,
+			tokens: Iterable<Id<'leap_token'>>,
 		) {
 			const promises: Array<Promise<void>> = [];
 
@@ -165,7 +165,7 @@ export const channels = sdk(client => {
 			T extends API.Channels.AnyStateObject = API.Channels.AnyStateObject,
 		>(
 			channel: API.Channels.Channel | API.Channels.Channel['id'],
-			state: SetStateAction<T>,
+			state: ChannelSetStateAction<T>,
 		) {
 			const id = typeof channel === 'object' ? channel.id : channel;
 			return updateState(id, state, 'set');
@@ -173,7 +173,7 @@ export const channels = sdk(client => {
 
 		async patchState<T extends API.Channels.AnyStateObject>(
 			channel: API.Channels.Channel | API.Channels.Channel['id'],
-			state: SetStateAction<T>,
+			state: ChannelSetStateAction<T>,
 		) {
 			const id = typeof channel === 'object' ? channel.id : channel;
 			return updateState(id, state, 'patch');
