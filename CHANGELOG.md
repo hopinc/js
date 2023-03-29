@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.31.0
+
+### Minor Changes
+
+- 90d790e: - Export all SDK functions under `sdks` namespace
+
 ## 1.30.0
 
 ### Minor Changes
