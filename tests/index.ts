@@ -6,10 +6,9 @@ import {test} from 'node:test';
 // @ts-expect-error This is usually injected by tsup
 globalThis.TSUP_IS_NODE = true;
 
-import {id, Hop, validateId} from '../src/index.ts';
+import {Hop, id, validateId} from '../src/index.ts';
 
-const BASE_URL =
-	process.env.TEST_HOP_API_BASE_URL ?? 'https://api-staging.hop.io';
+const BASE_URL = process.env.TEST_HOP_API_BASE_URL ?? 'https://api.hop.io';
 
 const hop = new Hop(
 	id(process.env.HOP_TOKEN, ['ptk', 'bearer', 'pat']),
