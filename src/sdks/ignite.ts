@@ -1,12 +1,12 @@
-import {type Infer, create} from '@onehop/json-methods';
-import {API, type Id, assertId} from '../rest/index.ts';
+import {create, type Infer} from '@onehop/json-methods';
+import {API, assertId, type Id} from '../rest/index.ts';
 import {
+	GatewayType,
+	RuntimeType,
 	type Deployment,
 	type DeploymentConfig,
 	type DeploymentMetadata,
 	type Gateway,
-	GatewayType,
-	RuntimeType,
 } from '../rest/types/ignite.ts';
 import {parseSize, validateId} from '../util/index.ts';
 import {sdk} from './create.ts';

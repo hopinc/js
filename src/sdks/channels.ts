@@ -36,6 +36,10 @@ export const channels = sdk(client => {
 			await channelsSDK.subscribeTokens(this.id, tokens);
 		},
 
+		async removeToken(token: Id<'leap_token'>) {
+			await channelsSDK.removeToken(this.id, token);
+		},
+
 		async publishMessage(name: string, data: unknown) {
 			await channelsSDK.publishMessage(this.id, name, data);
 		},
@@ -136,14 +140,40 @@ export const channels = sdk(client => {
 			);
 		},
 
+		async removeToken(
+			channel: API.Channels.Channel | API.Channels.Channel['id'],
+			token: Id<'leap_token'>,
+		) {
+			const id = typeof channel === 'object' ? channel.id : channel;
+
+			await client.delete(
+				'/v1/channels/:channel_id/subscribers/:token',
+				undefined,
+				{channel_id: id, token},
+			);
+		},
+
 		async subscribeTokens(
 			channel: API.Channels.Channel | API.Channels.Channel['id'],
-			tokens: Id<'leap_token'>[] | Set<Id<'leap_token'>>,
+			tokens: Iterable<Id<'leap_token'>>,
 		) {
 			const promises: Array<Promise<void>> = [];
 
 			for (const subscription of tokens) {
 				promises.push(this.subscribeToken(channel, subscription));
+			}
+
+			await Promise.allSettled(promises);
+		},
+
+		async removeTokens(
+			channel: API.Channels.Channel | API.Channels.Channel['id'],
+			tokens: Iterable<Id<'leap_token'>>,
+		) {
+			const promises: Array<Promise<void>> = [];
+
+			for (const subscription of tokens) {
+				promises.push(this.removeToken(channel, subscription));
 			}
 
 			await Promise.allSettled(promises);
