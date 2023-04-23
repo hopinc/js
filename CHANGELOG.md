@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.31.1
+
+### Patch Changes
+
+- 4dca717: Added support for unsubscribing a token from a channel
+
 ## 1.31.0
 
 ### Minor Changes
