@@ -557,7 +557,7 @@ __metadata:
     tsx: 3.12.6
     typedoc: 0.23.28
     typedoc-plugin-markdown: 3.14.0
-    typedoc-plugin-missing-exports: 1.0.0
+    typedoc-plugin-missing-exports: 2.0.0
     typescript: ^5.0.2
     zod: ^3.21.4
   languageName: unknown
@@ -3889,12 +3889,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-plugin-missing-exports@npm:1.0.0":
-  version: 1.0.0
-  resolution: "typedoc-plugin-missing-exports@npm:1.0.0"
+"typedoc-plugin-missing-exports@npm:2.0.0":
+  version: 2.0.0
+  resolution: "typedoc-plugin-missing-exports@npm:2.0.0"
   peerDependencies:
-    typedoc: 0.22.x || 0.23.x
-  checksum: 11ef3ba347a88924397f2f2f84216e5d41f9714baba671e4f9a86dd4de22d5e5e47477a295776c4f489be91065a152fedcbfa9aa6cba90499894e6670441ce31
+    typedoc: 0.24.x
+  checksum: 93981a78a83bd5c725c3342f9f2803df0b44067118b407ab06185c8f5a4e7998b1baeadba073ffb596f67048a3a692556b8ab09c617bcf039024226662a87949
   languageName: node
   linkType: hard
 
