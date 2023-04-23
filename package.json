@@ -53,7 +53,7 @@
 		"tsup": "6.7.0",
 		"tsx": "3.12.6",
 		"typedoc": "0.23.28",
-		"typedoc-plugin-markdown": "3.14.0",
+		"typedoc-plugin-markdown": "3.15.2",
 		"typedoc-plugin-missing-exports": "1.0.0",
 		"typescript": "^5.0.2"
 	},
