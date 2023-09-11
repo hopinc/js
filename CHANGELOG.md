@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.32.0
+
+### Minor Changes
+
+- fd32709: Adds dockerfile to BuildSettings interface
+
 ## 1.31.1
 
 ### Patch Changes
