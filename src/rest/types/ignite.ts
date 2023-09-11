@@ -302,6 +302,11 @@ export interface BuildSettings {
 	 * Root directory for build
 	 */
 	root_directory?: string;
+
+	/**
+	 * Specifies where the dockerfile is located
+	 */
+	dockerfile?: string;
 }
 
 /**
