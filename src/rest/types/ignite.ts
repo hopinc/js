@@ -799,9 +799,11 @@ export interface ContainerLog {
 	nonce: string;
 
 	/**
-	 * The level of the log. stdout becomes `info`
+	 * The level of the log
+	 *
+	 * ("error" and "log" are for backwards compatibility, new logs will be "stdout" and "stderr")
 	 */
-	level: 'stdout' | 'stderr';
+	level: 'stdout' | 'stderr' | 'error' | 'info';
 }
 
 /**
