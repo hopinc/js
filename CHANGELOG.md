@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.33.0
+
+### Minor Changes
+
+- 6abb7ae: Changes Container log levels to be the correct value ("info" -> "stdout" "error" -> "stderr")
+
 ## 1.32.0
 
 ### Minor Changes
