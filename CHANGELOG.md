@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.34.0
+
+### Minor Changes
+
+- e75ae82: Add back "info" and "error" for backwards compatibility
+
 ## 1.33.0
 
 ### Minor Changes
