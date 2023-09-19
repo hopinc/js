@@ -801,7 +801,7 @@ export interface ContainerLog {
 	/**
 	 * The level of the log. stdout becomes `info`
 	 */
-	level: 'info' | 'error';
+	level: 'stdout' | 'stderr';
 }
 
 /**
