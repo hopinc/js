@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.36.0
+
+### Minor Changes
+
+- 6bd39a0: Implement possible webhook events
+
 ## 1.35.0
 
 ### Minor Changes
