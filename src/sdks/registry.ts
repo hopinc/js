@@ -20,17 +20,28 @@ export const registry = sdk(client => {
 				return images;
 			},
 
-			async getManifest(image: string) {
+			async getManifest(image: string, project?: Id<'project'>) {
+				if (!project && client.authType !== 'ptk') {
+					throw new Error('Project is required when using a PAT or bearer');
+				}
+
 				const {manifests} = await client.get(
 					'/v1/registry/images/:image/manifests',
-					{image},
+					{image, project},
 				);
 
 				return manifests;
 			},
 
-			async delete(image: string) {
-				await client.delete('/v1/registry/images/:image', undefined, {image});
+			async delete(image: string, project?: Id<'project'>) {
+				if (!project && client.authType !== 'ptk') {
+					throw new Error('Project is required when using a PAT or bearer');
+				}
+
+				await client.delete('/v1/registry/images/:image', undefined, {
+					image,
+					project,
+				});
 			},
 		},
 	};
