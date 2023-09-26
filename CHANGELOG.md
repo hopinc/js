@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.35.0
+
+### Minor Changes
+
+- c9e568e: Allow user to fetch manifests and delete images with non-ptk authentication
+
 ## 1.34.0
 
 ### Minor Changes
