@@ -1,10 +1,4 @@
-export const POSSIBLE_EVENTS: Record<
-	string,
-	{
-		id: string;
-		name: string;
-	}[]
-> = {
+export const POSSIBLE_EVENTS = {
 	Channels: [
 		{
 			id: 'channel.client.connected',
@@ -175,4 +169,6 @@ export const POSSIBLE_EVENTS: Record<
 			name: 'Finance Transaction',
 		},
 	],
-};
+} as const;
+
+// Todo: maybe add type-fest/readonly-deep to keep the as const but also keep a structure type
