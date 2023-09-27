@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.37.0
+
+### Minor Changes
+
+- 0065422: Adds webhook ID to ID_PREFIXES
+
 ## 1.36.1
 
 ### Patch Changes
