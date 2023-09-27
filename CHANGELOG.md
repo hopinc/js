@@ -1,5 +1,12 @@
 # @onehop/js
 
+## 1.36.1
+
+### Patch Changes
+
+- 1c305d4: cast webhook's POSSIBLE_EVENTS to a const
+- 08ba517: Remove unknown event
+
 ## 1.36.0
 
 ### Minor Changes
