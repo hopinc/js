@@ -137,6 +137,10 @@ export const ID_PREFIXES = [
 		prefix: 'session',
 		description: 'Session ID for sessions on your account.',
 	},
+	{
+		prefix: 'webhook',
+		description: 'Webhook ID for webhooks on a project.',
+	},
 ] as const;
 
 /**
