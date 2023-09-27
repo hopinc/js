@@ -59,10 +59,6 @@ export const POSSIBLE_EVENTS = {
 			name: 'Build Cancelled',
 		},
 		{
-			id: 'ignite.deployment.deploy.validating',
-			name: 'Deploy Validating',
-		},
-		{
 			id: 'ignite.deployment.rollout.created',
 			name: 'Rollout Created',
 		},
