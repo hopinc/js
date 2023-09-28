@@ -1,24 +1,24 @@
 export const POSSIBLE_EVENTS = {
 	Channels: [
 		{
+			id: 'channel.created',
+			name: 'Created',
+		},
+		{
 			id: 'channel.client.connected',
 			name: 'Client Connected',
 		},
 		{
-			id: 'channel.client.disconnected',
-			name: 'Client Disconnected',
-		},
-		{
-			id: 'channel.created',
-			name: 'Created',
+			id: 'channel.updated',
+			name: 'Updated',
 		},
 		{
 			id: 'channel.deleted',
 			name: 'Deleted',
 		},
 		{
-			id: 'channel.updated',
-			name: 'Updated',
+			id: 'channel.client.disconnected',
+			name: 'Client Disconnected',
 		},
 	],
 	Ignite: [
@@ -35,20 +35,20 @@ export const POSSIBLE_EVENTS = {
 			name: 'Deployment Deleted',
 		},
 		{
-			id: 'ignite.deployment.build.started',
-			name: 'Build Started',
-		},
-		{
-			id: 'ignite.deployment.build.completed',
-			name: 'Build Completed',
-		},
-		{
 			id: 'ignite.deployment.build.created',
 			name: 'Build Created',
 		},
 		{
+			id: 'ignite.deployment.build.started',
+			name: 'Build Started',
+		},
+		{
 			id: 'ignite.deployment.build.updated',
 			name: 'Build Updated',
+		},
+		{
+			id: 'ignite.deployment.build.completed',
+			name: 'Build Completed',
 		},
 		{
 			id: 'ignite.deployment.build.failed',
@@ -117,6 +117,10 @@ export const POSSIBLE_EVENTS = {
 	],
 	Project: [
 		{
+			id: 'project.updated',
+			name: 'Updated',
+		},
+		{
 			id: 'project.member.created',
 			name: 'Member Created',
 		},
@@ -127,18 +131,6 @@ export const POSSIBLE_EVENTS = {
 		{
 			id: 'project.member.deleted',
 			name: 'Member Deleted',
-		},
-		{
-			id: 'project.members.add',
-			name: 'Member Added',
-		},
-		{
-			id: 'project.members.remove',
-			name: 'Member Removed',
-		},
-		{
-			id: 'project.updated',
-			name: 'Updated',
 		},
 		{
 			id: 'project.tokens.create',
