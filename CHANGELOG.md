@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.37.1
+
+### Patch Changes
+
+- 6d3d170: Removes unused/duplicated webhook events + sorts them in a consistent manner
+
 ## 1.37.0
 
 ### Minor Changes
