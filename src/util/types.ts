@@ -1,4 +1,5 @@
 import {formatList} from './lists.ts';
+import type {POSSIBLE_EVENTS} from './webhooks.ts';
 
 /**
  * All methods the Hop API accepts
@@ -173,6 +174,17 @@ export type InternalHopDomain = `${string}.hop`;
  * @public
  */
 export type AnyId = Id<IdPrefixes>;
+
+/**
+ * A union of all possible webhook groups
+ */
+export type PossibleWebhookGroups = keyof typeof POSSIBLE_EVENTS;
+
+/**
+ * A union of all possible webhook event IDs
+ */
+export type PossibleWebhookIDs =
+	(typeof POSSIBLE_EVENTS)[PossibleWebhookGroups][number]['id'];
 
 /**
  * Checks if a string is a valid Hop ID prefix
