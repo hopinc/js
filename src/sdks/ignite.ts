@@ -255,7 +255,7 @@ export const ignite = sdk(client => {
 
 	const deploymentGateways = {
 		/**
-		 * Fecthes all gateways attached to a deployment
+		 * Fetches all gateways attached to a deployment
 		 *
 		 * @param deploymentId - The ID of the deployment to fetch gateways for
 		 */
@@ -272,7 +272,7 @@ export const ignite = sdk(client => {
 		 * Creates and attaches a gateway to a deployment
 		 *
 		 * @param deployment - The deployment to create a gateway on
-		 * @param type - The type of the gatway to create, either internal or external
+		 * @param type - The type of the gateway to create, either internal or external
 		 * @param protocol - The protocol that the gateway will listen for
 		 * @param targetPort - The port to listen on
 		 */
@@ -315,7 +315,60 @@ export const ignite = sdk(client => {
 		},
 	};
 
+	const groups = {
+		async create(
+			name: string,
+			deploymentIds?: Id<'deployment'>[] | undefined,
+			projectId?: Id<'project'>,
+		) {
+			if (client.authType !== 'ptk' && !projectId) {
+				throw new Error(
+					'Project ID is required for Bearer or PAT authentication',
+				);
+			}
+
+			const {group} = await client.post(
+				'/v1/ignite/groups',
+				{
+					name,
+					deployment_ids: deploymentIds ?? [],
+				},
+				projectId ? {project: projectId} : {},
+			);
+
+			return group;
+		},
+
+		async edit(
+			groupId: Id<'deployment_group'>,
+			{
+				name,
+				position,
+			}: {name?: string | undefined; position?: number | undefined},
+			projectId?: Id<'project'>,
+		) {
+			if (client.authType !== 'ptk' && !projectId) {
+				throw new Error(
+					'Project ID is required for Bearer or PAT authentication',
+				);
+			}
+
+			const {group} = await client.patch(
+				'/v1/ignite/groups/:group_id',
+				{
+					name,
+					position,
+				},
+				{group_id: groupId, ...(projectId ? {project: projectId} : {})},
+			);
+
+			return group;
+		},
+	};
+
 	const igniteSDK = {
+		groups,
+
 		domains: {
 			delete: async (id: Id<'domain'>) => {
 				await client.delete('/v1/ignite/domains/:domain_id', undefined, {

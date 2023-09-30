@@ -141,6 +141,10 @@ export const ID_PREFIXES = [
 		prefix: 'webhook',
 		description: 'Webhook ID for webhooks on a project.',
 	},
+	{
+		prefix: 'deployment_group',
+		description: 'Group ID for Ignite deployments',
+	},
 ] as const;
 
 /**
