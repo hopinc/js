@@ -990,7 +990,11 @@ export interface DomainRedirect {
  * @public
  */
 export type IgniteEndpoints =
-	| Endpoint<'GET', '/v1/ignite/deployments', {deployments: Deployment[]}>
+	| Endpoint<
+			'GET',
+			'/v1/ignite/deployments',
+			{deployments: Deployment[]; groups: Group[]}
+	  >
 	| Endpoint<
 			'GET',
 			'/v1/ignite/deployments/:deployment_id/containers',
@@ -1130,4 +1134,10 @@ export type IgniteEndpoints =
 				name?: string | undefined;
 				position?: number | undefined;
 			}
-	  >;
+	  >
+	| Endpoint<
+			'PUT',
+			'/v1/ignite/groups/:group_id/deployments/:deployment_id',
+			{group: Group}
+	  >
+	| Endpoint<'DELETE', '/v1/ignite/groups/:group_id', Empty>;
