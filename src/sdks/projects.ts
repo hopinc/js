@@ -1,4 +1,4 @@
-import type {API, Endpoints, Id} from '../rest/index.ts';
+import type {API, Endpoints, Event, Id} from '../rest/index.ts';
 import {Request} from '../util/fetch.ts';
 import {sdk} from './create.ts';
 import type {PossibleWebhookIDs} from '../util/types.ts';
@@ -97,6 +97,43 @@ export const projects = sdk(client => {
 	};
 
 	const webhooks = {
+		/**
+		 * Utility function that returns a type-safe webhook event, throws if signature is invalid.
+		 *
+		 * @param body The stringed body received from the request
+		 * @param signature The signature from the X-Hop-Hooks-Signature
+		 * @param secret The secret provided upon webhook creation to verify the signature. (e.x: whsec_xxxxx)
+		 */
+		async constructEvent(body: string, signature: string, secret: string) {
+			const encoder = new TextEncoder();
+			const encodedBody = encoder.encode(body);
+
+			const key = await crypto.subtle.importKey(
+				'raw',
+				encoder.encode(secret),
+				{name: 'HMAC', hash: 'SHA-256'},
+				false,
+				['sign'],
+			);
+
+			const signatureBuffer = await crypto.subtle.sign(
+				'HMAC',
+				key,
+				encodedBody,
+			);
+
+			const finalSig = Array.from(new Uint8Array(signatureBuffer))
+				.map(byte => byte.toString(16).padStart(2, '0'))
+				.join('');
+
+			if (signature.toLowerCase() !== finalSig) {
+				throw new Error('Invalid signature');
+			}
+
+			const event = JSON.parse(body) as Event;
+
+			return event;
+		},
 		async get(projectId?: Id<'project'>) {
 			if (client.authType !== 'ptk' && !projectId) {
 				throw new Error(
