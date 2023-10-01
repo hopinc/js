@@ -7,6 +7,7 @@ import {
 	type DeploymentConfig,
 	type DeploymentMetadata,
 	type Gateway,
+	type Group,
 } from '../rest/types/ignite.ts';
 import {parseSize, validateId} from '../util/index.ts';
 import {sdk} from './create.ts';
@@ -327,7 +328,7 @@ export const ignite = sdk(client => {
 				);
 			}
 
-			const {group} = await client.post(
+			return await client.post(
 				'/v1/ignite/groups',
 				{
 					name,
@@ -335,8 +336,6 @@ export const ignite = sdk(client => {
 				},
 				projectId ? {project: projectId} : {},
 			);
-
-			return group;
 		},
 
 		async edit(
@@ -353,7 +352,7 @@ export const ignite = sdk(client => {
 				);
 			}
 
-			const {group} = await client.patch(
+			return await client.patch(
 				'/v1/ignite/groups/:group_id',
 				{
 					name,
@@ -361,8 +360,41 @@ export const ignite = sdk(client => {
 				},
 				{group_id: groupId, ...(projectId ? {project: projectId} : {})},
 			);
+		},
 
-			return group;
+		async move(
+			deploymentId: Id<'deployment'>,
+			groupId: Id<'deployment_group'>,
+			projectId?: Id<'project'>,
+		) {
+			if (client.authType !== 'ptk' && !projectId) {
+				throw new Error(
+					'Project ID is required for Bearer or PAT authentication',
+				);
+			}
+
+			return await client.put(
+				'/v1/ignite/groups/:group_id/deployments/:deployment_id',
+				undefined,
+				{
+					group_id: groupId,
+					deployment_id: deploymentId,
+					...(projectId ? {project: projectId} : {}),
+				},
+			);
+		},
+
+		async delete(groupId: Id<'deployment_group'>, projectId?: Id<'project'>) {
+			if (client.authType !== 'ptk' && !projectId) {
+				throw new Error(
+					'Project ID is required for Bearer or PAT authentication',
+				);
+			}
+
+			await client.delete('/v1/ignite/groups/:group_id', undefined, {
+				group_id: groupId,
+				...(projectId ? {project: projectId} : {}),
+			});
 		},
 	};
 
@@ -509,12 +541,24 @@ export const ignite = sdk(client => {
 					);
 				}
 
-				const {deployments} = await client.get(
+				const {deployments, groups} = await client.get(
 					'/v1/ignite/deployments',
 					projectId ? {project: projectId} : {},
 				);
 
-				return deployments.map(Deployments.from);
+				const groupRecord = groups.reduce((acc, group) => {
+					acc[group.id] = group;
+					return acc;
+				}, {} as Record<Group['id'], Group>);
+
+				return deployments
+					.map(deployment => ({
+						...deployment,
+						group: deployment.group_id
+							? groupRecord[deployment.group_id]
+							: null,
+					}))
+					.map(Deployments.from);
 			},
 
 			/**
