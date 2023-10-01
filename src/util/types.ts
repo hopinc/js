@@ -142,6 +142,10 @@ export const ID_PREFIXES = [
 		prefix: 'webhook',
 		description: 'Webhook ID for webhooks on a project.',
 	},
+	{
+		prefix: 'event',
+		description: 'Event ID for events sent by webhooks on a project.',
+	},
 ] as const;
 
 /**
