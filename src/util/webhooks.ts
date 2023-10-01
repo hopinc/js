@@ -5,16 +5,16 @@ export const POSSIBLE_EVENTS = {
 			name: 'Created',
 		},
 		{
-			id: 'channel.client.connected',
-			name: 'Client Connected',
-		},
-		{
 			id: 'channel.updated',
 			name: 'Updated',
 		},
 		{
 			id: 'channel.deleted',
 			name: 'Deleted',
+		},
+		{
+			id: 'channel.client.connected',
+			name: 'Client Connected',
 		},
 		{
 			id: 'channel.client.disconnected',
