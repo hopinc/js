@@ -247,6 +247,37 @@ export interface Webhook {
 }
 
 /**
+ * An event is sent from a webhook to an endpoint
+ */
+export interface Event<T extends PossibleWebhookIDs = PossibleWebhookIDs> {
+	/**
+	 * The ID of the webhook that sent this event
+	 */
+	webhook_id: Id<'webhook'>;
+	/**
+	 * The ID of the project that this event is for
+	 */
+	project_id: Id<'project'>;
+	/**
+	 * The time this event occurred at
+	 */
+	occurred_at: string;
+	/**
+	 * The ID of the event
+	 */
+	id: Id<'event'>;
+	/**
+	 * The event that occurred
+	 * @example ignite.deployment.container.updated
+	 */
+	event: T;
+	/**
+	 * The data for this event
+	 */
+	data: unknown;
+}
+
+/**
  * The endpoints for projects
  * @public
  */
