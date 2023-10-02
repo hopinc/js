@@ -159,4 +159,29 @@ export const POSSIBLE_EVENTS = {
 	],
 } as const;
 
+export async function verifyHmac(
+	body: string,
+	signature: string,
+	secret: string,
+) {
+	const encoder = new TextEncoder();
+	const encodedBody = encoder.encode(body);
+
+	const key = await crypto.subtle.importKey(
+		'raw',
+		encoder.encode(secret),
+		{name: 'HMAC', hash: 'SHA-256'},
+		false,
+		['sign'],
+	);
+
+	const signatureBuffer = await crypto.subtle.sign('HMAC', key, encodedBody);
+
+	const finalSig = Array.from(new Uint8Array(signatureBuffer))
+		.map(byte => byte.toString(16).padStart(2, '0'))
+		.join('');
+
+	return signature.toLowerCase() === finalSig;
+}
+
 // Todo: maybe add type-fest/readonly-deep to keep the as const but also keep a structure type
