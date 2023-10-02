@@ -134,7 +134,7 @@ export const projects = sdk(client => {
 
 			return event;
 		},
-		async get(projectId?: Id<'project'>) {
+		async getAll(projectId?: Id<'project'>) {
 			if (client.authType !== 'ptk' && !projectId) {
 				throw new Error(
 					'Project ID is required for bearer or PAT authentication to fetch all project members',
@@ -201,8 +201,8 @@ export const projects = sdk(client => {
 				events,
 				webhookUrl,
 			}: {
-				webhookUrl: string | undefined;
-				events: PossibleWebhookIDs[] | undefined;
+				webhookUrl?: string | undefined;
+				events?: PossibleWebhookIDs[] | undefined;
 			},
 			projectId?: Id<'project'>,
 		) {
