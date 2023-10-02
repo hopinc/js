@@ -133,23 +133,23 @@ export const POSSIBLE_EVENTS = {
 			name: 'Member Deleted',
 		},
 		{
-			id: 'project.tokens.create',
+			id: 'project.tokens.created',
 			name: 'Token Created',
 		},
 		{
-			id: 'project.tokens.delete',
+			id: 'project.tokens.deleted',
 			name: 'Token Deleted',
 		},
 		{
-			id: 'project.secrets.create',
+			id: 'project.secrets.created',
 			name: 'Secret Created',
 		},
 		{
-			id: 'project.secrets.update',
+			id: 'project.secrets.updated',
 			name: 'Secret Updated',
 		},
 		{
-			id: 'project.secrets.delete',
+			id: 'project.secrets.deleted',
 			name: 'Secret Deleted',
 		},
 		{
