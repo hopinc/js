@@ -291,6 +291,11 @@ export interface Deployment {
 	 * Build settings for deployment
 	 */
 	build_settings?: BuildSettings;
+
+	/**
+	 * The group the deployment belongs in
+	 */
+	group_id: Id<'deployment_group'> | null;
 }
 
 /**
@@ -542,6 +547,29 @@ export type HealthCheck = {
 
 	/**
 	 * When the health check was created
+	 */
+	created_at: Timestamp;
+};
+
+export type Group = {
+	/**
+	 * The ID of the group
+	 */
+	id: Id<'deployment_group'>;
+	/**
+	 * The name of the group
+	 */
+	name: string;
+	/**
+	 * The ID of the project the group belongs to
+	 */
+	project_id: Id<'project'>;
+	/**
+	 * The position of the group in the list
+	 */
+	position: number;
+	/**
+	 * The date the group was created
 	 */
 	created_at: Timestamp;
 };
@@ -962,7 +990,11 @@ export interface DomainRedirect {
  * @public
  */
 export type IgniteEndpoints =
-	| Endpoint<'GET', '/v1/ignite/deployments', {deployments: Deployment[]}>
+	| Endpoint<
+			'GET',
+			'/v1/ignite/deployments',
+			{deployments: Deployment[]; groups: Group[]}
+	  >
 	| Endpoint<
 			'GET',
 			'/v1/ignite/deployments/:deployment_id/containers',
@@ -1084,4 +1116,28 @@ export type IgniteEndpoints =
 			Partial<Omit<HealthCheck, 'id'>>
 	  >
 	| Endpoint<'DELETE', '/v1/ignite/domains/:domain_id', Empty>
-	| Endpoint<'GET', '/v1/ignite/domains/:domain_id', {domain: Domain}>;
+	| Endpoint<'GET', '/v1/ignite/domains/:domain_id', {domain: Domain}>
+	| Endpoint<
+			'POST',
+			'/v1/ignite/groups',
+			{group: Group},
+			{
+				name: string;
+				deployment_ids: Id<'deployment'>[];
+			}
+	  >
+	| Endpoint<
+			'PATCH',
+			'/v1/ignite/groups/:group_id',
+			{group: Group},
+			{
+				name?: string | undefined;
+				position?: number | undefined;
+			}
+	  >
+	| Endpoint<
+			'PUT',
+			'/v1/ignite/groups/:group_id/deployments/:deployment_id',
+			{group: Group}
+	  >
+	| Endpoint<'DELETE', '/v1/ignite/groups/:group_id', Empty>;
