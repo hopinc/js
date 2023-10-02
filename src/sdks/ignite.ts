@@ -328,7 +328,7 @@ export const ignite = sdk(client => {
 				);
 			}
 
-			return await client.post(
+			const {group} = await client.post(
 				'/v1/ignite/groups',
 				{
 					name,
@@ -336,6 +336,8 @@ export const ignite = sdk(client => {
 				},
 				projectId ? {project: projectId} : {},
 			);
+
+			return group;
 		},
 
 		async edit(
@@ -352,7 +354,7 @@ export const ignite = sdk(client => {
 				);
 			}
 
-			return await client.patch(
+			const {group} = await client.patch(
 				'/v1/ignite/groups/:group_id',
 				{
 					name,
@@ -360,6 +362,8 @@ export const ignite = sdk(client => {
 				},
 				{group_id: groupId, ...(projectId ? {project: projectId} : {})},
 			);
+
+			return group;
 		},
 
 		async move(
@@ -373,7 +377,7 @@ export const ignite = sdk(client => {
 				);
 			}
 
-			return await client.put(
+			const {group} = await client.put(
 				'/v1/ignite/groups/:group_id/deployments/:deployment_id',
 				undefined,
 				{
@@ -382,6 +386,8 @@ export const ignite = sdk(client => {
 					...(projectId ? {project: projectId} : {}),
 				},
 			);
+
+			return group;
 		},
 
 		async delete(groupId: Id<'deployment_group'>, projectId?: Id<'project'>) {
