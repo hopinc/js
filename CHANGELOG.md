@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.39.0
+
+### Minor Changes
+
+- 40d346a: Adds new deployment group SDKs and new types
+
 ## 1.38.0
 
 ### Minor Changes
