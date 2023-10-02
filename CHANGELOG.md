@@ -1,5 +1,17 @@
 # @onehop/js
 
+## 1.38.0
+
+### Minor Changes
+
+- cfb6a43: Webhook permissions
+
+## 1.37.2
+
+### Patch Changes
+
+- 9da7785: Fix event IDs
+
 ## 1.37.1
 
 ### Patch Changes
