@@ -20,7 +20,7 @@
 		}
 	},
 	"repository": "https://github.com/hopinc/js.git",
-	"homepage": "https://hop.io",
+	"homepage": "https://docs.hop.io/sdks/server/js",
 	"author": "Hop <developers@hop.io>",
 	"license": "MIT",
 	"sideEffects": false,
