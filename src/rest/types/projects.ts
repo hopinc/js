@@ -1,4 +1,9 @@
-import type {Empty, Id, Timestamp} from '../../util/types.ts';
+import type {
+	Empty,
+	Id,
+	PossibleWebhookIDs,
+	Timestamp,
+} from '../../util/types.ts';
 import type {Endpoint} from '../endpoints.ts';
 import type {User} from './users.ts';
 
@@ -205,6 +210,74 @@ export interface Secret {
 }
 
 /**
+ * Webhooks are used to send an event to an endpoint when something within Hop happens.
+ * @public
+ */
+export interface Webhook {
+	/**
+	 * The time this webhook was created at
+	 */
+	created_at: Timestamp;
+	/**
+	 * The events that this webhook is subscribed to
+	 */
+	events: PossibleWebhookIDs;
+	/**
+	 * The ID of the webhook
+	 */
+	id: Id<'webhook'>;
+	/**
+	 * The ID of the project this webhook is for
+	 */
+	project_id: Id<'project'>;
+	/**
+	 * The secret for this webhook
+	 * @warning This is censored after creation
+	 * @example whsec_xxxxxxxx
+	 */
+	secret: string;
+	/**
+	 * The type of the webhook
+	 */
+	type: 'http';
+	/**
+	 * The URL that this webhook will send events to, acts as an endpoint
+	 */
+	webhook_url: string;
+}
+
+/**
+ * An event is sent from a webhook to an endpoint
+ */
+export interface Event<T extends PossibleWebhookIDs = PossibleWebhookIDs> {
+	/**
+	 * The ID of the webhook that sent this event
+	 */
+	webhook_id: Id<'webhook'>;
+	/**
+	 * The ID of the project that this event is for
+	 */
+	project_id: Id<'project'>;
+	/**
+	 * The time this event occurred at
+	 */
+	occurred_at: string;
+	/**
+	 * The ID of the event
+	 */
+	id: Id<'event'>;
+	/**
+	 * The event that occurred
+	 * @example ignite.deployment.container.updated
+	 */
+	event: T;
+	/**
+	 * The data for this event
+	 */
+	data: unknown;
+}
+
+/**
  * The endpoints for projects
  * @public
  */
@@ -259,4 +332,58 @@ export type ProjectsEndpoints =
 	| Endpoint<'GET', '/v1/projects/:project_id/secrets', {secrets: Secret[]}>
 	| Endpoint<'GET', '/v1/projects/@this/secrets', {secrets: Secret[]}>
 	| Endpoint<'DELETE', '/v1/projects/:project_id/secrets/:secret_id', Empty>
-	| Endpoint<'DELETE', '/v1/projects/@this/secrets/:secret_id', Empty>;
+	| Endpoint<'DELETE', '/v1/projects/@this/secrets/:secret_id', Empty>
+	| Endpoint<'GET', '/v1/projects/:project_id/webhooks', {webhooks: Webhook[]}>
+	| Endpoint<'GET', '/v1/projects/@this/webhooks', {webhooks: Webhook[]}>
+	| Endpoint<
+			'POST',
+			'/v1/projects/:project_id/webhooks',
+			{webhook: Webhook},
+			{
+				webhook_url: string;
+				events: PossibleWebhookIDs[];
+			}
+	  >
+	| Endpoint<
+			'POST',
+			'/v1/projects/@this/webhooks',
+			{
+				webhook: Webhook;
+			},
+			{
+				webhook_url: string;
+				events: PossibleWebhookIDs[];
+			}
+	  >
+	| Endpoint<
+			'PATCH',
+			'/v1/projects/:project_id/webhooks/:webhook_id',
+			{webhook: Webhook},
+			{
+				webhook_url: string | undefined;
+				events: PossibleWebhookIDs[] | undefined;
+			}
+	  >
+	| Endpoint<
+			'PATCH',
+			'/v1/projects/@this/webhooks/:webhook_id',
+			{
+				webhook: Webhook;
+			},
+			{
+				webhook_url: string | undefined;
+				events: PossibleWebhookIDs[] | undefined;
+			}
+	  >
+	| Endpoint<'DELETE', '/v1/projects/:project_id/webhooks/:webhook_id', Empty>
+	| Endpoint<'DELETE', '/v1/projects/@this/webhooks/:webhook_id', Empty>
+	| Endpoint<
+			'POST',
+			'/v1/projects/:project_id/webhooks/:webhook_id/regenerate',
+			{secret: Webhook['secret']}
+	  >
+	| Endpoint<
+			'POST',
+			'/v1/projects/@this/webhooks/:webhook_id/regenerate',
+			{secret: Webhook['secret']}
+	  >;

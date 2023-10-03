@@ -1,4 +1,5 @@
 import {formatList} from './lists.ts';
+import type {POSSIBLE_EVENTS} from './webhooks.ts';
 
 /**
  * All methods the Hop API accepts
@@ -145,6 +146,10 @@ export const ID_PREFIXES = [
 		prefix: 'deployment_group',
 		description: 'Group ID for Ignite deployments',
 	},
+	{
+		prefix: 'event',
+		description: 'Event ID for events sent by webhooks on a project.',
+	},
 ] as const;
 
 /**
@@ -177,6 +182,17 @@ export type InternalHopDomain = `${string}.hop`;
  * @public
  */
 export type AnyId = Id<IdPrefixes>;
+
+/**
+ * A union of all possible webhook groups
+ */
+export type PossibleWebhookGroups = keyof typeof POSSIBLE_EVENTS;
+
+/**
+ * A union of all possible webhook event IDs
+ */
+export type PossibleWebhookIDs =
+	(typeof POSSIBLE_EVENTS)[PossibleWebhookGroups][number]['id'];
 
 /**
  * Checks if a string is a valid Hop ID prefix

@@ -1,6 +1,8 @@
-import type {API, Endpoints, Id} from '../rest/index.ts';
+import type {API, Endpoints, Event, Id} from '../rest/index.ts';
 import {Request} from '../util/fetch.ts';
 import {sdk} from './create.ts';
+import type {PossibleWebhookIDs} from '../util/types.ts';
+import {verifyHmac} from '../index.ts';
 
 /**
  * Projects SDK client
@@ -95,6 +97,195 @@ export const projects = sdk(client => {
 		},
 	};
 
+	const webhooks = {
+		/**
+		 * Utility function that returns a type-safe webhook event, throws if signature is invalid.
+		 *
+		 * @param body The stringed body received from the request
+		 * @param signature The signature from the X-Hop-Hooks-Signature
+		 * @param secret The secret provided upon webhook creation to verify the signature. (e.x: whsec_xxxxx)
+		 */
+		async constructEvent(body: string, signature: string, secret: string) {
+			const hmacVerified = await verifyHmac(body, signature, secret);
+			if (!hmacVerified) {
+				throw new Error('Invalid signature');
+			}
+
+			const event = JSON.parse(body) as Event;
+			return event;
+		},
+		async getAll(projectId?: Id<'project'>) {
+			if (client.authType !== 'ptk' && !projectId) {
+				throw new Error(
+					'Project ID is required for bearer or PAT authentication to fetch all project members',
+				);
+			}
+
+			if (projectId) {
+				const {webhooks} = await client.get(
+					'/v1/projects/:project_id/webhooks',
+					{
+						project_id: projectId,
+					},
+				);
+
+				return webhooks;
+			}
+
+			const {webhooks} = await client.get('/v1/projects/@this/webhooks', {});
+
+			return webhooks;
+		},
+
+		async create(
+			webhook_url: string,
+			events: PossibleWebhookIDs[],
+			projectId?: Id<'project'>,
+		) {
+			if (client.authType !== 'ptk' && !projectId) {
+				throw new Error(
+					'Project ID is required for bearer or PAT authentication to create a webhook',
+				);
+			}
+
+			if (projectId) {
+				const {webhook} = await client.post(
+					'/v1/projects/:project_id/webhooks',
+					{
+						webhook_url,
+						events,
+					},
+					{
+						project_id: projectId,
+					},
+				);
+
+				return webhook;
+			}
+
+			const {webhook} = await client.post(
+				'/v1/projects/@this/webhooks',
+				{
+					webhook_url,
+					events,
+				},
+				{},
+			);
+
+			return webhook;
+		},
+
+		async edit(
+			webhookId: Id<'webhook'>,
+			{
+				events,
+				webhookUrl,
+			}: {
+				webhookUrl?: string | undefined;
+				events?: PossibleWebhookIDs[] | undefined;
+			},
+			projectId?: Id<'project'>,
+		) {
+			if (client.authType !== 'ptk' && !projectId) {
+				throw new Error(
+					'Project ID is required for bearer or PAT authentication to edit a webhook',
+				);
+			}
+
+			if (projectId) {
+				const {webhook} = await client.patch(
+					'/v1/projects/:project_id/webhooks/:webhook_id',
+					{
+						webhook_url: webhookUrl,
+						events,
+					},
+					{
+						project_id: projectId,
+						webhook_id: webhookId,
+					},
+				);
+
+				return webhook;
+			}
+
+			const {webhook} = await client.patch(
+				'/v1/projects/@this/webhooks/:webhook_id',
+				{
+					webhook_url: webhookUrl,
+					events,
+				},
+				{
+					webhook_id: webhookId,
+				},
+			);
+
+			return webhook;
+		},
+
+		async delete(webhookId: Id<'webhook'>, projectId?: Id<'project'>) {
+			if (client.authType !== 'ptk' && !projectId) {
+				throw new Error(
+					'Project ID is required for bearer or PAT authentication to delete a webhook',
+				);
+			}
+
+			if (projectId) {
+				await client.delete(
+					'/v1/projects/:project_id/webhooks/:webhook_id',
+					undefined,
+					{
+						project_id: projectId,
+						webhook_id: webhookId,
+					},
+				);
+
+				return;
+			}
+
+			await client.delete(
+				'/v1/projects/@this/webhooks/:webhook_id',
+				undefined,
+				{
+					webhook_id: webhookId,
+				},
+			);
+		},
+
+		async regenerateSecret(
+			webhookId: Id<'webhook'>,
+			projectId?: Id<'project'>,
+		) {
+			if (client.authType !== 'ptk' && !projectId) {
+				throw new Error(
+					'Project ID is required for bearer or PAT authentication to regenerate a webhook secret',
+				);
+			}
+
+			if (projectId) {
+				const {secret} = await client.post(
+					'/v1/projects/:project_id/webhooks/:webhook_id/regenerate',
+					undefined,
+					{
+						project_id: projectId,
+						webhook_id: webhookId,
+					},
+				);
+
+				return secret;
+			}
+
+			const {secret} = await client.post(
+				'/v1/projects/@this/webhooks/:webhook_id/regenerate',
+				undefined,
+				{
+					webhook_id: webhookId,
+				},
+			);
+
+			return secret;
+		},
+	};
+
 	const projectsSDK = {
 		async getAllMembers(projectId?: Id<'project'>) {
 			if (client.authType !== 'ptk' && !projectId) {
@@ -144,6 +335,8 @@ export const projects = sdk(client => {
 		projectTokens: tokens,
 
 		tokens,
+
+		webhooks,
 
 		secrets: {
 			/**
