@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.40.2
+
+### Patch Changes
+
+- c0d8b4a: Fix webhooks type
+
 ## 1.40.1
 
 ### Patch Changes
