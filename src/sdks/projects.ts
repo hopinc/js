@@ -1,8 +1,8 @@
-import type {API, Endpoints, Event, Id} from '../rest/index.ts';
+import {constructEvent} from '../index.ts';
+import type {API, Endpoints, Id} from '../rest/index.ts';
 import {Request} from '../util/fetch.ts';
-import {sdk} from './create.ts';
 import type {PossibleWebhookIDs} from '../util/types.ts';
-import {verifyHmac} from '../index.ts';
+import {sdk} from './create.ts';
 
 /**
  * Projects SDK client
@@ -98,22 +98,7 @@ export const projects = sdk(client => {
 	};
 
 	const webhooks = {
-		/**
-		 * Utility function that returns a type-safe webhook event, throws if signature is invalid.
-		 *
-		 * @param body The stringed body received from the request
-		 * @param signature The signature from the X-Hop-Hooks-Signature
-		 * @param secret The secret provided upon webhook creation to verify the signature. (e.x: whsec_xxxxx)
-		 */
-		async constructEvent(body: string, signature: string, secret: string) {
-			const hmacVerified = await verifyHmac(body, signature, secret);
-			if (!hmacVerified) {
-				throw new Error('Invalid signature');
-			}
-
-			const event = JSON.parse(body) as Event;
-			return event;
-		},
+		constructEvent,
 		async getAll(projectId?: Id<'project'>) {
 			if (client.authType !== 'ptk' && !projectId) {
 				throw new Error(

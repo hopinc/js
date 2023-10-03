@@ -1,3 +1,4 @@
+import type {Event} from '..';
 import {crypto} from './crypto';
 
 export const POSSIBLE_EVENTS = {
@@ -161,6 +162,15 @@ export const POSSIBLE_EVENTS = {
 	],
 } as const;
 
+// Todo: maybe add type-fest/readonly-deep to keep the as const but also keep a structure type
+
+/**
+ * Utility function to verify hmac signatures
+ *
+ * @param body The stringed body received from the request
+ * @param signature The signature from the X-Hop-Hooks-Signature
+ * @param secret The secret provided upon webhook creation to verify the signature. (e.x: whsec_xxxxx)
+ */
 export async function verifyHmac(
 	body: string,
 	signature: string,
@@ -186,4 +196,23 @@ export async function verifyHmac(
 	return signature.toLowerCase() === finalSig;
 }
 
-// Todo: maybe add type-fest/readonly-deep to keep the as const but also keep a structure type
+/**
+ * Utility function that returns a type-safe webhook event, throws if signature is invalid.
+ *
+ * @param body The stringed body received from the request
+ * @param signature The signature from the X-Hop-Hooks-Signature
+ * @param secret The secret provided upon webhook creation to verify the signature. (e.x: whsec_xxxxx)
+ */
+export async function constructEvent(
+	body: string,
+	signature: string,
+	secret: string,
+) {
+	const hmacVerified = await verifyHmac(body, signature, secret);
+	if (!hmacVerified) {
+		throw new Error('Invalid signature');
+	}
+
+	const event = JSON.parse(body) as Event;
+	return event;
+}
