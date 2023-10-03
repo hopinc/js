@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.40.1
+
+### Patch Changes
+
+- eecf651: Fix deployment type inference on getAll
+
 ## 1.40.0
 
 ### Minor Changes
