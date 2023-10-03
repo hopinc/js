@@ -1,3 +1,5 @@
+import {crypto} from './crypto';
+
 export const POSSIBLE_EVENTS = {
 	Channels: [
 		{
