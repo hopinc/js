@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.40.3
+
+### Patch Changes
+
+- 2ab24bc: Provides constructEvent function outside of the project SDK (for no class use)
+
 ## 1.40.2
 
 ### Patch Changes
