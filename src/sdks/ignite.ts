@@ -557,14 +557,10 @@ export const ignite = sdk(client => {
 					return acc;
 				}, {} as Record<Group['id'], Group>);
 
-				return deployments
-					.map(deployment => ({
-						...deployment,
-						group: deployment.group_id
-							? groupRecord[deployment.group_id]
-							: null,
-					}))
-					.map(Deployments.from);
+				return deployments.map(Deployments.from).map(deployment => ({
+					...deployment,
+					group: deployment.group_id ? groupRecord[deployment.group_id] : null,
+				}));
 			},
 
 			/**
