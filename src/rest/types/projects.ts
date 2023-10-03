@@ -221,7 +221,7 @@ export interface Webhook {
 	/**
 	 * The events that this webhook is subscribed to
 	 */
-	events: PossibleWebhookIDs;
+	events: PossibleWebhookIDs[];
 	/**
 	 * The ID of the webhook
 	 */
