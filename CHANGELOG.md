@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.40.0
+
+### Minor Changes
+
+- ec529a6: Adds webhooks SDK, types, and verification
+
 ## 1.39.0
 
 ### Minor Changes
