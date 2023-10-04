@@ -2,7 +2,8 @@ import type {Event} from '..';
 import {crypto} from './crypto';
 
 export const POSSIBLE_EVENTS = {
-	Channels: [
+	// These are not yet implemented
+	/* 	Channels: [
 		{
 			id: 'channel.created',
 			name: 'Created',
@@ -23,7 +24,7 @@ export const POSSIBLE_EVENTS = {
 			id: 'channel.client.disconnected',
 			name: 'Client Disconnected',
 		},
-	],
+	], */
 	Ignite: [
 		{
 			id: 'ignite.deployment.created',
