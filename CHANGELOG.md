@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.41.0
+
+### Minor Changes
+
+- 3ad2d1f: Add types for event data and removes unimplemented events.
+
 ## 1.40.3
 
 ### Patch Changes
