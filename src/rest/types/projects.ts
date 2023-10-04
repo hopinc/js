@@ -5,6 +5,15 @@ import type {
 	Timestamp,
 } from '../../util/types.ts';
 import type {Endpoint} from '../endpoints.ts';
+import type {
+	Build,
+	Container,
+	ContainerMetrics,
+	Deployment,
+	DeploymentRollout,
+	Gateway,
+	HealthCheck,
+} from './ignite.ts';
 import type {User} from './users.ts';
 
 /**
@@ -249,33 +258,77 @@ export interface Webhook {
 /**
  * An event is sent from a webhook to an endpoint
  */
-export interface Event<T extends PossibleWebhookIDs = PossibleWebhookIDs> {
-	/**
-	 * The ID of the webhook that sent this event
-	 */
-	webhook_id: Id<'webhook'>;
-	/**
-	 * The ID of the project that this event is for
-	 */
-	project_id: Id<'project'>;
-	/**
-	 * The time this event occurred at
-	 */
-	occurred_at: string;
-	/**
-	 * The ID of the event
-	 */
-	id: Id<'event'>;
-	/**
-	 * The event that occurred
-	 * @example ignite.deployment.container.updated
-	 */
-	event: T;
-	/**
-	 * The data for this event
-	 */
-	data: unknown;
+
+export interface HealthCheckEventUpdate {
+	state: 'failed' | 'succeeded' | 'pending';
+	container_id: string;
+	deployment_id: string;
 }
+
+export type EventDataMap = {
+	'ignite.deployment.container.updated': Container;
+	'ignite.deployment.container.created': Container;
+	'ignite.deployment.container.deleted': Container;
+	'ignite.deployment.created': Deployment;
+	'ignite.deployment.updated': Deployment;
+	'ignite.deployment.deleted': Deployment;
+	'ignite.deployment.build.created': Build;
+	'ignite.deployment.build.updated': Build;
+	'ignite.deployment.rollout.created': DeploymentRollout;
+	'ignite.deployment.rollout.updated': DeploymentRollout;
+	'ignite.deployment.container.metrics_update': ContainerMetrics;
+	'ignite.deployment.healthcheck.created': HealthCheck;
+	'ignite.deployment.healthcheck.updated': HealthCheck;
+	'ignite.deployment.healthcheck.deleted': HealthCheck;
+	'ignite.deployment.healthcheck.events.failed': HealthCheckEventUpdate;
+	'ignite.deployment.healthcheck.events.succeeded': HealthCheckEventUpdate;
+	'ignite.deployment.gateway.created': Gateway;
+	'ignite.deployment.gateway.updated': Gateway;
+	'ignite.deployment.gateway.deleted': Gateway;
+	'project.updated': Project;
+	'project.member.created': Member;
+	'project.member.updated': Member;
+	'project.member.deleted': Member;
+	'project.tokens.created': ProjectToken;
+	'project.tokens.deleted': ProjectToken;
+	'project.secrets.created': Secret;
+	'project.secrets.updated': Secret;
+	'project.secrets.deleted': Secret;
+};
+
+type Events = keyof EventDataMap;
+
+export type Event = Events extends infer E
+	? E extends Events
+		? {
+				/**
+				 * The ID of the webhook that sent this event
+				 */
+				webhook_id: Id<'webhook'>;
+				/**
+				 * The ID of the project that this event is for
+				 */
+				project_id: Id<'project'>;
+				/**
+				 * The time this event occurred at
+				 */
+				occurred_at: string;
+				/**
+				 * The ID of the event
+				 */
+				id: Id<'event'>;
+				/**
+				 * The event that occurred
+				 * @example ignite.deployment.container.updated
+				 */
+				event: E;
+				/**
+				 * The data for this event
+				 */
+				data: EventDataMap[E];
+		  }
+		: never
+	: never;
 
 /**
  * The endpoints for projects

@@ -132,6 +132,12 @@ export interface VolumeDefinition {
 	mount_path: string;
 }
 
+export interface ContainerMetrics {
+	cpu_usage_percent: number;
+	memory_usage_percent: number;
+	memory_usage_bytes: number;
+}
+
 /**
  * The definition of a container
  * @public
@@ -165,11 +171,7 @@ export interface Container {
 	/**
 	 * Metrics for this container
 	 */
-	metrics: {
-		cpu_usage_percent: number;
-		memory_usage_percent: number;
-		memory_usage_bytes: number;
-	} | null;
+	metrics: ContainerMetrics | null;
 
 	/**
 	 * Information about the container
