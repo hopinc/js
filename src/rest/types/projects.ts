@@ -296,44 +296,28 @@ export type EventDataMap = {
 	'project.secrets.deleted': Secret;
 };
 
-type Events = keyof EventDataMap;
+type Events<E> = E[keyof E];
 
-export type Event = Events extends infer E
-	? E extends Events
-		? {
-				/**
-				 * The ID of the webhook that sent this event
-				 */
-				webhook_id: Id<'webhook'>;
-				/**
-				 * The ID of the project that this event is for
-				 */
-				project_id: Id<'project'>;
-				/**
-				 * The time this event occurred at
-				 */
-				occurred_at: string;
-				/**
-				 * The ID of the event
-				 */
-				id: Id<'event'>;
-				/**
-				 * The event that occurred
-				 * @example ignite.deployment.container.updated
-				 */
-				event: E;
-				/**
-				 * The data for this event
-				 */
-				data: EventDataMap[E];
-		  }
-		: never
-	: never;
+export type Event = Events<{
+	[Key in keyof EventDataMap]: {
+		webhook_id: Id<'webhook'>;
+		/**
+		 * The ID of the project that this event is for
+		 */
+		project_id: Id<'project'>;
+		/**
+		 * The time this event occurred at
+		 */
+		occurred_at: string;
+		/**
+		 * The ID of the event
+		 */
+		id: Id<'event'>;
+		event: Key;
+		data: EventDataMap[Key];
+	};
+}>;
 
-/**
- * The endpoints for projects
- * @public
- */
 export type ProjectsEndpoints =
 	| Endpoint<
 			'DELETE',
