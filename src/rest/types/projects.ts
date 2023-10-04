@@ -294,12 +294,13 @@ export type EventDataMap = {
 	'project.secrets.created': Secret;
 	'project.secrets.updated': Secret;
 	'project.secrets.deleted': Secret;
+	[key: string]: unknown;
 };
 
 type Events<E> = E[keyof E];
 
 export type Event = Events<{
-	[Key in keyof EventDataMap]: {
+	[Key in PossibleWebhookIDs]: {
 		webhook_id: Id<'webhook'>;
 		/**
 		 * The ID of the project that this event is for
@@ -313,7 +314,13 @@ export type Event = Events<{
 		 * The ID of the event
 		 */
 		id: Id<'event'>;
+		/**
+		 * The event that occurred
+		 */
 		event: Key;
+		/**
+		 * The data the belongs to the event
+		 */
 		data: EventDataMap[Key];
 	};
 }>;
