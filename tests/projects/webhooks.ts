@@ -8,7 +8,7 @@ export function webhookTests(hop: Hop) {
 	test('It creates a webhook', async () => {
 		const webhook = await hop.projects.webhooks.create(
 			'https://example.com/webhook',
-			['ignite.deployment.build.cancelled', 'channel.client.disconnected'],
+			['ignite.deployment.build.cancelled', 'ignite.deployment.build.created'],
 		);
 
 		assert.ok(
