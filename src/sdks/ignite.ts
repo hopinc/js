@@ -390,6 +390,28 @@ export const ignite = sdk(client => {
 			return group;
 		},
 
+		async remove(
+			deploymentId: Id<'deployment'>,
+			groupId: Id<'deployment_group'>,
+			projectId: Id<'project'>,
+		) {
+			if (client.authType !== 'ptk' && !projectId) {
+				throw new Error(
+					'Project ID is required for Bearer or PAT authentication',
+				);
+			}
+
+			await client.delete(
+				'/v1/ignite/groups/:group_id/:deployment_id',
+				undefined,
+				{
+					group_id: groupId,
+					deployment_id: deploymentId,
+					...(projectId ? {project: projectId} : {}),
+				},
+			);
+		},
+
 		async delete(groupId: Id<'deployment_group'>, projectId?: Id<'project'>) {
 			if (client.authType !== 'ptk' && !projectId) {
 				throw new Error(

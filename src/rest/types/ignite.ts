@@ -1142,4 +1142,5 @@ export type IgniteEndpoints =
 			'/v1/ignite/groups/:group_id/deployments/:deployment_id',
 			{group: Group}
 	  >
-	| Endpoint<'DELETE', '/v1/ignite/groups/:group_id', Empty>;
+	| Endpoint<'DELETE', '/v1/ignite/groups/:group_id', Empty>
+  | Endpoint<"DELETE", "/v1/ignite/groups/:group_id/:deployment_id", Empty>
