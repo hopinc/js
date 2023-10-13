@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.41.1
+
+### Patch Changes
+
+- 21acf56: Adds a remove deployment route to groups
+
 ## 1.41.0
 
 ### Minor Changes
