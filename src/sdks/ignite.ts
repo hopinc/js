@@ -366,15 +366,31 @@ export const ignite = sdk(client => {
 			return group;
 		},
 
+		/**
+		 * Moves a deployment to a group, or removes it if groupId is null
+		 */
 		async move(
 			deploymentId: Id<'deployment'>,
-			groupId: Id<'deployment_group'>,
+			groupId: Id<'deployment_group'> | null,
 			projectId?: Id<'project'>,
 		) {
 			if (client.authType !== 'ptk' && !projectId) {
 				throw new Error(
 					'Project ID is required for Bearer or PAT authentication',
 				);
+			}
+
+			if (groupId === null) {
+				await client.delete(
+					'/v1/ignite/deployments/:deployment_id/group',
+					undefined,
+					{
+						deployment_id: deploymentId,
+						...(projectId ? {project: projectId} : {}),
+					},
+				);
+
+				return;
 			}
 
 			const {group} = await client.put(
@@ -388,28 +404,6 @@ export const ignite = sdk(client => {
 			);
 
 			return group;
-		},
-
-		async remove(
-			deploymentId: Id<'deployment'>,
-			groupId: Id<'deployment_group'>,
-			projectId: Id<'project'>,
-		) {
-			if (client.authType !== 'ptk' && !projectId) {
-				throw new Error(
-					'Project ID is required for Bearer or PAT authentication',
-				);
-			}
-
-			await client.delete(
-				'/v1/ignite/groups/:group_id/:deployment_id',
-				undefined,
-				{
-					group_id: groupId,
-					deployment_id: deploymentId,
-					...(projectId ? {project: projectId} : {}),
-				},
-			);
 		},
 
 		async delete(groupId: Id<'deployment_group'>, projectId?: Id<'project'>) {
