@@ -319,7 +319,10 @@ export const ignite = sdk(client => {
 	const groups = {
 		async create(
 			name: string,
-			deploymentIds?: Id<'deployment'>[] | undefined,
+			options?: Partial<{
+				deploymentIds: Id<'deployment'>[];
+				position: number;
+			}>,
 			projectId?: Id<'project'>,
 		) {
 			if (client.authType !== 'ptk' && !projectId) {
@@ -332,7 +335,8 @@ export const ignite = sdk(client => {
 				'/v1/ignite/groups',
 				{
 					name,
-					deployment_ids: deploymentIds ?? [],
+					deployment_ids: options?.deploymentIds ?? [],
+					position: options?.position,
 				},
 				projectId ? {project: projectId} : {},
 			);

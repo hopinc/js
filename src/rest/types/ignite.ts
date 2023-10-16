@@ -1126,6 +1126,7 @@ export type IgniteEndpoints =
 			{
 				name: string;
 				deployment_ids: Id<'deployment'>[];
+				position?: number | undefined;
 			}
 	  >
 	| Endpoint<
