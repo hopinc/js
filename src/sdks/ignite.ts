@@ -572,15 +572,10 @@ export const ignite = sdk(client => {
 					projectId ? {project: projectId} : {},
 				);
 
-				const groupRecord = groups.reduce((acc, group) => {
-					acc[group.id] = group;
-					return acc;
-				}, {} as Record<Group['id'], Group>);
-
-				return deployments.map(Deployments.from).map(deployment => ({
-					...deployment,
-					group: deployment.group_id ? groupRecord[deployment.group_id] : null,
-				}));
+				return {
+					deployments: deployments.map(Deployments.from),
+					groups,
+				};
 			},
 
 			/**
