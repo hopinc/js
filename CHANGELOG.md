@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.43.0
+
+### Minor Changes
+
+- cdf9700: Adds groups to getAll in ignite deployments + refactors it to an object
+
 ## 1.42.0
 
 ### Minor Changes
