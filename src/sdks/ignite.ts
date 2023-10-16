@@ -7,7 +7,6 @@ import {
 	type DeploymentConfig,
 	type DeploymentMetadata,
 	type Gateway,
-	type Group,
 } from '../rest/types/ignite.ts';
 import {parseSize, validateId} from '../util/index.ts';
 import {sdk} from './create.ts';
