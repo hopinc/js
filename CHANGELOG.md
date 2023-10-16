@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.42.0
+
+### Minor Changes
+
+- 04b1b6e: Move deploymentIds to an options object when creating a deployment group + add position to options
+
 ## 1.41.1
 
 ### Patch Changes
