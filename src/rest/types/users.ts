@@ -26,6 +26,11 @@ export interface User {
 	 * The email of the user
 	 */
 	email: string;
+
+  /**
+   * The date the user was created
+   */
+  created_at: Timestamp;
 }
 
 /**
