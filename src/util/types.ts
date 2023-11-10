@@ -147,8 +147,16 @@ export const ID_PREFIXES = [
 		description: 'Group ID for Ignite deployments',
 	},
 	{
+		prefix: 'fleet_group',
+		description: 'Group ID for fleet nodes',
+	},
+	{
 		prefix: 'event',
 		description: 'Event ID for events sent by webhooks on a project.',
+	},
+	{
+		prefix: 'fleet_node',
+		description: 'Node ID for a fleet node',
 	},
 ] as const;
 
