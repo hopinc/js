@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.43.2
+
+### Patch Changes
+
+- 498eb1f: exports fleet types
+
 ## 1.43.1
 
 ### Patch Changes
