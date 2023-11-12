@@ -196,6 +196,7 @@ export class APIClient {
 
 		const response = await fetch(request, {
 			keepalive: true,
+			headers: request.headers,
 
 			// @ts-expect-error Targeting multiple runtimes, this will only work in node
 			agent: this.agent,
