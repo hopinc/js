@@ -1,5 +1,13 @@
 # @onehop/js
 
+## 1.43.1
+
+### Patch Changes
+
+- cade72b: Adds fleet types to the JS SDK
+- e08ef05: Force headers in fetch request
+- 76c06f3: Adds created_at to user object
+
 ## 1.43.0
 
 ### Minor Changes
