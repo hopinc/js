@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.43.3
+
+### Patch Changes
+
+- b79dff2: Adds bootstrap to fleet node type
+
 ## 1.43.2
 
 ### Patch Changes
