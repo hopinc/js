@@ -58,6 +58,11 @@ export interface Node {
 	 * Node metadata
 	 */
 	metadata: NodeMetadata;
+
+	/**
+	 * Whether if the node is bootstrapped and initialized
+	 */
+	bootstrapped: boolean;
 }
 
 export interface NodeMetadata {
