@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.43.5
+
+### Patch Changes
+
+- 8feaadb: adds target to deployment object + utility type for target Ids
+
 ## 1.43.4
 
 ### Patch Changes
