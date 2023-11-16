@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.43.6
+
+### Patch Changes
+
+- 95df29b: fixes timestamp type on fleet node
+
 ## 1.43.5
 
 ### Patch Changes
