@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.43.4
+
+### Patch Changes
+
+- 15f3bbe: fixes fleet metadata type
+
 ## 1.43.3
 
 ### Patch Changes
