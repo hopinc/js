@@ -57,7 +57,7 @@ export interface Node {
 	/**
 	 * Node metadata
 	 */
-	metadata: NodeMetadata;
+	metadata: NodeMetadata | null;
 
 	/**
 	 * Whether if the node is bootstrapped and initialized
