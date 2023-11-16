@@ -8,6 +8,7 @@ import type {
 	Timestamp,
 } from '../../util/types.ts';
 import type {Endpoint} from '../endpoints.ts';
+import type {TargetID} from './fleet.ts';
 
 /**
  * All regions that Hop operates in
@@ -674,6 +675,11 @@ export interface DeploymentConfig {
 	type: RuntimeType;
 
 	/**
+	 * Target node for deployment, if its undefined its inferred as Hop
+	 */
+	target: DeploymentTarget | undefined;
+
+	/**
 	 * The version of this config
 	 */
 	version: '12-12-2022';
@@ -736,6 +742,17 @@ export interface Image {
 	 * GitHub repo information (if applicable)
 	 */
 	gh_repo: ImageGHRepo | null;
+}
+
+export interface DeploymentTarget {
+	/**
+	 * The type of target (Hop, Fleet Node or Fleet Group)
+	 */
+	type: 'hop' | 'fleet_node' | 'fleet_group';
+	/**
+	 * The ID of the target that the deployment will be deployed to
+	 */
+	target_id: TargetID;
 }
 
 /**

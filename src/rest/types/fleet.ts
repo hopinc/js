@@ -112,3 +112,5 @@ export interface NodeIP {
 	 */
 	type: 'ipv4' | 'ipv6';
 }
+
+export type TargetID = Id<'fleet_node'> | Id<'fleet_group'> | null;
