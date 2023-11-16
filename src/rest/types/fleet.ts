@@ -1,4 +1,4 @@
-import type {Id} from '.';
+import type {Id, Timestamp} from '.';
 
 /**
  * Fleet scheduling state (schedulable/unschedulable)
@@ -53,7 +53,7 @@ export interface Node {
 	/**
 	 * The last time the node sent a heartbeat (Used to determine if the node is alive)
 	 */
-	last_heartbeat: string;
+	last_heartbeat: Timestamp;
 	/**
 	 * Node metadata
 	 */
