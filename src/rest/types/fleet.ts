@@ -64,6 +64,11 @@ export interface Node {
 	 * Whether if the node is bootstrapped and initialized
 	 */
 	bootstrapped: boolean;
+
+	/**
+	 * When the node was created
+	 */
+	created_at: Timestamp;
 }
 
 export interface NodeMetadata {
