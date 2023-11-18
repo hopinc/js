@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.44.2
+
+### Patch Changes
+
+- 6290d6a: fix: adds project query to delete fleet node
+
 ## 1.44.1
 
 ### Patch Changes
