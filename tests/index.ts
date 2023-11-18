@@ -4,8 +4,12 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 
 import {Hop, id, validateId} from '../src/index.ts';
-import {webhookTests} from './projects/webhooks.ts';
+import {channelsTests} from './channels.ts';
+import {fleetTests} from './fleet.ts';
 import {membersTest} from './projects/members.ts';
+import {webhookTests} from './projects/webhooks.ts';
+
+const SDK_TESTS = [webhookTests, membersTest, fleetTests, channelsTests];
 
 // @ts-expect-error This is usually injected by tsup
 globalThis.TSUP_IS_NODE = true;
@@ -60,12 +64,6 @@ test('It validates that the token is valid', () => {
 	assert(validateId('ptk_testing', 'ptk'), "Couldn't validate Project Token");
 });
 
-// Project Tests
-webhookTests(hop);
-membersTest(hop);
-
-// Todo: Move this to a separate folder + add channel tokens and other tests.
-test('It gets all channels', async () => {
-	const channels = await hop.channels.getAll();
-	assert.ok(Array.isArray(channels));
-});
+for (const SDKTest of SDK_TESTS) {
+	SDKTest(hop);
+}
