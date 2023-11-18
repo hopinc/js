@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.44.0
+
+### Minor Changes
+
+- 0ed50c7: Fleet SDK + tests
+
 ## 1.43.6
 
 ### Patch Changes
