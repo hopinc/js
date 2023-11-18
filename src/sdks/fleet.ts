@@ -106,6 +106,7 @@ export const fleet = sdk(client => {
 
 			await client.delete('/v1/fleet/nodes/:node_id', undefined, {
 				node_id: nodeId,
+				project: projectId,
 			});
 		},
 	};
