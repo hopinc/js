@@ -4,3 +4,4 @@ export * from './pipe.ts';
 export * from './projects.ts';
 export * from './registry.ts';
 export * from './users.ts';
+export * from './fleet.ts';

@@ -1,4 +1,5 @@
-import type {Id, Timestamp} from '.';
+import type {Empty, Id, Timestamp} from '.';
+import type {Endpoint} from '..';
 
 /**
  * Fleet scheduling state (schedulable/unschedulable)
@@ -114,3 +115,25 @@ export interface NodeIP {
 }
 
 export type TargetID = Id<'fleet_node'> | Id<'fleet_group'> | null;
+
+export type FleetEndpoints =
+	| Endpoint<'GET', '/v1/fleet/nodes', {nodes: Node[]}>
+	| Endpoint<
+			'POST',
+			'/v1/fleet/nodes',
+			{node: Node; token: string},
+			{
+				name: string;
+				scheduling_state: FleetSchedulingState;
+			}
+	  >
+	| Endpoint<'POST', '/v1/fleet/nodes/:node_id/token', {token: string}>
+	| Endpoint<'DELETE', '/v1/fleet/nodes/:node_id', Empty>
+	| Endpoint<
+			'PATCH',
+			'/v1/fleet/nodes/:node_id',
+			{node: Node},
+			{
+				scheduling_state: FleetSchedulingState;
+			}
+	  >;

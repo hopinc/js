@@ -1,4 +1,5 @@
 import type {ChannelEndpoints} from './types/channels.ts';
+import type {FleetEndpoints} from './types/fleet.ts';
 import type {IgniteEndpoints} from './types/ignite.ts';
 import type {Method} from './types/index.ts';
 import type {PipeEndpoints} from './types/pipe.ts';
@@ -59,4 +60,5 @@ export type Endpoints =
 	| UserEndpoints
 	| ProjectsEndpoints
 	| PipeEndpoints
-	| ChannelEndpoints;
+	| ChannelEndpoints
+	| FleetEndpoints;

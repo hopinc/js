@@ -5,6 +5,7 @@ import {
 } from './rest/client.ts';
 import {
 	channels,
+	fleet,
 	ignite,
 	pipe,
 	projects,
@@ -43,6 +44,7 @@ export class Hop {
 	public readonly pipe;
 	public readonly registry;
 	public readonly channels;
+	public readonly fleet;
 
 	constructor(options: PartialAPIOptions);
 	constructor(authentication: APIAuthentication, baseurl?: string);
@@ -73,5 +75,6 @@ export class Hop {
 		this.pipe = pipe(this.client);
 		this.registry = registry(this.client);
 		this.channels = channels(this.client);
+		this.fleet = fleet(this.client);
 	}
 }
