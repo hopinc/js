@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.44.1
+
+### Patch Changes
+
+- e645cbc: adds created_at to node object
+
 ## 1.44.0
 
 ### Minor Changes
