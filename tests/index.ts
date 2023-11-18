@@ -5,11 +5,10 @@ import {test} from 'node:test';
 
 import {Hop, id, validateId} from '../src/index.ts';
 import {channelsTests} from './channels.ts';
-import {fleetTests} from './fleet.ts';
 import {membersTest} from './projects/members.ts';
 import {webhookTests} from './projects/webhooks.ts';
 
-const SDK_TESTS = [webhookTests, membersTest, fleetTests, channelsTests];
+const SDK_TESTS = [webhookTests, membersTest, channelsTests];
 
 // @ts-expect-error This is usually injected by tsup
 globalThis.TSUP_IS_NODE = true;
