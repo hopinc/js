@@ -322,10 +322,26 @@ export interface BuildSettings {
  * @public
  */
 export interface DeploymentMetadata {
+	/**
+	 * Ports that have been found by container's runtime.
+	 */
 	container_port_mappings: Record<Id<'container'>, string[]>;
+	/**
+	 * Whether a user has ignored the onboarding process.
+	 */
 	ignored_boarding?: boolean;
+	/**
+	 * Whether the deployment was created from a preset.
+	 */
 	created_from_preset?: string;
+	/**
+	 * Whether a gateway has been created for the deployment.
+	 */
 	created_first_gateway?: boolean;
+	/**
+	 * Whether a user has acknowledged the ports that have been found by container's runtime.
+	 */
+	ports_acked?: string[];
 }
 
 /**
