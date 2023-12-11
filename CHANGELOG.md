@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.45.0
+
+### Minor Changes
+
+- 3f11d76: Adds ports_acked to deployment metadata
+
 ## 1.44.2
 
 ### Patch Changes
