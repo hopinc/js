@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.46.0
+
+### Minor Changes
+
+- f4d0ea0: Removes admin role, removes the need to add target while creating a deployment, removes GPU types and requirements from the SDK (not yet supported)
+
 ## 1.45.0
 
 ### Minor Changes
