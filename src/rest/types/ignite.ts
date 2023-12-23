@@ -96,14 +96,6 @@ export enum RestartPolicy {
 }
 
 /**
- * Types for supported GPU
- * @public
- */
-export enum VgpuType {
-	A400 = 'a400',
-}
-
-/**
  * Formats of volumes
  * @public
  */
@@ -693,7 +685,7 @@ export interface DeploymentConfig {
 	/**
 	 * Target node for deployment, if its undefined its inferred as Hop
 	 */
-	target: DeploymentTarget | undefined;
+	target?: DeploymentTarget | undefined;
 
 	/**
 	 * The version of this config
@@ -817,27 +809,6 @@ export interface Resources {
 	 * You can use the `parseSize` function to convert this to bytes.
 	 */
 	ram: ByteSizeString;
-
-	/**
-	 * vGPUs to allocate
-	 */
-	vgpu: Vgpu[];
-}
-
-/**
- * Virtual GPU config
- * @public
- */
-export interface Vgpu {
-	/**
-	 * The type of vGPU to allocate
-	 */
-	type: VgpuType;
-
-	/**
-	 * The amount of vGPUs to allocate
-	 */
-	count: number;
 }
 
 /**
