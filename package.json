@@ -1,6 +1,6 @@
 {
 	"name": "@onehop/js",
-	"version": "1.44.2",
+	"version": "1.45.0",
 	"type": "module",
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",
