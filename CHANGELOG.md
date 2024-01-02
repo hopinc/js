@@ -1,5 +1,11 @@
 # @onehop/js
 
+## 1.47.0
+
+### Minor Changes
+
+- 6073732: Adds target into deployment's root object, removes it from config and refactors the object a little
+
 ## 1.46.0
 
 ### Minor Changes
