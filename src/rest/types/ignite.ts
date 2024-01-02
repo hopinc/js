@@ -8,7 +8,7 @@ import type {
 	Timestamp,
 } from '../../util/types.ts';
 import type {Endpoint} from '../endpoints.ts';
-import type {TargetID} from './fleet.ts';
+import type {Node} from './fleet.ts';
 
 /**
  * All regions that Hop operates in
@@ -238,7 +238,7 @@ export interface Deployment {
 	/**
 	 * The config for this deployment
 	 */
-	config: Omit<DeploymentConfig, 'name'>;
+	config: Omit<DeploymentConfig, 'name' | 'target'>;
 
 	/**
 	 * Current active rollout for deployment
@@ -291,6 +291,11 @@ export interface Deployment {
 	 * The group the deployment belongs in
 	 */
 	group_id: Id<'deployment_group'> | null;
+
+	/**
+	 * Target node for deployment, if its undefined its inferred as Hop
+	 */
+	target?: DeploymentTarget | undefined;
 }
 
 /**
@@ -683,11 +688,6 @@ export interface DeploymentConfig {
 	type: RuntimeType;
 
 	/**
-	 * Target node for deployment, if its undefined its inferred as Hop
-	 */
-	target?: DeploymentTarget | undefined;
-
-	/**
 	 * The version of this config
 	 */
 	version: '12-12-2022';
@@ -728,6 +728,11 @@ export interface DeploymentConfig {
 	 * Entrypoint for this deployment
 	 */
 	entrypoint?: string[];
+
+	/**
+	 * Target node for deployment, if its undefined its inferred as Hop
+	 */
+	target?: DeploymentTarget | undefined;
 }
 
 /**
@@ -754,13 +759,13 @@ export interface Image {
 
 export interface DeploymentTarget {
 	/**
-	 * The type of target (Hop, Fleet Node or Fleet Group)
+	 * The type of target (Hop, Fleet Node) (fleet group coming later)
 	 */
-	type: 'hop' | 'fleet_node' | 'fleet_group';
+	type: 'hop' | 'fleet_node';
 	/**
-	 * The ID of the target that the deployment will be deployed to
+	 * The data of the target
 	 */
-	target_id: TargetID;
+	data: Node | null;
 }
 
 /**
