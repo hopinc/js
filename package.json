@@ -17,6 +17,10 @@
 		"./utils/zod": {
 			"import": "./dist/utils/zod/index.js",
 			"require": "./dist/utils/zod/index.cjs"
+		},
+		"./utils/typed-channels": {
+			"import": "./dist/utils/typed-channels/index.js",
+			"require": "./dist/utils/typed-channels/index.cjs"
 		}
 	},
 	"repository": "https://github.com/hopinc/js.git",

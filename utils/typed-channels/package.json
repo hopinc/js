@@ -1,0 +1,5 @@
+{
+	"main": "../../dist/utils/typed-channels/index.js",
+	"module": "../../dist/utils/typed-channels/index.mjs",
+	"types": "../../dist/utils/typed-channels/index.d.ts"
+}
