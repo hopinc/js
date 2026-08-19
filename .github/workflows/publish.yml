@@ -33,7 +33,7 @@ jobs:
         run: yarn changeset version
 
       - name: Publish to npm
-        uses: changesets/action@v1
+        uses: changesets/action@v2.1.1
         with:
           publish: yarn release
         env:
