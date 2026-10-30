@@ -61,6 +61,6 @@
 		"@onehop/json-methods": "^1.2.0",
 		"cross-fetch": "^3.1.5",
 		"uncrypto": "^0.1.3",
-		"zod": "^3.21.4"
+		"zod": "^4.0.0"
 	}
 }
